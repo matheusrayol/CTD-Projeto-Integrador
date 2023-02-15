@@ -1,0 +1,42 @@
+* {
+  padding: 0;
+  margin: 0;
+  vertical-align: baseline;
+  list-style: none;
+  text-decoration: none;
+  border: 0;
+  font-weight: bold;
+}
+
+.header {
+  background: #F3F1ED;
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  height: fit-content;
+  flex-wrap: wrap;
+
+  img {
+    width: fit-content;
+  }
+}
+
+.links {
+  display: flex;
+  gap: 2rem;
+}
+
+.acesso {
+  display: flex;
+  gap: 2rem;
+
+
+  &__link {
+    padding: 0.5rem 2rem;
+    border-radius: 0.5rem;
+    border: 2px solid #1DBEB4;
+    color: #1DBEB4;
+  }
+}
