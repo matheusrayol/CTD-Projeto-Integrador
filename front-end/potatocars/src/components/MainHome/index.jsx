@@ -1,6 +1,6 @@
 import React from 'react'
 // import { useState } from 'react'
-import styles from './Main.module.scss'
+import styles from './MainHome.module.scss'
 import { MdDoneAll } from 'react-icons/md'
 // import Calendar from 'react-calendar'
 
@@ -10,7 +10,7 @@ export default function Main() {
   return (
     <main className={styles.main}>
       <h1>Pesquise e descubra por que a PotatoCars é a melhor!!!</h1>
-      <h2>Alugue um Carro</h2>
+      {/* <h2>Alugue um Carro</h2> */}
       <form className={styles.form}>
         <div className={styles.form__campos}>
           <label htmlFor="">Local Retirada</label>

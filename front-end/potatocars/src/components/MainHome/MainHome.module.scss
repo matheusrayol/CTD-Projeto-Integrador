@@ -1,11 +1,12 @@
 .main {
   text-align: center;
-  background: #383B58;
+  background: rgb(9, 55, 52);
   color: white;
+  width: 100%;
 
   h1,
   h2 {
-    padding: 0.5rem;
+    padding: 0.5rem 0;
   }
 
   &__comentarios {
@@ -21,7 +22,7 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    padding: 0.5rem;
+    padding: 0.5rem 0;
   }
 }
 
@@ -30,9 +31,8 @@
   display: flex;
   gap: 1rem;
   color: white;
-  background: #383B58;
-
-  padding: 1rem;
+  background: rgb(9, 55, 52);
+  padding: 1rem 0;
   align-items: center;
   justify-content: center;
   align-content: center;
@@ -42,7 +42,7 @@
   & input {
     border: none;
     border-radius: 0.25rem;
-    padding: 0.5rem;
+    padding: 0.5rem 0;
   }
 
   &__campos {
@@ -50,7 +50,7 @@
     gap: 1rem;
     border: none;
     border-radius: 0.25rem;
-    padding: 1rem;
+    padding: 1rem 0;
     justify-content: center;
     align-items: center;
     align-content: center;
@@ -59,8 +59,14 @@
   &__botao {
     color: white;
     padding: 1rem 4rem;
-    border: none;
-    border-radius: 0.25rem;
-    background: #1DBEB4;
+    border: 1px solid #189f96c8;
+    border-radius: 0.5rem;
+    background: #189f96c8;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      background-color: #1DBEB4;
+      border: 1px solid white;
+    }
   }
 }

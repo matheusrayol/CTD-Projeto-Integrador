@@ -1,0 +1,68 @@
+.sectionLogin {
+  width: 100%;
+  text-align: center;
+}
+
+.formLogin {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 0;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: nowrap;
+
+  label {
+    padding: 1rem 0;
+  }
+
+  input {
+    width: 450px;
+    padding: 1rem;
+    border: 3px hidden;
+    border-radius: 0.35rem;
+  }
+
+  button {
+    padding: 1rem 2rem;
+    color: white;
+    border: 1px solid rgba(24, 159, 150, 0.785);
+    border-radius: 0.5rem;
+    background: rgba(24, 159, 150, 0.785);
+    transition: all 0.3s ease-in-out;
+  }
+}
+
+.fieldLabelInput {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  align-content: center;
+}
+
+div.formError,
+input.formError {
+  background: rgb(208, 123, 123);
+
+
+  input {
+    border: 3px solid #ff0000;
+  }
+}
+
+input.formError:focus {
+  background: rgb(208, 123, 123);
+  outline: 3px solid red;
+}
+
+span.formError {
+  width: 450px;
+  color: rgb(255, 0, 0);
+}
+
+.buttonRegister {
+  padding: 1rem 0;
+}
