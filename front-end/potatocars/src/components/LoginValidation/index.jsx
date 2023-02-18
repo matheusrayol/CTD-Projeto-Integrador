@@ -74,8 +74,9 @@ const LoginValidation = () => {
   }
 
   return (
-    <section className={styles.sectionLogin}>
-      <form className={styles.formLogin}>
+    <section className={styles.sectionLoginValidation}>
+      <form className={styles.formLoginValidation}>
+        <h1>Login</h1>
         <div className={styles.fieldLabelInput}>
           <label htmlFor="">Email</label>
           <input
@@ -121,7 +122,7 @@ const LoginValidation = () => {
         </button>
       </form>
       <div className={styles.buttonRegister}>
-        You don't have a record?
+        You don't have a registration?
         <Link to="/register"> Click Here!</Link>
       </div>
     </section>

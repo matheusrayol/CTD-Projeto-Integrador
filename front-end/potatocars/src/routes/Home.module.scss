@@ -1,5 +1,11 @@
-.app-home {
+// Body
+// ● Representa um body geral com a cor de background que ocupe 100 % da altura da tela.
+
+// ele diz isso mais no exemplo tem duas cores entre as sessoes dos cards do conteudo 
+.bodyHome {
   width: 100%;
+  height: fit-content;
+  color: black;
   padding: 0;
   margin: 0;
   vertical-align: baseline;
@@ -7,18 +13,4 @@
   text-decoration: none;
   border: 0;
   font-weight: bold;
-}
-
-// Body
-// ● Representa um body geral com a cor de background que ocupe 100 % da altura da tela.
-
-// ele diz isso mais no exemplo tem duas cores entre as sessoes dos cards do conteudo 
-.bodyHome {
-  width: 100%;
-}
-
-.h1Home {
-  padding-left: 1rem;
-  color: white;
-  background-color: #383B58;
 }

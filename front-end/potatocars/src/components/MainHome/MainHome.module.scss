@@ -1,7 +1,7 @@
 .main {
   text-align: center;
-  background: rgb(9, 55, 52);
-  color: white;
+  background: rgb(225, 224, 224);
+  color: black;
   width: 100%;
 
   h1,
@@ -30,8 +30,8 @@
 .form {
   display: flex;
   gap: 1rem;
-  color: white;
-  background: rgb(9, 55, 52);
+  color: black;
+  background: rgb(225, 224, 224);
   padding: 1rem 0;
   align-items: center;
   justify-content: center;
@@ -43,6 +43,7 @@
     border: none;
     border-radius: 0.25rem;
     padding: 0.5rem 0;
+    text-align: center;
   }
 
   &__campos {
@@ -57,7 +58,7 @@
   }
 
   &__botao {
-    color: white;
+    color: black;
     padding: 1rem 4rem;
     border: 1px solid #189f96c8;
     border-radius: 0.5rem;

@@ -1,12 +1,11 @@
 import React from 'react'
+import RegisterValidation from '../components/RegisterValidation'
 import styles from './Register.module.scss'
 
 const Register = () => {
   return (
-    <div className="app-register">
-      <div className={styles.bodyRegister}>
-        <h1>Register =D</h1>
-      </div>
+    <div className={styles.bodyRegister}>
+      <RegisterValidation />
     </div>
   )
 }
