@@ -1,0 +1,86 @@
+.sectionRegisterValidation {
+  width: 100%;
+  text-align: center;
+
+  h1 {
+    color: #1DBEB4;
+    padding-bottom: 1.5rem;
+  }
+
+  .formRegisterValidation {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding-top: 1.5rem 0;
+
+    .completeName {
+      width: 33%;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+
+      label {
+        text-align: start;
+        width: 50%;
+        margin-bottom: 0.25rem;
+      }
+
+      input {
+        padding: 0.5rem;
+        padding-right: 1.5rem;
+        width: 50%;
+        border-radius: 0.33rem;
+        margin-bottom: 1rem;
+      }
+    }
+
+
+    .fieldLabelInput {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: center;
+
+      label {
+        text-align: start;
+        width: 50%;
+        margin-bottom: 0.25rem;
+      }
+
+      input {
+        padding: 0.5rem;
+        padding-right: 1.5rem;
+        width: 50%;
+        border-radius: 0.33rem;
+        margin-bottom: 1rem;
+      }
+    }
+
+    .buttonRegisterValidation {
+      letter-spacing: 0.75px;
+      padding: 1rem 3rem;
+      color: white;
+      border: 2px solid rgba(24, 159, 150, 0.785);
+      border-radius: 0.5rem;
+      background: rgba(24, 159, 150, 0.785);
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        border: 2px solid rgba(255, 255, 255, 0.75);
+        background: rgba(10, 99, 93, 0.785);
+      }
+    }
+
+    .buttonRegister {
+      display: flex;
+      padding-top: 1.5rem;
+
+      p {
+        margin-left: 0.75rem;
+      }
+    }
+  }
+}

@@ -1,9 +1,16 @@
+.h1Home {
+  padding-left: 1rem;
+  color: white;
+  background: rgb(225, 224, 224);
+}
+
 .carrossel {
   cursor: grab;
   overflow: hidden;
-  background-color: #383B58;
+  background: rgb(225, 224, 224);
 }
 
 .inner {
   display: flex;
+  padding-bottom: 1rem;
 }
