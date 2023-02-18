@@ -1,12 +1,14 @@
 package br.com.dh.potatocars.service.impl;
 
 import br.com.dh.potatocars.dto.category.CategoryRequest;
+import br.com.dh.potatocars.exceptions.NotFoundException;
 import br.com.dh.potatocars.mapper.CategoryMapper;
 import br.com.dh.potatocars.repository.category.CategoryEntity;
 import br.com.dh.potatocars.repository.category.CategoryRepository;
 import br.com.dh.potatocars.service.CategoryService;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,18 +20,19 @@ public class CategoryServiceImpl implements CategoryService {
   private final CategoryMapper categoryMapper;
 
   @Override
-  public List<CategoryEntity> findAllCategory() {
-    return null;
+  public Page<CategoryEntity> findAllCategory(Pageable pageable) {
+
+    return categoryRepository.findAll(pageable);
   }
 
   @Override
   public CategoryEntity findCategoryById(Long id) {
-    return null;
+    return categoryRepository.findById(id).orElseThrow(() -> new NotFoundException("category_not_found", String.format("category %s not found", id)));
   }
 
   @Override
   public void deleteCategoryById(Long id) {
-
+    categoryRepository.deleteById(id);
   }
 
   @Override
