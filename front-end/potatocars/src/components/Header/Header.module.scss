@@ -24,12 +24,11 @@
   align-content: center;
   align-items: center;
   justify-content: space-around;
-  height: fit-content;
+  height: 12vh;
   flex-wrap: wrap;
   width: 100%;
   position: sticky; // pode? "pediram" fixed mais sticky tem mais utilidade e faz o mesmo
   top: 0;
-  padding: 0.5rem 0;
 
   img {
     width: fit-content;
@@ -53,7 +52,7 @@
       border-radius: 10px;
       z-index: -1;
       border: 2px solid transparent;
-      background: linear-gradient(to right, #c98cf1, #7b78e5) border-box;
+      background: linear-gradient(to right, #53c3b9, #1cad95) border-box;
       -webkit-mask: linear-gradient(#fff 0 0) padding-box,
         linear-gradient(#fff 0 0);
       -webkit-mask-composite: xor;

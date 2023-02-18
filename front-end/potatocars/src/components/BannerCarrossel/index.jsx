@@ -34,23 +34,26 @@ export default function BannerCarrossel() {
   ])
 
   return (
-    <motion.div
-      ref={carrossel}
-      className={styles.carrossel}
-      whileTap={{ cursor: 'grabbing' }}
-    >
+    <>
+      <h1 className={styles.h1Home}>Cards 1</h1>
       <motion.div
-        className={styles.inner}
-        drag="x"
-        dragConstraints={{ right: 0, left: -width }}
-        initial={{ x: 0 }}
-        animate={{ x: 0 }}
-        transition={{ duration: 0.8 }}
+        ref={carrossel}
+        className={styles.carrossel}
+        whileTap={{ cursor: 'grabbing' }}
       >
-        {allImagesBanner.map(image => {
-          return <CardsBanner key={image.id} imageData={image} />
-        })}
+        <motion.div
+          className={styles.inner}
+          drag="x"
+          dragConstraints={{ right: 0, left: -width }}
+          initial={{ x: 0 }}
+          animate={{ x: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          {allImagesBanner.map(image => {
+            return <CardsBanner key={image.id} imageData={image} />
+          })}
+        </motion.div>
       </motion.div>
-    </motion.div>
+    </>
   )
 }
