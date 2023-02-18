@@ -42,7 +42,8 @@ public class CategoryServiceImpl implements CategoryService {
   }
 
   @Override
-  public CategoryEntity updatedCategory(CategoryRequest categoryRequest) {
-    return null;
+  public CategoryEntity updatedCategory(Long id, CategoryRequest categoryRequest) {
+    CategoryEntity categoryEntity = findCategoryById(id);
+    return categoryRepository.save(categoryMapper.updateCategoryEntity(categoryEntity, categoryRequest));
   }
 }
