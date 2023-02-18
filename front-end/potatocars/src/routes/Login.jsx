@@ -6,7 +6,6 @@ const Login = () => {
   return (
     <div className="app-login">
       <div className={styles.bodyLogin}>
-        <h1>Login</h1>
         <LoginValidation />
       </div>
     </div>
