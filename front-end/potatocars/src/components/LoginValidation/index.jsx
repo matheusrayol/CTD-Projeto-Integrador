@@ -1,96 +1,60 @@
-/* eslint-disable no-unused-vars */
-import React, { useState } from 'react'
+import { React, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
+
+import useAuth from '../../hooks/useAuth'
+
 import styles from './LoginValidation.module.scss'
 
 const LoginValidation = () => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [formError, setFormError] = useState({
-    usernameError: false,
-    passwordError: false
-  })
-
+  const { signin } = useAuth()
+  // eslint-disable-next-line no-unused-vars
   const navigate = useNavigate()
 
-  const validateUsername = username => {
-    setFormError(prevState => ({ ...prevState }))
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
 
-    const withoutSpaces = username.trim()
-
-    if (withoutSpaces.length >= 5) {
-      setFormError(prevState => ({ ...prevState, usernameError: false }))
-      setUsername(username)
-      return true
-    } else {
-      setFormError(prevState => ({ ...prevState, usernameError: true }))
-      return false
-    }
-  }
-
-  const validatePassword = password => {
-    setFormError(prevState => ({ ...prevState }))
-
-    if (password.length >= 8) {
-      setFormError(prevState => ({ ...prevState, passwordError: false }))
-      setPassword(password)
-      return true
-    } else {
-      setFormError(prevState => ({ ...prevState, passwordError: true }))
-      return false
-    }
-  }
-
-  const handleSubmit = e => {
-    e.preventDefault()
-
-    let signInData = {
-      username: username,
-      password: password
+  const handleLogin = () => {
+    if (!email || !password) {
+      setError('Fill in all fields')
+      return
     }
 
-    let requestHeaders = {
-      'Content-Type': 'application/json'
+    const res = signin(email, password)
+
+    if (res) {
+      setError(res)
+      return
     }
 
-    // usar no fetch quando pronto
-    let requestConfiguration = {
-      method: 'POST',
-      body: JSON.stringify(signInData),
-      headers: requestHeaders
-    }
-
-    if (validateUsername && validatePassword) {
-      alert('Login realizado com sucesso!')
-      navigate('/home')
-    } else {
-      setFormError({
-        usernameError: false,
-        passwordError: false
-      })
-      alert('Usuário e/ou senha incorreto(s)!')
-    }
+    navigate('/home')
   }
 
   return (
-    <section className={styles.sectionLoginValidation}>
+    <section
+      className={`${styles.sectionLoginValidation} ${
+        error.genericError ? `${styles.error}` : ''
+      }`}
+    >
       <form className={styles.formLoginValidation}>
         <h1>Login</h1>
         <div className={styles.fieldLabelInput}>
           <label htmlFor="">Email</label>
           <input
-            className={`form-control ${
-              formError.usernameError ? `${styles.formError}` : ''
+            className={`${styles.inputValidation} ${
+              error.usernameError ? `${styles.error}` : ''
             }`}
             name="login"
+            placeholder="Insert your Email"
             required
-            onChange={event => validateUsername(event.target.value)}
+            value={email}
+            onChange={e => [setEmail(e.target.value), setError('')]}
           />
 
-          {formError.usernameError && (
-            <span className={`${styles.formError}`}>
-              O nome de usuário deve conter pelo menos 5 caracteres
+          {error.usernameError && (
+            <span className={`${styles.error}`}>
+              Username must contain at least 6 characters
             </span>
           )}
         </div>
@@ -98,17 +62,19 @@ const LoginValidation = () => {
           <label htmlFor="">Password</label>
           <input
             className={`form-control ${
-              formError.passwordError ? `${styles.formError}` : ''
+              error.passwordError ? `${styles.error}` : ''
             }`}
             name="password"
             type="password"
+            placeholder="Insert your password"
             required
-            onChange={event => validatePassword(event.target.value)}
+            value={password}
+            onChange={e => [setPassword(e.target.value), setError('')]}
           />
 
-          {formError.passwordError && (
-            <span className={styles.formError}>
-              A senha deve conter pelo menos 8 caracteres
+          {error.passwordError && (
+            <span className={styles.error}>
+              Password must contain at least 8 characters
             </span>
           )}
         </div>
@@ -116,14 +82,14 @@ const LoginValidation = () => {
         <button
           className={styles.buttonLoginValidation}
           type="submit"
-          onClick={event => handleSubmit(event)}
+          onClick={handleLogin}
         >
-          Register
+          Enter
         </button>
       </form>
       <div className={styles.buttonRegister}>
         You don't have a registration?
-        <Link to="/register"> Click Here!</Link>
+        <Link to="/register"> Click Here</Link>
       </div>
     </section>
   )

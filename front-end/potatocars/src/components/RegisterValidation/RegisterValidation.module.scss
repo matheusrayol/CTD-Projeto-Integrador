@@ -1,10 +1,20 @@
+@import "../../styles/GlobalVariablesScss.scss";
+
 .sectionRegisterValidation {
   width: 100%;
-  text-align: center;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: nowrap;
+  font-family: $font-bold;
+  font-weight: 700;
 
   h1 {
-    color: #1DBEB4;
-    padding-bottom: 1.5rem;
+    color: $color-two;
+    padding: 0;
   }
 
   .formRegisterValidation {
@@ -13,7 +23,27 @@
     flex-direction: column;
     flex-wrap: nowrap;
     align-items: center;
-    padding-top: 1.5rem 0;
+    padding: 0;
+
+    .buttonRegister {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      align-content: center;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      padding-top: 1.5rem;
+      text-decoration: none;
+    }
+
+    h1 {
+      margin: 0;
+      padding-bottom: 2rem;
+      letter-spacing: 1px;
+      font-size: 2rem;
+      color: $color-two;
+    }
 
     .completeName {
       width: 33%;
@@ -25,9 +55,11 @@
         text-align: start;
         width: 50%;
         margin-bottom: 0.25rem;
+        color: $color-three;
       }
 
       input {
+        border: $border-color-three;
         padding: 0.5rem;
         padding-right: 1.5rem;
         width: 50%;
@@ -48,9 +80,11 @@
         text-align: start;
         width: 50%;
         margin-bottom: 0.25rem;
+        color: $color-three;
       }
 
       input {
+        border: $border-color-three;
         padding: 0.5rem;
         padding-right: 1.5rem;
         width: 50%;
@@ -59,27 +93,96 @@
       }
     }
 
-    .buttonRegisterValidation {
-      letter-spacing: 0.75px;
+    .buttonSubmit {
+      text-decoration: none;
       padding: 1rem 3rem;
-      color: white;
-      border: 2px solid rgba(24, 159, 150, 0.785);
-      border-radius: 0.5rem;
-      background: rgba(24, 159, 150, 0.785);
-      transition: all 0.3s ease-in-out;
+      border: $border-color-two;
+      color: $text-color-two;
+      border-radius: 0.75rem;
+      background: $background-one;
+      transition: all 0.3s ease;
+
+      font-family: $font-bold;
+      font-size: 1rem;
+      font-weight: 700;
 
       &:hover {
-        border: 2px solid rgba(255, 255, 255, 0.75);
-        background: rgba(10, 99, 93, 0.785);
+        color: $text-color-one;
+        background-color: $background-three;
+        border: $border-color-one;
       }
     }
 
-    .buttonRegister {
-      display: flex;
-      padding-top: 1.5rem;
+    .buttonRegister a {
+      letter-spacing: 0.25px;
+      color: $color-one;
+      text-decoration: none;
+    }
+  }
 
-      p {
-        margin-left: 0.75rem;
+}
+
+@media(max-width: 850px) {
+  .sectionRegisterValidation {
+    .formRegisterValidation {
+
+      h1 {
+        padding-bottom: 1rem;
+      }
+
+      .buttonRegister {
+        padding-top: 1rem;
+      }
+
+      .fieldLabelInput {
+        width: 100%;
+
+        label {
+          width: 50%;
+        }
+
+        input {
+          width: 50%;
+        }
+      }
+
+      .completeName {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+}
+
+@media(max-width: 550px) {
+  .sectionRegisterValidation {
+    .formRegisterValidation {
+
+
+      h1 {
+        padding-bottom: 0;
+      }
+
+      .buttonRegister {
+        padding-top: 0.5rem;
+      }
+
+      .fieldLabelInput {
+        width: 100%;
+
+
+        label {
+          width: 75%;
+        }
+
+        input {
+          width: 75%;
+        }
       }
     }
   }

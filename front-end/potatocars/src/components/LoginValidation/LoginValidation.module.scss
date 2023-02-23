@@ -1,10 +1,31 @@
+@import "../../styles/GlobalVariablesScss.scss";
+
 .sectionLoginValidation {
   width: 100%;
-  text-align: center;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: nowrap;
+
+  font-family: $font-bold;
+  font-weight: 700;
 
   h1 {
-    color: #1DBEB4;
-    padding-bottom: 1.5rem;
+    color: $color-two;
+  }
+
+  .buttonRegister {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    text-decoration: none;
   }
 
   .formLoginValidation {
@@ -13,7 +34,15 @@
     flex-direction: column;
     flex-wrap: nowrap;
     align-items: center;
-    margin: 1.5rem 0;
+    margin-bottom: 1.5rem;
+
+    h1 {
+      margin: 0;
+      padding-bottom: 2rem;
+      letter-spacing: 1px;
+      font-size: 2rem;
+      color: rgb(97, 21, 118);
+    }
 
     .fieldLabelInput {
       width: 50%;
@@ -21,34 +50,89 @@
       flex-direction: column;
       flex-wrap: nowrap;
       align-items: center;
+      margin-bottom: 2rem;
 
       label {
         text-align: start;
         width: 50%;
         margin-bottom: 0.25rem;
+        color: $color-three;
       }
 
+
       input {
+        border: $border-color-three;
         padding: 0.5rem;
-        padding-right: 1.5rem;
+        padding-right: 1rem;
         width: 50%;
         border-radius: 0.33rem;
-        margin-bottom: 1rem;
+        margin: 0;
       }
     }
 
     button {
-      letter-spacing: 0.75px;
+      text-decoration: none;
       padding: 1rem 3rem;
-      color: white;
-      border: 2px solid rgba(24, 159, 150, 0.785);
-      border-radius: 0.5rem;
-      background: rgba(24, 159, 150, 0.785);
-      transition: all 0.3s ease-in-out;
+      border: $border-color-two;
+      color: $text-color-two;
+      border-radius: 0.75rem;
+      background: $background-one;
+      transition: all 0.3s ease;
+
+      font-family: $font-bold;
+      font-size: 1rem;
+      font-weight: 700;
 
       &:hover {
-        border: 2px solid rgba(255, 255, 255, 0.75);
-        background: rgba(10, 99, 93, 0.785);
+        color: $text-color-one;
+        background-color: $background-three;
+        border: $border-color-two;
+      }
+    }
+  }
+
+  .buttonRegister a {
+    letter-spacing: 0.5px;
+    color: $color-one;
+    text-decoration: none;
+  }
+}
+
+.error {
+  text-align: center;
+}
+
+@media(max-width: 850px) {
+  .sectionLoginValidation {
+    .formLoginValidation {
+      .fieldLabelInput {
+        width: 100%;
+
+        label {
+          width: 50%;
+        }
+
+        input {
+          width: 50%;
+        }
+      }
+    }
+  }
+}
+
+@media(max-width: 550px) {
+  .sectionLoginValidation {
+    .formLoginValidation {
+      .fieldLabelInput {
+        width: 100%;
+
+        label {
+          width: 75%;
+        }
+
+        input {
+          width: 75%;
+        }
       }
     }
   }

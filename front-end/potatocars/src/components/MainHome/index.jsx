@@ -1,48 +1,82 @@
-import React from 'react'
-// import { useState } from 'react'
 import styles from './MainHome.module.scss'
 import { MdDoneAll } from 'react-icons/md'
-// import Calendar from 'react-calendar'
+import { React, useState } from 'react'
+import Select from 'react-select'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
 export default function Main() {
-  // const [value, onChange] = useState(new Date())
+  const [selectedDateDeparture, setselectedDateDeparture] = useState('')
+  const [selectedDateArrival, setselectedDateArrival] = useState('')
+
+  const options = [
+    { value: 'Sao Jose do Rio Preto', label: 'São Jose do Rio Preto' },
+    { value: 'Rio de Janeiro', label: 'Rio de Janeiro' },
+    { value: 'Sao Paulo', label: 'São Paulo' },
+    { value: 'Belo Horizonte', label: 'Belo Horizonte' },
+    { value: 'Salvador', label: 'Salvador' }
+  ]
 
   return (
     <main className={styles.main}>
-      <h1>Pesquise e descubra por que a PotatoCars é a melhor!!!</h1>
-      {/* <h2>Alugue um Carro</h2> */}
+      <h1>Find out why PotatoCars is the Best</h1>
       <form className={styles.form}>
         <div className={styles.form__campos}>
-          <label htmlFor="">Local Retirada</label>
-          <input type="text" placeholder="Aonde você quer alugar?" />
+          <label htmlFor="">Departure Location</label>
+          <Select
+            className={styles.select}
+            options={options}
+            placeholder="City Departure"
+          />
         </div>
         <div className={styles.form__campos}>
-          <label htmlFor="">Data e Hora Retirada</label>
-          <input type="datetime-local" />
-          {/* <Calendar onChange={onChange} value={value} /> */}
+          <label htmlFor="">Date Time Departure</label>
+          <DatePicker
+            selected={selectedDateDeparture}
+            onChange={date => setselectedDateDeparture(date)}
+            showTimeSelect
+            dateFormat="dd/MM/yyyy - h:m"
+            placeholderText="Date Time Departure"
+            className={styles.calendar}
+          />
         </div>
         <div className={styles.form__campos}>
-          <label htmlFor="">Data e Hora de Devolução</label>
-          <input type="datetime-local" />
+          <label htmlFor="">Arrival Location</label>
+          <Select
+            className={styles.select}
+            options={options}
+            placeholder="City Arrival"
+          />
         </div>
-        <button className={styles.form__botao}>Buscar</button>
+        <div className={styles.form__campos}>
+          <label htmlFor="">Date Time Arrival</label>
+          <DatePicker
+            selected={selectedDateArrival}
+            onChange={date => setselectedDateArrival(date)}
+            showTimeSelect
+            dateFormat="dd/MM/yyyy - h:m"
+            placeholderText="Date Time Arrival"
+            className={styles.calendar}
+          />
+        </div>
+        <button className={styles.form__botao}>Search</button>
       </form>
       <div className={styles.main__comentarios}>
         <div className={styles.main__diferenciais}>
           <MdDoneAll />
-          <p>Melhor preço garantido</p>
+          <p>Best price guaranteed</p>
         </div>
         <div className={styles.main__diferenciais}>
           <MdDoneAll />
-          <p>Cashback no aluguel de carros</p>
+          <p>Cashback on car rental</p>
         </div>
         <div className={styles.main__diferenciais}>
           <MdDoneAll />
-          <p>Parcelamento em até 24x</p>
+          <p>Payment in up to 24x</p>
         </div>
         <div className={styles.main__diferenciais}>
           <MdDoneAll />
-          <p>Pague em Reais sem IOF</p>
+          <p>Pay in Reais without IOF</p>
         </div>
       </div>
     </main>

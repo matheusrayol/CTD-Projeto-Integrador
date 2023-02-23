@@ -30,52 +30,20 @@
 
 @media(max-width: 850px) {
   .sectionCard {
-
-    .inner {
-      display: grid;
-      grid-template-columns: 49vw 49vw;
-      gap: 1rem;
-      justify-items: center;
-      align-items: center;
-      justify-content: center;
-    }
-
-  }
-}
-
-@media(max-width: 750px) {
-  .sectionCard {
+    width: 100%;
     display: flex;
     flex-direction: column;
 
-
-    .carrossel {
-      display: flex;
-      flex-direction: column;
-
-    }
-
     .inner {
+      width: 100%;
       display: flex;
       flex-direction: column;
-      align-content: center;
+      gap: 1rem;
       align-items: center;
       justify-content: center;
-      width: 90%;
-      text-align: center;
-      margin-left: 5%;
-    }
-
-  }
-}
-
-@media(max-width: 550px) {
-  .sectionCard {
-    .inner {
-
-      width: 100%;
-
-      margin-left: 0%;
+      align-content: center;
+      flex-wrap: nowrap;
+      justify-items: start;
     }
 
   }
