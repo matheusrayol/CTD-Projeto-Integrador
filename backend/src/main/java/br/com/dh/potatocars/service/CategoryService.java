@@ -2,11 +2,12 @@ package br.com.dh.potatocars.service;
 
 import br.com.dh.potatocars.dto.category.CategoryRequest;
 import br.com.dh.potatocars.repository.category.CategoryEntity;
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 
 public interface CategoryService {
-  List<CategoryEntity> findAllCategory();
+  Page<CategoryEntity> findAllCategory(Pageable pageable);
 
   CategoryEntity findCategoryById(Long id);
 
@@ -14,5 +15,5 @@ public interface CategoryService {
 
   CategoryEntity createCategory(CategoryRequest categoryRequest);
 
-  CategoryEntity updatedCategory(CategoryRequest categoryRequest);
+  CategoryEntity updatedCategory(Long id, CategoryRequest categoryRequest);
 }
