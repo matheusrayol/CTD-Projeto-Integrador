@@ -1,0 +1,11 @@
+// Body
+// ● Representa um body geral com a cor de background que ocupe 100 % da altura da tela.
+
+// ele diz isso mais no exemplo tem duas cores entre as sessoes dos cards do conteudo 
+.appRegister {
+  width: 100%;
+
+  .bodyRegister {
+    background: rgb(225, 224, 225);
+  }
+}
