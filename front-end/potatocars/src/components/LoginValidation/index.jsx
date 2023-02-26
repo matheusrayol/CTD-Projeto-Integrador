@@ -4,81 +4,64 @@ import { Link } from 'react-router-dom'
 
 import useAuth from '../../hooks/useAuth'
 
+import * as C from './styles'
 import styles from './LoginValidation.module.scss'
 
 const LoginValidation = () => {
   const { signin } = useAuth()
-  // eslint-disable-next-line no-unused-vars
   const navigate = useNavigate()
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
 
-  const handleLogin = () => {
+  const handleLogin = e => {
+    e.preventDefault()
     if (!email || !password) {
       setError('Fill in all fields')
+      return
+    } else if (password.length < 6) {
+      setError('Password length is < 6 ')
       return
     }
 
     const res = signin(email, password)
-
-    if (res) {
-      setError(res)
-      return
+    if (email || password) {
+      if (res) {
+        setError(res)
+        return
+      }
+      alert('User login with sucess!')
+      navigate('/home')
     }
-
-    navigate('/home')
   }
 
   return (
-    <section
-      className={`${styles.sectionLoginValidation} ${
-        error.genericError ? `${styles.error}` : ''
-      }`}
-    >
+    <section className={styles.sectionLoginValidation}>
       <form className={styles.formLoginValidation}>
         <h1>Login</h1>
         <div className={styles.fieldLabelInput}>
           <label htmlFor="">Email</label>
           <input
-            className={`${styles.inputValidation} ${
-              error.usernameError ? `${styles.error}` : ''
-            }`}
+            className={styles.inputValidation}
             name="login"
-            placeholder="Insert your Email"
             required
             value={email}
             onChange={e => [setEmail(e.target.value), setError('')]}
           />
-
-          {error.usernameError && (
-            <span className={`${styles.error}`}>
-              Username must contain at least 6 characters
-            </span>
-          )}
         </div>
         <div className={styles.fieldLabelInput}>
           <label htmlFor="">Password</label>
           <input
-            className={`form-control ${
-              error.passwordError ? `${styles.error}` : ''
-            }`}
+            className={styles.inputValidation}
             name="password"
             type="password"
-            placeholder="Insert your password"
             required
             value={password}
             onChange={e => [setPassword(e.target.value), setError('')]}
           />
-
-          {error.passwordError && (
-            <span className={styles.error}>
-              Password must contain at least 8 characters
-            </span>
-          )}
         </div>
-
+        <C.labelError>{error}</C.labelError>
         <button
           className={styles.buttonLoginValidation}
           type="submit"

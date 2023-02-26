@@ -112,15 +112,19 @@
 @media(max-width: 850px) {
 
   .form {
-    gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    justify-items: center;
+    align-items: center;
 
     .select {
-      width: 300px;
+      width: 306px;
 
     }
 
     .calendar {
-      width: 300px;
+      width: 290px;
 
     }
   }
@@ -139,14 +143,6 @@
       &__campos {
         gap: 1rem;
 
-        .select {
-          width: 200px;
-
-        }
-
-        .calendar {
-          width: 200px;
-        }
       }
     }
 
@@ -209,15 +205,11 @@
       }
 
       .select {
-        width: 100%;
         color: $text-color-two;
         font-family: $font-bold;
         font-weight: 700;
       }
 
-      .calendar {
-        width: 200px;
-      }
     }
 
   }

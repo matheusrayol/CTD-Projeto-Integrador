@@ -36,6 +36,41 @@
     align-content: center;
     justify-content: center;
     align-items: center;
+
+
+    .logoEgg {
+      display: flex;
+      align-items: center;
+      padding: 0;
+      margin: 0;
+      border: 0;
+      gap: 0.5rem;
+      margin-left: 0.5rem;
+      text-decoration: none;
+      font-size: 1.5rem;
+      font-style: italic;
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+
+
+      span {
+        width: 70px;
+        height: 70px;
+        background-image: url('https://img.freepik.com/vetores-gratis/logotipo-do-carro-metalico-realista_52683-36046.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        border-radius: 2rem;
+        border: $border-color-two;
+
+        &:hover {
+          background-image: url('https://i.gifer.com/7HXy.gif');
+        }
+      }
+    }
   }
 
   @include breakpoint(md) {
@@ -81,6 +116,10 @@
       transform: translate(0);
       transition: 0.3s ease transform;
 
+      margin: 0;
+      border: 0;
+      padding: 0;
+
       h1 {
         visibility: hidden;
       }
@@ -125,6 +164,7 @@
           }
 
           a {
+            margin: 0;
             text-decoration: none;
             padding: 1rem 3rem;
             border: $border-color-two;
@@ -191,6 +231,20 @@
       }
 
       @include breakpoint(md) {
+        display: none;
+      }
+    }
+  }
+}
+
+@media(max-width: 1000px) {
+  .header {
+
+
+    .logos {
+
+
+      .logoEgg {
         display: none;
       }
     }

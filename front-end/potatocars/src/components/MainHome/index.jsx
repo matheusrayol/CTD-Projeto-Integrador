@@ -40,14 +40,14 @@ export default function Main() {
             className={styles.calendar}
           />
         </div>
-        <div className={styles.form__campos}>
+        {/* <div className={styles.form__campos}>
           <label htmlFor="">Arrival Location</label>
           <Select
             className={styles.select}
             options={options}
             placeholder="City Arrival"
           />
-        </div>
+        </div> */}
         <div className={styles.form__campos}>
           <label htmlFor="">Date Time Arrival</label>
           <DatePicker

@@ -17,6 +17,16 @@
     color: $color-two;
   }
 
+  .error {
+    .sectionLoginValidation {
+      .formLoginValidation {
+        input {
+          background-color: red;
+        }
+      }
+    }
+  }
+
   .buttonRegister {
     display: flex;
     align-items: center;
@@ -50,7 +60,7 @@
       flex-direction: column;
       flex-wrap: nowrap;
       align-items: center;
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
 
       label {
         text-align: start;

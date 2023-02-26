@@ -4,6 +4,8 @@
   width: 100%;
   border-radius: 1rem;
   background: none;
+  margin: 0;
+
 
   .cardBody {
     display: flex;
@@ -18,7 +20,7 @@
     background: $background-three;
     color: white;
     border: $border-color-two;
-    box-shadow: 2px 2px 6px #c061f3;
+    box-shadow: $border-box-shadow-one;
     border-radius: 1rem;
     padding: 0;
 
@@ -41,21 +43,14 @@
       color: $text-color-three;
     }
 
-
     img {
       width: 100%;
-      height: 250px;
+      height: 200px;
       pointer-events: none;
-      border-top-right-radius: 1rem;
-      border-top-left-radius: 1rem;
+      border-radius: 1rem;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border-bottom: $border-one-side;
     }
-  }
-
-  img {
-    width: 24.5vw;
-    height: 250px;
-    pointer-events: none;
-    border-top-right-radius: 1rem;
-    border-top-left-radius: 1rem;
   }
 }

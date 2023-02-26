@@ -45,6 +45,9 @@ function Navbar() {
           <Link to="/home">
             <img src={logoHeader} alt="Logo escrito DigitalBooking" />
           </Link>
+          <Link to="/home" className={styles.logoEgg}>
+            <span></span>NotOnlyCars
+          </Link>
         </div>
         <nav
           className={`${styles.header__content__nav} 

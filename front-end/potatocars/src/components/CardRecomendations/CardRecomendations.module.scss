@@ -1,21 +1,20 @@
 @import "../../styles/GlobalVariablesScss.scss";
 
 .item {
+  width: 100%;
   border-radius: 1rem;
   background: none;
   margin: 0;
-  padding: 0;
-  border: 0;
+  margin-right: 0.5rem;
 
 
   .cardBody {
     display: grid;
-    grid-template-columns: 24vw 24vw;
+    grid-template-columns: 24.4vw 24.4vw;
     justify-items: start;
     align-items: center;
     justify-content: center;
     align-content: center;
-    gap: 1rem;
 
     opacity: 0.9;
     filter: brightness(0.9);
@@ -23,7 +22,7 @@
     background: $background-three;
     color: $text-color-one;
     border: $border-color-two;
-    box-shadow: 2px 2px 6px #c061f3;
+    box-shadow: $border-box-shadow-one;
     border-radius: 1rem;
     margin: 0;
     padding: 0;
@@ -34,6 +33,8 @@
       margin: 0;
       padding: 0;
       border: 0;
+      border-right: $border-one-side;
+
     }
 
     .cardImg img {
@@ -47,9 +48,11 @@
     .cardParagraph {
       width: 24vw;
       text-align: center;
+      padding: 0.5rem 0;
 
       button {
-        padding: 1rem 6rem;
+        margin-top: 0.5rem;
+        padding: 1rem 5rem;
         border-radius: 0.75rem;
         font-family: $font-normal;
         border: $border-color-two;
@@ -90,16 +93,13 @@
 
 
     img {
+      width: 100%;
+      height: 250px;
       pointer-events: none;
+      border-radius: 1rem;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
     }
-  }
-
-  img {
-    width: 24vw;
-    height: 265px;
-    pointer-events: none;
-    border-radius: 1rem;
-    padding-left: 0.25rem;
   }
 }
 
@@ -107,22 +107,20 @@
   .item {
     border-radius: 1rem;
     background: none;
-    margin: 0 1rem;
-
 
     .cardBody {
       display: grid;
       grid-template-columns: 49vw 49vw;
       justify-items: start;
       align-items: center;
-      justify-content: center;
+      justify-content: start;
       align-content: center;
-      gap: 1rem;
+      gap: 0;
 
       opacity: 0.9;
       filter: brightness(0.9);
       transition: all 0.3s ease-in-out;
-      box-shadow: 2px 2px 6px #c061f3;
+      box-shadow: $border-box-shadow-one;
       border-radius: 1rem;
       padding: 0;
       margin: 0;
@@ -130,9 +128,6 @@
       .cardParagraph {
         width: 100%;
         text-align: center;
-      }
-
-      .cardImg {
         padding: 0;
       }
 
@@ -209,7 +204,6 @@
     .cardBody {
       margin: 0;
       padding: 0;
-      border: 0;
       gap: 1rem;
       display: flex;
       flex-direction: column;
@@ -217,34 +211,55 @@
       align-content: center;
       justify-content: center;
       align-items: center;
-    }
+      border: $border-color-two;
+      box-shadow: $border-box-shadow-one;
 
-    .cardParagraph {
-      margin: 0;
-      padding: 0;
-      border: 0;
-      width: 100%;
-      text-align: center;
-    }
 
-    p {
-      margin: 0;
-      width: max-content;
-      font-size: 1.5rem;
-      margin-left: 0%;
-      padding: 0.20rem;
-      border: 0;
-      font-weight: 400;
-    }
+      .cardParagraph {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        width: 100%;
+        text-align: center;
+      }
 
-    & p::first-letter {
-      font-weight: bold;
-      font-size: 2rem;
-      color: $text-color-three;
-    }
-  }
+      p {
+        margin: 0;
+        width: max-content;
+        font-size: 1.5rem;
+        margin-left: 0%;
+        padding: 0.20rem;
+        border: 0;
+        font-weight: 400;
+      }
 
-  .cardImg img {
-    width: 98vw;
+      & p::first-letter {
+        font-weight: bold;
+        font-size: 2rem;
+        color: $text-color-three;
+      }
+
+      .cardImg {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        border-radius: 1rem;
+
+        img {
+          width: 100%;
+          height: 100%;
+          margin: 0;
+          padding: 0;
+          border-right: none;
+          border-top-right-radius: 1rem;
+          border-bottom-left-radius: 0;
+          border-bottom: $border-one-side;
+
+        }
+      }
+
+    }
   }
 }

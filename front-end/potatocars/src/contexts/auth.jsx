@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
     }
   }, [])
 
-  const signin = (email, password) => {
+  const signin = (email, password, event) => {
     const usersStorage = JSON.parse(localStorage.getItem('users_bd'))
 
     const hasUser = usersStorage?.filter(user => user.email === email)
@@ -30,10 +30,10 @@ export const AuthProvider = ({ children }) => {
         setUser({ email, password })
         return
       } else {
-        return alert('E-mail or password incorrets')
+        return 'E-mail or Password Incorrets'
       }
     } else {
-      return alert('User not register')
+      return 'User Not Register'
     }
   }
 

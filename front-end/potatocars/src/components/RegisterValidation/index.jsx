@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { React, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styles from './RegisterValidation.module.scss'
 import useAuth from '../../hooks/useAuth'
+import * as C from './styles'
 
 const RegisterValidation = () => {
   const [rvName, setRvName] = useState('')
@@ -9,19 +10,24 @@ const RegisterValidation = () => {
   const [rvEmail, setRvEmail] = useState('')
   const [rvPassword, setRvPassword] = useState('')
   const [rvRePassword, setRvRePassword] = useState('')
-  // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState('')
   const navigate = useNavigate()
 
   const { signup } = useAuth()
 
-  const handleSignup = () => {
+  const handleSignup = e => {
+    e.preventDefault()
     if (!rvName | !rvSurname | !rvEmail | !rvPassword | !rvRePassword) {
       setError('Fill in all fields')
       return
     } else if (rvPassword !== rvRePassword) {
       setError('The passwords do not match')
       return
+    } else if (rvPassword.length < 6) {
+      setError('Password length is < 6 ')
+      return
+    } else {
+      setError('Unknow Error')
     }
 
     const res = signup(rvEmail, rvPassword)
@@ -38,7 +44,7 @@ const RegisterValidation = () => {
   return (
     <section className={styles.sectionRegisterValidation}>
       <form className={styles.formRegisterValidation}>
-        <h1>Create Account</h1>
+        <h1 className={styles.titleForm}>Create Account</h1>
         <div className={styles.completeName}>
           <div className={styles.fieldLabelInput}>
             <label htmlFor="">Name</label>
@@ -91,12 +97,11 @@ const RegisterValidation = () => {
             onChange={e => [setRvRePassword(e.target.value), setError('')]}
           />
         </div>
-
+        <C.labelError>{error}</C.labelError>
         <button
           className={styles.buttonSubmit}
           type="submit"
           onClick={handleSignup}
-          // onClick={event => handleSubmit(event)}
         >
           Register
         </button>
