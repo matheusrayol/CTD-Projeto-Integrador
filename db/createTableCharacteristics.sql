@@ -1,5 +1,0 @@
-CREATE TABLE characteristics(
-	id BIGINT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    name VARCHAR(500),
-    icon VARCHAR(2100)
-)
