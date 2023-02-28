@@ -17,10 +17,30 @@
   gap: 2rem;
   z-index: 1;
 
-  &__img {
+  &__copyright {
+
+    font-family: $font-bold;
+    font-weight: 700;
+    font-size: 0.85rem;
     display: flex;
-    margin-left: 2rem;
+    flex-direction: row;
+    gap: 0.25rem;
+    align-items: center;
+    justify-content: center;
+
+    &__img {
+
+      margin-left: 2rem;
+      width: 20px;
+      height: 20px;
+    }
+
+    span {
+      color: #16640f;
+    }
   }
+
+
 
   &__socialMedias {
     display: flex;
