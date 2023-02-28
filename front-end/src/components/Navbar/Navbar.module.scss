@@ -16,7 +16,7 @@
   background: $background-one;
 
   width: 100%;
-  height: 12vh;
+  height: 9vh;
   padding: 0;
   margin: 0;
   border: 0;
@@ -52,8 +52,8 @@
 
     p {
       font-size: 1.15rem;
-      font-family: $font-bold;
-      font-weight: 700;
+      font-family: $font-normal;
+      font-weight: 200;
       color: $text-color-two;
 
       a {
@@ -250,6 +250,7 @@
 
           p {
             color: $text-color-one;
+            font-weight: 300;
           }
 
           &__sectionUser {

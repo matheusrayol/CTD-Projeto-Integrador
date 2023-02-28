@@ -19,11 +19,11 @@
     opacity: 0.9;
     filter: brightness(0.9);
     transition: all 0.3s ease-in-out;
-    background: $background-three;
+    background: $background-four;
     color: white;
-    border: $border-color-two;
+    border: 2px solid $border-color-three;
     box-shadow: $border-box-shadow-one;
-    border-radius: 1rem;
+    border-radius: .5rem;
     padding: 0;
 
     &:hover {

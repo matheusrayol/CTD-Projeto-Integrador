@@ -44,7 +44,7 @@ function Navbar() {
         <div className={styles.logos}>
           <Link to="/home" className={styles.logoEgg}>
             <span></span>
-            <p>NotOnlyCars</p>
+            <p>Travel Green</p>
           </Link>
         </div>
         <nav
