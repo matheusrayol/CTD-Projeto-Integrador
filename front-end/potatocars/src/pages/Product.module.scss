@@ -1,8 +1,10 @@
+@import "../styles/GlobalVariablesScss.scss";
+
 .appProduct {
   width: 100%;
 
   .bodyProduct {
-    background: rgb(225, 224, 225);
+    background: $background-five;
   }
 
   main {
@@ -14,7 +16,9 @@
 
     img {
       width: 45%;
-      height: 500px;
+      height: 450px;
+      border: 4px groove rgb(53, 166, 38);
+      border-radius: 0.5rem;
     }
   }
 }
