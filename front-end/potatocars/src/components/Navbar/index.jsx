@@ -3,7 +3,7 @@ import useAuth from '../../hooks/useAuth'
 import { BiMenuAltRight } from 'react-icons/bi'
 import { AiOutlineClose } from 'react-icons/ai'
 import { Link, useNavigate } from 'react-router-dom'
-import logoHeader from '../../assets/logoHeader.svg'
+import imgAvatar from '../../assets/imgAvatar.png'
 import styles from './Navbar.module.scss'
 
 function Navbar() {
@@ -42,11 +42,9 @@ function Navbar() {
     <header className={styles.header}>
       <div className={styles.header__content}>
         <div className={styles.logos}>
-          <Link to="/home">
-            <img src={logoHeader} alt="Logo escrito DigitalBooking" />
-          </Link>
           <Link to="/home" className={styles.logoEgg}>
-            <span></span>NotOnlyCars
+            <span></span>
+            <p>NotOnlyCars</p>
           </Link>
         </div>
         <nav
@@ -59,25 +57,27 @@ function Navbar() {
             <li>
               <Link to="/home">Home</Link>
             </li>
-            <li>
-              <Link to="/register">Register</Link>
-            </li>
+
             <li>
               {user === null ? (
-                <Link to="/login">Login</Link>
+                <div className={styles.ifLogin}>
+                  <Link to="/register">Register</Link>
+                  <Link to="/login">Login</Link>
+                </div>
               ) : (
-                <Link to="/home" onClick={() => signout()}>
-                  Logout
-                </Link>
+                <div className={styles.ifLogout}>
+                  <div className={styles.ifLogout__sectionUser}>
+                    <img src={imgAvatar} alt="imagem Avatar" />
+                    <p>
+                      <Link to="/accountuser">{user.name}</Link>
+                    </p>
+                  </div>
+                  <Link to="/home" onClick={() => signout()}>
+                    Logout
+                  </Link>
+                </div>
               )}
             </li>
-
-            {/* <button
-              className={`btn btn-${theme} ${styles.btnStyle}`}
-              onClick={() => changeTheme(theme === 'dark' ? 'light' : 'dark')}
-            >
-              {theme === 'light' ? '🌙' : '☀'}
-            </button> */}
           </ul>
         </nav>
         <div className={styles.header__content__toggle}>

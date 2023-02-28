@@ -21,7 +21,7 @@ const LoginValidation = () => {
       setError('Fill in all fields')
       return
     } else if (password.length < 6) {
-      setError('Password length is < 6 ')
+      setError('Password length is too short')
       return
     }
 

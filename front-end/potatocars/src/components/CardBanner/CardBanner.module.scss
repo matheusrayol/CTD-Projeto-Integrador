@@ -5,6 +5,8 @@
   border-radius: 1rem;
   background: none;
   margin: 0;
+  font-family: $font-normal;
+  font-weight: 400;
 
 
   .cardBody {
@@ -25,21 +27,21 @@
     padding: 0;
 
     &:hover {
-      opacity: 1;
-      filter: brightness(1.1)
+      opacity: 1.1;
+      filter: brightness(1.2)
     }
 
     p {
-      font-size: 1.5rem;
+      font-size: 1.25rem;
       margin: 0;
-      padding: 0;
+      padding: 0.05rem 0;
       border: 0;
       font-weight: 400;
     }
 
     & p::first-letter {
       font-weight: bold;
-      font-size: 2rem;
+      font-size: 1.5rem;
       color: $text-color-three;
     }
 

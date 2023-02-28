@@ -6,11 +6,13 @@
   background: none;
   margin: 0;
   margin-right: 0.5rem;
+  font-family: $font-normal;
+  font-weight: 400;
 
 
   .cardBody {
     display: grid;
-    grid-template-columns: 24.4vw 24.4vw;
+    grid-template-columns: 23.05vw 23.05vw;
     justify-items: start;
     align-items: center;
     justify-content: center;
@@ -50,16 +52,37 @@
       text-align: center;
       padding: 0.5rem 0;
 
+      &__starRated {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+
+
+        p {
+          margin-right: 0rem;
+        }
+
+        img {
+          width: 20px;
+          height: 20px;
+          padding: 0;
+          margin-right: 0.1rem;
+        }
+      }
+
       button {
         margin-top: 0.5rem;
-        padding: 1rem 5rem;
+        margin-bottom: 0.25rem;
+        padding: 0.75rem 1.75rem;
         border-radius: 0.75rem;
         font-family: $font-normal;
         border: $border-color-two;
         color: $text-color-two;
-        background: $background-one;
+        background: $background-five;
         transition: all 0.3s ease-in-out;
-        font-size: 1rem;
+        font-size: 1.15rem;
         font-weight: 700;
 
         &:hover {
@@ -68,6 +91,7 @@
           border: $border-color-one;
         }
       }
+
     }
 
     &:hover {
@@ -76,18 +100,15 @@
     }
 
     p {
-      margin: 0;
-      width: fit-content;
-      font-size: 1.5rem;
-      margin-left: 5%;
-      padding: 0.20rem;
+      margin: 0 0.5rem;
+      font-size: 1.15rem;
+      padding: 0.20rem 0;
       border: 0;
       font-weight: 400;
     }
 
     & p::first-letter {
       font-weight: bold;
-      font-size: 2rem;
       color: $text-color-three;
     }
 
@@ -103,6 +124,16 @@
   }
 }
 
+@media(max-width: 1024px) {
+  .item {
+
+    .cardBody {
+      display: grid;
+      grid-template-columns: 22.25vw 22.25vw;
+    }
+  }
+}
+
 @media(max-width: 850px) {
   .item {
     border-radius: 1rem;
@@ -110,7 +141,7 @@
 
     .cardBody {
       display: grid;
-      grid-template-columns: 49vw 49vw;
+      grid-template-columns: 43vw 43vw;
       justify-items: start;
       align-items: center;
       justify-content: start;
@@ -132,26 +163,23 @@
       }
 
       &:hover {
-        opacity: 1;
-        filter: brightness(1.1)
+        opacity: 1.1;
+        filter: brightness(1.2)
       }
 
       p {
         margin: 0;
-        width: fit-content;
-        font-size: 1.5rem;
-        margin-left: 5%;
-        padding: 0.20rem;
+        font-size: 1.15rem;
+        padding: 0rem;
         border: 0;
         font-weight: 400;
       }
 
       & p::first-letter {
         font-weight: bold;
-        font-size: 2rem;
+        font-size: 1.35rem;
         color: $text-color-three;
       }
-
 
       img {
         pointer-events: none;
@@ -191,6 +219,7 @@
       width: 100%;
       text-align: center;
       margin-left: 0%;
+
     }
   }
 }
@@ -225,17 +254,16 @@
 
       p {
         margin: 0;
-        width: max-content;
-        font-size: 1.5rem;
+        font-size: 1.15rem;
         margin-left: 0%;
-        padding: 0.20rem;
+        padding: 0rem;
         border: 0;
         font-weight: 400;
       }
 
       & p::first-letter {
         font-weight: bold;
-        font-size: 2rem;
+        font-size: 1.35rem;
         color: $text-color-three;
       }
 

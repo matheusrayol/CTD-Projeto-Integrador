@@ -11,11 +11,14 @@
   width: 100%;
   z-index: 0;
 
-  h1,
-  h2 {
-    margin: 0;
+  h1 {
+    margin: 0 1rem;
     border: 0;
     padding: 0.5rem 0;
+
+    span {
+      color: $text-color-three;
+    }
   }
 
   &__comentarios {
@@ -31,7 +34,7 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    padding: 0.5rem 0;
+    padding: 0.25rem 0;
   }
 }
 
@@ -91,11 +94,11 @@
 
   &__botao {
     font-family: $font-normal;
-    padding: 1rem 3rem;
+    padding: 0.75rem 1.75rem;
     border: $border-color-two;
     color: $text-color-two;
     border-radius: 0.75rem;
-    background: $background-one;
+    background: $background-five;
     transition: all 0.3s ease-in-out;
     font-size: 1rem;
     font-weight: 700;
