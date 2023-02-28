@@ -1,0 +1,20 @@
+@import "../../styles/GlobalVariablesScss.scss";
+
+.main {
+  background-color: $background-five;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: $color-two;
+  font-size: 1.25rem;
+  font-family: $font-bold;
+  font-weight: 700;
+  text-transform: uppercase;
+
+  img {
+    width: 150px;
+    height: 150px;
+  }
+
+}

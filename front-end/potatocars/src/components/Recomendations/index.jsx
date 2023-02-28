@@ -51,7 +51,7 @@ export default function Recomendations() {
       title: 'Fiat 500e',
       location: 'Valadares do Oeste',
       description: 'R$ 49,00 / dia',
-      rated: '4.4'
+      rated: '4.5'
     }
   ])
 
