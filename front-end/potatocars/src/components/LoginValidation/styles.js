@@ -5,6 +5,6 @@ export const labelError = styled.label`
   margin-bottom: 2rem;
   padding: 0;
   border: 0;
-  font-size: 14px;
-  color: red;
+  font-size: 1rem;
+  color: rgb(247, 101, 101);
 `

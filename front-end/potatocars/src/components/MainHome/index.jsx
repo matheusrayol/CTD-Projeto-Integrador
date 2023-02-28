@@ -10,7 +10,7 @@ export default function Main() {
   const [selectedDateArrival, setselectedDateArrival] = useState('')
 
   const options = [
-    { value: 'Sao Jose do Rio Preto', label: 'São Jose do Rio Preto' },
+    { value: 'Fortaleza', label: 'Fortaleza' },
     { value: 'Rio de Janeiro', label: 'Rio de Janeiro' },
     { value: 'Sao Paulo', label: 'São Paulo' },
     { value: 'Belo Horizonte', label: 'Belo Horizonte' },
@@ -19,7 +19,9 @@ export default function Main() {
 
   return (
     <main className={styles.main}>
-      <h1>Find out why PotatoCars is the Best</h1>
+      <h1>
+        Find out why <span>NotCars</span> is the Best
+      </h1>
       <form className={styles.form}>
         <div className={styles.form__campos}>
           <label htmlFor="">Departure Location</label>

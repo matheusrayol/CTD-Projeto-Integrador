@@ -2,26 +2,25 @@
 
 .h2Home {
   font-size: 1.75rem;
-  padding: 1rem 0 1rem 1rem;
-  margin: 0;
+  padding: 0;
+  margin: 1rem 0 1rem 3rem;
   border: 0;
   font-family: $font-bold;
   font-weight: bold;
   color: $color-two;
+  width: fit-content;
 }
 
 .sectionCard {
   margin: 0;
   padding: 0;
   border: 0;
-
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
 
   .carrossel {
     cursor: grab;
     overflow: hidden;
-    background: $background-one;
   }
 
   .inner {
@@ -37,7 +36,7 @@
 
     .inner {
       display: grid;
-      grid-template-columns: 49vw 49vw;
+      grid-template-columns: 43vw 43vw;
       gap: 0.5rem;
       justify-items: stretch;
       width: 100%;
@@ -49,9 +48,19 @@
 }
 
 @media(max-width: 750px) {
+
+  .h2Home {
+
+    margin: 1rem 0 1rem 1.5rem;
+
+  }
+
   .sectionCard {
     display: flex;
     flex-direction: column;
+
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
 
 
     .carrossel {

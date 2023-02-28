@@ -1,11 +1,9 @@
-// Body
-// ● Representa um body geral com a cor de background que ocupe 100 % da altura da tela.
+@import "../styles/GlobalVariablesScss.scss";
 
-// ele diz isso mais no exemplo tem duas cores entre as sessoes dos cards do conteudo 
 .appLogin {
   width: 100%;
 
   .bodyLogin {
-    background: rgb(225, 224, 225);
+    background: $background-five;
   }
 }
