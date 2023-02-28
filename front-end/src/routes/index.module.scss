@@ -1,0 +1,17 @@
+@import "../styles/GlobalVariablesScss.scss";
+
+body {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  color: black;
+}
+
+
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: $color-two;
+}
