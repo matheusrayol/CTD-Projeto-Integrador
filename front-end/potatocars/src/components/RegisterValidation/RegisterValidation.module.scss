@@ -1,0 +1,191 @@
+@import "../../styles/GlobalVariablesScss.scss";
+
+.sectionRegisterValidation {
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: nowrap;
+  font-family: $font-bold;
+  font-weight: 700;
+
+  h1 {
+    font-family: $font-bold;
+    font-weight: 700;
+    color: $color-two;
+    padding: 0;
+  }
+
+  .formRegisterValidation {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding: 0;
+
+    .buttonRegister {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      align-content: center;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      padding-top: 1.5rem;
+      text-decoration: none;
+    }
+
+    h1 {
+      margin: 0;
+      padding-bottom: 2rem;
+      letter-spacing: 1px;
+      font-size: 2rem;
+      color: $color-two;
+    }
+
+    .completeName {
+      width: 33%;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+
+      label {
+        text-align: start;
+        width: 50%;
+        margin-bottom: 0.25rem;
+        color: $color-three;
+      }
+
+      input {
+        border: $border-color-three;
+        padding: 0.5rem;
+        padding-right: 1.5rem;
+        width: 50%;
+        border-radius: 0.33rem;
+        margin-bottom: 1rem;
+      }
+    }
+
+
+    .fieldLabelInput {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: center;
+
+      label {
+        text-align: start;
+        width: 50%;
+        margin-bottom: 0.25rem;
+        color: $color-three;
+      }
+
+      input {
+        border: $border-color-three;
+        padding: 0.5rem;
+        padding-right: 1.5rem;
+        width: 50%;
+        border-radius: 0.33rem;
+        margin-bottom: 1rem;
+      }
+    }
+
+    .buttonSubmit {
+      text-decoration: none;
+      padding: 1rem 3rem;
+      border: $border-color-two;
+      color: $text-color-two;
+      border-radius: 0.75rem;
+      background: $background-one;
+      transition: all 0.3s ease;
+
+      font-family: $font-bold;
+      font-size: 1rem;
+      font-weight: 700;
+
+      &:hover {
+        color: $text-color-one;
+        background-color: $background-three;
+        border: $border-color-one;
+      }
+    }
+
+    .buttonRegister a {
+      letter-spacing: 0.25px;
+      color: $color-one;
+      text-decoration: none;
+    }
+  }
+
+}
+
+@media(max-width: 850px) {
+  .sectionRegisterValidation {
+    .formRegisterValidation {
+
+      h1 {
+        padding-bottom: 1rem;
+      }
+
+      .buttonRegister {
+        padding-top: 1rem;
+      }
+
+      .fieldLabelInput {
+        width: 100%;
+
+        label {
+          width: 50%;
+        }
+
+        input {
+          width: 50%;
+        }
+      }
+
+      .completeName {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+}
+
+@media(max-width: 550px) {
+  .sectionRegisterValidation {
+    .formRegisterValidation {
+
+
+      h1 {
+        padding-bottom: 0;
+      }
+
+      .buttonRegister {
+        padding-top: 0.5rem;
+      }
+
+      .fieldLabelInput {
+        width: 100%;
+
+
+        label {
+          width: 75%;
+        }
+
+        input {
+          width: 75%;
+        }
+      }
+    }
+  }
+}
