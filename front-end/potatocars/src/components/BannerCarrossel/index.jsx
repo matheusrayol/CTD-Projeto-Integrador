@@ -18,35 +18,35 @@ export default function BannerCarrossel() {
   const [allImagesBanner] = useState([
     {
       id: 2,
-      imagem: img2,
+      image: img2,
       category: 'Lux Model',
-      title: 'Porsche Carrera GT 2',
-      location: 'Cidade 2',
-      description: 'R$ 250,00 / dia'
+      title: 'Mercedes S EQS',
+      location: 'São Paulo',
+      description: 'R$ 249,00 / dia'
     },
     {
       id: 4,
-      imagem: img4,
+      image: img4,
       category: 'Sport Model',
-      title: 'Jaguar Pantern Xlr 4',
-      location: 'Cidade 4',
-      description: 'R$ 450,00 / dia'
+      title: 'Byd Han',
+      location: 'Rio de Janeiro',
+      description: 'R$ 379,00 / dia'
     },
     {
       id: 6,
-      imagem: img6,
+      image: img6,
       category: 'Economy Model',
-      title: 'Gol modelo 2016 1.6v',
-      location: 'Cidade 6',
-      description: 'R$ 75,00 / dia'
+      title: 'Chevrolet Bolt',
+      location: 'Campos do Jordão',
+      description: 'R$ 149,00 / dia'
     },
     {
       id: 8,
-      imagem: img8,
+      image: img8,
       category: 'Confort Model',
-      title: 'Uno quadradao 3000',
-      location: 'Cidade 8',
-      description: 'R$ 125,00 / dia'
+      title: 'Caoa Chery',
+      location: 'Matão',
+      description: 'R$ 99,00 / dia'
     }
   ])
 

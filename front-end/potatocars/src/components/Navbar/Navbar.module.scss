@@ -27,10 +27,56 @@
   vertical-align: baseline;
   z-index: 1;
 
+  .ifLogin {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .ifLogout {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    img {
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      margin: 0;
+      border-radius: 99px;
+      border: none;
+    }
+
+    p {
+      font-size: 1.15rem;
+      font-family: $font-bold;
+      font-weight: 700;
+      color: $text-color-two;
+
+      a {
+        padding: 0.75rem 1.75rem;
+      }
+
+    }
+
+
+    &__sectionUser {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+
   .logos {
     display: flex;
-    gap: 0.5rem;
-    padding: 0 0 0 1rem;
+    gap: 0;
+    padding: 0;
     margin: 0;
     border: 0;
     align-content: center;
@@ -39,6 +85,7 @@
 
 
     .logoEgg {
+      color: $color-three;
       display: flex;
       align-items: center;
       padding: 0;
@@ -47,27 +94,22 @@
       gap: 0.5rem;
       margin-left: 0.5rem;
       text-decoration: none;
-      font-size: 1.5rem;
+      font-size: 1.15rem;
       font-style: italic;
 
-      &:hover {
-        text-decoration: underline;
-      }
-
-
-
       span {
-        width: 70px;
+        width: 170px;
         height: 70px;
-        background-image: url('https://img.freepik.com/vetores-gratis/logotipo-do-carro-metalico-realista_52683-36046.jpg');
+        background-image: url('https://cdn.discordapp.com/attachments/1074829594563190905/1079923680882200657/logo2x_new.png');
         background-repeat: no-repeat;
-        background-size: cover;
+        background-size: contain;
         background-position: center;
-        border-radius: 2rem;
-        border: $border-color-two;
+        border-radius: 1rem;
+        border: none;
 
         &:hover {
           background-image: url('https://i.gifer.com/7HXy.gif');
+          background-size: cover;
         }
       }
     }
@@ -166,11 +208,11 @@
           a {
             margin: 0;
             text-decoration: none;
-            padding: 1rem 3rem;
+            padding: 0.75rem 1.75rem;
             border: $border-color-two;
             color: $text-color-two;
             border-radius: 0.75rem;
-            background: $background-one;
+            background: $background-five;
             transition: all 0.3s ease;
 
             font-family: $font-bold;
@@ -192,6 +234,30 @@
       }
 
       &.isMenu {
+
+        .ifLogin {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .ifLogout {
+          display: flex;
+          flex-direction: column;
+
+          img {
+            display: none;
+          }
+
+          p {
+            color: $text-color-one;
+          }
+
+          &__sectionUser {
+            display: flex;
+            flex-direction: column;
+          }
+        }
+
         h1 {
           color: $text-color-one;
           visibility: visible;
@@ -205,7 +271,7 @@
 
         a {
           text-decoration: none;
-          padding: 1rem 3rem;
+          padding: 0.75rem 1.75rem;
           border: none;
           border-radius: 0.75rem;
           background: none;
@@ -244,7 +310,7 @@
     .logos {
 
 
-      .logoEgg {
+      .logoEgg p {
         display: none;
       }
     }

@@ -24,13 +24,13 @@ const RegisterValidation = () => {
       setError('The passwords do not match')
       return
     } else if (rvPassword.length < 6) {
-      setError('Password length is < 6 ')
+      setError('Password length is too short')
       return
     } else {
       setError('Unknow Error')
     }
 
-    const res = signup(rvEmail, rvPassword)
+    const res = signup(rvEmail, rvPassword, rvName)
 
     if (res) {
       setError(res)
@@ -46,7 +46,7 @@ const RegisterValidation = () => {
       <form className={styles.formRegisterValidation}>
         <h1 className={styles.titleForm}>Create Account</h1>
         <div className={styles.completeName}>
-          <div className={styles.fieldLabelInput}>
+          <div className={styles.completeName__labelInput}>
             <label htmlFor="">Name</label>
             <input
               type="text"
@@ -56,7 +56,7 @@ const RegisterValidation = () => {
               onChange={e => [setRvName(e.target.value), setError('')]}
             />
           </div>
-          <div className={styles.fieldLabelInput}>
+          <div className={styles.completeName__labelInput}>
             <label htmlFor="">Surname</label>
             <input
               type="text"

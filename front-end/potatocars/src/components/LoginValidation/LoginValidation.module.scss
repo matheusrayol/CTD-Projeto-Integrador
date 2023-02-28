@@ -9,22 +9,11 @@
   align-items: center;
   align-content: center;
   flex-wrap: nowrap;
-
   font-family: $font-bold;
   font-weight: 700;
 
   h1 {
     color: $color-two;
-  }
-
-  .error {
-    .sectionLoginValidation {
-      .formLoginValidation {
-        input {
-          background-color: red;
-        }
-      }
-    }
   }
 
   .buttonRegister {
@@ -51,7 +40,7 @@
       padding-bottom: 2rem;
       letter-spacing: 1px;
       font-size: 2rem;
-      color: rgb(97, 21, 118);
+      color: $color-two;
     }
 
     .fieldLabelInput {
@@ -68,7 +57,6 @@
         margin-bottom: 0.25rem;
         color: $color-three;
       }
-
 
       input {
         border: $border-color-three;
@@ -108,9 +96,6 @@
   }
 }
 
-.error {
-  text-align: center;
-}
 
 @media(max-width: 850px) {
   .sectionLoginValidation {

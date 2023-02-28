@@ -3,7 +3,7 @@ import { createContext, useEffect, useState } from 'react'
 export const AuthContext = createContext({})
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState()
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
     const userToken = localStorage.getItem('user_token')
@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
     }
   }, [])
 
-  const signin = (email, password, event) => {
+  const signin = (email, password, name) => {
     const usersStorage = JSON.parse(localStorage.getItem('users_bd'))
 
     const hasUser = usersStorage?.filter(user => user.email === email)
@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
       if (hasUser[0].email === email && hasUser[0].password === password) {
         const token = Math.random().toString(36).substring(2)
         localStorage.setItem('user_token', JSON.stringify({ email, token }))
-        setUser({ email, password })
+        setUser({ email, password, name })
         return
       } else {
         return 'E-mail or Password Incorrets'
@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
-  const signup = (email, password) => {
+  const signup = (email, password, name) => {
     const usersStorage = JSON.parse(localStorage.getItem('users_bd'))
 
     const hasUser = usersStorage?.filter(user => user.email === email)
@@ -49,14 +49,12 @@ export const AuthProvider = ({ children }) => {
     let newUser
 
     if (usersStorage) {
-      newUser = [...usersStorage, { email, password }]
+      newUser = [...usersStorage, { name, email, password }]
     } else {
-      newUser = [{ email, password }]
+      newUser = [{ name, email, password }]
     }
 
     localStorage.setItem('users_bd', JSON.stringify(newUser))
-
-    return
   }
 
   const signout = () => {
