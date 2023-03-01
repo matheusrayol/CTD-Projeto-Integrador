@@ -1,0 +1,219 @@
+{
+	"id": "192a43a0-c6fb-4a33-a1b2-bc58757faa05",
+	"name": "Projeto Integrador",
+	"timestamp": "2023-02-28T20:23:52.874Z",
+	"collection_id": "20400404-3c6b6be2-0d44-4ffb-ba77-0512a1aa1440",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 7,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2023-02-28T20:23:50.642Z",
+	"totalFail": 5,
+	"results": [
+		{
+			"id": "83abcad4-a7ad-48da-84e0-ddf8b24dafc3",
+			"name": "Criar uma categoria",
+			"url": "http://localhost:8080/category/create",
+			"time": 395,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Tempo de resposta de POST menor do que 250ms": false,
+				"Solicitação POST bem-sucedida": true,
+				"Retorno corresponde à categoria cadastrada": true
+			},
+			"testPassFailCounts": {
+				"Tempo de resposta de POST menor do que 250ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Solicitação POST bem-sucedida": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Retorno corresponde à categoria cadastrada": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				245
+			],
+			"allTests": [
+				{
+					"Tempo de resposta de POST menor do que 250ms": true,
+					"Solicitação POST bem-sucedida": true,
+					"Retorno corresponde à categoria cadastrada": true
+				}
+			]
+		},
+		{
+			"id": "c5606cad-749c-4bf1-bcfd-3ded1fb5adf2",
+			"name": "Buscar todas as categorias",
+			"url": "http://localhost:8080/category/all",
+			"time": 370,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Retorno bem-sucedido do GET para todas as categorias": true
+			},
+			"testPassFailCounts": {
+				"Retorno bem-sucedido do GET para todas as categorias": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				370
+			],
+			"allTests": [
+				{
+					"Retorno bem-sucedido do GET para todas as categorias": true
+				}
+			]
+		},
+		{
+			"id": "39530000-5c28-46a4-97c7-7ebbd8244e62",
+			"name": "Buscar categoria por ID",
+			"url": "http://localhost:8080/category/1",
+			"time": 252,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Tempo de resposta de POST menor do que 250ms": true,
+				"Solicitação GET bem-sucedida": true,
+				"Retorno corresponde à categoria cadastrada": true
+			},
+			"testPassFailCounts": {
+				"Tempo de resposta de POST menor do que 250ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Solicitação GET bem-sucedida": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Retorno corresponde à categoria cadastrada": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				232
+			],
+			"allTests": [
+				{
+					"Tempo de resposta de POST menor do que 250ms": true,
+					"Solicitação GET bem-sucedida": true,
+					"Retorno corresponde à categoria cadastrada": true
+				}
+			]
+		},
+		{
+			"id": "3e79ef2a-147e-4136-94ce-e65230adae44",
+			"name": "Excluir categoria",
+			"url": "http://localhost:8080/category/delete/3",
+			"time": 250,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {
+				"Content-Type is present": true,
+				"Exclusão de categoria com sucesso": true
+			},
+			"testPassFailCounts": {
+				"Content-Type is present": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Exclusão de categoria com sucesso": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				250
+			],
+			"allTests": [
+				{
+					"Content-Type is present": true,
+					"Exclusão de categoria com sucesso": true
+				}
+			]
+		},
+		{
+			"id": "0a32f242-8568-4019-b8a6-f95fd8b824f5",
+			"name": "Atualizar categoria",
+			"url": "http://localhost:8080/category/update/5",
+			"time": 363,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Tempo de resposta de POST menor do que 250ms": true,
+				"Solicitação PUT bem-sucedida": true,
+				"Retorno corresponde à categoria alterada": true
+			},
+			"testPassFailCounts": {
+				"Tempo de resposta de POST menor do que 250ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Solicitação PUT bem-sucedida": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Retorno corresponde à categoria alterada": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				163
+			],
+			"allTests": [
+				{
+					"Tempo de resposta de POST menor do que 250ms": true,
+					"Solicitação PUT bem-sucedida": true,
+					"Retorno corresponde à categoria alterada": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 1260,
+	"collection": {
+		"requests": [
+			{
+				"id": "83abcad4-a7ad-48da-84e0-ddf8b24dafc3",
+				"method": "POST"
+			},
+			{
+				"id": "c5606cad-749c-4bf1-bcfd-3ded1fb5adf2",
+				"method": "GET"
+			},
+			{
+				"id": "39530000-5c28-46a4-97c7-7ebbd8244e62",
+				"method": "GET"
+			},
+			{
+				"id": "3e79ef2a-147e-4136-94ce-e65230adae44",
+				"method": "DELETE"
+			},
+			{
+				"id": "0a32f242-8568-4019-b8a6-f95fd8b824f5",
+				"method": "PUT"
+			}
+		]
+	}
+}
