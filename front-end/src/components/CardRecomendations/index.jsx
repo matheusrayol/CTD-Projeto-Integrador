@@ -14,7 +14,7 @@ export default function CardsBanner(image) {
         <div className={styles.cardParagraph}>
           <div className={styles.cardParagraph__starRated}>
             <div>
-              <p>Rated: {image.imageData.rated}</p>
+              <p>Avaliação: {image.imageData.rated}</p>
             </div>
             <div>
               <img src={starRated} alt="svg de uma estrela" />
@@ -29,7 +29,7 @@ export default function CardsBanner(image) {
           <p>{image.imageData.location}</p>
           <p>{image.imageData.description}</p>
           <Link to="/product">
-            <button>View</button>
+            <button>Confira</button>
           </Link>
         </div>
       </div>

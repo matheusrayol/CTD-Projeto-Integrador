@@ -55,14 +55,14 @@ function Navbar() {
           <h1>Menu</h1>
           <ul>
             <li>
-              <Link to="/home">Home</Link>
+              <Link to="/home">Início</Link>
             </li>
 
             <li>
               {user === null ? (
                 <div className={styles.ifLogin}>
-                  <Link to="/register">Register</Link>
-                  <Link to="/login">Login</Link>
+                  <Link to="/login">Entrar</Link>
+                  <Link to="/register">Cadastrar</Link>
                 </div>
               ) : (
                 <div className={styles.ifLogout}>
@@ -73,7 +73,7 @@ function Navbar() {
                     </p>
                   </div>
                   <Link to="/home" onClick={() => signout()}>
-                    Logout
+                    Sair
                   </Link>
                 </div>
               )}

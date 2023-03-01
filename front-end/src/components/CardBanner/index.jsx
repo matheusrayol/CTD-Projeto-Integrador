@@ -6,7 +6,7 @@ export default function CardsBanner(image) {
   return (
     <motion.div className={styles.item} key={image.imageData.id}>
       <div className={styles.cardBody}>
-        <img src={image.imageData.image} alt="imagens do banco de fotos" />
+        <img src={image.imageData.image} alt="imagens do json do Banner" />
         <p>{image.imageData.category}</p>
         <p>{image.imageData.title}</p>
       </div>

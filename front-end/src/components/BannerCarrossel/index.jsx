@@ -19,7 +19,7 @@ export default function BannerCarrossel() {
     {
       id: 2,
       image: img2,
-      category: 'Lux Model',
+      category: 'Modelo de Luxo',
       title: 'Mercedes S EQS',
       location: 'São Paulo',
       description: 'R$ 249,00 / dia'
@@ -27,15 +27,15 @@ export default function BannerCarrossel() {
     {
       id: 4,
       image: img4,
-      category: 'Sport Model',
+      category: 'Modelo Esportivo',
       title: 'Byd Han',
       location: 'Rio de Janeiro',
-      description: 'R$ 379,00 / dia'
+      description: 'R$ 179,00 / dia'
     },
     {
       id: 6,
       image: img6,
-      category: 'Economy Model',
+      category: 'Modelo Conforto',
       title: 'Chevrolet Bolt',
       location: 'Campos do Jordão',
       description: 'R$ 149,00 / dia'
@@ -43,7 +43,7 @@ export default function BannerCarrossel() {
     {
       id: 8,
       image: img8,
-      category: 'Confort Model',
+      category: 'Modelo Compacto',
       title: 'Caoa Chery',
       location: 'Matão',
       description: 'R$ 99,00 / dia'
@@ -52,7 +52,7 @@ export default function BannerCarrossel() {
 
   return (
     <section>
-      <h2 className={styles.h2Home}>Find best models and options for you</h2>
+      <h2 className={styles.h2Home}>Procure as melhores opções e modelos</h2>
       <div className={styles.sectionCard}>
         <motion.div
           ref={carrossel}
