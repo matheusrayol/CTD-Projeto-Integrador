@@ -78,7 +78,7 @@
       color: $text-color-two;
       font-family: $font-bold;
       font-weight: 700;
-      font-size: 1rem;
+      font-size: 0.85rem;
     }
 
     .calendar {
@@ -86,9 +86,10 @@
       border: 0;
       gap: 0;
       margin: 0;
+      color: $text-color-two;
       font-family: $font-bold;
       font-weight: 700;
-      font-size: 1rem;
+      font-size: 0.85rem;
     }
   }
 
@@ -105,7 +106,7 @@
 
     &:hover {
       color: $text-color-one;
-      background-color: $background-three;
+      background-color: $color-one;
       border: $border-color-one;
     }
   }

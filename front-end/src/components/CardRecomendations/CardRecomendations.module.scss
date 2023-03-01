@@ -21,11 +21,11 @@
     opacity: 0.9;
     filter: brightness(0.9);
     transition: all 0.3s ease-in-out;
-    background: $background-three;
+    background: $color-three;
     color: $text-color-one;
     border: $border-color-two;
     box-shadow: $border-box-shadow-one;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     margin: 0;
     padding: 0;
 
@@ -87,7 +87,7 @@
 
         &:hover {
           color: $text-color-one;
-          background-color: $background-three;
+          background-color: $color-two;
           border: $border-color-one;
         }
       }
@@ -100,7 +100,7 @@
     }
 
     p {
-      margin: 0 0.5rem;
+      margin: 0;
       font-size: 1.15rem;
       padding: 0.20rem 0;
       border: 0;

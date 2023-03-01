@@ -18,10 +18,10 @@ const LoginValidation = () => {
   const handleLogin = e => {
     e.preventDefault()
     if (!email || !password) {
-      setError('Fill in all fields')
+      setError('Preencha todos os campos')
       return
     } else if (password.length < 6) {
-      setError('Password length is too short')
+      setError('Comprimento da senha é muito curto')
       return
     }
 
@@ -31,7 +31,7 @@ const LoginValidation = () => {
         setError(res)
         return
       }
-      alert('User login with sucess!')
+      alert('Usuário logado com sucesso!')
       navigate('/home')
     }
   }
@@ -39,7 +39,7 @@ const LoginValidation = () => {
   return (
     <section className={styles.sectionLoginValidation}>
       <form className={styles.formLoginValidation}>
-        <h1>Login</h1>
+        <h1>Entrar</h1>
         <div className={styles.fieldLabelInput}>
           <label htmlFor="">Email</label>
           <input
@@ -51,7 +51,7 @@ const LoginValidation = () => {
           />
         </div>
         <div className={styles.fieldLabelInput}>
-          <label htmlFor="">Password</label>
+          <label htmlFor="">Senha</label>
           <input
             className={styles.inputValidation}
             name="password"
@@ -67,12 +67,12 @@ const LoginValidation = () => {
           type="submit"
           onClick={handleLogin}
         >
-          Enter
+          Entrar
         </button>
       </form>
       <div className={styles.buttonRegister}>
-        You don't have a registration?
-        <Link to="/register"> Click Here</Link>
+        Você não possui cadastro?
+        <Link to="/register"> Clique Aqui</Link>
       </div>
     </section>
   )
