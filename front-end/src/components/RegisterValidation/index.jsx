@@ -18,16 +18,16 @@ const RegisterValidation = () => {
   const handleSignup = e => {
     e.preventDefault()
     if (!rvName | !rvSurname | !rvEmail | !rvPassword | !rvRePassword) {
-      setError('Fill in all fields')
+      setError('Preencha todos os campos')
       return
     } else if (rvPassword !== rvRePassword) {
-      setError('The passwords do not match')
+      setError('As senhas não coincidem')
       return
     } else if (rvPassword.length < 6) {
-      setError('Password length is too short')
+      setError('Comprimento da senha é muito curto')
       return
     } else {
-      setError('Unknow Error')
+      setError('Erro desconhecido')
     }
 
     const res = signup(rvEmail, rvPassword, rvName)
@@ -37,17 +37,17 @@ const RegisterValidation = () => {
       return
     }
 
-    alert('User register with sucess!')
+    alert('Usuário registrado com Sucesso!')
     navigate('/login')
   }
 
   return (
     <section className={styles.sectionRegisterValidation}>
       <form className={styles.formRegisterValidation}>
-        <h1 className={styles.titleForm}>Create Account</h1>
+        <h1 className={styles.titleForm}>Cadastre-se</h1>
         <div className={styles.completeName}>
           <div className={styles.completeName__labelInput}>
-            <label htmlFor="">Name</label>
+            <label htmlFor="">Nome</label>
             <input
               type="text"
               name="name"
@@ -57,7 +57,7 @@ const RegisterValidation = () => {
             />
           </div>
           <div className={styles.completeName__labelInput}>
-            <label htmlFor="">Surname</label>
+            <label htmlFor="">Sobrenome</label>
             <input
               type="text"
               name="surname"
@@ -78,7 +78,7 @@ const RegisterValidation = () => {
           />
         </div>
         <div className={styles.fieldLabelInput}>
-          <label htmlFor="">Password</label>
+          <label htmlFor="">Senha</label>
           <input
             type="password"
             name="password"
@@ -88,7 +88,7 @@ const RegisterValidation = () => {
           />
         </div>
         <div className={styles.fieldLabelInput}>
-          <label htmlFor="">Confirm Password</label>
+          <label htmlFor="">Confirme a senha</label>
           <input
             type="password"
             name="repassword"
@@ -103,11 +103,11 @@ const RegisterValidation = () => {
           type="submit"
           onClick={handleSignup}
         >
-          Register
+          Cadastrar
         </button>
         <div className={styles.buttonRegister}>
-          You have a registration?
-          <Link to="/login"> Click Here</Link>
+          Você possui cadastro?
+          <Link to="/login"> Clique Aqui</Link>
         </div>
       </form>
     </section>

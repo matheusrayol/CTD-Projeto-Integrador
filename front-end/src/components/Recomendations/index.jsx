@@ -20,7 +20,7 @@ export default function Recomendations() {
     {
       id: 1,
       image: img1,
-      category: 'Lux Model',
+      category: 'Modelo Luxuoso',
       title: 'Volvo XC Recharge',
       location: 'Campos do Jordão',
       description: 'R$ 299,00 / dia',
@@ -29,7 +29,7 @@ export default function Recomendations() {
     {
       id: 3,
       image: img3,
-      category: 'Sport Model',
+      category: 'Modelo Esportivo',
       title: 'Audi RS e-tron GT',
       location: 'Rio de Janeiro',
       description: 'R$ 139,00 / dia',
@@ -38,7 +38,7 @@ export default function Recomendations() {
     {
       id: 5,
       image: img5,
-      category: 'Confort Model',
+      category: 'Modelo Conforto',
       title: 'Sandero v2 Eletric',
       location: 'Forteleza',
       description: 'R$ 79,00 / dia',
@@ -47,7 +47,7 @@ export default function Recomendations() {
     {
       id: 7,
       image: img7,
-      category: 'Economy Model',
+      category: 'Modelo Compacto',
       title: 'Fiat 500e',
       location: 'Valadares do Oeste',
       description: 'R$ 49,00 / dia',
@@ -57,7 +57,7 @@ export default function Recomendations() {
 
   return (
     <section>
-      <h2 className={styles.h2Home}>Recomendations for you</h2>
+      <h2 className={styles.h2Home}>Recomendações para você</h2>
       <div className={styles.sectionCard}>
         <motion.div
           ref={carrossel}

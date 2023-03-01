@@ -20,65 +20,57 @@ export default function Main() {
   return (
     <main className={styles.main}>
       <h1>
-        Find out why <span>NotCars</span> is the Best
+        Procure e descubra por que a <span>NotCars</span> é a melhor
       </h1>
       <form className={styles.form}>
         <div className={styles.form__campos}>
-          <label htmlFor="">Departure Location</label>
+          <label htmlFor="">Selecione uma Cidade</label>
           <Select
             className={styles.select}
             options={options}
-            placeholder="City Departure"
+            placeholder="Selecione uma Cidade"
           />
         </div>
         <div className={styles.form__campos}>
-          <label htmlFor="">Date Time Departure</label>
+          <label htmlFor="">Data e Hora da Retirada</label>
           <DatePicker
             selected={selectedDateDeparture}
             onChange={date => setselectedDateDeparture(date)}
             showTimeSelect
             dateFormat="dd/MM/yyyy - h:m"
-            placeholderText="Date Time Departure"
+            placeholderText="Data / Hora Retirada"
             className={styles.calendar}
           />
         </div>
-        {/* <div className={styles.form__campos}>
-          <label htmlFor="">Arrival Location</label>
-          <Select
-            className={styles.select}
-            options={options}
-            placeholder="City Arrival"
-          />
-        </div> */}
         <div className={styles.form__campos}>
-          <label htmlFor="">Date Time Arrival</label>
+          <label htmlFor="">Data e hora da Devolução</label>
           <DatePicker
             selected={selectedDateArrival}
             onChange={date => setselectedDateArrival(date)}
             showTimeSelect
             dateFormat="dd/MM/yyyy - h:m"
-            placeholderText="Date Time Arrival"
+            placeholderText="Data / Hora Devolução"
             className={styles.calendar}
           />
         </div>
-        <button className={styles.form__botao}>Search</button>
+        <button className={styles.form__botao}>Procure</button>
       </form>
       <div className={styles.main__comentarios}>
         <div className={styles.main__diferenciais}>
           <MdDoneAll />
-          <p>Best price guaranteed</p>
+          <p>Melhor preço garantido</p>
         </div>
         <div className={styles.main__diferenciais}>
           <MdDoneAll />
-          <p>Cashback on car rental</p>
+          <p>Performance impressionante, condução simplificada</p>
         </div>
         <div className={styles.main__diferenciais}>
           <MdDoneAll />
-          <p>Payment in up to 24x</p>
+          <p>Cashback no aluguel de carros</p>
         </div>
         <div className={styles.main__diferenciais}>
           <MdDoneAll />
-          <p>Pay in Reais without IOF</p>
+          <p>Amigo do ambiente e economia para você</p>
         </div>
       </div>
     </main>

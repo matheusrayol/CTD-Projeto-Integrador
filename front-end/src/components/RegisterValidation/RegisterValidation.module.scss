@@ -126,7 +126,7 @@
 
     .buttonRegister a {
       letter-spacing: 0.25px;
-      color: $color-one;
+      color: $color-two;
       text-decoration: none;
     }
   }
@@ -168,6 +168,7 @@
         flex-direction: column;
         flex-wrap: nowrap;
         align-items: center;
+        gap: 0;
 
         &__labelInput {
           width: 100%;
