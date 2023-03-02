@@ -24,7 +24,7 @@ const RoutesApp = () => {
           <Route exact path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/accountuser" element={<AccountUser />} />
-          <Route path="/product" element={<Product />} />
+          <Route path="/product/:id" element={<Product />} />
           <Route path="*" element={<Error404 />} />
         </Routes>
       </div>

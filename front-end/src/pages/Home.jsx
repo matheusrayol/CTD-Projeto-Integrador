@@ -1,6 +1,6 @@
 import React from 'react'
 import MainHome from '../components/MainHome'
-import BannerCarrossel from '../components/BannerCarrossel'
+import Banner from '../components/Banner'
 import Recomendations from '../components/Recomendations'
 import styles from './Home.module.scss'
 import Navbar from '../components/Navbar'
@@ -12,7 +12,7 @@ export default function Home() {
       <div className={styles.bodyHome}>
         <Navbar />
         <MainHome />
-        <BannerCarrossel />
+        <Banner />
         <Recomendations />
         <Footer />
       </div>
