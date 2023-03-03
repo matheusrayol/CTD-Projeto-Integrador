@@ -25,6 +25,10 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @Log4j2
 public class CategoryController {
+  private static final String START_REQUEST = "[START REQUEST]";
+
+  private static final String BASE_URL = "/category";
+
   private final CategoryService categoryServiceImpl;
 
   private final CategoryMapper categoryMapper;
@@ -32,13 +36,14 @@ public class CategoryController {
 
   @GetMapping("/{id}")
   public ResponseEntity<CategoryResponse> getCategoryById(@PathVariable Long id) {
+    log.info(START_REQUEST + "[GET] " + BASE_URL + "/" + id);
     final CategoryEntity categoryEntity = categoryServiceImpl.findCategoryById(id);
     return ResponseEntity.ok(categoryMapper.toCategoryResponse(categoryEntity));
   }
 
   @GetMapping("/all")
   public ResponseEntity<Page<CategoryResponse>> getAllCategories(@PageableDefault(size = 10, direction = Sort.Direction.ASC) Pageable pageable) {
-
+    log.info(START_REQUEST + "[GET] " + BASE_URL + "/all/");
     Page<CategoryEntity> categoryEntityPage = categoryServiceImpl.findAllCategory(pageable);
 
     List<CategoryResponse> categoryResponseList = categoryEntityPage.getContent().stream()
@@ -49,12 +54,14 @@ public class CategoryController {
 
   @PostMapping("/create")
   public ResponseEntity<CategoryResponse> createCategory(@Valid @RequestBody CategoryRequest categoryRequest) {
+    log.info(START_REQUEST + "[POST] " + BASE_URL + "/create" +  " [BODY]" +  categoryRequest.toString());
     final CategoryEntity categoryEntity = categoryServiceImpl.createCategory(categoryRequest);
     return ResponseEntity.status(HttpStatus.CREATED).body(categoryMapper.toCategoryResponse(categoryEntity));
   }
 
   @DeleteMapping("/delete/{id}")
   public ResponseEntity<Void> deleteCategoryById(@PathVariable Long id) {
+    log.info(START_REQUEST + "[DELETE] " + BASE_URL + "/delete/" + id);
     categoryServiceImpl.deleteCategoryById(id);
     return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
   }
@@ -62,7 +69,7 @@ public class CategoryController {
   @PutMapping("/update/{id}")
   public ResponseEntity<CategoryResponse> updatedCategoryById(@PathVariable Long id,
                                                               @RequestBody CategoryRequest categoryRequest) {
-
+    log.info(START_REQUEST + "[PUT] " + BASE_URL + "/update/" + id + " [BODY]" +  categoryRequest.toString());
     CategoryEntity categoryEntity = categoryServiceImpl.updatedCategory(id, categoryRequest);
     return ResponseEntity.ok(categoryMapper.toCategoryResponse(categoryEntity));
   }
