@@ -2,7 +2,7 @@ package br.com.notcars.mapper;
 
 import br.com.notcars.dto.category.CategoryRequest;
 import br.com.notcars.dto.category.CategoryResponse;
-import br.com.notcars.repository.category.CategoryEntity;
+import br.com.notcars.model.CategoryEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;

@@ -1,4 +1,4 @@
-package br.com.notcars.repository.category;
+package br.com.notcars.model;
 
 
 import javax.persistence.*;
@@ -24,4 +24,7 @@ public class CategoryEntity {
 
   @Column
   private String urlImage;
+
+  @OneToMany(mappedBy = "category")
+  private ProductEntity product;
 }

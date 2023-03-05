@@ -3,7 +3,7 @@ package br.com.notcars.controller;
 import br.com.notcars.dto.category.CategoryRequest;
 import br.com.notcars.dto.category.CategoryResponse;
 import br.com.notcars.mapper.CategoryMapper;
-import br.com.notcars.repository.category.CategoryEntity;
+import br.com.notcars.model.CategoryEntity;
 import br.com.notcars.service.CategoryService;
 import java.util.List;
 import java.util.stream.Collectors;
