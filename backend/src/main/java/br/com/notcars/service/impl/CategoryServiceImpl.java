@@ -4,7 +4,7 @@ import br.com.notcars.dto.category.CategoryRequest;
 import br.com.notcars.exceptions.NotFoundException;
 import br.com.notcars.mapper.CategoryMapper;
 import br.com.notcars.model.CategoryEntity;
-import br.com.notcars.repository.category.CategoryRepository;
+import br.com.notcars.repository.CategoryRepository;
 import br.com.notcars.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

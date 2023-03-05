@@ -10,7 +10,7 @@ import br.com.notcars.dto.category.CategoryRequest;
 import br.com.notcars.exceptions.NotFoundException;
 import br.com.notcars.mapper.CategoryMapper;
 import br.com.notcars.model.CategoryEntity;
-import br.com.notcars.repository.category.CategoryRepository;
+import br.com.notcars.repository.CategoryRepository;
 import java.util.List;
 import java.util.Optional;
 import lombok.var;
