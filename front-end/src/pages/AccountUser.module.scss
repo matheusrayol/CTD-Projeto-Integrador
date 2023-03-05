@@ -1,7 +1,9 @@
+@import "../styles/GlobalVariablesScss.scss";
+
 .appAccountUser {
   width: 100%;
 
   .bodyAccountUser {
-    background: rgb(225, 224, 225);
+    background: $background-three2;
   }
 }

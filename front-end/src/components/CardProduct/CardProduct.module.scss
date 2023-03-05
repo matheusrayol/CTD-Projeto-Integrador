@@ -1,58 +1,170 @@
 @import "../../styles/GlobalVariablesScss.scss";
+@import "~react-image-gallery/styles/scss/image-gallery.scss";
+
 
 .item {
   width: 100%;
-  border-radius: 1rem;
-  background: none;
   margin: 0;
+  padding: 0;
+  border: 0;
   font-family: $font-normal;
   font-weight: 400;
-
+  background-color: $background-three2;
 
   .cardBody {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
-    opacity: 0.9;
-    filter: brightness(0.9);
-    transition: all 0.3s ease-in-out;
-    background: $background-four;
-    color: white;
-    border: 2px solid $border-color-three;
-    box-shadow: $border-box-shadow-one;
-    border-radius: .5rem;
+    margin: 0;
     padding: 0;
+    border: 0;
 
-    &:hover {
-      opacity: 1.1;
-      filter: brightness(1.2)
-    }
-
-    p {
-      font-size: 1.25rem;
+    &__sectionBack {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      background-color: $background-three;
+      height: 70px;
       margin: 0;
-      padding: 0.05rem 0;
+      padding: 0 1rem;
       border: 0;
-      font-weight: 400;
+
+      &__p {
+        height: fit-content;
+        margin: 0;
+        padding: 0.5rem 0.75rem;
+        border-radius: $border-radius-card;
+        border: $border-color-three;
+        background-color: rgb(210, 249, 212);
+
+        p {
+          margin: 0;
+          padding: 0;
+          border: 0;
+        }
+      }
+
+      &__button {
+        font-family: $font-normal;
+        padding: 0.75rem 1.75rem;
+        border: $border-color-two;
+        color: $text-color-two;
+        border-radius: $border-radius-button;
+        background: $background-five;
+        transition: all 0.3s ease-in-out;
+        font-size: 1rem;
+        font-weight: 700;
+
+        &:hover {
+          color: $text-color-one;
+          background-color: $color-zero;
+          border: $border-color-one;
+        }
+      }
     }
 
-    & p::first-letter {
-      font-weight: bold;
-      font-size: 1.5rem;
-      color: $text-color-three;
+
+    &__sectionTittle {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      height: 70px;
+      margin: 0;
+      padding: 0 1rem;
+      border: 0;
+      background: $background-three;
+
+      &__img {
+        width: 15px;
+        height: 15px;
+      }
+
+      &__p {
+        height: fit-content;
+        margin: 0;
+        padding: 0.5rem 0.75rem;
+        border-radius: $border-radius-card;
+        border: $border-color-three;
+        background-color: rgb(210, 249, 212);
+
+        p {
+          margin: 0;
+          padding: 0;
+          border: 0;
+        }
+      }
+
+      &__pLoc {
+        display: flex;
+        gap: 0.33rem;
+
+        p {
+          margin: 0;
+          padding: 0;
+          border: 0;
+        }
+      }
+
+      &__pRated {
+        p {
+          font-size: 1.15rem;
+          color: white;
+          font-family: $font-normal;
+          font-weight: 400;
+          margin: 0;
+          padding: 0;
+          border: 0;
+        }
+
+        span {
+          color: white;
+          font-family: $font-bold;
+          font-weight: 700;
+        }
+      }
+
     }
 
-    img {
+    &__sectionIcons {
+      margin: 0.5rem 1rem;
+      padding: 0.5rem 1rem;
+      border: 0;
+      display: flex;
+      gap: 1rem;
+
+      &__img {
+        width: 20px;
+        height: 20px;
+        padding: 0.25rem;
+        border-bottom: 4px solid $background-three2 ;
+      }
+
+      &__img:hover {
+        border-bottom: 4px solid red;
+      }
+    }
+
+    &__sectionGallery {
       width: 100%;
-      height: 200px;
-      pointer-events: none;
-      border-radius: 1rem;
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-      border-bottom: $border-one-side;
+      height: fit-content;
+    }
+
+    &__sectionDescription {
+      margin: 0 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-items: center;
+
+      &__lines {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+        justify-items: center;
+        align-items: center;
+      }
     }
   }
 }

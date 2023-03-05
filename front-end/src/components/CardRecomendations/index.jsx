@@ -28,7 +28,7 @@ export default function CardsBanner(image) {
           <p>{image.imageData.title}</p>
           <p>{image.imageData.location}</p>
           <p>{image.imageData.description}</p>
-          <Link to={`product/${image.imageData.id}`}>
+          <Link key={image.id} to={`../product/${image.imageData.id}`}>
             <button>Confira</button>
           </Link>
         </div>

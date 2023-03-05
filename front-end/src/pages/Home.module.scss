@@ -1,15 +1,12 @@
 @import "../styles/GlobalVariablesScss.scss";
 
-.bodyHome {
+.appHome {
   width: 100%;
-  height: fit-content;
-  padding: 0;
   margin: 0;
-  vertical-align: baseline;
-  list-style: none;
-  text-decoration: none;
+  padding: 0;
   border: 0;
-  font-weight: bold;
-  background-color: $background-five;
 
+  .bodyHome {
+    background: $background-three2;
+  }
 }

@@ -8,7 +8,7 @@ import Footer from '../components/Footer'
 
 export default function Home() {
   return (
-    <div className="app-home">
+    <div className={styles.appHome}>
       <div className={styles.bodyHome}>
         <Navbar />
         <MainHome />
