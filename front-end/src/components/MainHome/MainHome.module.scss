@@ -46,7 +46,7 @@
   justify-content: space-evenly;
   flex-direction: row;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-end;
   align-content: center;
 
   & input {
@@ -63,6 +63,7 @@
     border-radius: 0.25rem;
     align-items: flex-start;
     flex-direction: column;
+
 
     gap: 0;
     padding: 0;
@@ -98,7 +99,7 @@
     padding: 0.75rem 1.75rem;
     border: $border-color-two;
     color: $text-color-two;
-    border-radius: 0.75rem;
+    border-radius: $border-radius-button;
     background: $background-five;
     transition: all 0.3s ease-in-out;
     font-size: 1rem;
@@ -106,7 +107,7 @@
 
     &:hover {
       color: $text-color-one;
-      background-color: $color-one;
+      background-color: $color-zero;
       border: $border-color-one;
     }
   }

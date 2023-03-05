@@ -104,7 +104,7 @@
         background-repeat: no-repeat;
         background-size: contain;
         background-position: center;
-        border-radius: 1rem;
+        border-radius: $border-radius;
         border: none;
 
         &:hover {
@@ -211,7 +211,7 @@
             padding: 0.75rem 1.75rem;
             border: $border-color-two;
             color: $text-color-two;
-            border-radius: 0.75rem;
+            border-radius: $border-radius-button;
             background: $background-five;
             transition: all 0.3s ease;
 
@@ -274,7 +274,7 @@
           text-decoration: none;
           padding: 0.75rem 1.75rem;
           border: none;
-          border-radius: 0.75rem;
+          border-radius: $border-radius-button;
           background: none;
           font-size: 1.25rem;
           color: $text-color-one;

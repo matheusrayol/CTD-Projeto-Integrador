@@ -15,6 +15,10 @@ const LoginValidation = () => {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
 
+  function refreshPage() {
+    window.location.reload(false)
+  }
+
   const handleLogin = e => {
     e.preventDefault()
     if (!email || !password) {
@@ -33,6 +37,7 @@ const LoginValidation = () => {
       }
       alert('Usuário logado com sucesso!')
       navigate('/home')
+      refreshPage()
     }
   }
 
