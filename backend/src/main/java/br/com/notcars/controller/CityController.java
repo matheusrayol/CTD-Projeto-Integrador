@@ -2,6 +2,7 @@ package br.com.notcars.controller;
 
 import br.com.notcars.dto.city.CityRequest;
 import br.com.notcars.dto.city.CityResponse;
+import br.com.notcars.mapper.CityMapper;
 import br.com.notcars.service.CityService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 @Log4j2
 public class CityController {
   private final CityService cityServiceImpl;
+
+  private final CityMapper cityMapper;
 
   @GetMapping("/all")
   private ResponseEntity<List<CityResponse>> findAll(){

@@ -1,9 +1,9 @@
 package br.com.notcars.controller;
 
-import br.com.notcars.dto.city.CityRequest;
 import br.com.notcars.dto.city.CityResponse;
 import br.com.notcars.dto.product.ProductRequest;
 import br.com.notcars.dto.product.ProductResponse;
+import br.com.notcars.mapper.ProductMapper;
 import br.com.notcars.service.ProductService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @Log4j2
 public class ProductController {
+
   private final ProductService productServiceImpl;
+
+  private final ProductMapper productMapper;
 
   @GetMapping("/{id}")
   private ResponseEntity<ProductResponse> findProductById(@PathVariable Long id){
