@@ -53,7 +53,7 @@ export default function Main() {
             className={styles.calendar}
           />
         </div>
-        <button className={styles.form__botao}>Procure</button>
+        <button className={styles.form__botao}>Buscar</button>
       </form>
       <div className={styles.main__comentarios}>
         <div className={styles.main__diferenciais}>

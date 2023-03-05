@@ -30,10 +30,10 @@ export const AuthProvider = ({ children }) => {
         setUser({ email, password, name })
         return
       } else {
-        return 'E-mail or Password Incorrets'
+        return 'E-mail ou senha incorreto'
       }
     } else {
-      return 'User Not Register'
+      return 'Usuário não registrado'
     }
   }
 
@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
     const hasUser = usersStorage?.filter(user => user.email === email)
 
     if (hasUser?.length) {
-      return 'Have account with this E-mail'
+      return 'Já existe uma conta com esse Email'
     }
 
     let newUser
@@ -60,7 +60,7 @@ export const AuthProvider = ({ children }) => {
   const signout = () => {
     setUser(null)
     localStorage.removeItem('user_token')
-    alert('User Logout')
+    alert('Você saiu')
   }
 
   return (
