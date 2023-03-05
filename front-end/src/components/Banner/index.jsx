@@ -1,13 +1,10 @@
 import { React, useState, useEffect, useRef } from 'react'
-import styles from './BannerCarrossel.module.scss'
+import styles from './Banner.module.scss'
 import { motion } from 'framer-motion'
-import img2 from '../../assets/img2.jpg'
-import img4 from '../../assets/img4.jpg'
-import img6 from '../../assets/img6.jpg'
-import img8 from '../../assets/img8.jpg'
+import banner from '../../json/productsInformation.json'
 import CardsBanner from '../CardBanner'
 
-export default function BannerCarrossel() {
+export default function Banner() {
   const carrossel = useRef()
   const [width, setWidth] = useState(0)
 
@@ -15,40 +12,7 @@ export default function BannerCarrossel() {
     setWidth(carrossel.current?.scrollWidth - carrossel.current?.offsetWidth)
   }, [])
 
-  const [allImagesBanner] = useState([
-    {
-      id: 2,
-      image: img2,
-      category: 'Modelo de Luxo',
-      title: 'Mercedes S EQS',
-      location: 'São Paulo',
-      description: 'R$ 249,00 / dia'
-    },
-    {
-      id: 4,
-      image: img4,
-      category: 'Modelo Esportivo',
-      title: 'Byd Han',
-      location: 'Rio de Janeiro',
-      description: 'R$ 179,00 / dia'
-    },
-    {
-      id: 6,
-      image: img6,
-      category: 'Modelo Conforto',
-      title: 'Chevrolet Bolt',
-      location: 'Campos do Jordão',
-      description: 'R$ 149,00 / dia'
-    },
-    {
-      id: 8,
-      image: img8,
-      category: 'Modelo Compacto',
-      title: 'Caoa Chery',
-      location: 'Matão',
-      description: 'R$ 99,00 / dia'
-    }
-  ])
+  const [allImagesBanner] = useState(banner)
 
   return (
     <section>
