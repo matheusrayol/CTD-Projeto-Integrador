@@ -2,16 +2,16 @@
   {
     "id": 1,
     "image": "../../assets/img1.jpg",
-    "category": "Lux Model",
+    "category": "Modelo Luxuoso",
     "title": "Volvo XC40 Recharge",
-    "location": "São Jose do Rio Preto",
+    "location": "Fortaleza",
     "description": "R$ 299,00 / dia",
     "rated": "4.9"
   },
   {
     "id": 3,
     "image": "../../assets/img3.jpg",
-    "category": "Sport Model",
+    "category": "Modelo Esportivo",
     "title": "Audi RS e-tron GT",
     "location": "Rio de Janeiro",
     "description": "R$ 139,00 / dia",
@@ -20,19 +20,19 @@
   {
     "id": 5,
     "image": "../../assets/img5.jpg",
-    "category": "Confort Model",
-    "title": "Sandero v2 Hibrid",
-    "location": "Pindamonhangaba",
+    "category": "Modelo Conforto",
+    "title": "Sandero v2 Eletric",
+    "location": "Belo Horizonte",
     "description": "R$ 79,00 / dia",
     "rated": "4.5"
   },
   {
     "id": 7,
     "image": "../../assets/img7.jpg",
-    "category": "Economy Model",
+    "category": "Modelo Compacto",
     "title": "Fiat 500e",
-    "location": "Valadares do Oeste",
+    "location": "Salvador",
     "description": "R$ 49,00 / dia",
-    "rated": "3.7"
+    "rated": "4.7"
   }
 ]
