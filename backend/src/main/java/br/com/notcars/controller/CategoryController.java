@@ -42,14 +42,14 @@ public class CategoryController {
   }
 
   @GetMapping("/all")
-  public ResponseEntity<Page<CategoryResponse>> getAllCategories(@PageableDefault(size = 10, direction = Sort.Direction.ASC) Pageable pageable) {
+  public ResponseEntity<List<CategoryResponse>> getAllCategories() {
     log.info(START_REQUEST + "[GET] " + BASE_URL + "/all/");
-    Page<CategoryEntity> categoryEntityPage = categoryServiceImpl.findAllCategory(pageable);
+    List<CategoryEntity> categoryEntityList = categoryServiceImpl.findAllCategory();
 
-    List<CategoryResponse> categoryResponseList = categoryEntityPage.getContent().stream()
+    List<CategoryResponse> categoryResponseList = categoryEntityList.stream()
       .map(categoryMapper::toCategoryResponse).collect(Collectors.toList());
 
-    return ResponseEntity.ok(new PageImpl<>(categoryResponseList, categoryEntityPage.getPageable(), categoryEntityPage.getTotalPages()));
+    return ResponseEntity.ok(categoryResponseList);
   }
 
   @PostMapping("/create")
