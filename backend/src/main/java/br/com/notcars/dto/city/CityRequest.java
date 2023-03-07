@@ -9,9 +9,9 @@ import lombok.ToString;
 @Setter
 @ToString
 public class CityRequest {
-  @NotBlank
+  @NotBlank(message = "name is required")
   private String name;
 
-  @NotBlank
+  @NotBlank(message = "country is required")
   private String country;
 }
