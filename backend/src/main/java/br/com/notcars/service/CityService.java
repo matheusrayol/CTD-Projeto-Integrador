@@ -5,7 +5,7 @@ import br.com.notcars.model.CityEntity;
 import java.util.List;
 
 public interface CityService {
-  List<CityEntity> findAll();
+  List<CityEntity> findAllCities();
 
   CityEntity createCity(CityRequest cityRequest);
 }
