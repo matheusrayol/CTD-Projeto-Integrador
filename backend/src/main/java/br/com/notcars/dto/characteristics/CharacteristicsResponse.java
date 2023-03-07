@@ -1,14 +1,14 @@
-package br.com.notcars.dto.city;
+package br.com.notcars.dto.characteristics;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class CityResponse {
+public class CharacteristicsResponse {
   private Long id;
 
   private String name;
 
-  private String country;
+  private String icon;
 }

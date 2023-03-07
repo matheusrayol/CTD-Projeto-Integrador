@@ -2,12 +2,15 @@ package br.com.notcars.model;
 
 import java.util.List;
 import javax.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@Table(name = "characteristics")
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CharacteristicsEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +22,6 @@ public class CharacteristicsEntity {
   @Column
   private String icon;
 
-  @ManyToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "product_id")
+  @ManyToMany(mappedBy="characteristicsList")
   private List<ProductEntity> productList;
 }

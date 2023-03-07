@@ -1,12 +1,15 @@
 package br.com.notcars.model;
 
 import javax.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@Table(name = "images")
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ImageEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

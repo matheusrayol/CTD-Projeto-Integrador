@@ -2,34 +2,40 @@ package br.com.notcars.model;
 
 import java.util.List;
 import javax.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@Table(name = "products")
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProductEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column
+  @Column(name = "product_name")
   private String name;
 
-  @Column
+  @Column(name = "product_description")
   private String description;
 
   @ManyToOne
-  @JoinColumn(name = "category_id")
+  @JoinColumn(name = "categories_id")
   private CategoryEntity category;
 
   @ManyToOne
-  @JoinColumn(name = "city_id")
+  @JoinColumn(name = "cities_id")
   private CityEntity city;
 
-  @ManyToMany
+  @ManyToMany(cascade = CascadeType.ALL)
+  @JoinTable(name="products_characteristics", joinColumns=
+    {@JoinColumn(name="product_id")}, inverseJoinColumns=
+    {@JoinColumn(name="characteristic_id")})
   private List<CharacteristicsEntity> characteristicsList;
 
-  @OneToMany(mappedBy = "product")
+  @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
   private List<ImageEntity> imageList;
 }

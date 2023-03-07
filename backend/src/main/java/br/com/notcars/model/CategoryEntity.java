@@ -1,6 +1,7 @@
 package br.com.notcars.model;
 
 
+import java.util.List;
 import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,5 +27,5 @@ public class CategoryEntity {
   private String urlImage;
 
   @OneToMany(mappedBy = "category")
-  private ProductEntity product;
+  private List<ProductEntity> product;
 }

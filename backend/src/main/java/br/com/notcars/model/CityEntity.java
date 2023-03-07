@@ -2,21 +2,24 @@ package br.com.notcars.model;
 
 import java.util.List;
 import javax.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@Table(name = "cities")
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CityEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column
+  @Column(name = "city_name")
   private String name;
 
-  @Column
+  @Column(name = "country_city")
   private String country;
 
   @OneToMany(mappedBy = "city")
