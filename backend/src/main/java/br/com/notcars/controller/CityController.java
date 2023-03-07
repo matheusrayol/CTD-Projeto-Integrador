@@ -18,19 +18,24 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @Log4j2
 public class CityController {
+  private static final String START_REQUEST = "[START REQUEST]";
+
+  private static final String BASE_URL = "/city";
   private final CityService cityServiceImpl;
 
   private final CityMapper cityMapper;
 
   @GetMapping("/all")
-  private ResponseEntity<List<CityResponse>> findAll(){
+  private ResponseEntity<List<CityResponse>> findAll() {
+    log.info(START_REQUEST + "[GET] " + BASE_URL + "/all");
     List<CityEntity> cityList = cityServiceImpl.findAllCities();
     List<CityResponse> cityResponseList = cityList.stream().map(cityMapper::toResponse).collect(Collectors.toList());
     return ResponseEntity.ok(cityResponseList);
   }
 
   @PostMapping("/create")
-  private ResponseEntity<CityResponse> createCity(@RequestBody CityRequest cityRequest){
+  private ResponseEntity<CityResponse> createCity(@RequestBody CityRequest cityRequest) {
+    log.info(START_REQUEST + "[POST] " + BASE_URL + "/create" +  " [BODY]" +  cityRequest.toString());
     CityEntity city = cityServiceImpl.createCity(cityRequest);
     return ResponseEntity.status(HttpStatus.CREATED).body(cityMapper.toResponse(city));
   }

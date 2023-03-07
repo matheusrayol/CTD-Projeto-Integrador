@@ -43,7 +43,7 @@ public class CategoryController {
 
   @GetMapping("/all")
   public ResponseEntity<List<CategoryResponse>> getAllCategories() {
-    log.info(START_REQUEST + "[GET] " + BASE_URL + "/all/");
+    log.info(START_REQUEST + "[GET] " + BASE_URL + "/all");
     List<CategoryEntity> categoryEntityList = categoryServiceImpl.findAllCategory();
 
     List<CategoryResponse> categoryResponseList = categoryEntityList.stream()
