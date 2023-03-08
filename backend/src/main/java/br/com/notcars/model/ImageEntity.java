@@ -18,11 +18,11 @@ public class ImageEntity {
   @Column
   private String title;
 
-  @Column
+  @Column(name = "url_images")
   private String urlImage;
 
   @ManyToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "product_id")
+  @JoinColumn(name = "product_image_id")
   private ProductEntity product;
 
 }

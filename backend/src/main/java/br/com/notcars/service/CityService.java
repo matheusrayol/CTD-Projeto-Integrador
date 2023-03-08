@@ -8,4 +8,6 @@ public interface CityService {
   List<CityEntity> findAllCities();
 
   CityEntity createCity(CityRequest cityRequest);
+
+  CityEntity findCityById(Long id);
 }
