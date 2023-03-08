@@ -12,6 +12,10 @@
   font-family: $font-bold;
   font-weight: 700;
 
+  // height: 79.779vh;
+  // border-top: 1px solid rgb(156, 176, 150);
+  // border-bottom: 1px solid rgb(156, 176, 150);
+
   h1 {
     color: $color-two;
   }
@@ -35,6 +39,27 @@
     align-items: center;
     margin-bottom: 1.5rem;
 
+    .formError,
+    input.formError {
+      background: rgb(250, 202, 202);
+    }
+
+    input.formError:focus {
+      background: rgb(250, 202, 202);
+    }
+
+    span.formError {
+      margin: 0 5%;
+      background: none;
+      padding: 0;
+      border: 0;
+      margin-top: 0.25rem;
+      font-size: 1rem;
+      text-align: center;
+      background-color: none;
+      color: rgb(249, 95, 95);
+    }
+
     h1 {
       margin: 0;
       padding-bottom: 2rem;
@@ -49,7 +74,7 @@
       flex-direction: column;
       flex-wrap: nowrap;
       align-items: center;
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
 
       label {
         text-align: start;
@@ -70,6 +95,7 @@
 
     button {
       text-decoration: none;
+      margin-top: 0.5rem;
       padding: 1rem 3rem;
       border: $border-color-two;
       color: $text-color-two;

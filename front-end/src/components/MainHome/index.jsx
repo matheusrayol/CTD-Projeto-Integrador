@@ -13,8 +13,7 @@ export default function Main() {
     { value: 'Fortaleza', label: 'Fortaleza' },
     { value: 'Rio de Janeiro', label: 'Rio de Janeiro' },
     { value: 'Sao Paulo', label: 'São Paulo' },
-    { value: 'Belo Horizonte', label: 'Belo Horizonte' },
-    { value: 'Salvador', label: 'Salvador' }
+    { value: 'Belo Horizonte', label: 'Belo Horizonte' }
   ]
 
   return (

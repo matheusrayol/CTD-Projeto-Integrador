@@ -1,15 +1,15 @@
 import React from 'react'
 import styles from './Tags.module.scss'
 
-export default function Tags({ categories, filtraFotos }) {
+export default function Tags({ locations, filterCity }) {
   return (
     <div className={styles.tags}>
-      <p>Filtre por categoria</p>
+      <p>Filtre por cidade</p>
       <ul className={styles.tags__lista}>
-        {categories.map(category => {
+        {locations.map(location => {
           return (
-            <li key={category} onClick={() => filtraFotos(category)}>
-              {category}
+            <li key={location} onClick={() => filterCity(location)}>
+              {location}
             </li>
           )
         })}
