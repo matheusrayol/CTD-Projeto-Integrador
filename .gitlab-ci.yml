@@ -17,7 +17,7 @@ building:
 deploy-application:
   stage: deploy
   script:
-    - cp -r front-end/build1 /site
+    - cp -r front-end/build1 /site; pwd
 
 
 # ------ Verificar Depois -------
