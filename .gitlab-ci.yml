@@ -10,16 +10,14 @@ building:
     - cd front-end; pwd
     - npm i --no-optional
     - npm run build
+    - mv build build1
   # only:
   #   - main
 
 deploy-application:
   stage: deploy
   script:
-    - cp -r front-end/build /site
-
-
-
+    - cp -r front-end/build1 /site
 
 
 # ------ Verificar Depois -------
