@@ -3,12 +3,11 @@ package br.com.notcars.service.impl;
 import br.com.notcars.dto.category.CategoryRequest;
 import br.com.notcars.exceptions.NotFoundException;
 import br.com.notcars.mapper.CategoryMapper;
-import br.com.notcars.repository.category.CategoryEntity;
-import br.com.notcars.repository.category.CategoryRepository;
+import br.com.notcars.model.CategoryEntity;
+import br.com.notcars.repository.CategoryRepository;
 import br.com.notcars.service.CategoryService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,9 +19,8 @@ public class CategoryServiceImpl implements CategoryService {
   private final CategoryMapper categoryMapper;
 
   @Override
-  public Page<CategoryEntity> findAllCategory(Pageable pageable) {
-
-    return categoryRepository.findAll(pageable);
+  public List<CategoryEntity> findAllCategory() {
+    return categoryRepository.findAll();
   }
 
   @Override

@@ -9,8 +9,8 @@ import static org.mockito.Mockito.*;
 import br.com.notcars.dto.category.CategoryRequest;
 import br.com.notcars.exceptions.NotFoundException;
 import br.com.notcars.mapper.CategoryMapper;
-import br.com.notcars.repository.category.CategoryEntity;
-import br.com.notcars.repository.category.CategoryRepository;
+import br.com.notcars.model.CategoryEntity;
+import br.com.notcars.repository.CategoryRepository;
 import java.util.List;
 import java.util.Optional;
 import lombok.var;
@@ -58,30 +58,27 @@ class CategoryServiceImplTest {
     @Test
     void shouldReturnPage_whenListOfCategoryNotEmpty() {
       // Arrange
-      var pageable = PageRequest.of(1, 2);
-      var pageImpl = new PageImpl<>(List.of(mock(CategoryEntity.class)));
-      when(categoryRepository.findAll(pageable)).thenReturn(pageImpl);
+      when(categoryRepository.findAll()).thenReturn(List.of(mock(CategoryEntity.class)));
 
       // Act
-      var result = categoryService.findAllCategory(pageable);
+      var result = categoryService.findAllCategory();
 
       // Assert
-      assertEquals(1, result.getContent().size());
-      verify(categoryRepository, timeout(1)).findAll(pageable);
+      assertEquals(1, result.size());
+      verify(categoryRepository, timeout(1)).findAll();
     }
 
     @Test
     void shouldReturnPageEmpty_whenListOfCategoryIsEmpty() {
       // Arrange
-      var pageable = PageRequest.of(1, 2);
-      when(categoryRepository.findAll(pageable)).thenReturn(Page.empty());
+      when(categoryRepository.findAll()).thenReturn(List.of());
 
       // Act
-      var result = categoryService.findAllCategory(pageable);
+      var result = categoryService.findAllCategory();
 
       // Assert
-      assertEquals(0, result.getContent().size());
-      verify(categoryRepository, timeout(1)).findAll(pageable);
+      assertEquals(0, result.size());
+      verify(categoryRepository, timeout(1)).findAll();
     }
   }
 

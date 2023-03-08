@@ -1,13 +1,12 @@
 package br.com.notcars.service;
 
 import br.com.notcars.dto.category.CategoryRequest;
-import br.com.notcars.repository.category.CategoryEntity;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import br.com.notcars.model.CategoryEntity;
+import java.util.List;
 
 
 public interface CategoryService {
-  Page<CategoryEntity> findAllCategory(Pageable pageable);
+  List<CategoryEntity> findAllCategory();
 
   CategoryEntity findCategoryById(Long id);
 

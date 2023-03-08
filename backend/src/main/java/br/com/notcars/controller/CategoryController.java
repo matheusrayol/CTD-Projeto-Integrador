@@ -3,7 +3,7 @@ package br.com.notcars.controller;
 import br.com.notcars.dto.category.CategoryRequest;
 import br.com.notcars.dto.category.CategoryResponse;
 import br.com.notcars.mapper.CategoryMapper;
-import br.com.notcars.repository.category.CategoryEntity;
+import br.com.notcars.model.CategoryEntity;
 import br.com.notcars.service.CategoryService;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -42,14 +42,14 @@ public class CategoryController {
   }
 
   @GetMapping("/all")
-  public ResponseEntity<Page<CategoryResponse>> getAllCategories(@PageableDefault(size = 10, direction = Sort.Direction.ASC) Pageable pageable) {
-    log.info(START_REQUEST + "[GET] " + BASE_URL + "/all/");
-    Page<CategoryEntity> categoryEntityPage = categoryServiceImpl.findAllCategory(pageable);
+  public ResponseEntity<List<CategoryResponse>> getAllCategories() {
+    log.info(START_REQUEST + "[GET] " + BASE_URL + "/all");
+    List<CategoryEntity> categoryEntityList = categoryServiceImpl.findAllCategory();
 
-    List<CategoryResponse> categoryResponseList = categoryEntityPage.getContent().stream()
+    List<CategoryResponse> categoryResponseList = categoryEntityList.stream()
       .map(categoryMapper::toCategoryResponse).collect(Collectors.toList());
 
-    return ResponseEntity.ok(new PageImpl<>(categoryResponseList, categoryEntityPage.getPageable(), categoryEntityPage.getTotalPages()));
+    return ResponseEntity.ok(categoryResponseList);
   }
 
   @PostMapping("/create")
