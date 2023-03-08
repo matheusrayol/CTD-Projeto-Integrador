@@ -1,252 +1,232 @@
 {
 	"info": {
-		"_postman_id": "3c6b6be2-0d44-4ffb-ba77-0512a1aa1440",
-		"name": "Projeto Integrador",
+		"_postman_id": "4780afe5-538c-4613-9522-65bc6a8392ae",
+		"name": "projeto integrador",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "20400404"
+		"_exporter_id": "20393191"
 	},
 	"item": [
 		{
-			"name": "endpoints",
+			"name": "category",
 			"item": [
 				{
-					"name": "category",
-					"item": [
-						{
-							"name": "Criar uma categoria",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Tempo de resposta de POST menor do que 250ms\", function () {\r",
-											"    pm.expect(pm.response.responseTime).to.be.below(250);\r",
-											"});\r",
-											"pm.test(\"Solicitação POST bem-sucedida\", function () {\r",
-											"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
-											"});\r",
-											"pm.test(\"Retorno corresponde à categoria cadastrada\", function () {\r",
-											"    pm.expect(pm.response.text()).to.include(\"Categoria 1\");\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
+					"name": "criar categoria",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"qualification\": \"teste\",\r\n    \"descriptions\": \"teste\",\r\n    \"urlImage\": \"teste\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"qualification\": \"Categoria 1\",\r\n    \"descriptions\": \"teste\",\r\n    \"urlImage\": \"teste\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/category/create",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"category",
-										"create"
-									]
-								}
-							},
-							"response": []
+							}
 						},
-						{
-							"name": "Buscar todas as categorias",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Retorno bem-sucedido do GET para todas as categorias\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
+						"url": {
+							"raw": "{{baseUrl}}/category/create",
+							"host": [
+								"{{baseUrl}}"
 							],
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/category/all",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"category",
-										"all"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Buscar categoria por ID",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Tempo de resposta de POST menor do que 250ms\", function () {\r",
-											"    pm.expect(pm.response.responseTime).to.be.below(250);\r",
-											"});\r",
-											"pm.test(\"Solicitação GET bem-sucedida\", function () {\r",
-											"    pm.expect(pm.response.code).to.be.oneOf([200,201, 202]);\r",
-											"});\r",
-											"pm.test(\"Retorno corresponde à categoria cadastrada\", function () {\r",
-											"    pm.expect(pm.response.text()).to.include(\"Categoria 1\");\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/category/1",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"category",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Excluir categoria",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Content-Type is present\", function () {\r",
-											"    pm.response.to.have.header(\"Content-Type\");\r",
-											"});\r",
-											"pm.test(\"Exclusão de categoria com sucesso\", function () {\r",
-											"    pm.response.to.have.status(204);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/category/delete/3",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"category",
-										"delete",
-										"3"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Atualizar categoria",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Tempo de resposta de POST menor do que 250ms\", function () {\r",
-											"    pm.expect(pm.response.responseTime).to.be.below(250);\r",
-											"});\r",
-											"pm.test(\"Solicitação PUT bem-sucedida\", function () {\r",
-											"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);\r",
-											"});\r",
-											"pm.test(\"Retorno corresponde à categoria alterada\", function () {\r",
-											"    pm.expect(pm.response.text()).to.include(\"teste update\");\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"qualification\": \"teste update\",\r\n    \"descriptions\": \"teste update\",\r\n    \"urlImage\": \"teste update\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/category/update/5",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"category",
-										"update",
-										"5"
-									]
-								}
-							},
-							"response": []
+							"path": [
+								"category",
+								"create"
+							]
 						}
-					]
+					},
+					"response": []
+				},
+				{
+					"name": "buscar todas as categorias paginadas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/category/all",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"category",
+								"all"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "28",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "busca categoria por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/category/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleta categoria",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/category/delete/34",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"category",
+								"delete",
+								"34"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "atualizar uma categoria",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"qualification\": \"test update\",\r\n    \"descriptions\": \"test update\",\r\n    \"urlImage\": \"test update\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/category/update/33",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"category",
+								"update",
+								"33"
+							]
+						}
+					},
+					"response": []
 				}
 			]
-		}
-	],
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
 		},
 		{
-			"listen": "test",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		}
-	],
-	"variable": [
+			"name": "Product",
+			"item": [
+				{
+					"name": "buscar todas os produtos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/product/all",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"product",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "busca produtos por categoria ou cidade",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/product?category=teste&city=teste",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"product"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "teste"
+								},
+								{
+									"key": "city",
+									"value": "teste"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
 		{
-			"key": "baseUrl",
-			"value": "http://localhost:8080",
-			"type": "default"
+			"name": "City",
+			"item": [
+				{
+					"name": "buscar todas as cidades",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/city/all",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"city",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "criar cidade",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"São José dos Campos\",\r\n    \"country\": \"São Paulo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/city/create",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"city",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
