@@ -273,4 +273,7 @@ dist
 .history
 .ionide
 
+# arquivos mac
+.DS_Store
+
 # End of https://www.toptal.com/developers/gitignore/api/intellij,visualstudiocode,node
