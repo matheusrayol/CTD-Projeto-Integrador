@@ -33,7 +33,6 @@ public class ProductServiceImpl implements ProductService {
   public ProductEntity createProduct(ProductRequest productRequest, CategoryEntity category, CityEntity city) {
     List<ImageEntity> images = productRequest.getImages().stream().map(imageMapper::toEntity).collect(Collectors.toList());
     List<CharacteristicsEntity> characteristics = productRequest.getCharacteristics().stream().map(characteristicsMapper::toEntity).collect(Collectors.toList());
-
     ProductEntity product = productMapper.toEntity(productRequest, category, city, characteristics, images);
     return productRepository.save(product);
   }

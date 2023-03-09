@@ -1,9 +1,12 @@
 package br.com.notcars.controller;
 
+import br.com.notcars.dto.category.CategoryResponse;
+import br.com.notcars.dto.characteristics.CharacteristicsResponse;
 import br.com.notcars.dto.city.CityResponse;
+import br.com.notcars.dto.image.ImageResponse;
 import br.com.notcars.dto.product.ProductRequest;
 import br.com.notcars.dto.product.ProductResponse;
-import br.com.notcars.mapper.ProductMapper;
+import br.com.notcars.mapper.*;
 import br.com.notcars.model.CategoryEntity;
 import br.com.notcars.model.CityEntity;
 import br.com.notcars.model.ProductEntity;
@@ -34,6 +37,14 @@ public class ProductController {
 
   private final ProductMapper productMapper;
 
+  private final ImageMapper imageMapper;
+
+  private final CharacteristicsMapper characteristicsMapper;
+
+  private final CityMapper cityMapper;
+
+  private final CategoryMapper categoryMapper;
+
   @GetMapping("/{id}")
   private ResponseEntity<ProductResponse> findProductById(@PathVariable Long id){
     log.info(START_REQUEST + "[GET] " + BASE_URL + "/" + id);
@@ -63,8 +74,12 @@ public class ProductController {
     CityEntity city = cityServiceImpl.findCityById(productRequest.getCityId());
     ProductEntity product = productServiceImpl.createProduct(productRequest, category, city);
 
+    List<ImageResponse> imageListResponse = imageMapper.map(product.getImageList());
+    List<CharacteristicsResponse> characteristicsResponse = characteristicsMapper.map(product.getCharacteristicsList());
+    CityResponse cityResponse = cityMapper.toResponse(product.getCity());
+    CategoryResponse categoryResponse = categoryMapper.toCategoryResponse(product.getCategory());
 
-    return ResponseEntity.status(HttpStatus.CREATED).body(productMapper.toResponse(product));
+    return ResponseEntity.status(HttpStatus.CREATED).body(productMapper.toResponse(product, categoryResponse, cityResponse, characteristicsResponse, imageListResponse));
   }
 
 }

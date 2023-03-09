@@ -23,11 +23,11 @@ public class ProductEntity {
   private String description;
 
   @ManyToOne
-  @JoinColumn(name = "categories_id")
+  @JoinColumn(name = "categories_id", referencedColumnName = "id")
   private CategoryEntity category;
 
   @ManyToOne
-  @JoinColumn(name = "cities_id")
+  @JoinColumn(name = "cities_id", referencedColumnName = "id")
   private CityEntity city;
 
   @ManyToMany(cascade = CascadeType.ALL)
@@ -36,6 +36,6 @@ public class ProductEntity {
     {@JoinColumn(name="characteristic_id")})
   private List<CharacteristicsEntity> characteristicsList;
 
-  @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private List<ImageEntity> imageList;
 }

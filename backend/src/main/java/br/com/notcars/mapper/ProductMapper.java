@@ -1,5 +1,9 @@
 package br.com.notcars.mapper;
 
+import br.com.notcars.dto.category.CategoryResponse;
+import br.com.notcars.dto.characteristics.CharacteristicsResponse;
+import br.com.notcars.dto.city.CityResponse;
+import br.com.notcars.dto.image.ImageResponse;
 import br.com.notcars.dto.product.ProductRequest;
 import br.com.notcars.dto.product.ProductResponse;
 import br.com.notcars.model.*;
@@ -21,4 +25,13 @@ public interface ProductMapper {
                          List<ImageEntity> imageList);
 
   ProductResponse toResponse(ProductEntity product);
+
+  @Mapping(source = "product.id" , target = "id")
+  @Mapping(source = "product.name" , target = "name")
+  @Mapping(source = "product.description" , target = "description")
+  ProductResponse toResponse(ProductEntity product,
+                             CategoryResponse categoryResponse,
+                             CityResponse cityResponse,
+                             List<CharacteristicsResponse> characteristics,
+                             List<ImageResponse> images);
 }
