@@ -9,15 +9,15 @@ export default function Cards(image) {
       <div className={styles.cardBody}>
         <img src={image.imageData.image} alt={image.imageData.title} />
         <Link key={image.id} to={`../product/${image.imageData.id}`}>
-          <div
-            style={{ display: 'flex' }}
-            className={styles.cardBody__catRated}
-          >
+          <div className={styles.cardBody__catRated}>
             <p>{image.imageData.category}</p>
             <p>{image.imageData.rated}</p>
           </div>
-          <p>{image.imageData.title}</p>
-          <p>{image.imageData.description}</p>
+          <div className={styles.cardBody__ps}>
+            <p>{image.imageData.title}</p>
+            <p>Local: {image.imageData.location}</p>
+            <p>{image.imageData.description}</p>
+          </div>
         </Link>
       </div>
     </motion.div>
