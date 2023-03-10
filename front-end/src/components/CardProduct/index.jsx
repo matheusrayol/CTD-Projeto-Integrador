@@ -4,32 +4,26 @@ import styles from './CardProduct.module.scss'
 import iconLocation from '../../assets/iconLocation.svg'
 import iconShare from '../../assets/iconShare.svg'
 import iconHearth from '../../assets/iconHearth.svg'
-
 import WSPGallery from '../CardGallery/WSPGallery'
-
-import id1 from '../../assets/img1.jpg'
-import id2 from '../../assets/img2.jpg'
-import id3 from '../../assets/img3.jpg'
-import id4 from '../../assets/img4.jpg'
 
 export default function CardProduct(image) {
   const [buttonOpen, setButtonOpen] = useState(true)
 
   const galleryImages = [
     {
-      img: id1
+      img: image.imageData.img1
     },
     {
-      img: id2
+      img: image.imageData.img2
     },
     {
-      img: id3
+      img: image.imageData.img3
     },
     {
-      img: id4
+      img: image.imageData.img4
     },
     {
-      img: 'https://s2.glbimg.com/FHEje3o5fdk3qhdRORIRL66lvrg=/0x0:620x413/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2020/6/t/2vzlWQT9WWiBQi9yfLJQ/2019-01-28-iev-40-2-2.jpg'
+      img: image.imageData.img5
     }
   ]
 
@@ -38,8 +32,8 @@ export default function CardProduct(image) {
       <div className={styles.cardBody}>
         <div className={styles.cardBody__sectionBack}>
           <div className={styles.cardBody__sectionBack__p}>
-            <p>{image.imageData.category}</p>
             <p>{image.imageData.title}</p>
+            <p>{image.imageData.category}</p>
           </div>
           <Link to="/home">
             <button className={styles.cardBody__sectionBack__button}>
@@ -61,7 +55,7 @@ export default function CardProduct(image) {
           </div>
           <div className={styles.cardBody__sectionTittle__pRated}>
             <p>
-              Rated: <span>{image.imageData.rated}</span>
+              Avaliação: <span>{image.imageData.rated}</span>
             </p>
           </div>
         </div>
@@ -81,10 +75,38 @@ export default function CardProduct(image) {
           <WSPGallery galleryImages={galleryImages} />
         </div>
         <div className={styles.cardBody__sectionDescription}>
+          <div className={styles.cardBody__sectionDescription__lines}>
+            <div>
+              <h2>Descrição</h2>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
+                mollitia, molestiae quas vel sint commodi repudiandae
+                consequuntur voluptatum laborum numquam blanditiis harum
+                quisquam eius sed odit fugiat iusto fuga praesentium optio,
+                eaque rerum! Provident similique accusantium nemo autem.
+                Veritatis obcaecati tenetur iure eius earum ut molestias
+                architecto voluptate aliquam nihil, eveniet aliquid culpa
+                officia aut! Impedit sit sunt quaerat, odit, tenetur error,
+                harum nesciunt ipsum debitis quas aliquid. Reprehenderit, quia.
+                Quo neque error repudiandae fuga? Ipsa laudantium molestias eos
+                sapiente officiis modi at sunt excepturi expedita sint? Sed
+                quibusdam recusandae alias error harum maxime adipisci amet
+                laborum.
+              </p>
+              <h3>Qualificação</h3>
+              <p>
+                Os carros da NotCars como o {image.imageData.title} são
+                perfeitos para você ...
+              </p>
+              <p>provavelmente uma questão voltada para a nossa marca.</p>
+            </div>
+          </div>
+        </div>
+        <div className={styles.cardBody__sectionCharacteristics}>
           <h2>
             Veja por que alugar o <span>{image.imageData.title}</span>
           </h2>
-          <div className={styles.cardBody__sectionDescription__lines}>
+          <div className={styles.cardBody__sectionCharacteristics__lines}>
             <div>
               <p>{image.imageData.descriptionLine2}</p>
               <p>{image.imageData.descriptionLine3}</p>
@@ -121,6 +143,9 @@ export default function CardProduct(image) {
                     Fechar
                   </button>
                   <p>{image.imageData.politic}</p>
+                  <p>Normas: Título e descrição.</p>
+                  <p>Segurança: Título e descrição.</p>
+                  <p>Cancelamento: Título e descrição.</p>
                 </div>
               )}
             </div>

@@ -1,17 +1,17 @@
 import React from 'react'
 import styles from './AccUser.module.scss'
 import imgAvatar from '../../assets/avatar.jpg'
-import useAuth from '../../hooks/useAuth'
+import { useAuth } from '../../hooks/useAuth'
 
 export default function AccUser() {
-  const { user } = useAuth()
+  const { auth } = useAuth()
   return (
     <main className={styles.main}>
       <p>LOCAL DESTINADO A PAGINA PADRAO DO USUARIO</p>
       <img src={imgAvatar} alt="imagem Avatar" />
-      <p>Email: {user.email}</p>
-      <p>Password: {user.password}</p>
-      <p>Name: {user.name}</p>
+      <p>Email: {auth.email}</p>
+      <p>Password: {auth.password}</p>
+      <p>Name: {auth.name}</p>
     </main>
   )
 }

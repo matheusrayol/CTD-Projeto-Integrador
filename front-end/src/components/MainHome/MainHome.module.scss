@@ -113,6 +113,37 @@
   }
 }
 
+.h2Home {
+  font-size: 1.75rem;
+  padding: 0;
+  margin: 1rem 1rem 1rem 3rem;
+  border: 0;
+  font-family: $font-bold;
+  font-weight: bold;
+  color: $color-two;
+  width: fit-content;
+}
+
+.sectionCard {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  padding-left: 3rem;
+  padding-right: 3rem;
+
+  .carrossel {
+    cursor: grab;
+    overflow: hidden;
+  }
+
+  .inner {
+    display: flex;
+    gap: 0.5rem;
+    padding-bottom: 1rem;
+  }
+
+}
+
 
 @media(max-width: 850px) {
 
