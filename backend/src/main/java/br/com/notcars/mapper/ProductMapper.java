@@ -24,6 +24,8 @@ public interface ProductMapper {
                          List<CharacteristicsEntity> characteristicsList,
                          List<ImageEntity> imageList);
 
+  @Mapping(source = "product.imageList", target = "images")
+  @Mapping(source = "product.characteristicsList", target = "characteristics")
   ProductResponse toResponse(ProductEntity product);
 
   @Mapping(source = "product.id", target = "id")
