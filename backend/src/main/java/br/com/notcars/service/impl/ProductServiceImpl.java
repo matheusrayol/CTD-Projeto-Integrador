@@ -7,6 +7,9 @@ import br.com.notcars.mapper.ImageMapper;
 import br.com.notcars.mapper.ProductMapper;
 import br.com.notcars.model.*;
 import br.com.notcars.repository.ProductRepository;
+import br.com.notcars.service.CategoryService;
+import br.com.notcars.service.CharacteristicsService;
+import br.com.notcars.service.CityService;
 import br.com.notcars.service.ProductService;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +21,11 @@ import org.springframework.stereotype.Service;
 public class ProductServiceImpl implements ProductService {
   private final ProductRepository productRepository;
 
+  private final CategoryService categoryServiceImpl;
+
+  private final CharacteristicsService characteristicsServiceImpl;
+
+  private final CityService cityServiceImpl;
   private final ProductMapper productMapper;
 
   private final ImageMapper imageMapper;
@@ -30,9 +38,11 @@ public class ProductServiceImpl implements ProductService {
   }
 
   @Override
-  public ProductEntity createProduct(ProductRequest productRequest, CategoryEntity category, CityEntity city) {
+  public ProductEntity createProduct(ProductRequest productRequest) {
+    CategoryEntity category = categoryServiceImpl.findCategoryById(productRequest.getCategoryId());
+    CityEntity city = cityServiceImpl.findCityById(productRequest.getCityId());
     List<ImageEntity> images = productRequest.getImages().stream().map(imageMapper::toEntity).collect(Collectors.toList());
-    List<CharacteristicsEntity> characteristics = productRequest.getCharacteristics().stream().map(characteristicsMapper::toEntity).collect(Collectors.toList());
+    List<CharacteristicsEntity> characteristics = characteristicsServiceImpl.findAllById(productRequest.getCharacteristics());
     ProductEntity product = productMapper.toEntity(productRequest, category, city, characteristics, images);
     return productRepository.save(product);
   }

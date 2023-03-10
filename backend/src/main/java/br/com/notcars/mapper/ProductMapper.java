@@ -15,8 +15,8 @@ import org.mapstruct.ReportingPolicy;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ProductMapper {
 
-  @Mapping(source = "productRequest.name" , target = "name")
-  @Mapping(source = "productRequest.description" , target = "description")
+  @Mapping(source = "productRequest.name", target = "name")
+  @Mapping(source = "productRequest.description", target = "description")
   @Mapping(target = "id", ignore = true)
   ProductEntity toEntity(ProductRequest productRequest,
                          CategoryEntity category,
@@ -26,9 +26,9 @@ public interface ProductMapper {
 
   ProductResponse toResponse(ProductEntity product);
 
-  @Mapping(source = "product.id" , target = "id")
-  @Mapping(source = "product.name" , target = "name")
-  @Mapping(source = "product.description" , target = "description")
+  @Mapping(source = "product.id", target = "id")
+  @Mapping(source = "product.name", target = "name")
+  @Mapping(source = "product.description", target = "description")
   ProductResponse toResponse(ProductEntity product,
                              CategoryResponse categoryResponse,
                              CityResponse cityResponse,

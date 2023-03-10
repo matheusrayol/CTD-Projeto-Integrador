@@ -27,7 +27,7 @@ public class ProductRequest {
 
   @Valid
   @NotEmpty(message = "characteristics list is required")
-  private List<CharacteristicsRequest> characteristics;
+  private List<Long> characteristics;
 
   @Valid
   @NotEmpty(message = "images list is required")

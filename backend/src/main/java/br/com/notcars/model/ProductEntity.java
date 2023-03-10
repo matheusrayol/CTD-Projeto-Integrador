@@ -36,6 +36,7 @@ public class ProductEntity {
     {@JoinColumn(name="characteristic_id")})
   private List<CharacteristicsEntity> characteristicsList;
 
-  @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "product_image_id")
   private List<ImageEntity> imageList;
 }
