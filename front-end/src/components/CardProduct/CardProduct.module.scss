@@ -11,10 +11,14 @@
   font-weight: 400;
   background-color: $background-three2;
 
+  letter-spacing: 0.25px;
+
   .cardBody {
     margin: 0;
     padding: 0;
     border: 0;
+    font-family: $font-normal;
+    font-weight: 400;
 
     &__sectionBack {
       display: flex;
@@ -23,18 +27,16 @@
       justify-content: space-between;
       align-items: center;
       background-color: $background-three;
-      height: 70px;
+      height: 60px;
       margin: 0;
       padding: 0 1rem;
       border: 0;
+      color: $text-color-one;
 
       &__p {
         height: fit-content;
         margin: 0;
-        padding: 0.5rem 0.75rem;
-        border-radius: $border-radius-card;
-        border: $border-color-three;
-        background-color: rgb(210, 249, 212);
+        padding: 0rem 0.75rem;
 
         p {
           margin: 0;
@@ -69,11 +71,12 @@
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      height: 70px;
+      height: 50px;
       margin: 0;
       padding: 0 1rem;
       border: 0;
       background: $background-three;
+      color: $text-color-one;
 
       &__img {
         width: 15px;
@@ -83,10 +86,7 @@
       &__p {
         height: fit-content;
         margin: 0;
-        padding: 0.5rem 0.75rem;
-        border-radius: $border-radius-card;
-        border: $border-color-three;
-        background-color: rgb(210, 249, 212);
+        padding: 0rem 0.75rem;
 
         p {
           margin: 0;
@@ -164,6 +164,57 @@
         grid-template-rows: 1fr;
         justify-items: center;
         align-items: center;
+      }
+    }
+  }
+
+  .sectionPolitic {
+
+    display: flex;
+
+    .buttonPolitic {
+      font-family: $font-normal;
+      padding: 0.5rem 1rem;
+      border: $border-color-two;
+      color: $text-color-two;
+      border-radius: $border-radius-button;
+      background: $background-five;
+      transition: all 0.3s ease-in-out;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-left: 1rem;
+
+      &:hover {
+        color: $text-color-one;
+        background-color: $color-zero;
+        border: $border-color-one;
+      }
+    }
+  }
+
+  .sectionPoliticClose {
+
+    display: flex;
+    flex-direction: column;
+
+
+    .buttonPolitic {
+      width: fit-content;
+      font-family: $font-normal;
+      padding: 0.5rem 1rem;
+      border: $border-color-two;
+      color: $text-color-two;
+      border-radius: $border-radius-button;
+      background: $background-five;
+      transition: all 0.3s ease-in-out;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-left: 1rem;
+
+      &:hover {
+        color: $text-color-one;
+        background-color: $color-zero;
+        border: $border-color-one;
       }
     }
   }

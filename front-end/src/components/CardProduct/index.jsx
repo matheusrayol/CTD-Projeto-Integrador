@@ -11,9 +11,10 @@ import id1 from '../../assets/img1.jpg'
 import id2 from '../../assets/img2.jpg'
 import id3 from '../../assets/img3.jpg'
 import id4 from '../../assets/img4.jpg'
-import id5 from '../../assets/img5.jpg'
 
 export default function CardProduct(image) {
+  const [buttonOpen, setButtonOpen] = useState(true)
+
   const galleryImages = [
     {
       img: id1
@@ -28,7 +29,7 @@ export default function CardProduct(image) {
       img: id4
     },
     {
-      img: id5
+      img: 'https://s2.glbimg.com/FHEje3o5fdk3qhdRORIRL66lvrg=/0x0:620x413/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2020/6/t/2vzlWQT9WWiBQi9yfLJQ/2019-01-28-iev-40-2-2.jpg'
     }
   ]
 
@@ -99,11 +100,30 @@ export default function CardProduct(image) {
           </div>
           <p>Disponibilidade: 5</p>
           <div>
-            <div style={{ display: 'flex' }}>
+            <div className={styles.sectionPolitic}>
               <p>Política: </p>
-              <button>Open</button>
+
+              {buttonOpen === true ? (
+                <div>
+                  <button
+                    className={styles.buttonPolitic}
+                    onClick={() => setButtonOpen(false)}
+                  >
+                    Abrir
+                  </button>
+                </div>
+              ) : (
+                <div className={styles.sectionPoliticClose}>
+                  <button
+                    className={styles.buttonPolitic}
+                    onClick={() => setButtonOpen(true)}
+                  >
+                    Fechar
+                  </button>
+                  <p>{image.imageData.politic}</p>
+                </div>
+              )}
             </div>
-            <p>{image.imageData.politic}</p>
           </div>
         </div>
       </div>
