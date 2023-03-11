@@ -36,7 +36,7 @@ class CategoryServiceImplTest {
   private CategoryServiceImpl categoryService;
 
   @Nested
-  class CreateCategoryById {
+  class CreateCategory {
     @Test
     void shouldCreateCategorySuccessfully() {
       // Arrange
@@ -56,7 +56,7 @@ class CategoryServiceImplTest {
   @Nested
   public class FindAllCategory {
     @Test
-    void shouldReturnPage_whenListOfCategoryNotEmpty() {
+    void shouldReturnList_whenListOfCategoryNotEmpty() {
       // Arrange
       when(categoryRepository.findAll()).thenReturn(List.of(mock(CategoryEntity.class)));
 
@@ -69,7 +69,7 @@ class CategoryServiceImplTest {
     }
 
     @Test
-    void shouldReturnPageEmpty_whenListOfCategoryIsEmpty() {
+    void shouldReturnListEmpty_whenListOfCategoryIsEmpty() {
       // Arrange
       when(categoryRepository.findAll()).thenReturn(List.of());
 
