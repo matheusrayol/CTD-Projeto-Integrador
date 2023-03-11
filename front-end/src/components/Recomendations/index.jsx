@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import CardsRecomendations from '../CardRecomendations'
 import id1 from '../../assets/img1.jpg'
 import id3 from '../../assets/img3.jpg'
-import id5 from '../../assets/img5.jpg'
+
 import id7 from '../../assets/img7.jpg'
 
 export default function Recomendations() {
@@ -36,7 +36,8 @@ export default function Recomendations() {
     },
     {
       id: 5,
-      image: id5,
+      image:
+        'https://s2.glbimg.com/FHEje3o5fdk3qhdRORIRL66lvrg=/0x0:620x413/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2020/6/t/2vzlWQT9WWiBQi9yfLJQ/2019-01-28-iev-40-2-2.jpg',
       category: 'Modelo Conforto',
       title: 'JAC iEV40',
       location: 'Belo Horizonte',

@@ -10,11 +10,14 @@
   font-family: $font-normal;
   font-weight: 400;
   background-color: $background-three2;
+  letter-spacing: 0.25px;
 
   .cardBody {
     margin: 0;
     padding: 0;
     border: 0;
+    font-family: $font-normal;
+    font-weight: 400;
 
     &__sectionBack {
       display: flex;
@@ -23,18 +26,16 @@
       justify-content: space-between;
       align-items: center;
       background-color: $background-three;
-      height: 70px;
+      height: 60px;
       margin: 0;
       padding: 0 1rem;
       border: 0;
+      color: $text-color-one;
 
       &__p {
         height: fit-content;
         margin: 0;
-        padding: 0.5rem 0.75rem;
-        border-radius: $border-radius-card;
-        border: $border-color-three;
-        background-color: rgb(210, 249, 212);
+        padding: 0rem 0.75rem;
 
         p {
           margin: 0;
@@ -69,11 +70,12 @@
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      height: 70px;
+      height: 50px;
       margin: 0;
       padding: 0 1rem;
       border: 0;
       background: $background-three;
+      color: $text-color-one;
 
       &__img {
         width: 15px;
@@ -83,10 +85,7 @@
       &__p {
         height: fit-content;
         margin: 0;
-        padding: 0.5rem 0.75rem;
-        border-radius: $border-radius-card;
-        border: $border-color-three;
-        background-color: rgb(210, 249, 212);
+        padding: 0rem 0.75rem;
 
         p {
           margin: 0;
@@ -127,8 +126,7 @@
     }
 
     &__sectionIcons {
-      margin: 0.5rem 1rem;
-      padding: 0.5rem 1rem;
+      margin: 1rem 3rem;
       border: 0;
       display: flex;
       gap: 1rem;
@@ -160,10 +158,102 @@
       &__lines {
         width: 100%;
         display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        justify-items: center;
+        align-items: center;
+      }
+    }
+
+    &__sectionCharacteristics {
+      margin: 0 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-items: center;
+
+      &__lines {
+        width: 100%;
+        display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr;
         justify-items: center;
         align-items: center;
+      }
+    }
+  }
+
+  .sectionPolitic {
+
+    display: flex;
+    margin: 0;
+    margin-bottom: 1rem;
+    padding: 0;
+    border: 0;
+
+    p {
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+
+    .buttonPolitic {
+      font-family: $font-normal;
+      padding: 0rem 0.5rem;
+      border: 0;
+      border-bottom: 3px solid rgb(134, 156, 130);
+      color: $text-color-two;
+      border-radius: $border-radius-button;
+      background: none;
+      transition: all 0.3s ease-in-out;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-left: 1rem;
+
+      &:hover {
+        color: $text-color-one;
+        background-color: $color-zero;
+
+      }
+    }
+  }
+
+  .sectionPoliticClose {
+
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    border: 0;
+
+    p {
+      font-size: 1.15rem;
+      font-family: $font-normal;
+      font-weight: 400;
+      font-style: oblique;
+      margin: 0 2.5%;
+      padding: 0.5rem 0;
+      border: 0;
+    }
+
+    .buttonPolitic {
+      width: fit-content;
+      font-family: $font-normal;
+      padding: 0rem 0.5rem;
+      border: 0;
+      border-bottom: $border-one-side;
+      color: $text-color-two;
+      border-radius: $border-radius-button;
+      background: $background-five;
+      transition: all 0.3s ease-in-out;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-left: 1rem;
+
+      &:hover {
+        color: $text-color-one;
+        background-color: $color-zero;
+        border-bottom: $border-one-side;
       }
     }
   }

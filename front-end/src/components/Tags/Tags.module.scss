@@ -1,0 +1,39 @@
+@import "../../styles/GlobalVariablesScss.scss";
+
+.tags {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: black;
+  font-family: $font-normal;
+  font-weight: 400;
+  font-size: 16px;
+  gap: 1rem;
+
+  p {
+    font-size: 1.75rem;
+    padding: 1rem 1rem 1rem 3rem;
+    margin: 0;
+    border: 0;
+    font-family: $font-bold;
+    font-weight: bold;
+    color: $color-two;
+  }
+
+  &__lista {
+    list-style: none;
+    padding: 0;
+    gap: 1rem;
+    display: flex;
+    justify-content: space-between;
+
+    li {
+      color: white;
+      background-color: $background-three;
+      border-radius: 0.33rem;
+      padding: 0.25rem 0.75rem;
+      cursor: pointer;
+    }
+  }
+}

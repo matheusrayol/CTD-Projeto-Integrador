@@ -23,12 +23,13 @@
 
 .galleryWrap .single img {
   max-width: 100%;
-  border-radius: 0.66rem;
-  transition: all 0.1s ease-in-out;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 1px 1px 6px rgb(105, 105, 105);
 }
 
 .galleryWrap .single img:hover {
-  transform: scale(1.03);
+  transform: scale(1.025);
 }
 
 .galleryWrap .single:nth-child(1) {

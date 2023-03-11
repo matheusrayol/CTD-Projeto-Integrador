@@ -1,44 +1,142 @@
 import { React, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styles from './RegisterValidation.module.scss'
-import useAuth from '../../hooks/useAuth'
-import * as C from './styles'
+import { useAuth } from '../../hooks/useAuth'
 
 const RegisterValidation = () => {
-  const [rvName, setRvName] = useState('')
-  const [rvSurname, setRvSurname] = useState('')
-  const [rvEmail, setRvEmail] = useState('')
-  const [rvPassword, setRvPassword] = useState('')
-  const [rvRePassword, setRvRePassword] = useState('')
-  const [error, setError] = useState('')
+  const { saveToken } = useAuth()
   const navigate = useNavigate()
 
-  const { signup } = useAuth()
+  const [name, setName] = useState('')
+  const [surname, setSurname] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [repassword, setRepassword] = useState('')
 
-  const handleSignup = e => {
-    e.preventDefault()
-    if (!rvName | !rvSurname | !rvEmail | !rvPassword | !rvRePassword) {
-      setError('Preencha todos os campos')
-      return
-    } else if (rvPassword !== rvRePassword) {
-      setError('As senhas não coincidem')
-      return
-    } else if (rvPassword.length < 6) {
-      setError('Comprimento da senha é muito curto')
-      return
+  const [formError, setFormError] = useState({
+    nameError: false,
+    surnameError: false,
+    emailError: false,
+    passwordError: false,
+    repasswordError: false,
+    genericError: false
+  })
+
+  const validateName = name => {
+    setFormError(prevState => ({ ...prevState, genericError: false }))
+
+    if (name.length > 3) {
+      setFormError(prevState => ({ ...prevState, nameError: false }))
+      setName(name)
+      return true
     } else {
-      setError('Erro desconhecido')
+      setFormError(prevState => ({ ...prevState, nameError: true }))
+      return false
+    }
+  }
+
+  const validateSurname = surname => {
+    setFormError(prevState => ({ ...prevState, genericError: false }))
+
+    if (surname.length > 3) {
+      setFormError(prevState => ({ ...prevState, surnameError: false }))
+      setSurname(surname)
+      return true
+    } else {
+      setFormError(prevState => ({ ...prevState, surnameError: true }))
+      return false
+    }
+  }
+
+  const validateEmail = email => {
+    setFormError(prevState => ({ ...prevState, genericError: false }))
+
+    if (email.length > 5) {
+      setFormError(prevState => ({ ...prevState, emailError: false }))
+      setEmail(email)
+      return true
+    } else {
+      setFormError(prevState => ({ ...prevState, emailError: true }))
+      return false
+    }
+  }
+
+  const validatePassword = password => {
+    setFormError(prevState => ({ ...prevState, genericError: false }))
+
+    if (password.length > 5) {
+      setFormError(prevState => ({ ...prevState, passwordError: false }))
+      setPassword(password)
+      return true
+    } else {
+      setFormError(prevState => ({ ...prevState, passwordError: true }))
+      return false
+    }
+  }
+
+  const validateRepassword = repassword => {
+    setFormError(prevState => ({ ...prevState, genericError: false }))
+
+    if (repassword.length > 5 && repassword === password) {
+      setFormError(prevState => ({ ...prevState, repasswordError: false }))
+      setRepassword(repassword)
+      return true
+    } else {
+      setFormError(prevState => ({ ...prevState, repasswordError: true }))
+      return false
+    }
+  }
+
+  const handleSubmit = e => {
+    e.preventDefault()
+
+    let signInData = {
+      name: name,
+      surname: surname,
+      email: email,
+      password: password,
+      repassword: repassword
     }
 
-    const res = signup(rvEmail, rvPassword, rvName)
-
-    if (res) {
-      setError(res)
-      return
+    let requestHeaders = {
+      'Content-Type': 'application/json'
     }
 
-    alert('Usuário registrado com Sucesso!')
-    navigate('/login')
+    let requestConfiguration = {
+      method: 'POST',
+      body: JSON.stringify(signInData),
+      headers: requestHeaders
+    }
+
+    if (
+      validateName &&
+      validateSurname &&
+      validateEmail &&
+      validatePassword &&
+      validateRepassword
+    ) {
+      fetch(`https://notcars.com.br/auth`, requestConfiguration).then(
+        response => {
+          if (response.ok) {
+            response.json().then(data => {
+              saveToken(data.token)
+              alert('Cadastro realizado com sucesso!')
+              navigate('/login')
+            })
+          } else {
+            setFormError({
+              nameError: false,
+              surnameError: false,
+              emailError: false,
+              passwordError: false,
+              repasswordError: false,
+              genericError: true
+            })
+            alert('Campo(os) incorreto(s)!')
+          }
+        }
+      )
+    }
   }
 
   return (
@@ -52,8 +150,10 @@ const RegisterValidation = () => {
               type="text"
               name="name"
               required
-              value={rvName}
-              onChange={e => [setRvName(e.target.value), setError('')]}
+              onChange={event => validateName(event.target.value)}
+              className={`${styles.inputValidation} ${
+                formError.nameError ? `${styles.formError}` : ''
+              }`}
             />
           </div>
           <div className={styles.completeName__labelInput}>
@@ -62,8 +162,10 @@ const RegisterValidation = () => {
               type="text"
               name="surname"
               required
-              value={rvSurname}
-              onChange={e => [setRvSurname(e.target.value), setError('')]}
+              onChange={event => validateSurname(event.target.value)}
+              className={`${styles.inputValidation} ${
+                formError.surnameError ? `${styles.formError}` : ''
+              }`}
             />
           </div>
         </div>
@@ -73,8 +175,10 @@ const RegisterValidation = () => {
             type="email"
             name="email"
             required
-            value={rvEmail}
-            onChange={e => [setRvEmail(e.target.value), setError('')]}
+            onChange={event => validateEmail(event.target.value)}
+            className={`${styles.inputValidation} ${
+              formError.emailError ? `${styles.formError}` : ''
+            }`}
           />
         </div>
         <div className={styles.fieldLabelInput}>
@@ -83,8 +187,10 @@ const RegisterValidation = () => {
             type="password"
             name="password"
             required
-            value={rvPassword}
-            onChange={e => [setRvPassword(e.target.value), setError('')]}
+            onChange={event => validatePassword(event.target.value)}
+            className={`${styles.inputValidation} ${
+              formError.passwordError ? `${styles.formError}` : ''
+            }`}
           />
         </div>
         <div className={styles.fieldLabelInput}>
@@ -93,15 +199,31 @@ const RegisterValidation = () => {
             type="password"
             name="repassword"
             required
-            value={rvRePassword}
-            onChange={e => [setRvRePassword(e.target.value), setError('')]}
+            onChange={event => validateRepassword(event.target.value)}
+            className={`${styles.inputValidation} ${
+              formError.repasswordError ? `${styles.formError}` : ''
+            }`}
           />
         </div>
-        <C.labelError>{error}</C.labelError>
+        {formError.nameError && (
+          <span className={`${styles.formError}`}>Nome muito curto</span>
+        )}
+        {formError.surnameError && (
+          <span className={`${styles.formError}`}>Sobrenome muito curto</span>
+        )}
+        {formError.emailError && (
+          <span className={`${styles.formError}`}>Email muito curto</span>
+        )}
+        {formError.passwordError && (
+          <span className={`${styles.formError}`}>Senha muito curta</span>
+        )}
+        {formError.repasswordError && (
+          <span className={`${styles.formError}`}>Senhas não coincidem</span>
+        )}
         <button
           className={styles.buttonSubmit}
           type="submit"
-          onClick={handleSignup}
+          onClick={event => handleSubmit(event)}
         >
           Cadastrar
         </button>
