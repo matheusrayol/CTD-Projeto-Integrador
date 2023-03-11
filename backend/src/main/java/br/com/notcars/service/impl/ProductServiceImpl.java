@@ -3,7 +3,6 @@ package br.com.notcars.service.impl;
 import br.com.notcars.aspect.LogInfo;
 import br.com.notcars.dto.product.ProductRequest;
 import br.com.notcars.exceptions.NotFoundException;
-import br.com.notcars.mapper.CharacteristicsMapper;
 import br.com.notcars.mapper.ImageMapper;
 import br.com.notcars.mapper.ProductMapper;
 import br.com.notcars.model.*;
@@ -27,11 +26,11 @@ public class ProductServiceImpl implements ProductService {
   private final CharacteristicsService characteristicsServiceImpl;
 
   private final CityService cityServiceImpl;
+
   private final ProductMapper productMapper;
 
   private final ImageMapper imageMapper;
 
-  private final CharacteristicsMapper characteristicsMapper;
 
   @LogInfo
   @Override

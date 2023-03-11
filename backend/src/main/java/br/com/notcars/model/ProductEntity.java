@@ -30,7 +30,7 @@ public class ProductEntity {
   @JoinColumn(name = "cities_id", referencedColumnName = "id")
   private CityEntity city;
 
-  @ManyToMany(cascade = CascadeType.ALL)
+  @ManyToMany()
   @JoinTable(name="products_characteristics", joinColumns=
     {@JoinColumn(name="product_id")}, inverseJoinColumns=
     {@JoinColumn(name="characteristic_id")})
