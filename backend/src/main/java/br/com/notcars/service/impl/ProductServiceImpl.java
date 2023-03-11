@@ -1,5 +1,6 @@
 package br.com.notcars.service.impl;
 
+import br.com.notcars.aspect.LogInfo;
 import br.com.notcars.dto.product.ProductRequest;
 import br.com.notcars.exceptions.NotFoundException;
 import br.com.notcars.mapper.CharacteristicsMapper;
@@ -32,11 +33,13 @@ public class ProductServiceImpl implements ProductService {
 
   private final CharacteristicsMapper characteristicsMapper;
 
+  @LogInfo
   @Override
   public List<ProductEntity> findAll() {
     return productRepository.findAll();
   }
 
+  @LogInfo
   @Override
   public ProductEntity createProduct(ProductRequest productRequest) {
     CategoryEntity category = categoryServiceImpl.findCategoryById(productRequest.getCategoryId());
@@ -47,12 +50,14 @@ public class ProductServiceImpl implements ProductService {
     return productRepository.save(product);
   }
 
+  @LogInfo
   @Override
   public ProductEntity findProductById(Long id) {
     return productRepository.findById(id)
       .orElseThrow(() -> new NotFoundException("product_not_found", String.format("product %s not found", id)));
   }
 
+  @LogInfo
   @Override
   public List<ProductEntity> findProductByCategoryOrCity(String category, String city) {
     return null;
