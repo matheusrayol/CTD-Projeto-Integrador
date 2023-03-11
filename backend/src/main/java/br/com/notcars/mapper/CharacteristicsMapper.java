@@ -3,6 +3,7 @@ package br.com.notcars.mapper;
 import br.com.notcars.dto.characteristics.CharacteristicsRequest;
 import br.com.notcars.dto.characteristics.CharacteristicsResponse;
 import br.com.notcars.model.CharacteristicsEntity;
+import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
@@ -11,5 +12,5 @@ public interface CharacteristicsMapper {
 
   CharacteristicsEntity toEntity (CharacteristicsRequest characteristicsRequest);
 
-   CharacteristicsResponse toResponse (CharacteristicsEntity characteristics);
+   List<CharacteristicsResponse> map(List<CharacteristicsEntity> characteristics);
 }

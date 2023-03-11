@@ -1,6 +1,7 @@
 package br.com.notcars.service.impl;
 
 import br.com.notcars.dto.city.CityRequest;
+import br.com.notcars.exceptions.NotFoundException;
 import br.com.notcars.mapper.CityMapper;
 import br.com.notcars.model.CityEntity;
 import br.com.notcars.repository.CityRepository;
@@ -26,5 +27,11 @@ public class CityServiceImpl implements CityService {
   public CityEntity createCity(CityRequest cityRequest) {
     CityEntity city = cityMapper.toEntity(cityRequest);
     return cityRepository.save(city);
+  }
+
+  @Override
+  public CityEntity findCityById(Long id) {
+    return cityRepository.findById(id)
+      .orElseThrow(() -> new NotFoundException("city_not_found", String.format("city %s not found", id)));
   }
 }
