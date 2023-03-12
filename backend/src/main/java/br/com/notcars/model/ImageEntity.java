@@ -4,10 +4,12 @@ import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Table(name = "images")
 @Entity
 @Data
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class ImageEntity {
@@ -18,11 +20,10 @@ public class ImageEntity {
   @Column
   private String title;
 
-  @Column
+  @Column(name = "url_images")
   private String urlImage;
 
-  @ManyToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "product_id")
+  @ManyToOne
+  @JoinColumn(name = "product_image_id")
   private ProductEntity product;
-
 }

@@ -23,19 +23,20 @@ public class ProductEntity {
   private String description;
 
   @ManyToOne
-  @JoinColumn(name = "categories_id")
+  @JoinColumn(name = "categories_id", referencedColumnName = "id")
   private CategoryEntity category;
 
   @ManyToOne
-  @JoinColumn(name = "cities_id")
+  @JoinColumn(name = "cities_id", referencedColumnName = "id")
   private CityEntity city;
 
-  @ManyToMany(cascade = CascadeType.ALL)
+  @ManyToMany()
   @JoinTable(name="products_characteristics", joinColumns=
     {@JoinColumn(name="product_id")}, inverseJoinColumns=
     {@JoinColumn(name="characteristic_id")})
   private List<CharacteristicsEntity> characteristicsList;
 
-  @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "product_image_id")
   private List<ImageEntity> imageList;
 }

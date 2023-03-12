@@ -11,13 +11,15 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ProductResponse {
+  private Long id;
+
   private String name;
 
   private String description;
 
-  private CategoryResponse categoryId;
+  private CategoryResponse category;
 
-  private CityResponse cityId;
+  private CityResponse city;
 
   private List<CharacteristicsResponse> characteristics;
 
