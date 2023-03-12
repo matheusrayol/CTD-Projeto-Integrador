@@ -11,5 +11,5 @@ public interface ProductService {
 
   ProductEntity findProductById(Long id);
 
-  List<ProductEntity> findProductByCategoryOrCity(String category, String city);
+  List<ProductEntity> findProductByCategoryOrCity(Long category, Long city);
 }

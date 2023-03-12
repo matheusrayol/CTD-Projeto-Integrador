@@ -58,7 +58,8 @@ public class ProductServiceImpl implements ProductService {
 
   @LogInfo
   @Override
-  public List<ProductEntity> findProductByCategoryOrCity(String category, String city) {
-    return null;
+  public List<ProductEntity> findProductByCategoryOrCity(Long category, Long city) {
+
+    return productRepository.findAllByCategoryAndCity(category, city);
   }
 }

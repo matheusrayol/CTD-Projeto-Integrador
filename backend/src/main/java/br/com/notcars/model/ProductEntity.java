@@ -37,6 +37,6 @@ public class ProductEntity {
   private List<CharacteristicsEntity> characteristicsList;
 
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-  @JoinColumn(name = "product_image_id")
+  @JoinColumn(name = "product_images_id")
   private List<ImageEntity> imageList;
 }
