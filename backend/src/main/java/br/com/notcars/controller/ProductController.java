@@ -45,19 +45,14 @@ public class ProductController {
   }
 
   @GetMapping("/all")
-  private ResponseEntity<List<ProductResponse>> findAll() {
+  private ResponseEntity<List<ProductResponse>> findAll(@RequestParam(required = false) Long categoryId,
+                                                        @RequestParam(required = false) Long cityId) {
     log.info(START_REQUEST + "[GET] " + BASE_URL + "/all");
-    List<ProductEntity> productList = productServiceImpl.findAll();
+    List<ProductEntity> productList = productServiceImpl.findProductByCategoryOrCity(categoryId, cityId);
     List<ProductResponse> productResponses = productList.stream()
       .map(productMapper::toResponse)
       .collect(Collectors.toList());
     return ResponseEntity.ok(productResponses);
-  }
-
-  @GetMapping()
-  private ResponseEntity<List<ProductResponse>> findProductByCategoryOrCity(@RequestParam String category,
-                                                                            @RequestParam String city) {
-    return null;
   }
 
   @PostMapping("/create")

@@ -24,6 +24,6 @@ public class ImageEntity {
   private String urlImage;
 
   @ManyToOne
-  @JoinColumn(name = "product_image_id")
+  @JoinColumn(name = "product_images_id")
   private ProductEntity product;
 }
