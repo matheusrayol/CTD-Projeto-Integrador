@@ -31,7 +31,6 @@ section {
 
     .inner {
       display: flex;
-      gap: 0;
       padding-bottom: 1rem;
     }
 
@@ -60,13 +59,16 @@ section {
 
 @media(max-width: 750px) {
 
-  .h2Home {
-    font-size: 1.75rem;
-    padding: 1rem 0 1rem 1.5rem;
-  }
+  section {
 
-  .sectionCard {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    .h2Home {
+      font-size: 1.5rem;
+      padding: 1rem 1rem 1rem 1.25rem;
+    }
+
+    .sectionCard {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
   }
 }

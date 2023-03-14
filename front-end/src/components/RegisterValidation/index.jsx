@@ -13,6 +13,8 @@ const RegisterValidation = () => {
   const [password, setPassword] = useState('')
   const [repassword, setRepassword] = useState('')
 
+  const isFormValid = name && surname && email && password && repassword
+
   const [formError, setFormError] = useState({
     nameError: false,
     surnameError: false,
@@ -224,6 +226,7 @@ const RegisterValidation = () => {
           className={styles.buttonSubmit}
           type="submit"
           onClick={event => handleSubmit(event)}
+          disabled={!isFormValid}
         >
           Cadastrar
         </button>
