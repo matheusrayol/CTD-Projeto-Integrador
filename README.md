@@ -12,4 +12,3 @@
 - [Manual Test - Sprint 1 Week 1](https://gitlab.ctd.academy/ctd/brasil/projeto-integrador-1/0223/turma-5/grupo-6/-/blob/main/docs/Projeto%20Integrador%20-%20Sprint%201%20-%20Test%20Report%201.pdf)
 - [Manual Test - Sprint 1 Week 2](https://gitlab.ctd.academy/ctd/brasil/projeto-integrador-1/0223/turma-5/grupo-6/-/blob/main/docs/Projeto%20Integrador%20-%20Sprint%201%20-%20Test%20Report%202.pdf)
 - [Manual Test - Sprint 2 Week 1](https://gitlab.ctd.academy/ctd/brasil/projeto-integrador-1/0223/turma-5/grupo-6/-/blob/main/docs/Projeto%20Integrador%20-%20Sprint%202%20-%20Test%20Report%201.pdf)
-- [Manual Test - Sprint 2 Week 2](https://gitlab.ctd.academy/ctd/brasil/projeto-integrador-1/0223/turma-5/grupo-6/-/blob/main/docs/Projeto%20Integrador%20-%20Sprint%202%20-%20Test%20Report%202.pdf)
