@@ -15,6 +15,8 @@ const LoginValidation = () => {
     genericError: false
   })
 
+  const isFormValid = mail && pass
+
   const validateMail = mail => {
     setFormError(prevState => ({ ...prevState, genericError: false }))
 
@@ -130,6 +132,7 @@ const LoginValidation = () => {
           className={styles.buttonLoginValidation}
           type="submit"
           onClick={event => handleSubmit(event)}
+          disabled={!isFormValid}
         >
           Entrar
         </button>
