@@ -2,9 +2,9 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import styles from './CardRecomendations.module.scss'
-import starRated from '../../assets/starRated.svg'
+import starRated from '../../../assets/starRated.svg'
 
-export default function CardsBanner(image) {
+export default function CardsRecomendations(image) {
   return (
     <motion.div className={styles.item} key={image.imageData.id}>
       <div className={styles.cardBody}>
@@ -29,7 +29,7 @@ export default function CardsBanner(image) {
           <p>{image.imageData.location}</p>
           <p>{image.imageData.description}</p>
           <Link key={image.id} to={`../product/${image.imageData.id}`}>
-            <button>Confira</button>
+            <button>Mais detalhes</button>
           </Link>
         </div>
       </div>

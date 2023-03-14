@@ -112,6 +112,11 @@
         background-color: $background-three;
         border: $border-color-two;
       }
+
+      &:disabled {
+        background-color: rgb(180, 193, 179);
+        cursor: not-allowed;
+      }
     }
   }
 

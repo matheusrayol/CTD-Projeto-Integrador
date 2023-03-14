@@ -147,6 +147,11 @@
         background-color: $background-three;
         border: $border-color-one;
       }
+
+      &:disabled {
+        background-color: rgb(180, 193, 179);
+        cursor: not-allowed;
+      }
     }
 
     .buttonRegister a {
