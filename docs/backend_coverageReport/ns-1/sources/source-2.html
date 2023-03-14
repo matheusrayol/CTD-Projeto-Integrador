@@ -1,0 +1,399 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > CategoryServiceImplTest</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">br.com.notcars.service.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: CategoryServiceImplTest (br.com.notcars.service.impl)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CategoryServiceImplTest</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">CategoryServiceImplTest$CreateCategory</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/11)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">CategoryServiceImplTest$DeleteCategoryById</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (21/21)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">CategoryServiceImplTest$FindAllCategory</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (16/16)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">CategoryServiceImplTest$FindCategoryById</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (20/20)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">CategoryServiceImplTest$UpdatedCategory</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (24/24)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (18/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (94/94)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package br.com.notcars.service.impl;
+&nbsp;
+&nbsp;
+&nbsp;import static org.assertj.core.api.Assertions.assertThat;
+&nbsp;import static org.junit.jupiter.api.Assertions.*;
+&nbsp;import static org.mockito.ArgumentMatchers.any;
+&nbsp;import static org.mockito.Mockito.*;
+&nbsp;
+&nbsp;import br.com.notcars.dto.category.CategoryRequest;
+&nbsp;import br.com.notcars.exceptions.NotFoundException;
+&nbsp;import br.com.notcars.mapper.CategoryMapper;
+&nbsp;import br.com.notcars.model.CategoryEntity;
+&nbsp;import br.com.notcars.repository.CategoryRepository;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Optional;
+&nbsp;import lombok.var;
+&nbsp;import org.junit.jupiter.api.Nested;
+&nbsp;import org.junit.jupiter.api.Test;
+&nbsp;import org.junit.jupiter.api.extension.ExtendWith;
+&nbsp;import org.mockito.InjectMocks;
+&nbsp;import org.mockito.Mock;
+&nbsp;import org.mockito.junit.jupiter.MockitoExtension;
+&nbsp;import org.springframework.data.domain.Page;
+&nbsp;import org.springframework.data.domain.PageImpl;
+&nbsp;import org.springframework.data.domain.PageRequest;
+&nbsp;
+&nbsp;@ExtendWith(MockitoExtension.class)
+<b class="fc">&nbsp;public</b>
+<b class="fc">&nbsp;class CategoryServiceImplTest {</b>
+&nbsp;  @Mock
+&nbsp;  private CategoryRepository categoryRepository;
+&nbsp;
+&nbsp;  @Mock
+&nbsp;  private CategoryMapper categoryMapper;
+&nbsp;
+&nbsp;  @InjectMocks
+&nbsp;  private CategoryServiceImpl categoryService;
+&nbsp;
+<b class="fc">&nbsp;  @Nested</b>
+<b class="fc">&nbsp;  class CreateCategory {</b>
+&nbsp;    @Test
+&nbsp;    void shouldCreateCategorySuccessfully() {
+<b class="fc">&nbsp;      // Arrange</b>
+<b class="fc">&nbsp;      when(categoryMapper.toCategoryEntity(any())).thenReturn(mock(CategoryEntity.class));</b>
+<b class="fc">&nbsp;      when(categoryRepository.save(any())).thenReturn(mock(CategoryEntity.class));</b>
+&nbsp;
+<b class="fc">&nbsp;      // Act</b>
+<b class="fc">&nbsp;      var result = categoryService.createCategory(mock(CategoryRequest.class));</b>
+&nbsp;
+<b class="fc">&nbsp;      // Assert</b>
+<b class="fc">&nbsp;      assertNotNull(result);</b>
+<b class="fc">&nbsp;      verify(categoryMapper, times(1)).toCategoryEntity(any());</b>
+<b class="fc">&nbsp;      verify(categoryRepository, times(1)).save(any());</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+<b class="fc">&nbsp;  @Nested</b>
+<b class="fc">&nbsp;  public class FindAllCategory {</b>
+&nbsp;    @Test
+&nbsp;    void shouldReturnList_whenListOfCategoryNotEmpty() {
+<b class="fc">&nbsp;      // Arrange</b>
+<b class="fc">&nbsp;      when(categoryRepository.findAll()).thenReturn(List.of(mock(CategoryEntity.class)));</b>
+&nbsp;
+<b class="fc">&nbsp;      // Act</b>
+<b class="fc">&nbsp;      var result = categoryService.findAllCategory();</b>
+&nbsp;
+<b class="fc">&nbsp;      // Assert</b>
+<b class="fc">&nbsp;      assertEquals(1, result.size());</b>
+<b class="fc">&nbsp;      verify(categoryRepository, timeout(1)).findAll();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    void shouldReturnListEmpty_whenListOfCategoryIsEmpty() {
+<b class="fc">&nbsp;      // Arrange</b>
+<b class="fc">&nbsp;      when(categoryRepository.findAll()).thenReturn(List.of());</b>
+&nbsp;
+<b class="fc">&nbsp;      // Act</b>
+<b class="fc">&nbsp;      var result = categoryService.findAllCategory();</b>
+&nbsp;
+<b class="fc">&nbsp;      // Assert</b>
+<b class="fc">&nbsp;      assertEquals(0, result.size());</b>
+<b class="fc">&nbsp;      verify(categoryRepository, timeout(1)).findAll();</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;  @Nested</b>
+<b class="fc">&nbsp;  class FindCategoryById {</b>
+&nbsp;    @Test
+&nbsp;    void shouldReturnCategory_whenIdIsValid() {
+<b class="fc">&nbsp;      // Arrange</b>
+<b class="fc">&nbsp;      when(categoryRepository.findById(anyLong()))</b>
+<b class="fc">&nbsp;        .thenReturn(Optional.of(mock(CategoryEntity.class)));</b>
+&nbsp;
+<b class="fc">&nbsp;      // Act</b>
+<b class="fc">&nbsp;      var result = categoryService.findCategoryById(1L);</b>
+&nbsp;
+<b class="fc">&nbsp;      // Assert</b>
+<b class="fc">&nbsp;      assertNotNull(result);</b>
+<b class="fc">&nbsp;      verify(categoryRepository, times(1)).findById(anyLong());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    void shouldReturnError_whenCategoryNotFound() {
+<b class="fc">&nbsp;      // Arrange</b>
+<b class="fc">&nbsp;      when(categoryRepository.findById(anyLong()))</b>
+<b class="fc">&nbsp;        .thenReturn(Optional.empty());</b>
+&nbsp;
+<b class="fc">&nbsp;      // Act</b>
+<b class="fc">&nbsp;      var result = assertThrows(NotFoundException.class, () -&gt; {</b>
+<b class="fc">&nbsp;        categoryService.findCategoryById(1L);</b>
+&nbsp;      });
+&nbsp;
+<b class="fc">&nbsp;      // Assert</b>
+<b class="fc">&nbsp;      assertThat(result.getTitle())</b>
+<b class="fc">&nbsp;        .isEqualTo(&quot;category_not_found&quot;);</b>
+<b class="fc">&nbsp;      verify(categoryRepository, times(1)).findById(anyLong());</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+<b class="fc">&nbsp;  @Nested</b>
+<b class="fc">&nbsp;  class DeleteCategoryById {</b>
+&nbsp;    @Test
+&nbsp;    void shouldDeleteCategory_whenCategoryExists() {
+<b class="fc">&nbsp;      // Arrange</b>
+<b class="fc">&nbsp;      when(categoryRepository.findById(anyLong()))</b>
+<b class="fc">&nbsp;        .thenReturn(Optional.of(mock(CategoryEntity.class)));</b>
+&nbsp;
+<b class="fc">&nbsp;      // Act</b>
+<b class="fc">&nbsp;      categoryService.deleteCategoryById(1L);</b>
+&nbsp;
+<b class="fc">&nbsp;      // Assert</b>
+<b class="fc">&nbsp;      verify(categoryRepository, times(1)).findById(anyLong());</b>
+<b class="fc">&nbsp;      verify(categoryRepository, times(1)).deleteById(anyLong());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    void shouldReturnError_whenCategoryNotExists() {
+<b class="fc">&nbsp;      // Arrange</b>
+<b class="fc">&nbsp;      when(categoryRepository.findById(anyLong()))</b>
+<b class="fc">&nbsp;        .thenReturn(Optional.empty());</b>
+&nbsp;
+<b class="fc">&nbsp;      // Act</b>
+<b class="fc">&nbsp;      var result = assertThrows(NotFoundException.class, () -&gt; {</b>
+<b class="fc">&nbsp;        categoryService.deleteCategoryById(1L);</b>
+&nbsp;      });
+&nbsp;
+<b class="fc">&nbsp;      // Assert</b>
+<b class="fc">&nbsp;      assertThat(result.getTitle())</b>
+<b class="fc">&nbsp;        .isEqualTo(&quot;category_not_found&quot;);</b>
+<b class="fc">&nbsp;      verify(categoryRepository, times(1)).findById(anyLong());</b>
+<b class="fc">&nbsp;      verify(categoryRepository, never()).deleteById(anyLong());</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+<b class="fc">&nbsp;  @Nested</b>
+<b class="fc">&nbsp;  class UpdatedCategory {</b>
+&nbsp;    @Test
+&nbsp;    void shouldUpdateCategory_whenIdIsValid() {
+<b class="fc">&nbsp;      // Arrange</b>
+<b class="fc">&nbsp;      when(categoryRepository.findById(anyLong()))</b>
+<b class="fc">&nbsp;        .thenReturn(Optional.of(mock(CategoryEntity.class)));</b>
+<b class="fc">&nbsp;      when(categoryRepository.save(any())).thenReturn(mock(CategoryEntity.class));</b>
+<b class="fc">&nbsp;      when(categoryMapper.updateCategoryEntity(any(), any())).thenReturn(mock(CategoryEntity.class));</b>
+&nbsp;
+<b class="fc">&nbsp;      // Act</b>
+<b class="fc">&nbsp;      var result = categoryService.updatedCategory(1L, mock(CategoryRequest.class));</b>
+&nbsp;
+<b class="fc">&nbsp;      // Assert</b>
+<b class="fc">&nbsp;      assertNotNull(result);</b>
+<b class="fc">&nbsp;      verify(categoryRepository, times(1)).findById(anyLong());</b>
+<b class="fc">&nbsp;      verify(categoryRepository, times(1)).save(any());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    void shouldReturnError_whenIdIsNotValid() {
+<b class="fc">&nbsp;      // Arrange</b>
+<b class="fc">&nbsp;      when(categoryRepository.findById(anyLong()))</b>
+<b class="fc">&nbsp;        .thenReturn(Optional.empty());</b>
+&nbsp;
+<b class="fc">&nbsp;      // Act</b>
+<b class="fc">&nbsp;      var result = assertThrows(NotFoundException.class, () -&gt; {</b>
+<b class="fc">&nbsp;        categoryService.updatedCategory(1L, mock(CategoryRequest.class));</b>
+&nbsp;      });
+&nbsp;
+<b class="fc">&nbsp;      // Assert</b>
+<b class="fc">&nbsp;      assertThat(result.getTitle())</b>
+<b class="fc">&nbsp;        .isEqualTo(&quot;category_not_found&quot;);</b>
+<b class="fc">&nbsp;      verify(categoryRepository, times(1)).findById(anyLong());</b>
+<b class="fc">&nbsp;      verify(categoryRepository, never()).save(any());</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-03-14 11:37</div>
+</div>
+</body>
+</html>

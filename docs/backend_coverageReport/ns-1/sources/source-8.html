@@ -1,0 +1,359 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ProductServiceImplTest</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">br.com.notcars.service.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: ProductServiceImplTest (br.com.notcars.service.impl)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ProductServiceImplTest</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ProductServiceImplTest$CreateProduct</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (40/40)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ProductServiceImplTest$FindAll</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ProductServiceImplTest$FindProductById</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/13)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (63/63)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package br.com.notcars.service.impl;
+&nbsp;
+&nbsp;import static org.assertj.core.api.Assertions.assertThat;
+&nbsp;import static org.junit.jupiter.api.Assertions.*;
+&nbsp;import static org.mockito.Mockito.*;
+&nbsp;
+&nbsp;import br.com.notcars.dto.image.ImageRequest;
+&nbsp;import br.com.notcars.dto.product.ProductRequest;
+&nbsp;import br.com.notcars.exceptions.NotFoundException;
+&nbsp;import br.com.notcars.mapper.ImageMapper;
+&nbsp;import br.com.notcars.mapper.ProductMapper;
+&nbsp;import br.com.notcars.model.*;
+&nbsp;import br.com.notcars.repository.ProductRepository;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Optional;
+&nbsp;import lombok.var;
+&nbsp;import org.junit.jupiter.api.Nested;
+&nbsp;import org.junit.jupiter.api.Test;
+&nbsp;import org.junit.jupiter.api.extension.ExtendWith;
+&nbsp;import org.junit.runner.RunWith;
+&nbsp;import org.mockito.InjectMocks;
+&nbsp;import org.mockito.Mock;
+&nbsp;import org.mockito.junit.jupiter.MockitoExtension;
+&nbsp;import org.springframework.boot.test.context.SpringBootTest;
+&nbsp;import org.springframework.test.context.junit4.SpringRunner;
+&nbsp;
+&nbsp;@ExtendWith(MockitoExtension.class)
+&nbsp;public
+<b class="fc">&nbsp;class ProductServiceImplTest {</b>
+&nbsp;  @Mock
+&nbsp;  private ProductRepository productRepository;
+&nbsp;
+&nbsp;  @Mock
+&nbsp;  private CategoryServiceImpl categoryServiceImpl;
+&nbsp;
+&nbsp;  @Mock
+&nbsp;  private CharacteristicsServiceImpl characteristicsServiceImpl;
+&nbsp;
+&nbsp;  @Mock
+&nbsp;  private CityServiceImpl cityServiceImpl;
+&nbsp;
+&nbsp;  @Mock
+&nbsp;  private ProductMapper productMapper;
+&nbsp;
+&nbsp;  @Mock
+&nbsp;  private ImageMapper imageMapper;
+&nbsp;
+&nbsp;  @InjectMocks
+&nbsp;  private ProductServiceImpl productService;
+&nbsp;
+&nbsp;  @Nested
+<b class="fc">&nbsp;  class FindAll {</b>
+&nbsp;    @Test
+&nbsp;    void shouldReturnList_whenListOfProductNotEmpty() {
+&nbsp;      // Arrange
+<b class="fc">&nbsp;      when(productRepository.findAll()).thenReturn(List.of(mock(ProductEntity.class)));</b>
+&nbsp;
+&nbsp;      // Act
+<b class="fc">&nbsp;      var result = productService.findAll();</b>
+&nbsp;
+&nbsp;      // Assert
+<b class="fc">&nbsp;      assertEquals(1, result.size());</b>
+<b class="fc">&nbsp;      verify(productRepository, timeout(1)).findAll();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    void shouldReturnListEmpty_whenListOfProductIsEmpty() {
+&nbsp;      // Arrange
+<b class="fc">&nbsp;      when(productRepository.findAll()).thenReturn(List.of());</b>
+&nbsp;
+&nbsp;      // Act
+<b class="fc">&nbsp;      var result = productService.findAll();</b>
+&nbsp;
+&nbsp;      // Assert
+<b class="fc">&nbsp;      assertEquals(0, result.size());</b>
+<b class="fc">&nbsp;      verify(productRepository, timeout(1)).findAll();</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+&nbsp;  @Nested
+<b class="fc">&nbsp;  class FindProductById {</b>
+&nbsp;    @Test
+&nbsp;    void shouldReturnProduct_whenIdIsValid() {
+&nbsp;      // Arrange
+<b class="fc">&nbsp;      when(productRepository.findById(anyLong()))</b>
+<b class="fc">&nbsp;        .thenReturn(Optional.of(mock(ProductEntity.class)));</b>
+&nbsp;
+&nbsp;      // Act
+<b class="fc">&nbsp;      var result = productService.findProductById(1L);</b>
+&nbsp;
+&nbsp;      // Assert
+<b class="fc">&nbsp;      assertNotNull(result);</b>
+<b class="fc">&nbsp;      verify(productRepository, times(1)).findById(anyLong());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    void shouldReturnError_whenProductNotFound() {
+&nbsp;      // Arrange
+<b class="fc">&nbsp;      when(productRepository.findById(anyLong()))</b>
+<b class="fc">&nbsp;        .thenReturn(Optional.empty());</b>
+&nbsp;
+&nbsp;      // Act
+<b class="fc">&nbsp;      var result = assertThrows(NotFoundException.class, () -&gt; {</b>
+<b class="fc">&nbsp;        productService.findProductById(1L);</b>
+&nbsp;      });
+&nbsp;
+&nbsp;      // Assert
+<b class="fc">&nbsp;      assertThat(result.getTitle())</b>
+<b class="fc">&nbsp;        .isEqualTo(&quot;product_not_found&quot;);</b>
+<b class="fc">&nbsp;      verify(productRepository, times(1)).findById(anyLong());</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+&nbsp;  @Nested
+<b class="fc">&nbsp;  class CreateProduct {</b>
+&nbsp;
+&nbsp;    @Test
+&nbsp;    void shouldReturnError_whenCategoryNotFound() {
+&nbsp;      // Arrange
+<b class="fc">&nbsp;      ProductRequest productRequest = new ProductRequest();</b>
+<b class="fc">&nbsp;      productRequest.setCategoryId(1L);</b>
+&nbsp;
+<b class="fc">&nbsp;      doThrow(NotFoundException.class).when(categoryServiceImpl)</b>
+<b class="fc">&nbsp;        .findCategoryById(any());</b>
+&nbsp;
+&nbsp;      // Act
+<b class="fc">&nbsp;      var result = assertThrows(NotFoundException.class, () -&gt; {</b>
+<b class="fc">&nbsp;        productService.createProduct(productRequest);</b>
+&nbsp;      });
+&nbsp;
+&nbsp;      // Assert
+<b class="fc">&nbsp;      verify(imageMapper, never()).toEntity(any());</b>
+<b class="fc">&nbsp;      verify(productMapper, never()).toEntity(any(), any(), any(), anyList(), anyList());</b>
+<b class="fc">&nbsp;      verify(categoryServiceImpl, times(1)).findCategoryById(any());</b>
+<b class="fc">&nbsp;      verify(cityServiceImpl, never()).findCityById(any());</b>
+<b class="fc">&nbsp;      verify(productRepository, never()).save(any());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    void shouldReturnError_whenCityNotFound() {
+&nbsp;      // Arrange
+<b class="fc">&nbsp;      ProductRequest productRequest = new ProductRequest();</b>
+<b class="fc">&nbsp;      productRequest.setCityId(1L);</b>
+&nbsp;
+<b class="fc">&nbsp;      doThrow(NotFoundException.class).when(cityServiceImpl)</b>
+<b class="fc">&nbsp;        .findCityById(any());</b>
+<b class="fc">&nbsp;      when(categoryServiceImpl.findCategoryById(any())).thenReturn(mock(CategoryEntity.class));</b>
+&nbsp;
+&nbsp;
+&nbsp;      // Act
+<b class="fc">&nbsp;      var result = assertThrows(NotFoundException.class, () -&gt; {</b>
+<b class="fc">&nbsp;        productService.createProduct(productRequest);</b>
+&nbsp;      });
+&nbsp;
+&nbsp;      // Assert
+<b class="fc">&nbsp;      verify(imageMapper, never()).toEntity(any());</b>
+<b class="fc">&nbsp;      verify(productMapper, never()).toEntity(any(), any(), any(), anyList(), anyList());</b>
+<b class="fc">&nbsp;      verify(categoryServiceImpl, times(1)).findCategoryById(any());</b>
+<b class="fc">&nbsp;      verify(cityServiceImpl, times(1)).findCityById(any());</b>
+<b class="fc">&nbsp;      verify(productRepository, never()).save(any());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    void shouldCreateProductSuccessfully() {
+&nbsp;      // Arrange
+<b class="fc">&nbsp;      ProductRequest productRequest = new ProductRequest();</b>
+<b class="fc">&nbsp;      productRequest.setImages(List.of(mock(ImageRequest.class)));</b>
+<b class="fc">&nbsp;      productRequest.setCharacteristics(List.of(1L));</b>
+&nbsp;
+<b class="fc">&nbsp;      when(characteristicsServiceImpl.findAllById(any())).thenReturn(List.of(mock(CharacteristicsEntity.class)));</b>
+<b class="fc">&nbsp;      when(cityServiceImpl.findCityById(any())).thenReturn(mock(CityEntity.class));</b>
+<b class="fc">&nbsp;      when(categoryServiceImpl.findCategoryById(any())).thenReturn(mock(CategoryEntity.class));</b>
+<b class="fc">&nbsp;      when(productRepository.save(any())).thenReturn(mock(ProductEntity.class));</b>
+<b class="fc">&nbsp;      when(imageMapper.toEntity(any())).thenReturn(mock(ImageEntity.class));</b>
+<b class="fc">&nbsp;      when(productMapper.toEntity(any(), any(), any(), anyList(), anyList())).thenReturn(mock(ProductEntity.class));</b>
+&nbsp;
+&nbsp;
+&nbsp;      // Act
+<b class="fc">&nbsp;      var result = productService.createProduct(productRequest);</b>
+&nbsp;
+&nbsp;      // Assert
+<b class="fc">&nbsp;      assertNotNull(result);</b>
+<b class="fc">&nbsp;      verify(imageMapper, times(1)).toEntity(any());</b>
+<b class="fc">&nbsp;      verify(productMapper, times(1)).toEntity(any(), any(), any(), anyList(), anyList());</b>
+<b class="fc">&nbsp;      verify(categoryServiceImpl, times(1)).findCategoryById(any());</b>
+<b class="fc">&nbsp;      verify(cityServiceImpl, times(1)).findCityById(any());</b>
+<b class="fc">&nbsp;      verify(productRepository, times(1)).save(any());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;  }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-03-14 11:37</div>
+</div>
+</body>
+</html>
