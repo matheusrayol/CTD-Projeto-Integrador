@@ -6,7 +6,7 @@
 
 ### API Testing
 - [Postman API Collection](https://gitlab.ctd.academy/ctd/brasil/projeto-integrador-1/0223/turma-5/grupo-6/-/blob/main/docs/Projeto%20Integrador.postman_collection.json)
-- [Postman Automated Test Run - Sprint 1](https://gitlab.ctd.academy/ctd/brasil/projeto-integrador-1/0223/turma-5/grupo-6/-/blob/main/docs/Projeto%20Integrador.postman_test_run.json)
+- [Postman Automated Test Run - Sprint 1](https://gitlab.ctd.academy/ctd/brasil/projeto-integrador-1/0223/turma-5/grupo-6/-/blob/main/docs/Projeto%20Integrador.postman_test_run_S1.json)
 
 ### Test Reports - Manual Testing
 - [Manual Test - Sprint 1 Week 1](https://gitlab.ctd.academy/ctd/brasil/projeto-integrador-1/0223/turma-5/grupo-6/-/blob/main/docs/Projeto%20Integrador%20-%20Sprint%201%20-%20Test%20Report%201.pdf)
