@@ -1,84 +1,119 @@
 import styles from './MainHome.module.scss'
-import { MdDoneAll } from 'react-icons/md'
-import { React, useState } from 'react'
-import Select from 'react-select'
-import DatePicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
+import { React, useEffect, useState } from 'react'
+import DateRangePickerComp from './DateRangePickerComp'
+import { CardLocation } from '../CardLocation'
 
 export default function Main() {
-  const [selectedDateDeparture, setselectedDateDeparture] = useState('')
-  const [selectedDateArrival, setselectedDateArrival] = useState('')
+  const [location, setLocation] = useState([])
+  const [search, setSearch] = useState({})
 
-  const options = [
-    { value: 'Fortaleza', label: 'Fortaleza' },
-    { value: 'Rio de Janeiro', label: 'Rio de Janeiro' },
-    { value: 'Sao Paulo', label: 'São Paulo' },
-    { value: 'Belo Horizonte', label: 'Belo Horizonte' },
-    { value: 'Salvador', label: 'Salvador' }
-  ]
+  console.log(search)
+
+  // função responsavel em verificar a localização do nome das cidades
+  const searchFunction = e => {
+    e.preventDefault()
+    if (location !== null || '') {
+      setSearch({
+        name: destination.name
+      })
+    } else {
+      console.log('batatou parça')
+    }
+  }
+
+  // useEffect responsavel pela conexão com api que busca as cidades
+  useEffect(() => {
+    let requestHeaders = {
+      'Content-Type': 'application/json'
+    }
+
+    let requestConfiguration = {
+      method: 'GET',
+      headers: requestHeaders
+    }
+
+    fetch(`city/all`, requestConfiguration).then(response => {
+      response.json().then(data => {
+        setLocation(data)
+      })
+    })
+  }, [])
+
+  const [showDestination, setShowDestination] = useState(false)
+  const [destination, setDestination] = useState(null)
+
+  function toogleLocation() {
+    setShowDestination(!showDestination)
+  }
+
+  const selectDestination = location => {
+    if (location !== null || '') {
+      return `${location.name}`
+    }
+  }
 
   return (
     <main className={styles.main}>
       <h1>
-        Find out why <span>NotCars</span> is the Best
+        Procure e descubra por que a <span>NotCars</span> é a melhor
       </h1>
       <form className={styles.form}>
         <div className={styles.form__campos}>
-          <label htmlFor="">Departure Location</label>
-          <Select
-            className={styles.select}
-            options={options}
-            placeholder="City Departure"
-          />
+          <div className={styles.select__location}>
+            <label htmlFor="">Selecione</label>
+            <input
+              className={styles.select__location__input}
+              onClick={toogleLocation}
+              placeholder="Escolha cidade para retirada"
+              value={selectDestination(destination)}
+            />
+            <div
+              className={
+                showDestination
+                  ? `${styles.container__location__open}`
+                  : `${styles.container__location__close}`
+              }
+            >
+              {showDestination &&
+                location.map((location, index) => (
+                  <div className={styles.location__list} key={index}>
+                    <CardLocation
+                      id={index}
+                      data={location}
+                      onSelectDestination={currentDestination =>
+                        setDestination(currentDestination)
+                      }
+                    />
+                  </div>
+                ))}
+            </div>
+          </div>
         </div>
         <div className={styles.form__campos}>
-          <label htmlFor="">Date Time Departure</label>
-          <DatePicker
-            selected={selectedDateDeparture}
-            onChange={date => setselectedDateDeparture(date)}
-            showTimeSelect
-            dateFormat="dd/MM/yyyy - h:m"
-            placeholderText="Date Time Departure"
-            className={styles.calendar}
-          />
+          <label htmlFor="">
+            Data e Hora da Retirada / Data e Hora da Entrega
+          </label>
+          <DateRangePickerComp />
         </div>
-        {/* <div className={styles.form__campos}>
-          <label htmlFor="">Arrival Location</label>
-          <Select
-            className={styles.select}
-            options={options}
-            placeholder="City Arrival"
-          />
-        </div> */}
-        <div className={styles.form__campos}>
-          <label htmlFor="">Date Time Arrival</label>
-          <DatePicker
-            selected={selectedDateArrival}
-            onChange={date => setselectedDateArrival(date)}
-            showTimeSelect
-            dateFormat="dd/MM/yyyy - h:m"
-            placeholderText="Date Time Arrival"
-            className={styles.calendar}
-          />
-        </div>
-        <button className={styles.form__botao}>Search</button>
+        <button
+          className={styles.form__botao}
+          onClick={event => searchFunction(event)}
+        >
+          Buscar
+        </button>
       </form>
       <div className={styles.main__comentarios}>
         <div className={styles.main__diferenciais}>
-          <MdDoneAll />
-          <p>Best price guaranteed</p>
+          <p>Melhor preço garantido</p>
         </div>
         <div className={styles.main__diferenciais}>
-          <MdDoneAll />
-          <p>Cashback on car rental</p>
+          <p>Performance impressionante, condução simplificada</p>
         </div>
         <div className={styles.main__diferenciais}>
-          <MdDoneAll />
-          <p>Payment in up to 24x</p>
+          <p>Cashback no aluguel de carros</p>
         </div>
         <div className={styles.main__diferenciais}>
-          <MdDoneAll />
-          <p>Pay in Reais without IOF</p>
+          <p>Amigo do ambiente e economia para você</p>
         </div>
       </div>
     </main>

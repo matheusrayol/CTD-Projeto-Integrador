@@ -4,21 +4,6 @@
   width: 100%;
 
   .bodyProduct {
-    background: $background-five;
-  }
-
-  main {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    height: 80vh;
-
-    img {
-      width: 45%;
-      height: 450px;
-      border: 4px groove rgb(53, 166, 38);
-      border-radius: 0.5rem;
-    }
+    background: $background-three2;
   }
 }

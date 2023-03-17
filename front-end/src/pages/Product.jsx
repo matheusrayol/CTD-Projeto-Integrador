@@ -1,19 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './Product.module.scss'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import imgPageCard from '../assets/imgPageCard.png'
-import imgPageCard2 from '../assets/imgPageCard2.png'
+import CardProduct from '../components/CardProduct'
+
+import { json } from '../json/infoProducts'
+import { useParams } from 'react-router'
 
 export default function Product() {
+  const allImages = json
+
+  const params = useParams()
+  const [product, setProduct] = useState({})
+
+  useEffect(() => {
+    setProduct(allImages[params.id - 1])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params])
+
   return (
     <div className={styles.appProduct}>
       <div className={styles.bodyProduct}>
         <Navbar />
-        <main>
-          <img src={imgPageCard} alt="img 1" />
-          <img src={imgPageCard2} alt="img 2" />
-        </main>
+        <CardProduct key={product.id} imageData={product} />
         <Footer />
       </div>
     </div>

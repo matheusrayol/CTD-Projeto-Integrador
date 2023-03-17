@@ -218,6 +218,207 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "product",
+					"item": [
+						{
+							"name": "Criar um produto",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Tempo de resposta de POST menor do que 250ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(250);\r",
+											"});\r",
+											"pm.test(\"Solicitação POST bem-sucedida\", function () {\r",
+											"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+											"});\r",
+											"pm.test(\"Retorno corresponde à categoria cadastrada\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"Categoria 1\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"BMW\",\r\n  \"description\": \"Carro\",\r\n  \"categoryId\": 0,\r\n  \"cityId\": 0,\r\n  \"characteristics\": [\r\n    0\r\n  ],\r\n  \"images\": [\r\n    {\r\n      \"title\": \"BMW\",\r\n      \"urlImage\": \"https://localhost/dummy.png\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/product/create",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"product",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar todos os produtos",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Retorno bem-sucedido do GET para todos os produtos\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/product/all",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"product",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar produto por ID",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Tempo de resposta de POST menor do que 250ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(250);\r",
+											"});\r",
+											"pm.test(\"Solicitação GET bem-sucedida\", function () {\r",
+											"    pm.expect(pm.response.code).to.be.oneOf([200,201, 202]);\r",
+											"});\r",
+											"pm.test(\"Retorno corresponde ao produto cadastrado\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"BMW\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/product/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"product",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "city",
+					"item": [
+						{
+							"name": "Criar uma cidade",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Tempo de resposta de POST menor do que 250ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(250);\r",
+											"});\r",
+											"pm.test(\"Solicitação POST bem-sucedida\", function () {\r",
+											"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+											"});\r",
+											"pm.test(\"Retorno corresponde à cidade cadastrada\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"Categoria 1\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Belo Horizonte\",\r\n  \"country\": \"Brasil\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/city/create",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"city",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Listar todas as cidades",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Retorno bem-sucedido do GET para todas as cidades\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/city/all",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"city",
+										"all"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		}
