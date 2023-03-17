@@ -4,8 +4,8 @@ import styles from './Error404Page.module.scss'
 export default function Error404Page() {
   return (
     <section className={styles.sectionError404Page}>
-      <h1>Page 404</h1>
-      <h2>But don't cry, try back to home ^^</h2>
+      <h1>Página 404</h1>
+      <h2>Mas não chore, tente voltar para o site ^^</h2>
       <div className={styles.imgError}>
         <img src="https://i.gifer.com/7HXy.gif" alt="" />
         <img
@@ -14,9 +14,10 @@ export default function Error404Page() {
         />
         <img src="https://i.gifer.com/7HXy.gif" alt="" />
       </div>
-      <p>It's just a 404 Error! </p>
+      <p>É apenas um erro 404!</p>
       <p>
-        What you're looking for may have been misplaced in Long Term Memory.
+        O que você está procurando pode ter sido extraviado na Memória de Longo
+        Prazo.
       </p>
     </section>
   )

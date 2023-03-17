@@ -1,78 +1,145 @@
 import { React, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
-
-import useAuth from '../../hooks/useAuth'
-
-import * as C from './styles'
+import { useAuth } from '../../hooks/useAuth'
 import styles from './LoginValidation.module.scss'
 
 const LoginValidation = () => {
-  const { signin } = useAuth()
+  const { saveToken } = useAuth()
   const navigate = useNavigate()
+  const [mail, setMail] = useState('')
+  const [pass, setPass] = useState('')
+  const [formError, setFormError] = useState({
+    mailError: false,
+    passError: false,
+    genericError: false
+  })
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
+  const isFormValid = mail && pass
 
-  const handleLogin = e => {
+  const validateMail = mail => {
+    setFormError(prevState => ({ ...prevState, genericError: false }))
+
+    if (mail.length > 5) {
+      setFormError(prevState => ({ ...prevState, mailError: false }))
+      setMail(mail)
+      return true
+    } else {
+      setFormError(prevState => ({ ...prevState, mailError: true }))
+      return false
+    }
+  }
+
+  const validatePass = pass => {
+    setFormError(prevState => ({ ...prevState, genericError: false }))
+
+    if (pass.length > 5) {
+      setFormError(prevState => ({ ...prevState, passError: false }))
+      setPass(pass)
+      return true
+    } else {
+      setFormError(prevState => ({ ...prevState, passError: true }))
+      return false
+    }
+  }
+
+  function refreshPage() {
+    window.location.reload(false)
+  }
+
+  const handleSubmit = e => {
     e.preventDefault()
-    if (!email || !password) {
-      setError('Fill in all fields')
-      return
-    } else if (password.length < 6) {
-      setError('Password length is too short')
-      return
+
+    let signInData = {
+      username: mail,
+      password: pass
     }
 
-    const res = signin(email, password)
-    if (email || password) {
-      if (res) {
-        setError(res)
-        return
-      }
-      alert('User login with sucess!')
-      navigate('/home')
+    let requestHeaders = {
+      'Content-Type': 'application/json'
+    }
+
+    let requestConfiguration = {
+      method: 'POST',
+      body: JSON.stringify(signInData),
+      headers: requestHeaders
+    }
+
+    if (validateMail && validatePass) {
+      fetch(`https://notcars.com.br/auth`, requestConfiguration).then(
+        response => {
+          if (response.ok) {
+            response.json().then(data => {
+              saveToken(data.token)
+              alert('Login realizado com sucesso!')
+              navigate('/home')
+              refreshPage()
+            })
+          } else {
+            setFormError({
+              mailError: false,
+              passError: false,
+              genericError: true
+            })
+            alert('Usuário e/ou senha incorreto(s)!')
+          }
+        }
+      )
     }
   }
 
   return (
     <section className={styles.sectionLoginValidation}>
-      <form className={styles.formLoginValidation}>
-        <h1>Login</h1>
+      <form
+        className={`${styles.formLoginValidation} ${
+          formError.genericError ? `${styles.formError}` : ''
+        }`}
+      >
+        <h1>Entrar</h1>
         <div className={styles.fieldLabelInput}>
           <label htmlFor="">Email</label>
           <input
-            className={styles.inputValidation}
-            name="login"
+            className={`${styles.inputValidation} ${
+              formError.mailError ? `${styles.formError}` : ''
+            }`}
+            name="email"
+            type="email"
             required
-            value={email}
-            onChange={e => [setEmail(e.target.value), setError('')]}
+            onChange={event => validateMail(event.target.value)}
           />
+          {formError.mailError && (
+            <span className={`${styles.formError}`}>Email incompleto</span>
+          )}
         </div>
         <div className={styles.fieldLabelInput}>
-          <label htmlFor="">Password</label>
+          <label htmlFor="">Senha</label>
           <input
-            className={styles.inputValidation}
+            className={`${styles.inputValidation} ${
+              formError.passError ? `${styles.formError}` : ''
+            }`}
             name="password"
             type="password"
             required
-            value={password}
-            onChange={e => [setPassword(e.target.value), setError('')]}
+            onChange={event => validatePass(event.target.value)}
           />
+          {formError.passError && (
+            <span className={`${styles.formError}`}>
+              Comprimento da senha é muito curto
+            </span>
+          )}
         </div>
-        <C.labelError>{error}</C.labelError>
         <button
           className={styles.buttonLoginValidation}
           type="submit"
-          onClick={handleLogin}
+          onClick={event => handleSubmit(event)}
+          disabled={!isFormValid}
         >
-          Enter
+          Entrar
         </button>
       </form>
       <div className={styles.buttonRegister}>
-        You don't have a registration?
-        <Link to="/register"> Click Here</Link>
+        Você não possui cadastro?
+        <Link to="/register"> Clique Aqui</Link>
       </div>
     </section>
   )

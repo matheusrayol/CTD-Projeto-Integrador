@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import useAuth from '../../hooks/useAuth'
+import { useAuth } from '../../hooks/useAuth'
 import { BiMenuAltRight } from 'react-icons/bi'
 import { AiOutlineClose } from 'react-icons/ai'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import imgAvatar from '../../assets/imgAvatar.png'
 import styles from './Navbar.module.scss'
 
 function Navbar() {
-  const { user, signout } = useAuth()
-  // eslint-disable-next-line no-unused-vars
-  const navigate = useNavigate()
+  const { auth, removeToken } = useAuth()
 
   const [menuOpen, setMenuOpen] = useState(false)
   const [size, setSize] = useState({
@@ -55,25 +53,25 @@ function Navbar() {
           <h1>Menu</h1>
           <ul>
             <li>
-              <Link to="/home">Home</Link>
+              <Link to="/home">Início</Link>
             </li>
 
             <li>
-              {user === null ? (
+              {auth === '' ? (
                 <div className={styles.ifLogin}>
-                  <Link to="/register">Register</Link>
-                  <Link to="/login">Login</Link>
+                  <Link to="/login">Entrar</Link>
+                  <Link to="/register">Cadastrar</Link>
                 </div>
               ) : (
                 <div className={styles.ifLogout}>
                   <div className={styles.ifLogout__sectionUser}>
                     <img src={imgAvatar} alt="imagem Avatar" />
                     <p>
-                      <Link to="/accountuser">{user.name}</Link>
+                      <Link to="/accountuser">{auth.name}</Link>
                     </p>
                   </div>
-                  <Link to="/home" onClick={() => signout()}>
-                    Logout
+                  <Link to="/home" onClick={() => removeToken()}>
+                    Sair
                   </Link>
                 </div>
               )}

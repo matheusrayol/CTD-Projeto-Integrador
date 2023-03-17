@@ -1,33 +1,40 @@
 @import "../../styles/GlobalVariablesScss.scss";
 
-.h2Home {
-  font-size: 1.75rem;
-  padding: 1rem 0 1rem 3rem;
-  margin: 0;
-  border: 0;
-  font-family: $font-bold;
-  font-weight: bold;
-  color: $color-two;
-}
-
-.sectionCard {
+section {
+  background-color: $background-three2;
   margin: 0;
   padding: 0;
   border: 0;
-  padding-left: 3rem;
-  padding-right: 3rem;
 
-  .carrossel {
-    cursor: grab;
-    overflow: hidden;
+  .h2Home {
+    font-size: 1.75rem;
+    padding: 1rem 1rem 1rem 3rem;
+    margin: 0;
+    border: 0;
+    font-family: $font-bold;
+    font-weight: bold;
+    color: $color-two;
   }
 
-  .inner {
-    display: flex;
-    gap: 0;
-    padding-bottom: 1rem;
-  }
+  .sectionCard {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    padding-left: 3rem;
+    padding-right: 3rem;
 
+
+    .carrossel {
+      cursor: grab;
+      overflow: hidden;
+    }
+
+    .inner {
+      display: flex;
+      padding-bottom: 1rem;
+    }
+
+  }
 }
 
 @media(max-width: 850px) {
@@ -52,13 +59,16 @@
 
 @media(max-width: 750px) {
 
-  .h2Home {
-    font-size: 1.75rem;
-    padding: 1rem 0 1rem 1.5rem;
-  }
+  section {
 
-  .sectionCard {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    .h2Home {
+      font-size: 1.5rem;
+      padding: 1rem 1rem 1rem 1.25rem;
+    }
+
+    .sectionCard {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
   }
 }
