@@ -1,15 +1,26 @@
-package com.matheusrayol.suite;
+package com.matheusrayol.tests;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import java.util.List;
 
-// page_url = about:blank
-public class HomePageTests {
+import com.matheusrayol.GlobalParameters;
+import com.matheusrayol.bases.TestBase;
+import com.matheusrayol.flows.HomeFlows;
+import com.matheusrayol.pages.HomePage;
+import com.matheusrayol.utils.DriverUtils;
+import org.junit.Assert;
+import org.junit.Test;
 
-    public HomePageTests(WebDriver driver) {
-        PageFactory.initElements(driver, this);
+public class HomePageTests extends TestBase {
+
+    HomePage homePage;
+    HomeFlows homeFlows;
+    String url = GlobalParameters.DEFAULT_URL;
+
+    @Test
+    public void websiteIsLoaded() {
+
+        homePage = new HomePage();
+        homeFlows = new HomeFlows();
+
+        Assert.assertTrue(DriverUtils.INSTANCE.getCurrentUrl().contains(url));
     }
 }

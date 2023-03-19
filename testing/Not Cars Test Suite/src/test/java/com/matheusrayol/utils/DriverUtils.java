@@ -21,15 +21,15 @@ public class DriverUtils {
             if (execution.equals("local")) {
                 if (browser.equals("chrome")) {
                     ChromeOptions chromeOptions = new ChromeOptions();
-                    chromeOptions.addArguments("no-sandbox");
-                    chromeOptions.addArguments("--allow-running-insecure-content");
                     chromeOptions.addArguments("--lang=pt-BR");
                     chromeOptions.addArguments("download.default_directory", downloadPath);
+                    chromeOptions.addArguments("--remote-allow-origins=*");
                     INSTANCE = new ChromeDriver(chromeOptions);
                 } else if (browser.equals("chromeHeadless")) {
                     ChromeOptions chromeOptions = new ChromeOptions();
                     chromeOptions.addArguments("download.default_directory", downloadPath);
                     chromeOptions.addArguments("--headless");
+                    chromeOptions.addArguments("--remote-allow-origins=*");
                     INSTANCE = new ChromeDriver(chromeOptions);
                 } else {
                     try {
