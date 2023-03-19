@@ -3,7 +3,7 @@ import { DateRangePicker } from 'react-date-range'
 
 import format from 'date-fns/format'
 import { addDays } from 'date-fns'
-import './batata.scss'
+import './ProductCalendar.scss'
 
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'

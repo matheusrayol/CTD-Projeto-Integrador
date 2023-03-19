@@ -4,7 +4,7 @@ import styles from './CardProduct.module.scss'
 import iconLocation from '../../assets/iconLocation.svg'
 import iconShare from '../../assets/iconShare.svg'
 import iconHearth from '../../assets/iconHearth.svg'
-import WSPGallery from '../CardGallery/WSPGallery'
+import GalleryPageProduct from '../CardGallery/GalleryPageProduct'
 import DateRangePickerComp2 from './DateRangePickerComp2'
 
 export default function CardProduct(image) {
@@ -73,7 +73,7 @@ export default function CardProduct(image) {
           />
         </div>
         <div className={styles.cardBody__sectionGallery}>
-          <WSPGallery galleryImages={galleryImages} />
+          <GalleryPageProduct galleryImages={galleryImages} />
         </div>
         <div className={styles.cardBody__sectionDescription}>
           <div className={styles.cardBody__sectionDescription__lines}>
@@ -132,9 +132,14 @@ export default function CardProduct(image) {
           <div className={styles.cardBody__sectionReservation__reserve}>
             <p>Informe as datas pretenditas para realizar a locação do</p>
             <p>{image.imageData.title}</p>
-            <button className={styles.buttonReservation}>
-              Iniciar Reserva
-            </button>
+            <Link
+              key={image.id}
+              to={`../product/${image.imageData.id}/reserve`}
+            >
+              <button className={styles.buttonReservation}>
+                Iniciar Reserva
+              </button>
+            </Link>
           </div>
         </div>
         <div>

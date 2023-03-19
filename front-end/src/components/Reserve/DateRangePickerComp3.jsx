@@ -3,12 +3,12 @@ import { DateRangePicker } from 'react-date-range'
 
 import format from 'date-fns/format'
 import { addDays } from 'date-fns'
-import './HomeCalendar.scss'
+import './reserveCalendar.scss'
 
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
 
-const DateRangePickerComp = () => {
+const DateRangePickerComp3 = () => {
   // date state
   const [range, setRange] = useState([
     {
@@ -46,14 +46,14 @@ const DateRangePickerComp = () => {
   }
 
   return (
-    <div className="calendarWrap">
+    <div className="calendarWrap3">
       <input
         value={`${format(range[0].startDate, 'dd/MM/yyyy')} <--> ${format(
           range[0].endDate,
           'dd/MM/yyyy'
         )}`}
         readOnly
-        className="inputBox"
+        className="inputBox3"
         onClick={() => setOpen(open => !open)}
       />
 
@@ -66,7 +66,7 @@ const DateRangePickerComp = () => {
             ranges={range}
             months={2}
             direction="horizontal"
-            className="calendarElement"
+            className="calendarElement3"
           />
         )}
       </div>
@@ -74,4 +74,4 @@ const DateRangePickerComp = () => {
   )
 }
 
-export default DateRangePickerComp
+export default DateRangePickerComp3

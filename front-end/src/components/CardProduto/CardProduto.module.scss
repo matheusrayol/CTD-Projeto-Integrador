@@ -1,4 +1,4 @@
-@import "../../../styles/GlobalVariablesScss.scss";
+@import "../../styles/GlobalVariablesScss.scss";
 
 .item {
   width: 100%;
@@ -15,8 +15,8 @@
     grid-template-columns: 23.05vw 23.05vw;
     justify-items: start;
     align-items: center;
-    justify-content: center;
     align-content: center;
+    justify-content: space-around;
 
     opacity: 0.9;
     filter: brightness(0.9);
@@ -53,6 +53,10 @@
       margin: 0 2.5%;
       text-align: justify;
       padding: 0.5rem 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
 
 
       &__starRated {
@@ -130,7 +134,19 @@
 
     .cardBody {
       display: grid;
-      grid-template-columns: 22.25vw 22.25vw;
+      grid-template-columns: 45vw 45vw;
+
+
+      .cardImg {
+        width: 100%;
+        min-width: 200px;
+        height: 275px;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        border-right: $border-one-side;
+
+      }
     }
   }
 }
@@ -156,12 +172,6 @@
       border-radius: 0.75rem;
       padding: 0;
       margin: 0;
-
-      .cardParagraph {
-        width: 100%;
-        text-align: center;
-        padding: 0;
-      }
 
       &:hover {
         opacity: 1.1;
@@ -233,7 +243,6 @@
     .cardBody {
       margin: 0;
       padding: 0;
-      gap: 1rem;
       display: flex;
       flex-direction: column;
       flex-wrap: nowrap;
@@ -242,15 +251,6 @@
       align-items: center;
       border: $border-color-two;
       box-shadow: $border-box-shadow-one;
-
-
-      .cardParagraph {
-        margin: 0;
-        padding: 0;
-        border: 0;
-        width: 100%;
-        text-align: center;
-      }
 
       p {
         margin: 0;

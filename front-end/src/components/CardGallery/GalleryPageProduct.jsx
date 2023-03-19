@@ -7,9 +7,9 @@ import {
   faCircleXmark
 } from '@fortawesome/free-solid-svg-icons'
 
-import './wsp-gallery.scss'
+import './GalleryPageProduct.scss'
 
-const WSPGallery = ({ galleryImages }) => {
+const GalleryPageProduct = ({ galleryImages }) => {
   const [slideNumber, setSlideNumber] = useState(0)
   const [openModal, setOpenModal] = useState(false)
 
@@ -80,4 +80,4 @@ const WSPGallery = ({ galleryImages }) => {
   )
 }
 
-export default WSPGallery
+export default GalleryPageProduct

@@ -1,10 +1,50 @@
+// import { useContext, useRef } from 'react'
+// import { CategoryContext } from '../../context/CategoryContext'
+// import styles from './Banner.module.scss'
+
+// export const Banner = props => {
+//   const { setSelectedCategory, setCategoryId } = useContext(CategoryContext)
+//   const categoryCardId = props.category?.id
+//   const categoryRef = useRef()
+
+//   const handleClick = event => {
+//     setSelectedCategory(categoryRef.current.innerText)
+//     setCategoryId(categoryCardId)
+//     console.log('handleClick categoryId: ' + categoryCardId)
+//   }
+
+//   return (
+//     <div
+//       className={styles['card-container']}
+//       onClick={event => handleClick(event)}
+//     >
+//       <div className={styles['card-image-wrapper']}>
+//         <img
+//           src={props.category.urlImagem}
+//           alt=""
+//           className={styles['card-image']}
+//         />
+//       </div>
+//       <div className={styles['card-description']}>
+//         <h3 className={styles['card-title']} ref={categoryRef}>
+//           {props.category.descricao}
+//         </h3>
+//         <p className={styles['card-detail']}>
+//           {props.category.qualificacao} {props.category.descricao}
+//         </p>
+//       </div>
+//     </div>
+//   )
+// }
+
 import { React, useEffect, useRef, useState } from 'react'
 import styles from './Banner.module.scss'
 import { motion } from 'framer-motion'
-import CardBanner from './CardBanner'
-import { json } from '../../json/infoProducts'
+import { CardBanner } from './CardBanner'
+// import { json } from '../../json/infoProducts'
+// import { ProductsContext } from '../../context/ProductsContext'
 
-export default function Banner() {
+export const Banner = () => {
   const carrossel = useRef()
   const [width, setWidth] = useState(0)
 
@@ -12,7 +52,7 @@ export default function Banner() {
     setWidth(carrossel.current?.scrollWidth - carrossel.current?.offsetWidth)
   }, [])
 
-  const [allImagesBest] = useState(json)
+  // const [allImagesBest] = useState(ProductsContext)
 
   // eslint-disable-next-line no-unused-vars
   const [product, setProduct] = useState([])
@@ -52,12 +92,9 @@ export default function Banner() {
             animate={{ x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            {allImagesBest.map(image => {
+            {product.map(image => {
               return <CardBanner key={image.id} imageData={image} />
             })}
-            {/* {product.map((product, index) => 
-              <CardBanner key={index} imageData={product} />
-              )} */}
           </motion.div>
         </motion.div>
       </div>

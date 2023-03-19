@@ -4,6 +4,7 @@ import Login from '../pages/Login'
 import Register from '../pages/Register'
 import AccountUser from '../pages/AccountUser'
 import Product from '../pages/Product'
+import ReservePage from '../pages/ReservePage'
 import Error404 from '../pages/Error404'
 import styles from './index.module.scss'
 
@@ -18,6 +19,7 @@ const RoutesApp = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/accountuser" element={<AccountUser />} />
           <Route path="/product/:id" element={<Product />} />
+          <Route path="/product/:id/reserve" element={<ReservePage />} />
           <Route path="*" element={<Error404 />} />
         </Routes>
       </div>
