@@ -1,4 +1,4 @@
-package br.com.notcars.aspect;
+package br.com.notcars.config.aspect;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
