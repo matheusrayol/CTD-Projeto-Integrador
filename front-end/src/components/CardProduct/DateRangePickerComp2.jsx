@@ -21,6 +21,8 @@ const DateRangePickerComp = () => {
   // get the target element to toggle
   const refOne = useRef(null)
 
+  const minDate = new Date()
+
   return (
     <div className="calendarWrap2">
       <input
@@ -42,6 +44,7 @@ const DateRangePickerComp = () => {
             months={2}
             direction="horizontal"
             className="calendarElement2"
+            minDate={minDate}
           />
         }
       </div>

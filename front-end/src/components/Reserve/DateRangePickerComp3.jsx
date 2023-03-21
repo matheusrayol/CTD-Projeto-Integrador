@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { DateRangePicker } from 'react-date-range'
 
 import format from 'date-fns/format'
@@ -18,32 +18,10 @@ const DateRangePickerComp3 = () => {
     }
   ])
 
-  // open close
-  const [open, setOpen] = useState(false)
+  const minDate = new Date()
 
   // get the target element to toggle
   const refOne = useRef(null)
-
-  useEffect(() => {
-    // event listeners
-    document.addEventListener('keydown', hideOnEscape, true)
-    document.addEventListener('click', hideOnClickOutside, true)
-  }, [])
-
-  // hide dropdown on ESC press
-  const hideOnEscape = e => {
-    // console.log(e.key)
-    if (e.key === 'Escape') {
-      setOpen(false)
-    }
-  }
-
-  // Hide dropdown on outside click
-  const hideOnClickOutside = e => {
-    if (refOne.current && !refOne.current.contains(e.target)) {
-      setOpen(false)
-    }
-  }
 
   return (
     <div className="calendarWrap3">
@@ -54,21 +32,19 @@ const DateRangePickerComp3 = () => {
         )}`}
         readOnly
         className="inputBox3"
-        onClick={() => setOpen(open => !open)}
       />
 
       <div ref={refOne}>
-        {open && (
-          <DateRangePicker
-            onChange={item => setRange([item.selection])}
-            editableDateInputs={true}
-            moveRangeOnFirstSelection={false}
-            ranges={range}
-            months={2}
-            direction="horizontal"
-            className="calendarElement3"
-          />
-        )}
+        <DateRangePicker
+          onChange={item => setRange([item.selection])}
+          editableDateInputs={true}
+          moveRangeOnFirstSelection={false}
+          ranges={range}
+          months={2}
+          direction="horizontal"
+          className="calendarElement3"
+          minDate={minDate}
+        />
       </div>
     </div>
   )

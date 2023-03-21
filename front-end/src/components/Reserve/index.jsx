@@ -6,7 +6,6 @@ import { json } from '../../json/infoProducts'
 import { useParams } from 'react-router'
 
 export default function Reserve(image) {
-  const [buttonOpen, setButtonOpen] = useState(true)
   const product = json
 
   const params = useParams()
@@ -108,12 +107,10 @@ export default function Reserve(image) {
             </div>
           </div>
           <div className={styles.cardBody__grid__sectionDateArrive}>
-            <h2>Selecione a sua hora prevista de chegada</h2>
+            <h2>Selecione hora prevista de chegada</h2>
             <div className={styles.cardBody__grid__sectionDateArrive__select}>
               <select placeholder="Sua hora de chegada">
-                <option value="0">
-                  Selecione a sua hora prevista de chegada
-                </option>
+                <option value="0">Selecione hora prevista de chegada</option>
                 <option value="1">01:00 AM</option>
                 <option value="2">02:00 AM</option>
                 <option value="3">03:00 AM</option>
@@ -142,49 +139,30 @@ export default function Reserve(image) {
             </div>
           </div>
           <div className={styles.cardBody__grid__sectionPolit}>
-            <div className={styles.sectionPolitic}>
-              {buttonOpen === true ? (
-                <div>
-                  <h2>Politica</h2>
-                  <button
-                    className={styles.buttonPolitic}
-                    onClick={() => setButtonOpen(false)}
-                  >
-                    Oque você precisa saber antes de alugar - ABRIR
-                  </button>
+            <div className={styles.sectionPoliticClose}>
+              <h2>Política </h2>
+              <p>Oque você precisa saber antes de alugar</p>
+              <div className={styles.sectionPoliticClose__div}>
+                <div className={styles.sectionPoliticClose__norms}>
+                  <h3>Normas de locação</h3>
+                  <p>Atraso max: 15min</p>
+                  <p>Não é permitido desativar sistemas do carro</p>
+                  <p>Não fumar ou beber no carro</p>
                 </div>
-              ) : (
-                <div className={styles.sectionPoliticClose}>
-                  <h2>Política </h2>
-                  <button
-                    className={styles.buttonPolitic}
-                    onClick={() => setButtonOpen(true)}
-                  >
-                    Oque você precisa saber antes de alugar - FECHAR
-                  </button>
-                  <div className={styles.sectionPoliticClose__div}>
-                    <div className={styles.sectionPoliticClose__norms}>
-                      <h3>Normas de locação</h3>
-                      <p>Atraso max: 15min</p>
-                      <p>Não é permitido desativar sistemas do carro</p>
-                      <p>Não fumar ou beber no carro</p>
-                    </div>
-                    <div className={styles.sectionPoliticClose__health}>
-                      <h3>Saúde e segurança</h3>
-                      <p>Entregue limpo e higienizado</p>
-                      <p>Possui sistema de frenagem automatico</p>
-                      <p>Sistemas de direção e bancos ergonômicos</p>
-                    </div>
-                    <div className={styles.sectionPoliticClose__politics}>
-                      <h3>Políticas de cancelamento</h3>
-                      <p>
-                        Adicione as datas da viagem para obter detalhes de
-                        cancelamento para este carro.
-                      </p>
-                    </div>
-                  </div>
+                <div className={styles.sectionPoliticClose__health}>
+                  <h3>Saúde e segurança</h3>
+                  <p>Entregue limpo e higienizado</p>
+                  <p>Possui sistema de frenagem automatico</p>
+                  <p>Sistemas de direção e bancos ergonômicos</p>
                 </div>
-              )}
+                <div className={styles.sectionPoliticClose__politics}>
+                  <h3>Políticas de cancelamento</h3>
+                  <p>
+                    Adicione as datas da viagem para obter detalhes de
+                    cancelamento para este carro.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
