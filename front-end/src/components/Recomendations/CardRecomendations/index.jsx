@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import styles from './CardRecomendations.module.scss'
 import starRated from '../../../assets/starRated.svg'
 
-export default function CardsRecomendations(image) {
+export const CardsRecomendations = image => {
   return (
     <motion.div className={styles.item} key={image.imageData.id}>
       <div className={styles.cardBody}>
