@@ -1,0 +1,35 @@
+@import "../../styles/GlobalVariablesScss.scss";
+
+ul {
+  margin: 0rem 0.5rem;
+  padding: 0;
+  border: 0;
+
+  .location__item {
+
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    list-style: none;
+
+
+    .location__content {
+      display: flex;
+      flex-direction: column;
+      border-bottom: solid 0.016rem rgb(152, 240, 128);
+      padding: 0 0 0.5rem 0;
+
+      .name__city {
+        font-size: 16px;
+        font-weight: bold;
+        color: white;
+      }
+
+      .name__country {
+        font-size: 14px;
+        font-weight: bold;
+        color: blue;
+      }
+
+    }
+  }
+}

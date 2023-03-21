@@ -1,0 +1,43 @@
+@import "../../styles/GlobalVariablesScss.scss";
+
+.calendarWrap {
+    background-color: rgb(160, 215, 162);
+    border-radius: 1rem;
+    text-align: center;
+
+
+}
+
+.inputBox {
+    font-family: $font-normal;
+    font-size: 1rem;
+    background-color: white;
+    width: 300px;
+}
+
+input.inputBox {
+    padding: 5px 8px 4px 8px;
+    border-radius: 3px;
+    border: 1px solid #666;
+    color: rgb(111, 111, 111);
+}
+
+.calendarElement {
+    position: absolute;
+    left: 55%;
+    transform: translateX(-50%);
+    top: 32.5%;
+    z-index: 999;
+
+    .rdrMonthAndYearWrapper {
+        display: none;
+    }
+
+    .rdrDefinedRangesWrapper {
+        font-size: 12px;
+        width: 226px;
+        border-right: solid 1px #eff2f7;
+        display: none;
+
+    }
+}
