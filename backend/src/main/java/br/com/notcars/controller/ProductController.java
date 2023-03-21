@@ -38,14 +38,14 @@ public class ProductController {
   private final CategoryMapper categoryMapper;
 
   @GetMapping("/{id}")
-  private ResponseEntity<ProductResponse> findProductById(@PathVariable Long id) {
+  public ResponseEntity<ProductResponse> findProductById(@PathVariable Long id) {
     log.info(START_REQUEST + "[GET] " + BASE_URL + "/" + id);
     ProductEntity product = productServiceImpl.findProductById(id);
     return ResponseEntity.ok(productMapper.toResponse(product));
   }
 
   @GetMapping("/all")
-  private ResponseEntity<List<ProductResponse>> findAll(@RequestParam(required = false) Long categoryId,
+  public ResponseEntity<List<ProductResponse>> findAll(@RequestParam(required = false) Long categoryId,
                                                         @RequestParam(required = false) Long cityId) {
     log.info(START_REQUEST + "[GET] " + BASE_URL + "/all");
     List<ProductEntity> productList = productServiceImpl.findProductByCategoryOrCity(categoryId, cityId);
@@ -56,7 +56,7 @@ public class ProductController {
   }
 
   @PostMapping("/create")
-  private ResponseEntity<ProductResponse> createProduct(@RequestBody ProductRequest productRequest) {
+  public ResponseEntity<ProductResponse> createProduct(@RequestBody ProductRequest productRequest) {
     ProductEntity product = productServiceImpl.createProduct(productRequest);
     List<ImageResponse> imageListResponse = imageMapper.map(product.getImageList());
     List<CharacteristicsResponse> characteristicsResponse = characteristicsMapper.map(product.getCharacteristicsList());

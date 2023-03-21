@@ -1,6 +1,6 @@
 package br.com.notcars.service.impl;
 
-import br.com.notcars.aspect.LogInfo;
+import br.com.notcars.config.aspect.LogInfo;
 import br.com.notcars.dto.product.ProductRequest;
 import br.com.notcars.exceptions.NotFoundException;
 import br.com.notcars.mapper.ImageMapper;
