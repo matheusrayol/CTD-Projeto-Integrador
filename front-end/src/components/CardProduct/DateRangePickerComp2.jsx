@@ -3,7 +3,7 @@ import { DateRangePicker } from 'react-date-range'
 
 import format from 'date-fns/format'
 import { addDays } from 'date-fns'
-import './batata.scss'
+import './ProductCalendar.scss'
 
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
@@ -20,6 +20,8 @@ const DateRangePickerComp = () => {
 
   // get the target element to toggle
   const refOne = useRef(null)
+
+  const minDate = new Date()
 
   return (
     <div className="calendarWrap2">
@@ -42,6 +44,7 @@ const DateRangePickerComp = () => {
             months={2}
             direction="horizontal"
             className="calendarElement2"
+            minDate={minDate}
           />
         }
       </div>

@@ -3,7 +3,7 @@
     <module name="backend" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="br.com.notcars.service.impl.*" />
+        <option name="PATTERN" value="br.com.notcars.service.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>

@@ -1,7 +1,7 @@
 {
   "name": "potatocars",
   "version": "0.1.0",
-  "proxy": "http://ec2-3-22-250-39.us-east-2.compute.amazonaws.com:8080",
+  "proxy": "http://localhost:8080/",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.3.0",

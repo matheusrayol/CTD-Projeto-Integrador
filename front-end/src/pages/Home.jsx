@@ -1,8 +1,5 @@
 import React from 'react'
-import MainHome from '../components/MainHome'
-import Banner from '../components/Banner'
-import Recomendations from '../components/Recomendations'
-// import FilterCategory from '../components/FilterCategory'
+import { MainHome } from '../components/MainHome'
 import styles from './Home.module.scss'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
@@ -13,9 +10,6 @@ export default function Home() {
       <div className={styles.bodyHome}>
         <Navbar />
         <MainHome />
-        {/* <FilterCategory /> */}
-        <Banner />
-        <Recomendations />
         <Footer />
       </div>
     </div>
