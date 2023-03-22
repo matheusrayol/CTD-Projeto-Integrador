@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from 'react'
 import 'react-calendar/dist/Calendar.css'
-import { Calender } from '../Calender'
+import { Calender } from './Calender'
 import { SelectLocation } from '../Select'
 import { CardCategoria } from '../CardCategoria'
 import { CardProduct } from '../CardMainHome'
@@ -137,15 +137,16 @@ export function MainHome() {
   }
 
   return (
-    <div className="container-home">
-      <div className="container-search-motor">
-        <div className="content-search">
+    <div className="container-home" id="container-home">
+      <div className="container-search-home" id="container-search-home">
+        <div className="content-search" id="content-search">
           <h1>
             Procure e descubra por que a <span>NotCars</span> é a melhor
           </h1>
-          <div className="inputs-search">
-            <div className="select-location">
+          <div className="inputs-search" id="inputs-search">
+            <div className="select-location" id="select-location">
               <input
+                id="input-select-location"
                 className="input-select-location"
                 onClick={toogleLocation}
                 onChange={getValueInputSelect}
@@ -153,6 +154,7 @@ export function MainHome() {
                 value={valueInputSelect}
               />
               <div
+                id="showDestination"
                 className={
                   showDestination
                     ? 'container-location-open'
@@ -184,7 +186,7 @@ export function MainHome() {
                     ))}
               </div>
             </div>
-            <div className="input-calendar">
+            <div className="input-calendar" id="input-calendar">
               <input
                 onClick={toggleCalendar}
                 type="text"
@@ -208,6 +210,7 @@ export function MainHome() {
               </div>
             </div>
             <button
+              id="submit-search"
               className="submit-search"
               onClick={event => searchDestinationSelect(event)}
             >
@@ -216,9 +219,9 @@ export function MainHome() {
           </div>
         </div>
       </div>
-      <section className="container-category">
+      {/* <section className="container-category" id="container-category">
         <h2>Buscar por Categoria/Modelo</h2>
-        <div className="list-categories">
+        <div className="list-categories" id="list-categories">
           {category.map((categories, index) => (
             <CardCategoria
               id={index}
@@ -229,8 +232,8 @@ export function MainHome() {
             />
           ))}
         </div>
-      </section>
-      <section className="container-diferential">
+      </section> */}
+      <section className="container-diferential" id="container-diferential">
         <div className="list-diferentials">
           <p>Melhor preço garantido</p>
         </div>
@@ -244,7 +247,7 @@ export function MainHome() {
           <p>Amigo do ambiente e economia para você</p>
         </div>
       </section>
-      <section className="container-product">
+      <section className="container-product" id="container-product">
         {listProduct ? (
           <h2>Recomendações para você</h2>
         ) : selectCategory ? (
@@ -254,7 +257,7 @@ export function MainHome() {
         ) : (
           ''
         )}
-        <div className="list-products">
+        <div className="list-products" id="list-products">
           {listProduct
             ? json.map((products, index) => (
                 <CardProduct id={index.length} data={products} />

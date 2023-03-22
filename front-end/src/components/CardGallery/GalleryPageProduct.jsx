@@ -40,23 +40,26 @@ const GalleryPageProduct = ({ galleryImages }) => {
   return (
     <div>
       {openModal && (
-        <div className="sliderWrap">
+        <div className="sliderWrap" id="sliderWrap">
           <FontAwesomeIcon
             icon={faCircleXmark}
             className="btnClose"
+            id="btnClose"
             onClick={handleCloseModal}
           />
           <FontAwesomeIcon
             icon={faCircleChevronLeft}
             className="btnPrev"
+            id="btnPrev"
             onClick={prevSlide}
           />
           <FontAwesomeIcon
             icon={faCircleChevronRight}
             className="btnNext"
+            id="btnNext"
             onClick={nextSlide}
           />
-          <div className="fullScreenImage">
+          <div className="fullScreenImage" id="fullScreenImage">
             <img src={galleryImages[slideNumber].img} alt="" />
           </div>
         </div>

@@ -13,6 +13,7 @@ export function Calender(props) {
 
   return (
     <Calendar
+      id="CalendarHome"
       onChange={handleDateChange}
       value={selectedRange}
       selectRange={true}

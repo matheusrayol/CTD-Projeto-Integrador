@@ -24,7 +24,7 @@ const DateRangePickerComp = () => {
   const minDate = new Date()
 
   return (
-    <div className="calendarWrap2">
+    <div className="calendarWrap2" id="calendarWrap2">
       <input
         value={`${format(range[0].startDate, 'dd/MM/yyyy')} <--> ${format(
           range[0].endDate,
@@ -32,6 +32,7 @@ const DateRangePickerComp = () => {
         )}`}
         readOnly
         className="inputBox2"
+        id="inputBox2"
       />
 
       <div ref={refOne}>
@@ -45,6 +46,7 @@ const DateRangePickerComp = () => {
             direction="horizontal"
             className="calendarElement2"
             minDate={minDate}
+            id="calendarElement2"
           />
         }
       </div>
