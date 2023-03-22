@@ -219,20 +219,7 @@ export function MainHome() {
           </div>
         </div>
       </div>
-      {/* <section className="container-category" id="container-category">
-        <h2>Buscar por Categoria/Modelo</h2>
-        <div className="list-categories" id="list-categories">
-          {category.map((categories, index) => (
-            <CardCategoria
-              id={index}
-              data={categories}
-              onSelectCategory={currentCategory =>
-                filterProductByCategory(currentCategory)
-              }
-            />
-          ))}
-        </div>
-      </section> */}
+
       <section className="container-diferential" id="container-diferential">
         <div className="list-diferentials">
           <p>Melhor preço garantido</p>
@@ -247,6 +234,20 @@ export function MainHome() {
           <p>Amigo do ambiente e economia para você</p>
         </div>
       </section>
+      {/* <section className="container-category" id="container-category">
+        <h2>Buscar por Categoria/Modelo</h2>
+        <div className="list-categories" id="list-categories">
+          {category.map((categories, index) => (
+            <CardCategoria
+              id={index}
+              data={categories}
+              onSelectCategory={currentCategory =>
+                filterProductByCategory(currentCategory)
+              }
+            />
+          ))}
+        </div>
+      </section> */}
       <section className="container-product" id="container-product">
         {listProduct ? (
           <h2>Recomendações para você</h2>

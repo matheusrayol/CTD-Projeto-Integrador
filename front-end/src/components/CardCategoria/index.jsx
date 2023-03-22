@@ -5,7 +5,7 @@
 //   // const [imgUrl, setImgUrl] = useState('')
 
 //   // useEffect(() => {
-//   //   fetch(`http://localhost:8080/api/imagem/${props.data.imageID}`).then(
+//   //   fetch(`https://bucket-pi-t5-grupo6.s3.us-east-2.amazonaws.com/images/${props.data.imageID}`).then(
 //   //     res => {
 //   //       res.json().then(data => {
 //   //         setImgUrl(data.url)

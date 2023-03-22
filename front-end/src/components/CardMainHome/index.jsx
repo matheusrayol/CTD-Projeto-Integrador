@@ -18,7 +18,6 @@ export function CardProduct(props) {
             <div className="rating-scale-product" id="rating-scale-product">
               <span id="rating-scale-product-span">{props.data.rated}</span>
             </div>
-            {/* <span className="name-rating-product">Muito bom</span> */}
           </div>
         </div>
         <div className="location-product" id="location-product">
