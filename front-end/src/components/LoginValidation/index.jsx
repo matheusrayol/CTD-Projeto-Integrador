@@ -66,39 +66,42 @@ const LoginValidation = () => {
     }
 
     if (validateMail && validatePass) {
-      fetch(`https://notcars.com.br/auth`, requestConfiguration).then(
-        response => {
-          if (response.ok) {
-            response.json().then(data => {
-              saveToken(data.token)
-              alert('Login realizado com sucesso!')
-              navigate('/home')
-              refreshPage()
-            })
-          } else {
-            setFormError({
-              mailError: false,
-              passError: false,
-              genericError: true
-            })
-            alert('Usuário e/ou senha incorreto(s)!')
-          }
+      fetch(`/auth`, requestConfiguration).then(response => {
+        if (response.ok) {
+          response.json().then(data => {
+            saveToken(data.token)
+            alert('Login realizado com sucesso!')
+            navigate('/home')
+            refreshPage()
+          })
+        } else {
+          setFormError({
+            mailError: false,
+            passError: false,
+            genericError: true
+          })
+          alert('Usuário e/ou senha incorreto(s)!')
         }
-      )
+      })
     }
   }
 
   return (
-    <section className={styles.sectionLoginValidation}>
+    <section
+      className={styles.sectionLoginValidation}
+      id="sectionLoginValidation"
+    >
       <form
         className={`${styles.formLoginValidation} ${
           formError.genericError ? `${styles.formError}` : ''
         }`}
+        id="formLoginValidation"
       >
-        <h1>Entrar</h1>
-        <div className={styles.fieldLabelInput}>
+        <h1 id="formLoginValidation__title">Entrar</h1>
+        <div className={styles.fieldLabelInput} id="fieldLabelInput">
           <label htmlFor="">Email</label>
           <input
+            id="inputValidationEmail"
             className={`${styles.inputValidation} ${
               formError.mailError ? `${styles.formError}` : ''
             }`}
@@ -108,12 +111,15 @@ const LoginValidation = () => {
             onChange={event => validateMail(event.target.value)}
           />
           {formError.mailError && (
-            <span className={`${styles.formError}`}>Email incompleto</span>
+            <span id="span__formErrorEmail" className={`${styles.formError}`}>
+              Email incompleto
+            </span>
           )}
         </div>
-        <div className={styles.fieldLabelInput}>
+        <div className={styles.fieldLabelInput} id="fieldLabelInput">
           <label htmlFor="">Senha</label>
           <input
+            id="inputValidationSenha"
             className={`${styles.inputValidation} ${
               formError.passError ? `${styles.formError}` : ''
             }`}
@@ -123,12 +129,13 @@ const LoginValidation = () => {
             onChange={event => validatePass(event.target.value)}
           />
           {formError.passError && (
-            <span className={`${styles.formError}`}>
+            <span id="span__formErrorSenha" className={`${styles.formError}`}>
               Comprimento da senha é muito curto
             </span>
           )}
         </div>
         <button
+          id="buttonLoginValidation"
           className={styles.buttonLoginValidation}
           type="submit"
           onClick={event => handleSubmit(event)}
@@ -137,7 +144,7 @@ const LoginValidation = () => {
           Entrar
         </button>
       </form>
-      <div className={styles.buttonRegister}>
+      <div className={styles.buttonRegister} id="buttonRegister">
         Você não possui cadastro?
         <Link to="/register"> Clique Aqui</Link>
       </div>
