@@ -1,0 +1,9 @@
+@import "../styles/GlobalVariablesScss.scss";
+
+.appProduct {
+  width: 100%;
+
+  .bodyProduct {
+    background: $background-three2;
+  }
+}
