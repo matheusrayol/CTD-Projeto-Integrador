@@ -9,17 +9,18 @@ import { Link } from 'react-router-dom'
 
 export default function Footer() {
   return (
-    <div className={styles.footer}>
-      <div className={styles.footer__copyright}>
+    <div className={styles.footer} id="footer">
+      <div className={styles.footer__copyright} id="footer__copyright">
         <img
           src={footerCopyRight}
           alt="Mensagem CopyRigh"
           className={styles.footer__copyright__img}
+          id="footer__copyright__img"
         />
         <span>2023 NotCars</span>
       </div>
 
-      <div className={styles.footer__socialMedias}>
+      <div className={styles.footer__socialMedias} id="footer__socialMedias">
         <Link to="https://web.facebook.com" target="_blank">
           <img src={logoFacebook} alt="Logo FaceBook" />
         </Link>

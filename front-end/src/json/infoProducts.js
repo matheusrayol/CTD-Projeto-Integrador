@@ -2,20 +2,17 @@ export const json = [
   {
     id: 1,
     image:
-      'https://cdn.autopapo.com.br/box/uploads/2022/02/08194410/volvo_c40_azul-5-1920x1280.jpg',
+      'https://www.topgear.com/sites/default/files/cars-car/image/2021/04/279648_volvo_xc40_recharge_twin.jpg?w=1280&h=720',
     picture1:
-      'https://www.carpointnews.com.br/wp-content/uploads/2022/05/Volvo-C40-P8-Recharger-2022-CPN-13-2048x1536.jpg',
+      'https://quatrorodas.abril.com.br/wp-content/uploads/2022/02/Volvo-XC40-2022-2023-1.jpg?quality=70&strip=info&w=860&h=575&crop=1',
     picture2:
-      'https://www.carpointnews.com.br/wp-content/uploads/2022/05/Volvo-C40-P8-Recharger-2022-CPN-14-1024x768.jpg',
-    picture3:
-      'https://revistatorque.com.br/wp/wp-content/uploads/2022/05/Volvo-C40-P8-Recharger-2022-CPN-12-scaled.jpg',
-    picture4:
-      'https://www.carpointnews.com.br/wp-content/uploads/2022/05/Volvo-C40-P8-Recharger-2022-CPN-8-scaled.jpg',
-    picture5:
-      'https://www.carpointnews.com.br/wp-content/uploads/2022/05/Volvo-C40-P8-Recharger-2022-CPN-13-scaled.jpg',
+      'https://quatrorodas.abril.com.br/wp-content/uploads/2022/02/Volvo-XC40-2022-2023-1.jpg?quality=70&strip=info&w=860&h=575&crop=1',
+    picture3: 'https://autoshow.com.br/wp-content/uploads/2021/05/volvo-1.jpg',
+    picture4: 'https://autoshow.com.br/wp-content/uploads/2021/05/volvo-1.jpg',
+    picture5: 'https://autoshow.com.br/wp-content/uploads/2021/05/volvo-1.jpg',
     category: 'Modelo Luxuoso',
     title: 'Volvo XC40 Recharge',
-    location: 'Fortaleza',
+    location: 'Salvador',
     adress: 'Avenida Beira Mar, nº 1240, Cep: 60060-610',
     description:
       'O Volvo XC40 Recharge Pure Electric, é um SUV com todas as qualidades da marca escandinava, como nível superior em segurança, design harmônico...',
@@ -150,7 +147,7 @@ export const json = [
       'https://cdn.autopapo.com.br/box/uploads/2019/06/28162536/jac_iev40-5.png',
     category: 'Modelo Conforto',
     title: 'JAC iEV40',
-    location: 'Fortaleza',
+    location: 'Salvador',
     adress: 'Avenida dos Andrades, nº 3550, Cep: 30260-070',
     description:
       'Segundo Sergio Habib, presidente da JAC Motors Brasil, o grande trunfo do JAC iEV 40 será o sistema de propulsão elétrica, que é silencioso, econômico...',

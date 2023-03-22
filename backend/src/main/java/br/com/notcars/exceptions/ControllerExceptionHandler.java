@@ -20,4 +20,16 @@ public class ControllerExceptionHandler {
       HttpStatus.NOT_FOUND);
   }
 
+  @ExceptionHandler(BadRequestException.class)
+  public ResponseEntity<ExceptionDetails> handlerBadRequestException(BadRequestException ex) {
+    return new ResponseEntity<>(
+      ExceptionDetails.builder()
+        .titulo(ex.getTitle())
+        .mensagem(ex.getMessage())
+        .timestamp(LocalDateTime.now())
+        .status(HttpStatus.BAD_REQUEST.value())
+        .build(),
+      HttpStatus.BAD_REQUEST);
+  }
+
 }
