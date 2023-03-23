@@ -35,10 +35,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     http.csrf().disable()
       .authorizeRequests()
       .antMatchers("/user", "/user/authenticate", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
-      .antMatchers(HttpMethod.GET, "/category/**", "/product/**", "/city/**").permitAll()
+      .antMatchers(HttpMethod.GET, "/category/**", "/product/**", "/city/**", "/reservation/**").permitAll()
       .antMatchers(HttpMethod.POST, "/category/**", "/product/**", "/city/**").hasRole("ADMIN")
       .antMatchers(HttpMethod.DELETE, "/category/**", "/product/**", "/city/**").hasRole("ADMIN")
       .antMatchers(HttpMethod.PUT, "/category/**").hasRole("ADMIN")
+      .antMatchers(HttpMethod.POST, "/reservation/**").hasRole("USER")
       .anyRequest()
       .authenticated().and()
       .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

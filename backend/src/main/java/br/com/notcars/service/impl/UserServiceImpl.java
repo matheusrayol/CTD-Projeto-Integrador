@@ -41,11 +41,13 @@ public class UserServiceImpl implements UserDetailsService {
     return userRepository.save(userEntity);
   }
 
+  public UserEntity findByEmail(String email) {
+    return userRepository.findByEmail(email).orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
+  }
 
   private void validatedIfEmailIsRegistered(String email) {
     if (userRepository.findByEmail(email).isPresent()) {
       throw new BadRequestException("Email já cadastrado");
     }
-
   }
 }
