@@ -33,7 +33,8 @@ deploy-application:
   stage: deploy
   image: quay.io/ansible/ansible-core
   script:
-    - ansible all -u ubuntu --private-key $MINHA_CHAVE -i 'ec2-18-221-166-116.us-east-2.compute.amazonaws.com,' -b -m copy -a "src=front-end/build dest=/site/grupo-6/front-end"
+    - ls -l $MINHA_CHAVE
+    - ansible all -u ubuntu --private-key /tmp/pi_t5_grupo6_key.pem -i 'ec2-18-221-166-116.us-east-2.compute.amazonaws.com,' -b -m copy -a "src=front-end/build dest=/site/grupo-6/front-end"
     # - scp -o StrictHostKeyChecking=no -i /tmp/pi_t5_grupo6_key.pem -r front-end/build ubuntu@ec2-18-221-166-116.us-east-2.compute.amazonaws.com:~/site
     # - ssh -o StrictHostKeyChecking=no -i /tmp/pi_t5_grupo6_key.pem ubuntu@ec2-18-221-166-116.us-east-2.compute.amazonaws.com "sudo cp -r ~/site/build /site/grupo-6/front-end"
 
