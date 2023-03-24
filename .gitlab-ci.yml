@@ -5,6 +5,8 @@ stages:
   - deploy
 
 building:
+  tags:
+    - nginx
   stage: build
   script:
     - cd front-end; pwd
