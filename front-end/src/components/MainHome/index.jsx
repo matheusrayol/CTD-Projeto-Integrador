@@ -3,12 +3,12 @@ import { useEffect, useState } from 'react'
 import 'react-calendar/dist/Calendar.css'
 import { Calender } from './Calender'
 import { SelectLocation } from '../Select'
-import { CardCategoria } from '../CardCategoria'
+// import { CardCategoria } from '../CardCategoria'
 import { CardProduct } from '../CardMainHome'
 import './style.sass'
 
 // usando local até corrigir algumas mudanças dos dados no bd
-import { json } from '../../json/infoProducts'
+// import { json } from '../../json/infoProducts'
 
 export function MainHome() {
   const [startDate, setStartDate] = useState([null, null])
@@ -77,21 +77,28 @@ export function MainHome() {
   )
 
   const filterProductBySelect = () => {
-    const filterObjects = json.filter(object =>
-      object.location.toLowerCase().includes(valueInputSelect.toLowerCase())
+    const filterObjects = products.filter(object =>
+      object.city.name.toLowerCase().includes(valueInputSelect.toLowerCase())
     )
     return filterObjects
   }
 
-  const filterProductByCategory = currentCategory => {
-    const filterCategory = json.filter(
-      object => object.category === currentCategory
-    )
-    setObjectFilter(filterCategory)
-    setListProduct(false)
-    setSelectCategory(true)
-    setSelectCity(false)
-  }
+  // useEffect(() => {
+  //   fetch(`/product/all?cityId=${id}`).then(res => {
+  //     res.json().then(data => {
+  //       setProducts(data)
+  //     })
+  //   })
+  // }, [])
+  // const filterProductByCategory = currentCategory => {
+  //   const filterCategory = json.filter(
+  //     object => object.category === currentCategory
+  //   )
+  //   setObjectFilter(filterCategory)
+  //   setListProduct(false)
+  //   setSelectCategory(true)
+  //   setSelectCity(false)
+  // }
 
   const searchDestinationSelect = event => {
     event.preventDefault()
@@ -260,7 +267,7 @@ export function MainHome() {
         )}
         <div className="list-products" id="list-products">
           {listProduct
-            ? json.map((products, index) => (
+            ? products.map((products, index) => (
                 <CardProduct id={index.length} data={products} />
               ))
             : objectFilter.map((products, index) => (

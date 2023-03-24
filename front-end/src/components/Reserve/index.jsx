@@ -1,20 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styles from './Reserve.module.scss'
 import DateRangePickerComp3 from './DateRangePickerComp3'
-import CardReserve from './CardReserve'
-import { json } from '../../json/infoProducts'
-import { useParams } from 'react-router'
+import { Link } from 'react-router-dom'
+import { addDays, format } from 'date-fns'
 
 export default function Reserve(image) {
-  const product = json
+  const [startDate, setStartDate] = useState(new Date())
+  const [endDate, setEndDate] = useState(addDays(new Date(), 7))
 
-  const params = useParams()
-  const [value, setValue] = useState({})
-
-  useEffect(() => {
-    setValue(product[params.id - 1])
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [params])
+  const handleRangeChange = newRange => {
+    setStartDate(newRange.startDate)
+    setEndDate(newRange.endDate)
+  }
 
   return (
     <div className={styles.item} key={image.imageData.id}>
@@ -98,12 +95,50 @@ export default function Reserve(image) {
             <div
               className={styles.cardBody__grid__sectionReservation__calendar}
             >
-              <DateRangePickerComp3 />
+              <DateRangePickerComp3 onRangeChange={handleRangeChange} />
             </div>
           </div>
           <div className={styles.cardBody__grid__sectionCardReserve}>
             <div className={styles.cardBody__grid__sectionCardReserve__card}>
-              <CardReserve key={value.id} imageData={value} />
+              <div className={styles.item} key={image.imageData.id}>
+                <div className={styles.cardBody}>
+                  <div>
+                    <h2>Detalhes da reserva</h2>
+                  </div>
+                  <div className={styles.cardImg}>
+                    <img
+                      src={image.imageData.images[0].urlImage}
+                      alt={image.imageData.name}
+                    />
+                  </div>
+                  <div className={styles.cardBody__info}>
+                    <p>{image.imageData.category.qualification}</p>
+                    <p>{image.imageData.name}</p>
+                    <p>
+                      {image.imageData.city.name},{' '}
+                      {image.imageData.city.country}
+                    </p>
+                  </div>
+                  <div className={styles.cardBody__check}>
+                    <div className={styles.cardBody__check__checkIn}>
+                      <p>Check-In</p>
+                      <p>{format(startDate, 'dd/MM/yyyy')}</p>
+                    </div>
+                    <div className={styles.cardBody__check__checkOut}>
+                      <p>Check-Out</p>
+                      <p> {format(endDate, 'dd/MM/yyyy')}</p>
+                    </div>
+                  </div>
+                  <div className={styles.cardBody__confirmButton}>
+                    <Link
+                      key={image.imageData.id}
+                      to={`../product/${image.imageData.id}/reserve/false`}
+                    >
+                      <button>Confirmar Reserva</button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div className={styles.cardBody__grid__sectionDateArrive}>
@@ -141,7 +176,9 @@ export default function Reserve(image) {
           <div className={styles.cardBody__grid__sectionPolit}>
             <div className={styles.sectionPoliticClose}>
               <h2>Política </h2>
-              <p>Oque você precisa saber antes de alugar</p>
+              <div className={styles.sectionPoliticClose__pFirst}>
+                <p>Oque você precisa saber antes de alugar</p>
+              </div>
               <div className={styles.sectionPoliticClose__div}>
                 <div className={styles.sectionPoliticClose__norms}>
                   <h3>Normas de locação</h3>

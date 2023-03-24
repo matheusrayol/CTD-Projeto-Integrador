@@ -12,22 +12,21 @@ export default function CardProduct(image) {
 
   const galleryImages = [
     {
-      img: image.imageData.picture1
+      img: image.imageData.images[0].urlImage
     },
     {
-      img: image.imageData.picture2
+      img: image.imageData.images[0].urlImage
     },
     {
-      img: image.imageData.picture3
+      img: image.imageData.images[0].urlImage
     },
     {
-      img: image.imageData.picture4
+      img: image.imageData.images[0].urlImage
     },
     {
-      img: image.imageData.picture5
+      img: image.imageData.images[0].urlImage
     }
   ]
-
   return (
     <div className={styles.item} key={image.imageData.id} id="item">
       <div className={styles.cardBody} id="cardBody">
@@ -39,8 +38,8 @@ export default function CardProduct(image) {
             className={styles.cardBody__sectionBack__p}
             id="cardBody__sectionBack__p"
           >
-            <p>{image.imageData.title}</p>
-            <p>{image.imageData.category}</p>
+            <p>{image.imageData.name}</p>
+            <p>{image.imageData.description}</p>
           </div>
           <Link to="/home" id="cardBody__sectionBack__link">
             <button
@@ -70,11 +69,11 @@ export default function CardProduct(image) {
                 id="cardBody__sectionTittle__img"
               />
               <p id="cardBody__sectionTittle__oLoc_p1">
-                {image.imageData.location}
+                {image.imageData.city.name}
               </p>
             </div>
             <p id="cardBody__sectionTittle__oLoc_p2">
-              {image.imageData.adress}
+              {image.imageData.city.country}
             </p>
           </div>
           <div
@@ -82,7 +81,8 @@ export default function CardProduct(image) {
             id="cardBody__sectionTittle__pRated"
           >
             <p>
-              Avaliação: <span>{image.imageData.rated}</span>
+              {/* Avaliação: <span>{image.imageData.rated}</span> */}
+              <span>Avaliação: 4.5</span>
             </p>
           </div>
         </div>
@@ -119,7 +119,7 @@ export default function CardProduct(image) {
           >
             <div id="cardBody__sectionDescription__lines__div">
               <h2 id="cardBody__sectionDescription__lines__div__h2">
-                Veja por que alugar o {image.imageData.title}
+                Veja por que alugar o {image.imageData.name}
               </h2>
               <p id="cardBody__sectionDescription__lines__div__p">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
@@ -151,49 +151,60 @@ export default function CardProduct(image) {
             className={styles.cardBody__sectionCharacteristics__lines1}
             id="cardBody__sectionCharacteristics__lines1"
           >
-            <p>{image.imageData.descriptionLine2}</p>
+            {/* <p>{image.imageData.descriptionLine2}</p> */}
+            <p>Preço por diaria:R$ 199.95</p>
           </div>
           <div
             className={styles.cardBody__sectionCharacteristics__lines2}
             id="cardBody__sectionCharacteristics__lines2"
           >
-            <p>{image.imageData.descriptionLine3}</p>
+            {/* <p>{image.imageData.descriptionLine3}</p> */}
+            <p>Baterias: 92,8 kWh</p>
           </div>
           <div
             className={styles.cardBody__sectionCharacteristics__lines3}
             id="cardBody__sectionCharacteristics__lines3"
           >
-            <p>{image.imageData.descriptionLine4}</p>
+            <p>Potência: 413 cv</p>
+            {/* <p>{image.imageData.descriptionLine4}</p> */}
           </div>
           <div
             className={styles.cardBody__sectionCharacteristics__lines4}
             id="cardBody__sectionCharacteristics__lines4"
           >
-            <p>{image.imageData.descriptionLine5}</p>
+            <p>Torque: 67,3 kgfm</p>
+            {/* <p>{image.imageData.descriptionLine5}</p> */}
           </div>
           <div
             className={styles.cardBody__sectionCharacteristics__lines5}
             id="cardBody__sectionCharacteristics__lines5"
           >
-            <p>{image.imageData.descriptionLine6}</p>
+            <p>Autonomia: 418 km (WLTP)</p>
+            {/* <p>{image.imageData.descriptionLine6}</p> */}
           </div>
           <div
             className={styles.cardBody__sectionCharacteristics__lines6}
             id="cardBody__sectionCharacteristics__lines6"
           >
-            <p>{image.imageData.descriptionLine7}</p>
+            <p>
+              Tempo de recarga: 40 min (0 a 80%) - carga rápida; 8 horas -
+              Wallbox; NI - 220V
+            </p>
+            {/* <p>{image.imageData.descriptionLine7}</p> */}
           </div>
           <div
             className={styles.cardBody__sectionCharacteristics__lines7}
             id="cardBody__sectionCharacteristics__lines7"
           >
-            <p>{image.imageData.descriptionLine8}</p>
+            <p>0 a 100 km/h: 4,9 s</p>
+            {/* <p>{image.imageData.descriptionLine8}</p> */}
           </div>
           <div
             className={styles.cardBody__sectionCharacteristics__lines8}
             id="cardBody__sectionCharacteristics__lines8"
           >
-            <p>{image.imageData.descriptionLine9}</p>
+            <p>Ar condicionado incluso</p>
+            {/* <p>{image.imageData.descriptionLine9}</p> */}
           </div>
         </div>
         <div
@@ -219,7 +230,7 @@ export default function CardProduct(image) {
             <p>Informe as datas pretenditas para realizar a locação do</p>
             <p>{image.imageData.title}</p>
             <Link
-              key={image.id}
+              key={image.imageData.id}
               to={`../product/${image.imageData.id}/reserve`}
               id="LinkToReserve"
             >

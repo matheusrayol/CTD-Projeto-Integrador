@@ -1,7 +1,7 @@
 @import "../../styles/GlobalVariablesScss.scss";
 
 .calendarWrap3 {
-    background-color: rgb(234, 233, 233);
+    background-color: #444444;
     border-radius: 1rem;
     text-align: center;
 
@@ -11,17 +11,18 @@
 .inputBox3 {
     font-family: $font-normal;
     font-size: 1rem;
-    background-color: rgb(248, 245, 245);
+    background-color: rgb(115, 115, 115);
     width: 215px;
     margin: 0;
     margin-top: 0.5rem;
 }
 
 input.inputBox3 {
+    text-align: center;
     padding: 5px 8px 4px 8px;
-    border-radius: 3px;
-    border: 1px solid #666;
-    color: rgb(111, 111, 111);
+    border-radius: 6px;
+    border: 1px solid #ffffff;
+    color: rgb(255, 255, 255);
 }
 
 .calendarElement3 {
@@ -36,10 +37,6 @@ input.inputBox3 {
     }
 
     .rdrDefinedRangesWrapper {
-        font-size: 12px;
-        width: 226px;
-        border-right: solid 1px #eff2f7;
         display: none;
-
     }
 }
