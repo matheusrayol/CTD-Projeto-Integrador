@@ -16,28 +16,32 @@ build-frontend:
     paths:
       - front-end/build
 
-# build-backend:
-#   tags:
-#     - nginx
-#   stage: build
-#   script:
-#     - cd backend; pwd
-#     - mvn clean install
-#   artifacts:
-#     paths:
-#       - backend/target
+build-backend:
+  tags:
+    - nginx
+  stage: build
+  script:
+    - cd backend; pwd
+    - mvn clean install
+  artifacts:
+    paths:
+      - backend/target
 
-deploy-application:
+deploy-frontend:
   tags:
     - nginx
   stage: deploy
   image: quay.io/ansible/ansible-core
   script:
-    - ls -l ${MINHA_CHAVE}
-    - ansible all --ssh-common-args='-o StrictHostKeyChecking=no' -u ubuntu --private-key /tmp/pi_t5_grupo6_key.pem -i 'ec2-18-221-166-116.us-east-2.compute.amazonaws.com,' -b -m copy -a "src=front-end/build dest=/site/grupo-6/front-end" -vvv
-    # - scp -o StrictHostKeyChecking=no -i /tmp/pi_t5_grupo6_key.pem -r front-end/build ubuntu@ec2-18-221-166-116.us-east-2.compute.amazonaws.com:~/site
-    # - ssh -o StrictHostKeyChecking=no -i /tmp/pi_t5_grupo6_key.pem ubuntu@ec2-18-221-166-116.us-east-2.compute.amazonaws.com "sudo cp -r ~/site/build /site/grupo-6/front-end"
+    - ansible all --ssh-common-args='-o StrictHostKeyChecking=no' -u ubuntu --private-key /tmp/pi_t5_grupo6_key.pem -i 'ec2-18-221-166-116.us-east-2.compute.amazonaws.com,' -b -m copy -a "src=front-end/build dest=/site/grupo-6/front-end"
 
+deploy-backend:
+  tags:
+    - nginx
+  stage: deploy
+  image: quay.io/ansible/ansible-core
+  script:
+    - ansible all --ssh-common-args='-o StrictHostKeyChecking=no' -u ubuntu --private-key /tmp/pi_t5_grupo6_key.pem -i 'ec2-18-221-166-116.us-east-2.compute.amazonaws.com,' -b -m copy -a "src=backend/target dest=/site/grupo-6/backend"
 
 # ------ Verificar Depois -------
   # .tag-release:
