@@ -20,6 +20,7 @@ build-backend:
   tags:
     - nginx
   stage: build
+  image: maven
   script:
     - cd backend; pwd
     - mvn clean install
