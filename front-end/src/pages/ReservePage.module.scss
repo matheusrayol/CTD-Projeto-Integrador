@@ -5,5 +5,15 @@
 
   .bodyProduct {
     background: $background-three2;
+
+    .spinner {
+      font-size: 2rem;
+      background-color: $background-three2;
+      min-height: 80vh;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      align-items: center;
+    }
   }
 }
