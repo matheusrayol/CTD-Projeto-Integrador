@@ -14,7 +14,7 @@ build-application:
     - npm run build
   artifacts:
     paths:
-      - build
+      - grupo-6/front-end/build
 
 deploy-application:
   stage: deploy
