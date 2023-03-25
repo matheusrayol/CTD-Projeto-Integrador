@@ -64,6 +64,7 @@ public class ProductServiceImpl implements ProductService {
     return productRepository.findAllByCategoryAndCity(category, city);
   }
 
+  @LogInfo
   @Override
   public List<ProductEntity> findAvailabilityByCityAndDate(Long cityId, LocalDate startDate, LocalDate endDate) {
     return productRepository.findAvailability(cityId, startDate, endDate);

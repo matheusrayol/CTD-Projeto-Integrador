@@ -1,5 +1,6 @@
 package br.com.notcars.service.impl;
 
+import br.com.notcars.config.aspect.LogInfo;
 import br.com.notcars.dto.category.CategoryRequest;
 import br.com.notcars.exceptions.NotFoundException;
 import br.com.notcars.mapper.CategoryMapper;
@@ -18,6 +19,7 @@ public class CategoryServiceImpl implements CategoryService {
 
   private final CategoryMapper categoryMapper;
 
+  @LogInfo
   @Override
   public List<CategoryEntity> findAllCategory() {
     return categoryRepository.findAll();
@@ -28,18 +30,21 @@ public class CategoryServiceImpl implements CategoryService {
     return categoryRepository.findById(id).orElseThrow(() -> new NotFoundException("category_not_found", String.format("category %s not found", id)));
   }
 
+  @LogInfo
   @Override
   public void deleteCategoryById(Long id) {
     findCategoryById(id);
     categoryRepository.deleteById(id);
   }
 
+  @LogInfo
   @Override
   public CategoryEntity createCategory(CategoryRequest categoryRequest) {
     final CategoryEntity categoryEntity = categoryMapper.toCategoryEntity(categoryRequest);
     return categoryRepository.save(categoryEntity);
   }
 
+  @LogInfo
   @Override
   public CategoryEntity updatedCategory(Long id, CategoryRequest categoryRequest) {
     CategoryEntity categoryEntity = findCategoryById(id);

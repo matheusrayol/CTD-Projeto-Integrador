@@ -61,7 +61,7 @@ public class ProductController {
   public ResponseEntity<List<ProductResponse>> findAvailabilityByCityAndDate(@RequestParam Long cityId,
                                                                              @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate,
                                                                              @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate) {
-
+    log.info(START_REQUEST + "[GET] " + BASE_URL + "/availability");
     List<ProductEntity> productList = productServiceImpl.findAvailabilityByCityAndDate(cityId, startDate, endDate);
     List<ProductResponse> productResponses = productList.stream()
       .map(productMapper::toResponse)
@@ -71,6 +71,7 @@ public class ProductController {
 
   @PostMapping("/create")
   public ResponseEntity<ProductResponse> createProduct(@RequestBody ProductRequest productRequest) {
+    log.info(START_REQUEST + "[POST] " + BASE_URL + "/create");
     ProductEntity product = productServiceImpl.createProduct(productRequest);
     List<ImageResponse> imageListResponse = imageMapper.map(product.getImageList());
     List<CharacteristicsResponse> characteristicsResponse = characteristicsMapper.map(product.getCharacteristicsList());
