@@ -1,5 +1,6 @@
 package br.com.notcars.controller;
 
+import br.com.notcars.dto.user.AuthenticateRequest;
 import br.com.notcars.dto.user.AuthenticationResponse;
 import br.com.notcars.util.JwtUtil;
 import br.com.notcars.dto.user.UserRequest;
@@ -7,6 +8,7 @@ import br.com.notcars.dto.user.UserResponse;
 import br.com.notcars.mapper.UserMapper;
 import br.com.notcars.model.UserEntity;
 import br.com.notcars.service.impl.UserServiceImpl;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -40,14 +42,14 @@ public class UserController {
   private final UserMapper userMapper;
 
   @PostMapping
-  public ResponseEntity<UserResponse> create(@RequestBody UserRequest userRequest) {
+  public ResponseEntity<UserResponse> create(@RequestBody @Valid UserRequest userRequest) {
     log.info(START_REQUEST + "[POST] " + BASE_URL);
     UserEntity user = userServiceImpl.create(userRequest);
     return ResponseEntity.status(HttpStatus.CREATED).body(userMapper.toUserResponse(user));
   }
 
   @PostMapping("/authenticate")
-  public ResponseEntity<AuthenticationResponse> createAuthenticationToken(@RequestBody UserRequest userRequest) throws Exception {
+  public ResponseEntity<AuthenticationResponse> createAuthenticationToken(@RequestBody @Valid AuthenticateRequest userRequest) throws Exception {
     log.info(START_REQUEST + "[POST] " + BASE_URL + "/authenticate");
     try {
       authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userRequest.getEmail(), userRequest.getPassword()));

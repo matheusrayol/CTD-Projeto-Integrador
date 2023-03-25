@@ -11,4 +11,6 @@ public class CityResponse {
   private String name;
 
   private String country;
+
+  private String state;
 }
