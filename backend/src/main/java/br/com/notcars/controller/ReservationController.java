@@ -18,18 +18,23 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @Log4j2
 public class ReservationController {
+  private static final String START_REQUEST = "[START REQUEST]";
+
+  private static final String BASE_URL = "/reservation";
   private final ReservationService reservationServiceImpl;
 
   private final ReservationMapper reservationMapper;
 
   @PostMapping("/create")
   public ResponseEntity<ReservationResponse> createReservation(@RequestBody ReservationRequest reservation) {
+    log.info(START_REQUEST + "[POST] " + BASE_URL + "/create");
     ReservationEntity reservationEntity = reservationServiceImpl.createReservation(reservation);
     return ResponseEntity.status(HttpStatus.CREATED).body(reservationMapper.toReservationResponse(reservationEntity));
   }
 
   @GetMapping("/product/{productId}")
   public ResponseEntity<List<ReservationResponse>> findReservationByProductId(@PathVariable Long productId) {
+    log.info(START_REQUEST + "[GET] " + BASE_URL + "/product/" + productId);
     List<ReservationEntity> reservation = reservationServiceImpl.findAllByProductId(productId);
     return ResponseEntity.ok(reservation.stream().map(reservationMapper::toReservationResponse).collect(Collectors.toList()));
   }
