@@ -97,7 +97,7 @@ const RegisterValidation = () => {
       surname: surname,
       email: email,
       password: password,
-      repassword: repassword
+      functionId: 2
     }
 
     let requestHeaders = {
@@ -117,7 +117,7 @@ const RegisterValidation = () => {
       validatePassword &&
       validateRepassword
     ) {
-      fetch(`/auth`, requestConfiguration).then(response => {
+      fetch(`/user`, requestConfiguration).then(response => {
         if (response.ok) {
           response.json().then(data => {
             saveToken(data.token)
@@ -125,6 +125,13 @@ const RegisterValidation = () => {
             navigate('/login')
           })
         } else {
+          if(response.status === 400 ){
+            response.json().then(data => {
+              alert(data.mensagem)
+            })
+          } else {
+            alert('Campo(os) incorreto(s)!')
+          }
           setFormError({
             nameError: false,
             surnameError: false,
@@ -133,7 +140,6 @@ const RegisterValidation = () => {
             repasswordError: false,
             genericError: true
           })
-          alert('Campo(os) incorreto(s)!')
         }
       })
     }

@@ -7,7 +7,7 @@ import imgAvatar from '../../assets/imgAvatar.png'
 import styles from './Navbar.module.scss'
 
 function Navbar() {
-  const { auth, removeToken } = useAuth()
+  const { auth, logout, name } = useAuth()
 
   const [menuOpen, setMenuOpen] = useState(false)
   const [size, setSize] = useState({
@@ -76,14 +76,14 @@ function Navbar() {
                     <img src={imgAvatar} alt="imagem Avatar" />
                     <p>
                       <Link id="NameUserWhenLogged" to="/accountuser">
-                        {auth.name}
+                        {name}
                       </Link>
                     </p>
                   </div>
                   <Link
                     id="ifLogoutSair"
                     to="/home"
-                    onClick={() => removeToken()}
+                    onClick={() => logout()}
                   >
                     Sair
                   </Link>
