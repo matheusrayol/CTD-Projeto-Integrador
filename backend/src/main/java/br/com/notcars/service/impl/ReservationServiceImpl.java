@@ -10,7 +10,6 @@ import br.com.notcars.repository.ReservationRepository;
 import br.com.notcars.service.ProductService;
 import br.com.notcars.service.ReservationService;
 import java.util.List;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
