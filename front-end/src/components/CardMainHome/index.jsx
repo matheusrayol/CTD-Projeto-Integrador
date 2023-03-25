@@ -3,25 +3,26 @@ import './style.sass'
 export function CardProduct(props) {
   return (
     <div className="card-product" id="card-product">
-      <img src={props.data.image} alt="" />
+      <img src={props.data.images[0].urlImage} alt="" />
       <div className="content-product" id="content-product">
         <div className="header-product" id="header-product">
           <div className="info-product" id="info-product">
             <span className="category-product" id="category-product">
-              {props.data.category}
+              {props.data.category.qualification}
             </span>
             <h1 className="name-product" id="name-product">
-              {props.data.title}
+              {props.data.name}
             </h1>
           </div>
           <div className="reputation-product" id="reputation-product">
             <div className="rating-scale-product" id="rating-scale-product">
-              <span id="rating-scale-product-span">{props.data.rated}</span>
+              {/* <span id="rating-scale-product-span">{props.data.rated}</span> */}
+              <span>4.5</span>
             </div>
           </div>
         </div>
         <div className="location-product" id="location-product">
-          <span>{props.data.location}</span>
+          <span>{props.data.city.name}</span>
         </div>
         <div className="description-product" id="description-product">
           <p>{props.data.description}</p>
