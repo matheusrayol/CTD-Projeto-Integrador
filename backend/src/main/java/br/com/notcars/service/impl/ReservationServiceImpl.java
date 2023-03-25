@@ -1,5 +1,6 @@
 package br.com.notcars.service.impl;
 
+import br.com.notcars.config.aspect.LogInfo;
 import br.com.notcars.dto.reservation.ReservationRequest;
 import br.com.notcars.exceptions.BadRequestException;
 import br.com.notcars.mapper.ReservationMapper;
@@ -10,7 +11,6 @@ import br.com.notcars.repository.ReservationRepository;
 import br.com.notcars.service.ProductService;
 import br.com.notcars.service.ReservationService;
 import java.util.List;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +24,7 @@ public class ReservationServiceImpl implements ReservationService {
   private final ProductService productServiceImpl;
   private final ReservationMapper reservationMapper;
 
+  @LogInfo
   @Override
   public ReservationEntity createReservation(ReservationRequest reservationRequest) {
     if(!isAvailable(reservationRequest)){
@@ -35,11 +36,13 @@ public class ReservationServiceImpl implements ReservationService {
     return reservationRepository.save(reservation);
   }
 
+  @LogInfo
   @Override
   public List<ReservationEntity> findAllByProductId(Long productId) {
     return reservationRepository.findAllByProduct_Id(productId);
   }
 
+  @LogInfo
   private boolean isAvailable(ReservationRequest reservationRequest) {
     List<ReservationEntity> reservation =
       reservationRepository.findAllByAvailability(reservationRequest.getProductId(), reservationRequest.getDateBegin(), reservationRequest.getDateEnd());
