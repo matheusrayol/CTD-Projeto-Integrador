@@ -12,6 +12,7 @@ import br.com.notcars.service.ProductService;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -70,7 +71,7 @@ public class ProductController {
   }
 
   @PostMapping("/create")
-  public ResponseEntity<ProductResponse> createProduct(@RequestBody ProductRequest productRequest) {
+  public ResponseEntity<ProductResponse> createProduct(@RequestBody @Valid ProductRequest productRequest) {
     log.info(START_REQUEST + "[POST] " + BASE_URL + "/create");
     ProductEntity product = productServiceImpl.createProduct(productRequest);
     List<ImageResponse> imageListResponse = imageMapper.map(product.getImageList());

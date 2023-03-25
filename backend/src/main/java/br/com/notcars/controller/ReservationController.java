@@ -7,6 +7,7 @@ import br.com.notcars.model.ReservationEntity;
 import br.com.notcars.service.ReservationService;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -26,7 +27,7 @@ public class ReservationController {
   private final ReservationMapper reservationMapper;
 
   @PostMapping("/create")
-  public ResponseEntity<ReservationResponse> createReservation(@RequestBody ReservationRequest reservation) {
+  public ResponseEntity<ReservationResponse> createReservation(@RequestBody @Valid ReservationRequest reservation) {
     log.info(START_REQUEST + "[POST] " + BASE_URL + "/create");
     ReservationEntity reservationEntity = reservationServiceImpl.createReservation(reservation);
     return ResponseEntity.status(HttpStatus.CREATED).body(reservationMapper.toReservationResponse(reservationEntity));
