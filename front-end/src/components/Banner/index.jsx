@@ -23,7 +23,7 @@ export const Banner = () => {
       headers: requestHeaders
     }
 
-    fetch(`product/all`, requestConfiguration).then(response => {
+    fetch(`category/all`, requestConfiguration).then(response => {
       response.json().then(data => {
         setProduct(data)
       })
