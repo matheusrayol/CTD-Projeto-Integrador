@@ -7,6 +7,7 @@ import { SelectLocation } from '../Select'
 import { Banner } from '../Banner'
 import { CardProduct } from '../CardMainHome'
 import './style.sass'
+import { format } from 'date-fns'
 
 export function MainHome() {
   //Const's calendario
@@ -14,6 +15,7 @@ export function MainHome() {
   const [selectDate, setSelectDate] = useState(false)
   const [showCalendar, setShowCalendar] = useState(false)
   const [showDestination, setShowDestination] = useState(false)
+  const [cityId, setCityId] = useState('')
 
   //Const's cards/filtros
   const [objectFilter, setObjectFilter] = useState([])
@@ -53,15 +55,27 @@ export function MainHome() {
     })
   }, [])
 
-  //Fetch para pegar todas as cidades por id
-  function filterApi(id) {
-    fetch(`/product/all?cityId=${id}`).then(res => {
-      res.json().then(data => {
-        setProducts([])
-        setProducts(data)
-        console.log(data)
+
+  function submit(event) {
+    event.preventDefault()
+    
+    if(startDate[0] === null && cityId !== "") {
+      fetch(`/product/all?cityId=${cityId}`).then(res => {
+        res.json().then(data => {
+          setProducts(data)
+        })
       })
-    })
+    }
+    if(startDate[0] !== null && startDate[1] !== null && cityId !== "") {
+      const startDateInput = format(startDate[0], 'yyyy-MM-dd')
+      const endDateInput = format(startDate[1], 'yyyy-MM-dd')
+
+      fetch(`/product/availability?cityId=${cityId}&startDate=${startDateInput}&endDate=${endDateInput}`).then(res => {
+        res.json().then(data => {
+          setProducts(data)
+        })
+      })
+    }
   }
 
   // const pega o valor do input selecionado
@@ -143,10 +157,11 @@ export function MainHome() {
                     <SelectLocation
                       id={index.length}
                       data={location}
-                      // onSelectDestination={currentDestination =>
-                      //   inputSelected(currentDestination)
-                      // }
-                      onSelectDestination={() => filterApi(location.id)}
+                      onSelectDestination={(currentDestination) => {
+                        inputSelected(currentDestination)
+                        setCityId(location.id)
+                      }
+                      }
                     />
                   </div>
                 ))}
@@ -175,7 +190,7 @@ export function MainHome() {
                 )}
               </div>
             </div>
-            <button id="submit-search" className="submit-search">
+            <button id="submit-search" className="submit-search" onClick={submit}>
               Buscar
             </button>
           </div>
@@ -209,11 +224,11 @@ export function MainHome() {
         <div className="list-products" id="list-products">
           {listProduct
             ? products.map((products, index) => (
-                <CardProduct key={index} id={index.length} data={products} />
-              ))
+              <CardProduct key={index} id={index.length} data={products} />
+            ))
             : objectFilter.map((products, index) => (
-                <CardProduct key={index} id={index.length} data={products} />
-              ))}
+              <CardProduct key={index} id={index.length} data={products} />
+            ))}
         </div>
       </section>
     </div>
