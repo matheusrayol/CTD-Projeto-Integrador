@@ -5,7 +5,7 @@ import { useAuth } from '../../hooks/useAuth'
 import styles from './LoginValidation.module.scss'
 
 const LoginValidation = () => {
-  const { saveToken, saveName } = useAuth()
+  const { saveToken, saveData } = useAuth()
   const navigate = useNavigate()
   const [mail, setMail] = useState('')
   const [pass, setPass] = useState('')
@@ -70,7 +70,7 @@ const LoginValidation = () => {
         if (response.ok) {
           response.json().then(data => {
             saveToken(data.jwt)
-            saveName(`${data.name}`)
+            saveData(data)
             alert('Login realizado com sucesso!')
             navigate('/home')
             refreshPage()
