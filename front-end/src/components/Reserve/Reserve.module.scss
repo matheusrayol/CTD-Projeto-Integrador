@@ -11,6 +11,40 @@
   font-weight: 700;
   background-color: $background-three2;
   letter-spacing: 0.25px;
+  display: flex;
+  flex-direction: column;
+
+  &__buttonBack {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    margin-right: 1rem;
+    margin-top: 1rem;
+    text-align: end;
+    text-decoration: none;
+    align-items: center;
+    justify-content: flex-end;
+
+    button {
+      font-family: $font-normal;
+      padding: 0.75rem 1.75rem;
+      border: $border-color-two;
+      color: $text-color-two;
+      border-radius: $border-radius-button;
+      background: $background-five;
+      transition: all 0.3s ease-in-out;
+      font-size: 1rem;
+      font-weight: 700;
+
+      &:hover {
+        color: $text-color-one;
+        background-color: $color-zero;
+        border: $border-color-one;
+      }
+    }
+
+  }
 
   .cardBody {
     margin: 0;
@@ -75,8 +109,10 @@
             }
 
             input {
-              padding: 0.5rem 0;
+              padding: 0.5rem 0.5rem;
               border-radius: 0.33rem;
+              color: white;
+
             }
           }
 
@@ -94,8 +130,9 @@
             }
 
             input {
-              padding: 0.5rem 0;
+              padding: 0.5rem 0.5rem;
               border-radius: 0.33rem;
+              color: white;
             }
           }
 
@@ -113,8 +150,9 @@
             }
 
             input {
-              padding: 0.5rem 0;
+              padding: 0.5rem 0.5rem;
               border-radius: 0.33rem;
+              color: white;
             }
           }
 
@@ -132,7 +170,8 @@
             }
 
             input {
-              padding: 0.5rem 0;
+              color: black;
+              padding: 0.5rem 0.5rem;
               border-radius: 0.33rem;
             }
           }
@@ -172,7 +211,7 @@
               box-shadow: 1px 1px 4px rgb(62, 101, 59);
               margin: 0;
               padding: 0;
-              margin-top: 5.25rem;
+              margin-top: 1.5rem;
               margin-right: 1rem;
               box-sizing: border-box;
 
@@ -200,9 +239,9 @@
                 &__checkIn {
                   display: flex;
                   flex-direction: row;
-                  margin: 0 1rem;
+                  margin: 0 2rem;
                   border-bottom: 1px solid black;
-                  justify-content: space-evenly;
+                  justify-content: space-between;
 
                   p {
                     padding-bottom: 0.25rem;
@@ -213,9 +252,9 @@
                 &__checkOut {
                   display: flex;
                   flex-direction: row;
-                  margin: 0 1rem;
+                  margin: 0 2rem;
                   border-bottom: 1px solid black;
-                  justify-content: space-evenly;
+                  justify-content: space-between;
 
                   p {
                     padding-bottom: 0.25rem;

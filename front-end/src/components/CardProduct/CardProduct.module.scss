@@ -194,44 +194,145 @@
       &__lines1 {
         width: 100%;
         grid-area: description1;
-        margin: 0 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+
+        img {
+          width: 24px;
+          height: 24px;
+        }
+
+        p {
+          font-weight: 500;
+        }
       }
 
       &__lines2 {
         width: 100%;
         grid-area: description2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+
+        img {
+          width: 24px;
+          height: 24px;
+        }
+
+        p {
+          font-weight: 500;
+        }
       }
 
       &__lines3 {
         width: 100%;
         grid-area: description3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+
+        img {
+          width: 24px;
+          height: 24px;
+        }
+
+        p {
+          font-weight: 500;
+        }
       }
 
       &__lines4 {
         width: 100%;
         grid-area: description4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+
+        img {
+          width: 24px;
+          height: 24px;
+        }
+
+        p {
+          font-weight: 500;
+        }
       }
 
       &__lines5 {
         width: 100%;
         grid-area: description5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+
+        img {
+          width: 24px;
+          height: 24px;
+        }
+
+        p {
+          font-weight: 500;
+        }
       }
 
       &__lines6 {
         width: 100%;
         grid-area: description6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+
+        img {
+          width: 24px;
+          height: 24px;
+        }
+
+        p {
+          font-weight: 500;
+        }
       }
 
       &__lines7 {
         width: 100%;
         grid-area: description7;
-        margin: 0 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+
+        img {
+          width: 24px;
+          height: 24px;
+        }
+
+        p {
+          font-weight: 500;
+        }
       }
 
       &__lines8 {
         width: 100%;
         grid-area: description8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
 
+        img {
+          width: 24px;
+          height: 24px;
+        }
+
+        p {
+          font-weight: 500;
+        }
       }
     }
 
