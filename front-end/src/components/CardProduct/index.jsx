@@ -6,27 +6,35 @@ import iconShare from '../../assets/iconShare.svg'
 import iconHearth from '../../assets/iconHearth.svg'
 import GalleryPageProduct from '../CardGallery/GalleryPageProduct'
 import DateRangePickerComp2 from './DateRangePickerComp2'
+import { useAuth } from '../../hooks/useAuth'
 
 export default function CardProduct(image) {
   const [buttonOpen, setButtonOpen] = useState(true)
+  const { auth } = useAuth()
+
+  function alertYouLogin() {
+    alert('Você não está logado para realizar uma reserva')
+    //enviar uma logica para o LoginValidation para criar um "pop-up" no local do alert
+  }
 
   const galleryImages = [
     {
       img: image.imageData.images[0].urlImage
     },
     {
-      img: image.imageData.images[0].urlImage
+      img: image.imageData.images[1].urlImage
     },
     {
-      img: image.imageData.images[0].urlImage
+      img: image.imageData.images[2].urlImage
     },
     {
-      img: image.imageData.images[0].urlImage
+      img: image.imageData.images[3].urlImage
     },
     {
-      img: image.imageData.images[0].urlImage
+      img: image.imageData.images[4].urlImage
     }
   ]
+
   return (
     <div className={styles.item} key={image.imageData.id} id="item">
       <div className={styles.cardBody} id="cardBody">
@@ -39,7 +47,7 @@ export default function CardProduct(image) {
             id="cardBody__sectionBack__p"
           >
             <p>{image.imageData.name}</p>
-            <p>{image.imageData.description}</p>
+            <p>{image.imageData.category.qualification}</p>
           </div>
           <Link to="/home" id="cardBody__sectionBack__link">
             <button
@@ -122,15 +130,14 @@ export default function CardProduct(image) {
                 Veja por que alugar o {image.imageData.name}
               </h2>
               <p id="cardBody__sectionDescription__lines__div__p">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
-                mollitia, molestiae quas vel sint commodi repudiandae
-                consequuntur voluptatum laborum numquam blanditiis harum
-                quisquam eius sed odit fugiat iusto fuga praesentium optio,
-                eaque rerum! Provident similique accusantium nemo autem.
-                Veritatis obcaecati tenetur iure eius earum ut molestias
-                architecto voluptate aliquam nihil, eveniet aliquid culpa
-                officia aut! Impedit sit sunt quaerat, odit, tenetur error,
-                harum nesciunt ipsum debitis quas aliquid.
+                {image.imageData.description} Possuindo design aerodinâmico e
+                moderno, com linhas suaves e elegantes. O motor elétrico é muito
+                mais compacto do que um motor a combustão interna, permitindo
+                que o espaço do motor seja utilizado para aumentar o espaço
+                interno do veículo ou a capacidade de carga. Muitos carros
+                elétricos também têm recursos de segurança avançados, como
+                sistemas de frenagem regenerativa, sensores de colisão e
+                assistência de condução.
               </p>
             </div>
           </div>
@@ -151,60 +158,57 @@ export default function CardProduct(image) {
             className={styles.cardBody__sectionCharacteristics__lines1}
             id="cardBody__sectionCharacteristics__lines1"
           >
-            {/* <p>{image.imageData.descriptionLine2}</p> */}
-            <p>Preço por diaria:R$ 199.95</p>
+            <img src={image.imageData.characteristics[0].icon} alt="" />
+            <p>{image.imageData.characteristics[0].name}</p>
           </div>
           <div
             className={styles.cardBody__sectionCharacteristics__lines2}
             id="cardBody__sectionCharacteristics__lines2"
           >
-            {/* <p>{image.imageData.descriptionLine3}</p> */}
-            <p>Baterias: 92,8 kWh</p>
+            <img src={image.imageData.characteristics[1].icon} alt="" />
+            <p>{image.imageData.characteristics[1].name}</p>
           </div>
           <div
             className={styles.cardBody__sectionCharacteristics__lines3}
             id="cardBody__sectionCharacteristics__lines3"
           >
-            <p>Potência: 413 cv</p>
-            {/* <p>{image.imageData.descriptionLine4}</p> */}
+            <img src={image.imageData.characteristics[2].icon} alt="" />
+            <p>{image.imageData.characteristics[2].name}</p>
           </div>
           <div
             className={styles.cardBody__sectionCharacteristics__lines4}
             id="cardBody__sectionCharacteristics__lines4"
           >
-            <p>Torque: 67,3 kgfm</p>
-            {/* <p>{image.imageData.descriptionLine5}</p> */}
+            <img src={image.imageData.characteristics[3].icon} alt="" />
+            <p>{image.imageData.characteristics[3].name}</p>
           </div>
           <div
             className={styles.cardBody__sectionCharacteristics__lines5}
             id="cardBody__sectionCharacteristics__lines5"
           >
-            <p>Autonomia: 418 km (WLTP)</p>
-            {/* <p>{image.imageData.descriptionLine6}</p> */}
+            <img src={image.imageData.characteristics[4].icon} alt="" />
+            <p>{image.imageData.characteristics[4].name}</p>
           </div>
           <div
             className={styles.cardBody__sectionCharacteristics__lines6}
             id="cardBody__sectionCharacteristics__lines6"
           >
-            <p>
-              Tempo de recarga: 40 min (0 a 80%) - carga rápida; 8 horas -
-              Wallbox; NI - 220V
-            </p>
-            {/* <p>{image.imageData.descriptionLine7}</p> */}
+            <img src={image.imageData.characteristics[5].icon} alt="" />
+            <p>{image.imageData.characteristics[5].name}</p>
           </div>
           <div
             className={styles.cardBody__sectionCharacteristics__lines7}
             id="cardBody__sectionCharacteristics__lines7"
           >
-            <p>0 a 100 km/h: 4,9 s</p>
-            {/* <p>{image.imageData.descriptionLine8}</p> */}
+            <img src={image.imageData.characteristics[6].icon} alt="" />
+            <p>{image.imageData.characteristics[6].name}</p>
           </div>
           <div
             className={styles.cardBody__sectionCharacteristics__lines8}
             id="cardBody__sectionCharacteristics__lines8"
           >
-            <p>Ar condicionado incluso</p>
-            {/* <p>{image.imageData.descriptionLine9}</p> */}
+            <img src={image.imageData.characteristics[7].icon} alt="" />
+            <p>{image.imageData.characteristics[7].name}</p>
           </div>
         </div>
         <div
@@ -229,18 +233,29 @@ export default function CardProduct(image) {
           >
             <p>Informe as datas pretenditas para realizar a locação do</p>
             <p>{image.imageData.title}</p>
-            <Link
-              key={image.imageData.id}
-              to={`../product/${image.imageData.id}/reserve`}
-              id="LinkToReserve"
-            >
-              <button
-                className={styles.buttonReservation}
-                id="buttonReservation"
+            {auth === '' ? (
+              <Link to={`/login`} onClick={alertYouLogin}>
+                <button
+                  className={styles.buttonReservation}
+                  id="buttonReservation"
+                >
+                  Iniciar Reserva
+                </button>
+              </Link>
+            ) : (
+              <Link
+                key={image.imageData.id}
+                to={`../product/${image.imageData.id}/reserve`}
+                id="LinkToReserve"
               >
-                Iniciar Reserva
-              </button>
-            </Link>
+                <button
+                  className={styles.buttonReservation}
+                  id="buttonReservation"
+                >
+                  Iniciar Reserva
+                </button>
+              </Link>
+            )}
           </div>
         </div>
         <div>

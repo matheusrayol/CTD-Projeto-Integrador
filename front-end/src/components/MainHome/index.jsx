@@ -4,32 +4,25 @@ import 'react-calendar/dist/Calendar.css'
 import { Calender } from './Calender'
 import { SelectLocation } from '../Select'
 // import { CardCategoria } from '../CardCategoria'
+import { Banner } from '../Banner'
 import { CardProduct } from '../CardMainHome'
 import './style.sass'
 
-// usando local até corrigir algumas mudanças dos dados no bd
-// import { json } from '../../json/infoProducts'
-
 export function MainHome() {
+  //Const's calendario
   const [startDate, setStartDate] = useState([null, null])
   const [selectDate, setSelectDate] = useState(false)
   const [showCalendar, setShowCalendar] = useState(false)
   const [showDestination, setShowDestination] = useState(false)
 
-  const [searchDestination, setSearchDestination] = useState('')
-  const [category, setCategory] = useState([])
-  const [location, setLocation] = useState([])
-  const [products, setProducts] = useState([])
-
+  //Const's cards/filtros
   const [objectFilter, setObjectFilter] = useState([])
   const [listProduct, setListProduct] = useState(true)
-  const [selectCity, setSelectCity] = useState(false)
-
-  const [selectCategory, setSelectCategory] = useState(false)
-
   const [inputSelect, setInputSelect] = useState(true)
   const [valueInputSelect, setValueInputSelect] = useState('')
 
+  //Fetch de todos os card's de categoria --> não está sendo utilizado ainda.
+  const [category, setCategory] = useState([])
   useEffect(() => {
     fetch('/category/all').then(res => {
       res.json().then(data => {
@@ -38,6 +31,8 @@ export function MainHome() {
     })
   }, [])
 
+  //Fetch de todas as cidades
+  const [location, setLocation] = useState([])
   useEffect(() => {
     if (showDestination) {
       fetch('/city/all').then(res => {
@@ -48,6 +43,8 @@ export function MainHome() {
     }
   }, [showDestination])
 
+  //Fetch de todos os produtos
+  const [products, setProducts] = useState([])
   useEffect(() => {
     fetch('/product/all').then(res => {
       res.json().then(data => {
@@ -56,6 +53,18 @@ export function MainHome() {
     })
   }, [])
 
+  //Fetch para pegar todas as cidades por id
+  function filterApi(id) {
+    fetch(`/product/all?cityId=${id}`).then(res => {
+      res.json().then(data => {
+        setProducts([])
+        setProducts(data)
+        console.log(data)
+      })
+    })
+  }
+
+  // const pega o valor do input selecionado
   const getValueInputSelect = event => {
     setValueInputSelect(event.target.value)
     if (valueInputSelect.length >= 1) {
@@ -65,71 +74,31 @@ export function MainHome() {
     }
   }
 
-  const teste = nome => {
-    setValueInputSelect(nome)
+  // const que fecha o toggle caso o input escolhido tenha sido clicado
+  const inputSelected = cityName => {
+    setValueInputSelect(cityName)
     setShowDestination(false)
   }
 
-  const filterInputSelect = location.filter(
-    object =>
-      object.name.toLowerCase().includes(valueInputSelect.toLowerCase()) ||
-      object.country.toLowerCase().includes(valueInputSelect.toLowerCase())
-  )
-
-  const filterProductBySelect = () => {
-    const filterObjects = products.filter(object =>
-      object.city.name.toLowerCase().includes(valueInputSelect.toLowerCase())
-    )
-    return filterObjects
-  }
-
-  // useEffect(() => {
-  //   fetch(`/product/all?cityId=${id}`).then(res => {
-  //     res.json().then(data => {
-  //       setProducts(data)
-  //     })
-  //   })
-  // }, [])
-  // const filterProductByCategory = currentCategory => {
-  //   const filterCategory = json.filter(
-  //     object => object.category === currentCategory
-  //   )
-  //   setObjectFilter(filterCategory)
-  //   setListProduct(false)
-  //   setSelectCategory(true)
-  //   setSelectCity(false)
-  // }
-
-  const searchDestinationSelect = event => {
-    event.preventDefault()
-    if (valueInputSelect !== null) {
-      setSearchDestination(valueInputSelect)
-      const objFilter = filterProductBySelect()
-      setObjectFilter(objFilter)
-      setListProduct(false)
-      setValueInputSelect('')
-      setSelectCity(true)
-      setSelectCategory(false)
-    } else {
-      console.log('batatou parça')
-    }
-  }
-
+  // const que realiza o fechamento do calendario
   function toggleCalendar() {
     setShowCalendar(!showCalendar)
     setShowDestination(false)
   }
 
+  // const que realiza a abertura do calendario
   function toogleLocation() {
     setShowDestination(!showDestination)
   }
 
-  const dataSelecionada = range => {
+  // const que seleciona a data do calendario selecionado
+  const selectedDate = range => {
     setStartDate(range)
     setSelectDate(true)
     setShowCalendar(false)
   }
 
+  // const para formatação e formas do alcance do calendario
   const formatDate = range => {
     if (!range) {
       return ''
@@ -169,28 +138,18 @@ export function MainHome() {
                 }
               >
                 {inputSelect ? <h3>Locais para retirada</h3> : ''}
-                {showDestination && inputSelect
-                  ? location.slice(0, 4).map((location, index) => (
-                      <div className="location-list">
-                        <SelectLocation
-                          id={index.length}
-                          data={location}
-                          onSelectDestination={currentDestination =>
-                            teste(currentDestination)
-                          }
-                        />
-                      </div>
-                    ))
-                  : filterInputSelect.slice(0, 4).map(filter => (
-                      <div className="location-list">
-                        <SelectLocation
-                          data={filter}
-                          onSelectDestination={currentDestination =>
-                            teste(currentDestination)
-                          }
-                        />
-                      </div>
-                    ))}
+                {location.map((location, index) => (
+                  <div className="location-list">
+                    <SelectLocation
+                      id={index.length}
+                      data={location}
+                      // onSelectDestination={currentDestination =>
+                      //   inputSelected(currentDestination)
+                      // }
+                      onSelectDestination={() => filterApi(location.id)}
+                    />
+                  </div>
+                ))}
               </div>
             </div>
             <div className="input-calendar" id="input-calendar">
@@ -210,23 +169,18 @@ export function MainHome() {
                 {showCalendar && (
                   <Calender
                     id={startDate}
-                    onSelectedData={dataSelecionada}
+                    onSelectedData={selectedDate}
                     selectedRange={startDate}
                   />
                 )}
               </div>
             </div>
-            <button
-              id="submit-search"
-              className="submit-search"
-              onClick={event => searchDestinationSelect(event)}
-            >
+            <button id="submit-search" className="submit-search">
               Buscar
             </button>
           </div>
         </div>
       </div>
-
       <section className="container-diferential" id="container-diferential">
         <div className="list-diferentials">
           <p>Melhor preço garantido</p>
@@ -245,33 +199,20 @@ export function MainHome() {
         <h2>Buscar por Categoria/Modelo</h2>
         <div className="list-categories" id="list-categories">
           {category.map((categories, index) => (
-            <CardCategoria
-              id={index}
-              data={categories}
-              onSelectCategory={currentCategory =>
-                filterProductByCategory(currentCategory)
-              }
-            />
+            <CardCategoria key={index} id={index} data={categories} />
           ))}
         </div>
       </section> */}
+      <Banner />
       <section className="container-product" id="container-product">
-        {listProduct ? (
-          <h2>Recomendações para você</h2>
-        ) : selectCategory ? (
-          <h2>{objectFilter[0].category}</h2>
-        ) : selectCity ? (
-          <h2>{objectFilter[0].city}</h2>
-        ) : (
-          ''
-        )}
+        <h2>Recomendações para você</h2>
         <div className="list-products" id="list-products">
           {listProduct
             ? products.map((products, index) => (
-                <CardProduct id={index.length} data={products} />
+                <CardProduct key={index} id={index.length} data={products} />
               ))
             : objectFilter.map((products, index) => (
-                <CardProduct id={index.length} data={products} />
+                <CardProduct key={index} id={index.length} data={products} />
               ))}
         </div>
       </section>

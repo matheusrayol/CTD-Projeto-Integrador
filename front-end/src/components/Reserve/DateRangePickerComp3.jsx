@@ -32,6 +32,32 @@ const DateRangePickerComp3 = ({ onRangeChange }) => {
     }
   }
 
+  const days = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb']
+  const months = [
+    'Janeiro',
+    'Fevereiro',
+    'Março',
+    'Abril',
+    'Maio',
+    'Junho',
+    'Julho',
+    'Agosto',
+    'Setembro',
+    'Outubro',
+    'Novembro',
+    'Dezembro'
+  ]
+
+  const locale = {
+    localize: {
+      day: n => days[n],
+      month: n => months[n]
+    },
+    formatLong: {
+      date: () => 'dd/mm/yyyy'
+    }
+  }
+
   return (
     <div className="calendarWrap3" id="calendarWrap3">
       <input
@@ -45,6 +71,7 @@ const DateRangePickerComp3 = ({ onRangeChange }) => {
 
       <div ref={refOne}>
         <DateRangePicker
+          locale={locale}
           onChange={handleRangeChange}
           editableDateInputs={true}
           moveRangeOnFirstSelection={false}

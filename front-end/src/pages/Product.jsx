@@ -5,6 +5,8 @@ import Footer from '../components/Footer'
 import CardProduct from '../components/CardProduct'
 import { useParams } from 'react-router'
 
+import { RotatingLines } from 'react-loader-spinner'
+
 export default function Product() {
   const params = useParams()
   const [product, setProduct] = useState(null)
@@ -26,7 +28,15 @@ export default function Product() {
         {product ? (
           <CardProduct key={product.id} imageData={product} />
         ) : (
-          <div className={styles.spinner}>Loading...</div>
+          <div className={styles.spinner}>
+            <RotatingLines
+              strokeColor="#499167"
+              strokeWidth="5"
+              animationDuration="0.75"
+              width="96"
+              visible={true}
+            />
+          </div>
         )}
         <Footer />
       </div>

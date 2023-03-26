@@ -42,4 +42,31 @@ input.inputBox2 {
         display: none;
 
     }
+
+    .rdrDateDisplayWrapper {
+        background-color: rgb(133, 171, 133);
+        border: 1px solid $background-three;
+        border-top-left-radius: 0.5rem;
+        border-top-right-radius: 0.5rem;
+    }
+
+    .rdrMonths {
+        display: flex;
+        border: 1px solid $background-three;
+        border-bottom-left-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
+    }
+
+    .rdrStartEdge,
+    .rdrEndEdge {
+        background-color: rgb(71, 103, 71);
+    }
+
+    .rdrDay {
+        background: $background-three2;
+    }
+
+    .rdrInRange {
+        background: rgb(133, 171, 133);
+    }
 }

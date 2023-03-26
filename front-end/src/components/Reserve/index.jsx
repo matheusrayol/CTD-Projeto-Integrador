@@ -3,6 +3,7 @@ import styles from './Reserve.module.scss'
 import DateRangePickerComp3 from './DateRangePickerComp3'
 import { Link } from 'react-router-dom'
 import { addDays, format } from 'date-fns'
+import { useAuth } from '../../hooks/useAuth'
 
 export default function Reserve(image) {
   const [startDate, setStartDate] = useState(new Date())
@@ -12,6 +13,8 @@ export default function Reserve(image) {
     setStartDate(newRange.startDate)
     setEndDate(newRange.endDate)
   }
+
+  const { name, surname, email } = useAuth()
 
   return (
     <div className={styles.item} key={image.imageData.id}>
@@ -34,6 +37,8 @@ export default function Reserve(image) {
                   Nome
                 </label>
                 <input
+                  disabled
+                  value={name}
                   type="text"
                   className={styles.cardBody__grid__sectionClientDates__input}
                 />
@@ -50,6 +55,8 @@ export default function Reserve(image) {
                   Sobrenome
                 </label>
                 <input
+                  disabled
+                  value={surname}
                   type="text"
                   className={styles.cardBody__grid__sectionClientDates__input}
                 />
@@ -66,7 +73,9 @@ export default function Reserve(image) {
                   Email
                 </label>
                 <input
+                  disabled
                   type="text"
+                  value={email}
                   className={styles.cardBody__grid__sectionClientDates__input}
                 />
               </div>
@@ -101,6 +110,12 @@ export default function Reserve(image) {
           <div className={styles.cardBody__grid__sectionCardReserve}>
             <div className={styles.cardBody__grid__sectionCardReserve__card}>
               <div className={styles.item} key={image.imageData.id}>
+                <div className={styles.item__buttonBack}>
+                  <Link to={`/product/${image.imageData.id}`}>
+                    <button>Voltar</button>
+                  </Link>
+                </div>
+
                 <div className={styles.cardBody}>
                   <div>
                     <h2>Detalhes da reserva</h2>
