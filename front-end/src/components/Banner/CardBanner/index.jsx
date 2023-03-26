@@ -3,19 +3,19 @@ import { motion } from 'framer-motion'
 import styles from './CardBanner.module.scss'
 import { Link } from 'react-router-dom'
 
-export const CardBanner = image => {
+export const CardBanner = category => {
   return (
-    <motion.div className={styles.item} key={image.imageData.id}>
+    <motion.div className={styles.item} key={category.imageData.id}>
       <div className={styles.cardBody}>
         <div className={styles.cardImg}>
           <img
-            src={image.imageData.images[0].urlImage}
-            alt={image.imageData.name}
+            src={category.imageData.urlImage}
+            alt={category.imageData.qualification}
           />
         </div>
-        <Link key={image.id} to={`../product/${image.imageData.id}`}>
-          <p>{image.imageData.name}</p>
-          <p>{image.imageData.category.qualification}</p>
+        <Link key={category.id}>
+          <p>{category.imageData.descriptions}</p>
+          <p>{category.imageData.qualification}</p>
         </Link>
       </div>
     </motion.div>
