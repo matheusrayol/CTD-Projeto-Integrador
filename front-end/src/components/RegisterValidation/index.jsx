@@ -1,10 +1,8 @@
 import { React, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styles from './RegisterValidation.module.scss'
-import { useAuth } from '../../hooks/useAuth'
 
 const RegisterValidation = () => {
-  const { saveToken } = useAuth()
   const navigate = useNavigate()
 
   const [name, setName] = useState('')
@@ -120,12 +118,11 @@ const RegisterValidation = () => {
       fetch(`/user`, requestConfiguration).then(response => {
         if (response.ok) {
           response.json().then(data => {
-            saveToken(data.token)
             alert('Cadastro realizado com sucesso!')
             navigate('/login')
           })
         } else {
-          if(response.status === 400 ){
+          if (response.status === 400) {
             response.json().then(data => {
               alert(data.mensagem)
             })
@@ -169,9 +166,8 @@ const RegisterValidation = () => {
               required
               onChange={event => validateName(event.target.value)}
               id="inputValidationNome"
-              className={`${styles.inputValidation} ${
-                formError.nameError ? `${styles.formError}` : ''
-              }`}
+              className={`${styles.inputValidation} ${formError.nameError ? `${styles.formError}` : ''
+                }`}
             />
           </div>
           <div
@@ -185,9 +181,8 @@ const RegisterValidation = () => {
               required
               onChange={event => validateSurname(event.target.value)}
               id="inputValidationSobrenome"
-              className={`${styles.inputValidation} ${
-                formError.surnameError ? `${styles.formError}` : ''
-              }`}
+              className={`${styles.inputValidation} ${formError.surnameError ? `${styles.formError}` : ''
+                }`}
             />
           </div>
         </div>
@@ -202,9 +197,8 @@ const RegisterValidation = () => {
             required
             onChange={event => validateEmail(event.target.value)}
             id="inputValidationEmail"
-            className={`${styles.inputValidation} ${
-              formError.emailError ? `${styles.formError}` : ''
-            }`}
+            className={`${styles.inputValidation} ${formError.emailError ? `${styles.formError}` : ''
+              }`}
           />
         </div>
         <div
@@ -218,9 +212,8 @@ const RegisterValidation = () => {
             required
             onChange={event => validatePassword(event.target.value)}
             id="inputValidationSenha"
-            className={`${styles.inputValidation} ${
-              formError.passwordError ? `${styles.formError}` : ''
-            }`}
+            className={`${styles.inputValidation} ${formError.passwordError ? `${styles.formError}` : ''
+              }`}
           />
         </div>
         <div
@@ -234,9 +227,8 @@ const RegisterValidation = () => {
             required
             onChange={event => validateRepassword(event.target.value)}
             id="inputValidationReSenha"
-            className={`${styles.inputValidation} ${
-              formError.repasswordError ? `${styles.formError}` : ''
-            }`}
+            className={`${styles.inputValidation} ${formError.repasswordError ? `${styles.formError}` : ''
+              }`}
           />
         </div>
         {formError.nameError && (

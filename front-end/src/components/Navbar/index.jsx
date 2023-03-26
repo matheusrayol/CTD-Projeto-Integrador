@@ -76,7 +76,7 @@ function Navbar() {
                     <img src={imgAvatar} alt="imagem Avatar" />
                     <p>
                       <Link id="NameUserWhenLogged" to="/accountuser">
-                        {name}
+                        Olá, {name.toUpperCase()}!
                       </Link>
                     </p>
                   </div>

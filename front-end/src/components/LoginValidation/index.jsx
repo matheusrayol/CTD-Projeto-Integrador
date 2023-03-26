@@ -70,7 +70,7 @@ const LoginValidation = () => {
         if (response.ok) {
           response.json().then(data => {
             saveToken(data.jwt)
-            saveName(`${data.name} ${data.surname}`)
+            saveName(`${data.name}`)
             alert('Login realizado com sucesso!')
             navigate('/home')
             refreshPage()
