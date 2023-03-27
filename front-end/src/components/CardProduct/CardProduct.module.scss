@@ -54,6 +54,7 @@
         transition: all 0.3s ease-in-out;
         font-size: 1rem;
         font-weight: 700;
+        cursor: pointer;
 
         &:hover {
           color: $text-color-one;
@@ -400,6 +401,7 @@
           transition: all 0.3s ease-in-out;
           font-size: 1rem;
           font-weight: 700;
+          cursor: pointer;
 
           &:hover {
             color: $text-color-one;
@@ -439,6 +441,7 @@
         font-size: 1rem;
         font-weight: 700;
         width: fit-content;
+        cursor: pointer;
 
         &:hover {
           color: $text-color-two;
@@ -478,6 +481,7 @@
         font-size: 1rem;
         font-weight: 700;
         width: fit-content;
+        cursor: pointer;
 
         &:hover {
           color: $text-color-two;

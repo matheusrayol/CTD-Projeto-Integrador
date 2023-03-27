@@ -33,7 +33,7 @@ export default function Product() {
               strokeColor="#499167"
               strokeWidth="5"
               animationDuration="0.75"
-              width="96"
+              width="48"
               visible={true}
             />
           </div>

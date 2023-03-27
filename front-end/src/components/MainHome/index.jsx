@@ -1,29 +1,28 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from 'react'
-import 'react-calendar/dist/Calendar.css'
 import { Calender } from './Calender'
 import { SelectLocation } from '../Select'
-// import { CardCategoria } from '../CardCategoria'
-import { Banner } from '../Banner'
+import { CardCategory } from '../CardCategory'
 import { CardProduct } from '../CardMainHome'
-import './style.sass'
 import { format } from 'date-fns'
+import './style.sass'
+import 'react-calendar/dist/Calendar.css'
 
 export function MainHome() {
   //Const's calendario
-  const [startDate, setStartDate] = useState([null, null])
   const [selectDate, setSelectDate] = useState(false)
   const [showCalendar, setShowCalendar] = useState(false)
   const [showDestination, setShowDestination] = useState(false)
-  const [cityId, setCityId] = useState('')
 
   //Const's cards/filtros
   const [objectFilter, setObjectFilter] = useState([])
   const [listProduct, setListProduct] = useState(true)
   const [inputSelect, setInputSelect] = useState(true)
   const [valueInputSelect, setValueInputSelect] = useState('')
+  const [inputCategory, setInputCategory] = useState(true)
+  const [valueInputCategory, setValueInputCategory] = useState('')
 
-  //Fetch de todos os card's de categoria --> não está sendo utilizado ainda.
+  //Fetch de todos os card's de categoria
   const [category, setCategory] = useState([])
   useEffect(() => {
     fetch('/category/all').then(res => {
@@ -55,22 +54,26 @@ export function MainHome() {
     })
   }, [])
 
-
+  // Função responsavel pelo filtro por cidade e/ou data
+  const [startDate, setStartDate] = useState([null, null])
+  const [cityId, setCityId] = useState('')
   function submit(event) {
     event.preventDefault()
-    
-    if(startDate[0] === null && cityId !== "") {
+
+    if (startDate[0] === null && cityId !== '') {
       fetch(`/product/all?cityId=${cityId}`).then(res => {
         res.json().then(data => {
           setProducts(data)
         })
       })
     }
-    if(startDate[0] !== null && startDate[1] !== null && cityId !== "") {
+    if (startDate[0] !== null && startDate[1] !== null && cityId !== '') {
       const startDateInput = format(startDate[0], 'yyyy-MM-dd')
       const endDateInput = format(startDate[1], 'yyyy-MM-dd')
 
-      fetch(`/product/availability?cityId=${cityId}&startDate=${startDateInput}&endDate=${endDateInput}`).then(res => {
+      fetch(
+        `/product/availability?cityId=${cityId}&startDate=${startDateInput}&endDate=${endDateInput}`
+      ).then(res => {
         res.json().then(data => {
           setProducts(data)
         })
@@ -78,7 +81,24 @@ export function MainHome() {
     }
   }
 
-  // const pega o valor do input selecionado
+  //Fetch para pegar filtrar por id da categoria o produto
+  const [categoryId, setCategoryId] = useState('')
+  function filterCategory(id) {
+    console.log(categoryId)
+    fetch(`/product/all?categoryId=${id}`).then(res => {
+      res.json().then(data => {
+        setProducts(data)
+      })
+    })
+  }
+
+  // const que fecha o toggle caso o input escolhido tenha sido clicado
+  const inputSelected = cityName => {
+    setValueInputSelect(cityName)
+    setShowDestination(false)
+  }
+
+  //
   const getValueInputSelect = event => {
     setValueInputSelect(event.target.value)
     if (valueInputSelect.length >= 1) {
@@ -86,12 +106,6 @@ export function MainHome() {
     } else {
       setInputSelect(true)
     }
-  }
-
-  // const que fecha o toggle caso o input escolhido tenha sido clicado
-  const inputSelected = cityName => {
-    setValueInputSelect(cityName)
-    setShowDestination(false)
   }
 
   // const que realiza o fechamento do calendario
@@ -157,11 +171,10 @@ export function MainHome() {
                     <SelectLocation
                       id={index.length}
                       data={location}
-                      onSelectDestination={(currentDestination) => {
+                      onSelectDestination={currentDestination => {
                         inputSelected(currentDestination)
                         setCityId(location.id)
-                      }
-                      }
+                      }}
                     />
                   </div>
                 ))}
@@ -190,7 +203,11 @@ export function MainHome() {
                 )}
               </div>
             </div>
-            <button id="submit-search" className="submit-search" onClick={submit}>
+            <button
+              id="submit-search"
+              className="submit-search"
+              onClick={submit}
+            >
               Buscar
             </button>
           </div>
@@ -210,25 +227,30 @@ export function MainHome() {
           <p>Amigo do ambiente e economia para você</p>
         </div>
       </section>
-      {/* <section className="container-category" id="container-category">
-        <h2>Buscar por Categoria/Modelo</h2>
+      <section className="container-category" id="container-category">
+        <h2>Procure as melhores opções por categoria</h2>
         <div className="list-categories" id="list-categories">
-          {category.map((categories, index) => (
-            <CardCategoria key={index} id={index} data={categories} />
+          {category.map((image, index) => (
+            <CardCategory
+              onSelectCategory={currentCategory => {
+                filterCategory(currentCategory)
+              }}
+              key={index}
+              imageData={image}
+            />
           ))}
         </div>
-      </section> */}
-      <Banner />
+      </section>
       <section className="container-product" id="container-product">
         <h2>Recomendações para você</h2>
         <div className="list-products" id="list-products">
           {listProduct
             ? products.map((products, index) => (
-              <CardProduct key={index} id={index.length} data={products} />
-            ))
+                <CardProduct key={index} id={index.length} data={products} />
+              ))
             : objectFilter.map((products, index) => (
-              <CardProduct key={index} id={index.length} data={products} />
-            ))}
+                <CardProduct key={index} id={index.length} data={products} />
+              ))}
         </div>
       </section>
     </div>
