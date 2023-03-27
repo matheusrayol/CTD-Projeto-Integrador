@@ -68,7 +68,7 @@ public class CategoryController {
 
   @PutMapping("/update/{id}")
   public ResponseEntity<CategoryResponse> updatedCategoryById(@PathVariable Long id,
-                                                              @RequestBody CategoryRequest categoryRequest) {
+                                                              @RequestBody @Valid CategoryRequest categoryRequest) {
     log.info(START_REQUEST + "[PUT] " + BASE_URL + "/update/" + id + " [BODY]" +  categoryRequest.toString());
     CategoryEntity categoryEntity = categoryServiceImpl.updatedCategory(id, categoryRequest);
     return ResponseEntity.ok(categoryMapper.toCategoryResponse(categoryEntity));

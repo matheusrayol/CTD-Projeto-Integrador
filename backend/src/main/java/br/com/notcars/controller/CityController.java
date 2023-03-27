@@ -7,6 +7,7 @@ import br.com.notcars.model.CityEntity;
 import br.com.notcars.service.CityService;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -34,7 +35,7 @@ public class CityController {
   }
 
   @PostMapping("/create")
-  public ResponseEntity<CityResponse> createCity(@RequestBody CityRequest cityRequest) {
+  public ResponseEntity<CityResponse> createCity(@RequestBody @Valid CityRequest cityRequest) {
     log.info(START_REQUEST + "[POST] " + BASE_URL + "/create" +  " [BODY]" +  cityRequest.toString());
     CityEntity city = cityServiceImpl.createCity(cityRequest);
     return ResponseEntity.status(HttpStatus.CREATED).body(cityMapper.toResponse(city));
