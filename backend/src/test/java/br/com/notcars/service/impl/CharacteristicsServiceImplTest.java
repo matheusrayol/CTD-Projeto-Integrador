@@ -2,7 +2,6 @@ package br.com.notcars.service.impl;
 
 import br.com.notcars.model.CharacteristicsEntity;
 import br.com.notcars.repository.CharacteristicsRepository;
-import lombok.var;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -18,6 +17,7 @@ import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
+@DisplayName("CharacteristicsServiceImpl")
 class CharacteristicsServiceImplTest {
 
     @Mock
@@ -29,13 +29,15 @@ class CharacteristicsServiceImplTest {
     @Nested
     public class FindAllCharacteristics {
         @Test
+        @DisplayName("Deve retornar a lista de características quando a lista de Características não estiver vazia")
         void shouldReturnList_whenListOfCharacteristicsNotEmpty() {
             // Arrange
             when(characteristicsRepository.findAllById(anyList()))
                     .thenReturn(List.of(mock(CharacteristicsEntity.class)));
 
             // Act
-            var result = characteristicsService.findAllById(List.of(1L));
+            List<CharacteristicsEntity> result;
+            result = characteristicsService.findAllById(List.of(1L));
 
             // Assert
             assertEquals(1, result.size());
@@ -43,12 +45,14 @@ class CharacteristicsServiceImplTest {
         }
 
         @Test
+        @DisplayName("Deve retornar uma lista vazia quando a lista de Cidades estiver vazia")
         void shouldReturnListEmpty_whenListOfCityIsEmpty() {
             // Arrange
             when(characteristicsRepository.findAllById(anyList())).thenReturn(List.of());
 
             // Act
-            var result = characteristicsService.findAllById(List.of(1L));
+            List<CharacteristicsEntity> result;
+            result = characteristicsService.findAllById(List.of(1L));
 
             // Assert
             assertEquals(0, result.size());
@@ -57,51 +61,78 @@ class CharacteristicsServiceImplTest {
     }
 
     @Test
-    @DisplayName("should return an empty list when given a list of invalid IDs")
+    @DisplayName("Deve retornar uma lista vazia quando a lista de IDs for nula")
     void findAllByIdWithInvalidIds() {
+        // Arrange
         when(characteristicsRepository.findAllById(anyList())).thenReturn(List.of());
-        var result = characteristicsService.findAllById(List.of(1L));
+
+        // Act
+        List<CharacteristicsEntity> result;
+        result = characteristicsService.findAllById(List.of(1L));
+
+        // Assert
         assertEquals(0, result.size());
         verify(characteristicsRepository, timeout(1)).findAllById(anyList());
     }
 
     @Test
-    @DisplayName("should return an empty list when given an empty list of IDs")
+    @DisplayName("Deve retornar uma lista vazia quando a lista de IDs for nula")
     void findAllByIdWithEmptyIdList() {
+        // Arrange
         when(characteristicsRepository.findAllById(anyList())).thenReturn(List.of());
-        var result = characteristicsService.findAllById(List.of());
+
+        // Act
+        List<CharacteristicsEntity> result;
+        result = characteristicsService.findAllById(List.of());
+
+        // Assert
         assertEquals(0, result.size());
         verify(characteristicsRepository, timeout(1)).findAllById(anyList());
     }
 
     @Test
-    @DisplayName("should return a list of characteristics when given a list of valid IDs")
+    @DisplayName("Deve retornar uma lista de Características com IDs válidos quando for dada uma lista de IDs válidos")
     void findAllByIdWithValidIds() {
+        // Arrange
         List<Long> characteristicsIdList = List.of(1L, 2L, 3L);
         when(characteristicsRepository.findAllById(characteristicsIdList))
                 .thenReturn(List.of(mock(CharacteristicsEntity.class)));
 
+        // Act
         List<CharacteristicsEntity> result =
                 characteristicsService.findAllById(characteristicsIdList);
 
+        // Assert
         assertEquals(1, result.size());
         verify(characteristicsRepository, timeout(1)).findAllById(characteristicsIdList);
     }
 
     @Test
-    @DisplayName(
-            "should return a list of characteristics with only valid IDs when given a list of mixed valid and invalid IDs")
+    @DisplayName("Deve retornar uma lista de Características com IDs válidos quando for dada uma lista" +
+            " de IDs válidos e inválidos")
     void findAllByIdWithMixedValidAndInvalidIds() {
-        var validId = 1L;
-        var invalidId = 2L;
-        var validCharacteristics = new CharacteristicsEntity();
+        // Arrange
+        long validId;
+        validId = 1L;
+
+        long invalidId;
+        invalidId = 2L;
+
+        CharacteristicsEntity validCharacteristics;
+        validCharacteristics = new CharacteristicsEntity();
         validCharacteristics.setId(validId);
-        var characteristicsIdList = List.of(validId, invalidId);
+
+        List<Long> characteristicsIdList;
+        characteristicsIdList = List.of(validId, invalidId);
 
         when(characteristicsRepository.findAllById(characteristicsIdList))
                 .thenReturn(List.of(validCharacteristics));
-        var result = characteristicsService.findAllById(characteristicsIdList);
 
+        // Act
+        List<CharacteristicsEntity> result;
+        result = characteristicsService.findAllById(characteristicsIdList);
+
+        // Assert
         assertEquals(1, result.size());
         assertEquals(validId, result.get(0).getId());
     }

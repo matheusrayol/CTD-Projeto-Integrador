@@ -6,7 +6,6 @@ import br.com.notcars.exceptions.NotFoundException;
 import br.com.notcars.mapper.CategoryMapper;
 import br.com.notcars.model.CategoryEntity;
 import br.com.notcars.repository.CategoryRepository;
-import lombok.var;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -24,6 +23,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
+@DisplayName("CategoryServiceImpl")
 class CategoryServiceImplTest {
     @Mock
     private CategoryRepository categoryRepository;
@@ -35,15 +35,17 @@ class CategoryServiceImplTest {
     private CategoryServiceImpl categoryService;
 
     @Nested
-    class CreateCategory {
+    public class CreateCategory {
         @Test
+        @DisplayName("Uma categoria deve ser criada com sucesso")
         void shouldCreateCategorySuccessfully() {
             // Arrange
             when(categoryMapper.toCategoryEntity(any())).thenReturn(mock(CategoryEntity.class));
             when(categoryRepository.save(any())).thenReturn(mock(CategoryEntity.class));
 
             // Act
-            var result = categoryService.createCategory(mock(CategoryRequest.class));
+            CategoryEntity result;
+            result = categoryService.createCategory(mock(CategoryRequest.class));
 
             // Assert
             assertNotNull(result);
@@ -55,12 +57,14 @@ class CategoryServiceImplTest {
     @Nested
     public class FindAllCategory {
         @Test
+        @DisplayName("Deve retornar uma lista quando a lista de Categorias não for vazia")
         void shouldReturnList_whenListOfCategoryNotEmpty() {
             // Arrange
             when(categoryRepository.findAll()).thenReturn(List.of(mock(CategoryEntity.class)));
 
             // Act
-            var result = categoryService.findAllCategory();
+            List<CategoryEntity> result;
+            result = categoryService.findAllCategory();
 
             // Assert
             assertEquals(1, result.size());
@@ -68,12 +72,14 @@ class CategoryServiceImplTest {
         }
 
         @Test
+        @DisplayName("Deve retornar uma lista vazia quando a lista de Categorias for vazia")
         void shouldReturnListEmpty_whenListOfCategoryIsEmpty() {
             // Arrange
             when(categoryRepository.findAll()).thenReturn(List.of());
 
             // Act
-            var result = categoryService.findAllCategory();
+            List<CategoryEntity> result;
+            result = categoryService.findAllCategory();
 
             // Assert
             assertEquals(0, result.size());
@@ -82,15 +88,17 @@ class CategoryServiceImplTest {
     }
 
     @Nested
-    class FindCategoryById {
+    public class FindCategoryById {
         @Test
+        @DisplayName("Deve localizar uma categoria por ID quando o ID for válido")
         void shouldReturnCategory_whenIdIsValid() {
             // Arrange
             when(categoryRepository.findById(anyLong()))
                     .thenReturn(Optional.of(mock(CategoryEntity.class)));
 
             // Act
-            var result = categoryService.findCategoryById(1L);
+            CategoryEntity result;
+            result = categoryService.findCategoryById(1L);
 
             // Assert
             assertNotNull(result);
@@ -98,17 +106,16 @@ class CategoryServiceImplTest {
         }
 
         @Test
+        @DisplayName("Deve retornar um erro quando a categoria não for encontrada")
         void shouldReturnError_whenCategoryNotFound() {
             // Arrange
             when(categoryRepository.findById(anyLong())).thenReturn(Optional.empty());
 
             // Act
-            var result =
-                    assertThrows(
-                            NotFoundException.class,
-                            () -> {
-                                categoryService.findCategoryById(1L);
-                            });
+            NotFoundException result;
+            result = assertThrows(
+                    NotFoundException.class,
+                    () -> categoryService.findCategoryById(1L));
 
             // Assert
             assertThat(result.getTitle()).isEqualTo("category_not_found");
@@ -117,8 +124,9 @@ class CategoryServiceImplTest {
     }
 
     @Nested
-    class DeleteCategoryById {
+    public class DeleteCategoryById {
         @Test
+        @DisplayName("A categoria deve ser excluída com sucesso caso exista")
         void shouldDeleteCategory_whenCategoryExists() {
             // Arrange
             when(categoryRepository.findById(anyLong()))
@@ -133,17 +141,16 @@ class CategoryServiceImplTest {
         }
 
         @Test
+        @DisplayName("Um erro deve ser exibido ao tentar excluir uma categoria inexistente")
         void shouldReturnError_whenCategoryNotExists() {
             // Arrange
             when(categoryRepository.findById(anyLong())).thenReturn(Optional.empty());
 
             // Act
-            var result =
-                    assertThrows(
-                            NotFoundException.class,
-                            () -> {
-                                categoryService.deleteCategoryById(1L);
-                            });
+            NotFoundException result;
+            result = assertThrows(
+                    NotFoundException.class,
+                    () -> categoryService.deleteCategoryById(1L));
 
             // Assert
             assertThat(result.getTitle()).isEqualTo("category_not_found");
@@ -153,8 +160,9 @@ class CategoryServiceImplTest {
     }
 
     @Nested
-    class UpdatedCategory {
+    public class UpdatedCategory {
         @Test
+        @DisplayName("Uma categoria deve ser atualizada se a ID for válida")
         void shouldUpdateCategory_whenIdIsValid() {
             // Arrange
             when(categoryRepository.findById(anyLong()))
@@ -164,7 +172,8 @@ class CategoryServiceImplTest {
                     .thenReturn(mock(CategoryEntity.class));
 
             // Act
-            var result = categoryService.updatedCategory(1L, mock(CategoryRequest.class));
+            CategoryEntity result;
+            result = categoryService.updatedCategory(1L, mock(CategoryRequest.class));
 
             // Assert
             assertNotNull(result);
@@ -173,17 +182,16 @@ class CategoryServiceImplTest {
         }
 
         @Test
+        @DisplayName("Deve retornar um erro caso a ID da categoria não seja válida")
         void shouldReturnError_whenIdIsNotValid() {
             // Arrange
             when(categoryRepository.findById(anyLong())).thenReturn(Optional.empty());
 
             // Act
-            var result =
-                    assertThrows(
-                            NotFoundException.class,
-                            () -> {
-                                categoryService.updatedCategory(1L, mock(CategoryRequest.class));
-                            });
+            NotFoundException result;
+            result = assertThrows(
+                    NotFoundException.class,
+                    () -> categoryService.updatedCategory(1L, mock(CategoryRequest.class)));
 
             // Assert
             assertThat(result.getTitle()).isEqualTo("category_not_found");
@@ -193,13 +201,16 @@ class CategoryServiceImplTest {
     }
 
     @Test
-    @DisplayName("should return all categories when findAllCategory is called")
+    @DisplayName("Deve retornar todas as categorias")
     void findAllCategoryReturnsAllCategories() {
-        var categoryEntity = mock(CategoryEntity.class);
-        var categoryEntityList = List.of(categoryEntity);
+        CategoryEntity categoryEntity;
+        categoryEntity = mock(CategoryEntity.class);
+        List<CategoryEntity> categoryEntityList;
+        categoryEntityList = List.of(categoryEntity);
         when(categoryRepository.findAll()).thenReturn(categoryEntityList);
 
-        var result = categoryService.findAllCategory();
+        List<CategoryEntity> result;
+        result = categoryService.findAllCategory();
 
         assertEquals(categoryEntityList, result);
         verify(categoryRepository, times(1)).findAll();

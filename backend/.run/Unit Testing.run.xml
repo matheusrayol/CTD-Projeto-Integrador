@@ -6,10 +6,6 @@
         <option name="PATTERN" value="br.com.notcars.service.*" />
         <option name="ENABLED" value="true" />
       </pattern>
-      <pattern>
-        <option name="PATTERN" value="br.com.notcars.controller.*" />
-        <option name="ENABLED" value="true" />
-      </pattern>
     </extension>
     <option name="PACKAGE_NAME" value="br.com.notcars" />
     <option name="MAIN_CLASS_NAME" value="" />

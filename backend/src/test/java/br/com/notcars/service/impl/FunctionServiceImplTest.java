@@ -16,6 +16,7 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
+@DisplayName("FunctionServiceImpl")
 class FunctionServiceImplTest {
 
     @Mock
@@ -25,14 +26,14 @@ class FunctionServiceImplTest {
     private FunctionServiceImpl functionService;
 
     @Test
-    @DisplayName("should throw a NotFoundException when the id is not found")
+    @DisplayName("Deve lançar NotFoundException quando o id não for encontrado")
     void findByIdWhenIdIsNotFoundThenThrowNotFoundException() {
         when(functionRepository.findById(anyLong())).thenReturn(java.util.Optional.empty());
         assertThrows(NotFoundException.class, () -> functionService.findById(1L));
     }
 
     @Test
-    @DisplayName("should return the function entity when the id is found")
+    @DisplayName("Deve retornar a FunctionEntity quando o id for encontrado")
     void findByIdWhenIdIsFound() {
         FunctionEntity functionEntity = new FunctionEntity();
         functionEntity.setId(1L);

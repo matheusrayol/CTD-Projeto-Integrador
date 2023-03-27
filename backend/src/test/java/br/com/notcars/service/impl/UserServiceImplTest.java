@@ -24,6 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
+@DisplayName("UserServiceImpl")
 class UserServiceImplTest {
 
     @Mock
@@ -42,7 +43,7 @@ class UserServiceImplTest {
     private UserServiceImpl userServiceImpl;
 
     @Test
-    @DisplayName("should return the user when the email exists")
+    @DisplayName("Deve localizar um usuário por email quando o email existir")
     void findByEmailWhenEmailExists() {
         UserEntity userEntity = new UserEntity();
         userEntity.setEmail("test@test.com");
@@ -54,7 +55,7 @@ class UserServiceImplTest {
     }
 
     @Test
-    @DisplayName("should throw NotFoundException when the email does not exist")
+    @DisplayName("Deve lançar uma exceção quando o email não existir")
     void findByEmailWhenEmailDoesNotExistThenThrowNotFoundException() {
         String email = "email@email.com";
         when(userRepository.findByEmail(email)).thenReturn(Optional.empty());
@@ -64,7 +65,7 @@ class UserServiceImplTest {
     }
 
     @Test
-    @DisplayName("should throw NotFoundException when the email does not exist")
+    @DisplayName("Devem ser lançadas exceções quando os dados do usuário forem inválidos")
     void loadUserByUsernameWhenEmailDoesNotExistThenThrowNotFoundException() {
         String email = "email@email.com";
         when(userRepository.findByEmail(email)).thenReturn(Optional.empty());
@@ -77,7 +78,7 @@ class UserServiceImplTest {
     }
 
     @Test
-    @DisplayName("should return UserDetails when the email exists")
+    @DisplayName("Deve retornar um UserDetails quando o email existir")
     void loadUserByUsernameWhenEmailExists() {
         String email = "test@test.com";
         UserEntity userEntity = new UserEntity();
@@ -90,7 +91,7 @@ class UserServiceImplTest {
     }
 
     @Test
-    @DisplayName("should throw an exception when the email is already registered")
+    @DisplayName("Devem ser lançadas exceções quando os dados do usuário forem inválidos")
     void createUserWhenEmailIsAlreadyRegisteredThenThrowException() {
         UserRequest userRequest = new UserRequest();
         userRequest.setEmail("test@test.com");
@@ -106,7 +107,7 @@ class UserServiceImplTest {
     }
 
     @Test
-    @DisplayName("should create a new user when the email is not registered")
+    @DisplayName("Devem ser lançadas exceções quando os dados do usuário forem inválidos")
     void createUserWhenEmailIsNotRegistered() {
         UserRequest userRequest = new UserRequest();
         userRequest.setEmail("test@test.com");

@@ -24,6 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
+@DisplayName("ProductServiceImpl")
 class ProductServiceImplTest {
     @Mock
     private ProductRepository productRepository;
@@ -47,7 +48,7 @@ class ProductServiceImplTest {
     private ProductServiceImpl productService;
 
     @Test
-    @DisplayName("should return all products when findAll is called")
+    @DisplayName("Deve retornar todos os produtos cadastrados")
     void findAllReturnsAllProducts() {
         ProductEntity productEntity = new ProductEntity();
         when(productRepository.findAll()).thenReturn(List.of(productEntity));
@@ -59,7 +60,7 @@ class ProductServiceImplTest {
     }
 
     @Test
-    @DisplayName("should return products by both category and city when both are provided")
+    @DisplayName("Deve retornar os produtos por categoria e cidade quando os dois são fornecidos")
     void findProductByCategoryAndCityWhenBothAreProvided() {
         when(productRepository.findAllByCategoryAndCity(anyLong(), anyLong()))
                 .thenReturn(List.of(mock(ProductEntity.class)));
@@ -70,7 +71,7 @@ class ProductServiceImplTest {
     }
 
     @Test
-    @DisplayName("should return an empty list when no products match the given category or city")
+    @DisplayName("Deve retornar uma lista vazia quando nenhum produto corresponder a categoria e cidade")
     void findProductByCategoryOrCityWhenNoProductsMatch() {
         when(productRepository.findAllByCategoryAndCity(anyLong(), anyLong()))
                 .thenReturn(List.of());
@@ -83,6 +84,7 @@ class ProductServiceImplTest {
     @Nested
     class FindAll {
         @Test
+        @DisplayName("Deve retornar uma lista vazia quando não houver produtos cadastrados")
         void shouldReturnList_whenListOfProductNotEmpty() {
             // Arrange
             when(productRepository.findAll()).thenReturn(List.of(mock(ProductEntity.class)));
@@ -97,6 +99,7 @@ class ProductServiceImplTest {
         }
 
         @Test
+        @DisplayName("Deve retornar uma lista vazia quando não houver produtos cadastrados")
         void shouldReturnListEmpty_whenListOfProductIsEmpty() {
             // Arrange
             when(productRepository.findAll()).thenReturn(List.of());
@@ -114,6 +117,7 @@ class ProductServiceImplTest {
     @Nested
     class FindProductById {
         @Test
+        @DisplayName("Deve retornar um produto quando o id for válido")
         void shouldReturnProduct_whenIdIsValid() {
             // Arrange
             when(productRepository.findById(anyLong()))
@@ -129,6 +133,7 @@ class ProductServiceImplTest {
         }
 
         @Test
+        @DisplayName("Deve retornar um erro quando o id for inválido")
         void shouldReturnError_whenProductNotFound() {
             // Arrange
             when(productRepository.findById(anyLong())).thenReturn(Optional.empty());
@@ -138,9 +143,7 @@ class ProductServiceImplTest {
             result =
                     assertThrows(
                             NotFoundException.class,
-                            () -> {
-                                productService.findProductById(1L);
-                            });
+                            () -> productService.findProductById(1L));
 
             // Assert
             assertThat(result.getTitle()).isEqualTo("product_not_found");
@@ -152,6 +155,7 @@ class ProductServiceImplTest {
     class CreateProduct {
 
         @Test
+        @DisplayName("Deve retornar um produto quando os dados forem válidos")
         void shouldReturnError_whenCategoryNotFound() {
             // Arrange
             ProductRequest productRequest = new ProductRequest();
@@ -164,9 +168,7 @@ class ProductServiceImplTest {
             result =
                     assertThrows(
                             NotFoundException.class,
-                            () -> {
-                                productService.createProduct(productRequest);
-                            });
+                            () -> productService.createProduct(productRequest));
 
             // Assert
             verify(imageMapper, never()).toEntity(any());
@@ -174,9 +176,11 @@ class ProductServiceImplTest {
             verify(categoryServiceImpl, times(1)).findCategoryById(any());
             verify(cityServiceImpl, never()).findCityById(any());
             verify(productRepository, never()).save(any());
+
         }
 
         @Test
+        @DisplayName("Deve retornar um erro quando a categoria não for encontrada")
         void shouldReturnError_whenCityNotFound() {
             // Arrange
             ProductRequest productRequest = new ProductRequest();
@@ -191,9 +195,7 @@ class ProductServiceImplTest {
             result =
                     assertThrows(
                             NotFoundException.class,
-                            () -> {
-                                productService.createProduct(productRequest);
-                            });
+                            () -> productService.createProduct(productRequest));
 
             // Assert
             verify(imageMapper, never()).toEntity(any());
@@ -204,6 +206,7 @@ class ProductServiceImplTest {
         }
 
         @Test
+        @DisplayName("Deve retornar um erro quando as imagens não forem encontradas")
         void shouldCreateProductSuccessfully() {
             // Arrange
             ProductRequest productRequest = new ProductRequest();
@@ -235,8 +238,7 @@ class ProductServiceImplTest {
     }
 
     @Test
-    @DisplayName(
-            "should return an empty list when no products are available for the given city and date range")
+    @DisplayName("Deve retornar uma lista vazia quando não houver produtos disponíveis para a cidade e data informada")
     void findAvailabilityByCityAndDateReturnsEmptyListWhenNoProductsAvailable() {
         when(productRepository.findAvailability(anyLong(), any(), any())).thenReturn(List.of());
         List<ProductEntity> result;
@@ -246,7 +248,7 @@ class ProductServiceImplTest {
     }
 
     @Test
-    @DisplayName("should return available products for the given city and date range")
+    @DisplayName("Deve retornar uma lista de produtos disponíveis para a cidade e data informada")
     void findAvailabilityByCityAndDateReturnsAvailableProducts() {
         Long cityId = 1L;
         LocalDate startDate = LocalDate.now();

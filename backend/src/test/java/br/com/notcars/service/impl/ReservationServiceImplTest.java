@@ -27,6 +27,7 @@ import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
+@DisplayName("ReservationServiceImpl")
 class ReservationServiceImplTest {
 
     @Mock
@@ -45,8 +46,7 @@ class ReservationServiceImplTest {
     private ReservationServiceImpl reservationServiceImpl;
 
     @Test
-    @DisplayName(
-            "should return an empty list when no reservations are found for a given product ID")
+    @DisplayName("Devem ser retornadas todas as reservas para um dado ID de produto")
     void findAllByProductIdReturnsEmptyListWhenNoReservationsFound() {
         when(reservationRepository.findAllByProduct_Id(anyLong()))
                 .thenReturn(Collections.emptyList());
@@ -58,7 +58,7 @@ class ReservationServiceImplTest {
     }
 
     @Test
-    @DisplayName("should return all reservations for a given product ID")
+    @DisplayName("Devem ser retornadas todas as reservas para um dado ID de produto")
     void findAllByProductIdReturnsAllReservations() {
         ReservationEntity reservationEntity = new ReservationEntity();
         reservationEntity.setId(1L);
@@ -84,7 +84,7 @@ class ReservationServiceImplTest {
     }
 
     @Test
-    @DisplayName("should throw an exception when the product is not available")
+    @DisplayName("Devem ser retornadas todas as reservas para um dado ID de usuário")
     void createReservationWhenProductIsNotAvailableThenThrowException() {
         ReservationRequest reservationRequest = new ReservationRequest();
         reservationRequest.setDateBegin(LocalDate.now());
@@ -100,7 +100,7 @@ class ReservationServiceImplTest {
     }
 
     @Test
-    @DisplayName("should create a reservation when the product is available")
+    @DisplayName("Devem ser retornadas todas as reservas para um dado ID de usuário")
     void createReservationWhenProductIsAvailable() {
 
         UserEntity user = new UserEntity();

@@ -20,6 +20,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
+@DisplayName("CityServiceImpl")
 class CityServiceImplTest {
 
     @Mock
@@ -32,7 +33,7 @@ class CityServiceImplTest {
     private CityServiceImpl cityService;
 
     @Test
-    @DisplayName("should return all cities when findAllCities is called")
+    @DisplayName("Deve retornar todas as Cidades cadastradas")
     void findAllCitiesReturnsAllCities() {
         when(cityRepository.findAll()).thenReturn(List.of(mock(CityEntity.class)));
         List<CityEntity> result;
@@ -44,6 +45,7 @@ class CityServiceImplTest {
     @Nested
     class CreateCity {
         @Test
+        @DisplayName("Deve criar uma Cidade com sucesso")
         void shouldCreateCitySuccessfully() {
             // Arrange
             when(cityMapper.toEntity(any())).thenReturn(mock(CityEntity.class));
@@ -63,6 +65,7 @@ class CityServiceImplTest {
     @Nested
     public class FindAllCities {
         @Test
+        @DisplayName("Deve retornar uma lista de Cidades quando a lista de Cidades não estiver vazia")
         void shouldReturnList_whenListOfCityNotEmpty() {
             // Arrange
             when(cityRepository.findAll()).thenReturn(List.of(mock(CityEntity.class)));
@@ -77,6 +80,7 @@ class CityServiceImplTest {
         }
 
         @Test
+        @DisplayName("Deve retornar uma lista vazia quando a lista de Cidades estiver vazia")
         void shouldReturnListEmpty_whenListOfCityIsEmpty() {
             // Arrange
             when(cityRepository.findAll()).thenReturn(List.of());
@@ -92,7 +96,7 @@ class CityServiceImplTest {
     }
 
     @Test
-    @DisplayName("should throw NotFoundException when the id is not found")
+    @DisplayName("Deve retornar uma exceção NotFoundException quando o id não for encontrado")
     void findCityByIdWhenIdNotFoundThenThrowNotFoundException() {
         when(cityRepository.findById(any())).thenReturn(java.util.Optional.empty());
         assertThrows(NotFoundException.class, () -> cityService.findCityById(1L));
@@ -100,7 +104,7 @@ class CityServiceImplTest {
     }
 
     @Test
-    @DisplayName("should return the city when the id is valid")
+    @DisplayName("Deve retornar a cidade correspondente quando uma ID válida for passada")
     void findCityByIdWhenIdIsValid() {
         when(cityRepository.findById(any()))
                 .thenReturn(java.util.Optional.of(mock(CityEntity.class)));

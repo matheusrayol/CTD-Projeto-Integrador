@@ -7,416 +7,933 @@
 	},
 	"item": [
 		{
-			"name": "endpoints",
+			"name": "Endpoints - Testes Positivos",
 			"item": [
 				{
-					"name": "category",
+					"name": "Create",
 					"item": [
 						{
-							"name": "Criar uma categoria",
-							"event": [
+							"name": "user",
+							"item": [
 								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Tempo de resposta de POST menor do que 250ms\", function () {\r",
-											"    pm.expect(pm.response.responseTime).to.be.below(250);\r",
-											"});\r",
-											"pm.test(\"Solicitação POST bem-sucedida\", function () {\r",
-											"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
-											"});\r",
-											"pm.test(\"Retorno corresponde à categoria cadastrada\", function () {\r",
-											"    pm.expect(pm.response.text()).to.include(\"Categoria 1\");\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"qualification\": \"Categoria 1\",\r\n    \"descriptions\": \"teste\",\r\n    \"urlImage\": \"teste\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
+									"name": "Criar novo usuário",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"// Variáveis Globais - Geração de aleatoriedade\r",
+													"var uuid = require(\"uuid\");\r",
+													"var id = uuid.v4();\r",
+													"\r",
+													"// Variáveis para configuração do usuário \r",
+													"var userName = `Postman`\r",
+													"var userSurname = `Collection Test ${id.slice(id.length - 6)}`\r",
+													"var userEmail = `postman-${id.slice(id.length - 6)}@pig6.com`\r",
+													"var userPassword = `123456`\r",
+													"var userFunction = `1`\r",
+													"pm.collectionVariables.set('userEmail', userEmail);\r",
+													"pm.collectionVariables.set('userName', userName);\r",
+													"pm.collectionVariables.set('userSurname', userSurname);\r",
+													"pm.collectionVariables.set('userPassword', userPassword);\r",
+													"pm.collectionVariables.set('userFunction', userFunction);"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Usuário é criado com sucesso\", function () {\r",
+													"    pm.response.to.have.status(\"Created\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Retorno corresponde ao usuário cadastrado\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(pm.collectionVariables.get(\"userEmail\"));\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
 										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/category/create",
-									"host": [
-										"{{baseUrl}}"
 									],
-									"path": [
-										"category",
-										"create"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Buscar todas as categorias",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Retorno bem-sucedido do GET para todas as categorias\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/category/all",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"category",
-										"all"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Buscar categoria por ID",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Tempo de resposta de POST menor do que 250ms\", function () {\r",
-											"    pm.expect(pm.response.responseTime).to.be.below(250);\r",
-											"});\r",
-											"pm.test(\"Solicitação GET bem-sucedida\", function () {\r",
-											"    pm.expect(pm.response.code).to.be.oneOf([200,201, 202]);\r",
-											"});\r",
-											"pm.test(\"Retorno corresponde à categoria cadastrada\", function () {\r",
-											"    pm.expect(pm.response.text()).to.include(\"Categoria 1\");\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/category/1",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"category",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Excluir categoria",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Content-Type is present\", function () {\r",
-											"    pm.response.to.have.header(\"Content-Type\");\r",
-											"});\r",
-											"pm.test(\"Exclusão de categoria com sucesso\", function () {\r",
-											"    pm.response.to.have.status(204);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/category/delete/3",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"category",
-										"delete",
-										"3"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Atualizar categoria",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Tempo de resposta de POST menor do que 250ms\", function () {\r",
-											"    pm.expect(pm.response.responseTime).to.be.below(250);\r",
-											"});\r",
-											"pm.test(\"Solicitação PUT bem-sucedida\", function () {\r",
-											"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);\r",
-											"});\r",
-											"pm.test(\"Retorno corresponde à categoria alterada\", function () {\r",
-											"    pm.expect(pm.response.text()).to.include(\"teste update\");\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"qualification\": \"teste update\",\r\n    \"descriptions\": \"teste update\",\r\n    \"urlImage\": \"teste update\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\": \"{{userName}}\",\r\n    \"surname\": \"{{userSurname}}\",\r\n    \"email\": \"{{userEmail}}\",\r\n    \"password\": \"{{userPassword}}\",\r\n    \"functionId\": \"{{userFunction}}\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/user",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"user"
+											]
 										}
-									}
+									},
+									"response": []
 								},
-								"url": {
-									"raw": "{{baseUrl}}/category/update/5",
-									"host": [
-										"{{baseUrl}}"
+								{
+									"name": "Autenticar Usuário",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Usuário é autenticado com sucesso\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"// Define uma variável na collection com o token de resposta\r",
+													"pm.collectionVariables.set('userToken', pm.response.json().jwt)"
+												],
+												"type": "text/javascript"
+											}
+										}
 									],
-									"path": [
-										"category",
-										"update",
-										"5"
-									]
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"email\": \"{{userEmail}}\",\r\n    \"password\": \"{{userPassword}}\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/user/authenticate",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"user",
+												"authenticate"
+											]
+										}
+									},
+									"response": []
 								}
-							},
-							"response": []
+							]
+						},
+						{
+							"name": "category",
+							"item": [
+								{
+									"name": "Criar uma categoria",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Tempo de resposta de POST menor do que 250ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(250);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Retorno corresponde à categoria cadastrada\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(pm.collectionVariables.get(\"categoryQualification\"));\r",
+													"    pm.collectionVariables.set('createdCategoryId', pm.response.json().id);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"// Variáveis Globais - Geração de aleatoriedade\r",
+													"var uuid = require(\"uuid\");\r",
+													"var id = uuid.v4();\r",
+													"\r",
+													"// Variáveis para configuração de categorias\r",
+													"var categoryQualification = `Postman Category Test ${id.slice(id.length - 6)}`\r",
+													"var categoryDescription = `This is a description for Postman Category Test`\r",
+													"var categoryUrl = `https://loremflickr.com/320/240`\r",
+													"pm.collectionVariables.set('categoryQualification', categoryQualification);\r",
+													"pm.collectionVariables.set('categoryDescription', categoryDescription);\r",
+													"pm.collectionVariables.set('categoryUrl', categoryUrl);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{userToken}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"qualification\": \"{{categoryQualification}}\",\r\n    \"descriptions\": \"{{categoryDescription}}\",\r\n    \"urlImage\": \"{{categoryUrl}}\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/category/create",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"category",
+												"create"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "city",
+							"item": [
+								{
+									"name": "Criar uma cidade",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Tempo de resposta de POST menor do que 250ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(250);\r",
+													"});\r",
+													"pm.test(\"Solicitação POST bem-sucedida\", function () {\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+													"});\r",
+													"pm.test(\"Retorno corresponde à cidade cadastrada\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(pm.collectionVariables.get(\"cityName\"));\r",
+													"    pm.collectionVariables.set('createdCityId', pm.response.json().id);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"// Variáveis Globais - Geração de aleatoriedade\r",
+													"var uuid = require(\"uuid\");\r",
+													"var id = uuid.v4();\r",
+													"\r",
+													"// Variáveis para teste de Cidades\r",
+													"var cityName = `Postman City ${id.slice(id.length - 6)}`\r",
+													"var cityState = `PS`\r",
+													"var CityCountry = `Brazil`\r",
+													"pm.collectionVariables.set('cityName', cityName);\r",
+													"pm.collectionVariables.set('cityState', cityState);\r",
+													"pm.collectionVariables.set('CityCountry', CityCountry);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{userToken}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"name\": \"{{cityName}}\",\r\n  \"state\": \"{{cityState}}\",\r\n  \"country\": \"{{CityCountry}}\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/city/create",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"city",
+												"create"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "product",
+							"item": [
+								{
+									"name": "Criar um produto",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Tempo de resposta de POST menor do que 250ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(250);\r",
+													"});\r",
+													"pm.test(\"Solicitação POST bem-sucedida\", function () {\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+													"});\r",
+													"pm.test(\"Retorno corresponde à categoria cadastrada\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(pm.collectionVariables.get(\"productName\"));\r",
+													"    pm.collectionVariables.set('createdProductId', pm.response.json().id);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"// Variáveis Globais - Geração de aleatoriedade\r",
+													"var uuid = require(\"uuid\");\r",
+													"var id = uuid.v4();\r",
+													"\r",
+													"var productName = `Postman Car ${id.slice(id.length - 6)}`\r",
+													"var productDescription = `Postman Cars usam estresse como combustível`\r",
+													"var productCategoryId = pm.collectionVariables.get(\"createdCategoryId\")\r",
+													"var productCityId = pm.collectionVariables.get(\"createdCityId\")\r",
+													"var productImageTitle = `Postman Car ${id.slice(id.length - 6)}`\r",
+													"var productImageUrl = `https://localhost`\r",
+													"pm.collectionVariables.set('productName', productName);\r",
+													"pm.collectionVariables.set('productDescription', productDescription);\r",
+													"pm.collectionVariables.set('productCategoryId', productCategoryId);\r",
+													"pm.collectionVariables.set('productCityId', productCityId);\r",
+													"pm.collectionVariables.set('productImageTitle', productImageTitle);\r",
+													"pm.collectionVariables.set('productImageUrl', productImageUrl);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{userToken}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"name\": \"{{productName}}\",\r\n  \"description\": \"{{productDescription}}\",\r\n  \"categoryId\": \"{{productCategoryId}}\",\r\n  \"cityId\": \"{{productCityId}}\",\r\n  \"characteristics\": [\r\n    0\r\n  ],\r\n  \"images\": [\r\n    {\r\n      \"title\": \"{{productImageTitle}}\",\r\n      \"urlImage\": \"{{productImageUrl}}\"\r\n    }\r\n  ]\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/product/create",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"product",
+												"create"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "reservation",
+							"item": [
+								{
+									"name": "Criar reserva",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"// Get today's date\r",
+													"const today = new Date();\r",
+													"\r",
+													"// Get a random number of days between 0 and 365 (1 year)\r",
+													"const randomDays = Math.floor(Math.random() * 365);\r",
+													"\r",
+													"// Add the random number of days to today's date\r",
+													"const randomDate = new Date(today.getTime() + (randomDays * 24 * 60 * 60 * 1000));\r",
+													"\r",
+													"// Format the date as yyyy-mm-dd\r",
+													"const year = randomDate.getFullYear();\r",
+													"const month = (randomDate.getMonth() + 1).toString().padStart(2, '0');\r",
+													"const day = randomDate.getDate().toString().padStart(2, '0');\r",
+													"const firstDate = `${year}-${month}-${day}`;\r",
+													"\r",
+													"// Add 7 days to the random date\r",
+													"randomDate.setDate(randomDate.getDate() + 7);\r",
+													"\r",
+													"// Format the date as yyyy-mm-dd\r",
+													"const yearPlus7 = randomDate.getFullYear();\r",
+													"const monthPlus7 = (randomDate.getMonth() + 1).toString().padStart(2, '0');\r",
+													"const dayPlus7 = randomDate.getDate().toString().padStart(2, '0');\r",
+													"const secondDate = `${yearPlus7}-${monthPlus7}-${dayPlus7}`;\r",
+													"\r",
+													"// Get a random hour between 8 and 20 (inclusive)\r",
+													"const hour = Math.floor(Math.random() * 13) + 8;\r",
+													"\r",
+													"// Get a random minute with 30-minute increments (0 or 30)\r",
+													"const minute = Math.floor(Math.random() * 2) * 30;\r",
+													"\r",
+													"// Get a random second between 0 and 59\r",
+													"const second = Math.floor(Math.random() * 60);\r",
+													"\r",
+													"// Format the time as HH:mm:ss\r",
+													"const time = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}:${second.toString().padStart(2, '0')}`;\r",
+													"\r",
+													"pm.collectionVariables.set('reservationHourStart', time)\r",
+													"pm.collectionVariables.set('reservationDateStart', firstDate)\r",
+													"pm.collectionVariables.set('reservationDateEnd', secondDate)"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Tempo de resposta de POST menor do que 250ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(250);\r",
+													"});\r",
+													"pm.test(\"Solicitação POST bem-sucedida\", function () {\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+													"});\r",
+													"pm.test(\"Retorno corresponde à reserva cadastrada\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(pm.collectionVariables.get(\"userEmail\"));\r",
+													"    pm.collectionVariables.set('createdReservationId', pm.response.json().id);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0YXRpYW5lZzJAbWFpbC5jb20iLCJleHAiOjE2ODYyNjQ0NzQsImlhdCI6MTY3OTc4NDQ3NH0.LV8fJ1EM80tOQgdgDF3DTPN_iAcIuk4SGvSjhpjD3Lc",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"hourStartReservation\": \"11:30:00\",\r\n  \"dateBegin\": \"{{reservationDateStart}}\",\r\n  \"dateEnd\": \"{{reservationDateEnd}}\",\r\n  \"userEmail\": \"{{userEmail}}\",\r\n  \"productId\": {{createdProductId}}\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/reservation/create",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reservation",
+												"create"
+											]
+										}
+									},
+									"response": []
+								}
+							]
 						}
 					]
 				},
 				{
-					"name": "product",
+					"name": "Read",
 					"item": [
 						{
-							"name": "Criar um produto",
-							"event": [
+							"name": "category",
+							"item": [
 								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Tempo de resposta de POST menor do que 250ms\", function () {\r",
-											"    pm.expect(pm.response.responseTime).to.be.below(250);\r",
-											"});\r",
-											"pm.test(\"Solicitação POST bem-sucedida\", function () {\r",
-											"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
-											"});\r",
-											"pm.test(\"Retorno corresponde à categoria cadastrada\", function () {\r",
-											"    pm.expect(pm.response.text()).to.include(\"Categoria 1\");\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n  \"name\": \"BMW\",\r\n  \"description\": \"Carro\",\r\n  \"categoryId\": 0,\r\n  \"cityId\": 0,\r\n  \"characteristics\": [\r\n    0\r\n  ],\r\n  \"images\": [\r\n    {\r\n      \"title\": \"BMW\",\r\n      \"urlImage\": \"https://localhost/dummy.png\"\r\n    }\r\n  ]\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
+									"name": "Buscar todas as categorias",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Retorno bem-sucedido do GET para todas as categorias\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
 										}
-									}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/category/all",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"category",
+												"all"
+											]
+										}
+									},
+									"response": []
 								},
-								"url": {
-									"raw": "{{baseUrl}}/product/create",
-									"host": [
-										"{{baseUrl}}"
+								{
+									"name": "Buscar categoria por ID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Tempo de resposta de POST menor do que 250ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(250);\r",
+													"});\r",
+													"pm.test(\"Solicitação GET bem-sucedida\", function () {\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([200,201, 202]);\r",
+													"});\r",
+													"pm.test(\"Retorno corresponde à categoria cadastrada\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(pm.collectionVariables.get(\"categoryQualification\"));\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
 									],
-									"path": [
-										"product",
-										"create"
-									]
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/category/{{createdCategoryId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"category",
+												"{{createdCategoryId}}"
+											]
+										}
+									},
+									"response": []
 								}
-							},
-							"response": []
+							]
 						},
 						{
-							"name": "Buscar todos os produtos",
-							"event": [
+							"name": "city",
+							"item": [
 								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Retorno bem-sucedido do GET para todos os produtos\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/product/all",
-									"host": [
-										"{{baseUrl}}"
+									"name": "Listar todas as cidades",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Retorno bem-sucedido do GET para todas as cidades\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
 									],
-									"path": [
-										"product",
-										"all"
-									]
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/city/all",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"city",
+												"all"
+											]
+										}
+									},
+									"response": []
 								}
-							},
-							"response": []
+							]
 						},
 						{
-							"name": "Buscar produto por ID",
-							"event": [
+							"name": "product",
+							"item": [
 								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Tempo de resposta de POST menor do que 250ms\", function () {\r",
-											"    pm.expect(pm.response.responseTime).to.be.below(250);\r",
-											"});\r",
-											"pm.test(\"Solicitação GET bem-sucedida\", function () {\r",
-											"    pm.expect(pm.response.code).to.be.oneOf([200,201, 202]);\r",
-											"});\r",
-											"pm.test(\"Retorno corresponde ao produto cadastrado\", function () {\r",
-											"    pm.expect(pm.response.text()).to.include(\"BMW\");\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/product/1",
-									"host": [
-										"{{baseUrl}}"
+									"name": "Buscar todos os produtos",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Retorno bem-sucedido do GET para todos os produtos\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
 									],
-									"path": [
-										"product",
-										"1"
-									]
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/product/all",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"product",
+												"all"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Buscar produto por ID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Tempo de resposta de POST menor do que 250ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(250);\r",
+													"});\r",
+													"pm.test(\"Solicitação GET bem-sucedida\", function () {\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([200,201, 202]);\r",
+													"});\r",
+													"pm.test(\"Retorno corresponde ao produto cadastrado\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(pm.collectionVariables.get(\"createdProductId\"));\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/product/{{createdProductId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"product",
+												"{{createdProductId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Buscar produtos por categoria",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Tempo de resposta de POST menor do que 250ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(250);\r",
+													"});\r",
+													"pm.test(\"Solicitação GET bem-sucedida\", function () {\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([200,201, 202]);\r",
+													"});\r",
+													"pm.test(\"Retorno corresponde ao produto cadastrado\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(pm.collectionVariables.get(\"createdProductId\"));\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/product/all?categoryId={{createdCategoryId}}&cityId={{createdCityId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"product",
+												"all"
+											],
+											"query": [
+												{
+													"key": "categoryId",
+													"value": "{{createdCategoryId}}"
+												},
+												{
+													"key": "cityId",
+													"value": "{{createdCityId}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Buscar produto por cidade e data",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Tempo de resposta de POST menor do que 250ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(250);\r",
+													"});\r",
+													"pm.test(\"Solicitação GET bem-sucedida\", function () {\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([200,201, 202]);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/product/availability?cityId={{createdCityId}}&startDate=2023-04-11&endDate=2023-04-19",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"product",
+												"availability"
+											],
+											"query": [
+												{
+													"key": "cityId",
+													"value": "{{createdCityId}}"
+												},
+												{
+													"key": "startDate",
+													"value": "2023-04-11"
+												},
+												{
+													"key": "endDate",
+													"value": "2023-04-19"
+												}
+											]
+										}
+									},
+									"response": []
 								}
-							},
-							"response": []
+							]
+						},
+						{
+							"name": "reservation",
+							"item": [
+								{
+									"name": "listar reservas de um produto",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Tempo de resposta de POST menor do que 250ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(250);\r",
+													"});\r",
+													"pm.test(\"Solicitação GET bem-sucedida\", function () {\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([200,201, 202]);\r",
+													"});\r",
+													"pm.test(\"Retorno corresponde ao produto cadastrado\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(pm.collectionVariables.get(\"createdProductId\"));\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/reservation/product/{{createdProductId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reservation",
+												"product",
+												"{{createdProductId}}"
+											]
+										}
+									},
+									"response": []
+								}
+							]
 						}
 					]
 				},
 				{
-					"name": "city",
+					"name": "Update",
 					"item": [
 						{
-							"name": "Criar uma cidade",
-							"event": [
+							"name": "category",
+							"item": [
 								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Tempo de resposta de POST menor do que 250ms\", function () {\r",
-											"    pm.expect(pm.response.responseTime).to.be.below(250);\r",
-											"});\r",
-											"pm.test(\"Solicitação POST bem-sucedida\", function () {\r",
-											"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
-											"});\r",
-											"pm.test(\"Retorno corresponde à cidade cadastrada\", function () {\r",
-											"    pm.expect(pm.response.text()).to.include(\"Categoria 1\");\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n  \"name\": \"Belo Horizonte\",\r\n  \"country\": \"Brasil\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
+									"name": "Atualizar categoria",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Tempo de resposta de POST menor do que 250ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(250);\r",
+													"});\r",
+													"pm.test(\"Solicitação PUT bem-sucedida\", function () {\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);\r",
+													"});\r",
+													"pm.test(\"Retorno corresponde à categoria alterada\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"Updated\");\r",
+													"\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
 										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/city/create",
-									"host": [
-										"{{baseUrl}}"
 									],
-									"path": [
-										"city",
-										"create"
-									]
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{userToken}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"qualification\": \"{{categoryQualification}} Updated\",\r\n    \"descriptions\": \"{{categoryDescription}} Updated\",\r\n    \"urlImage\": \"{{categoryUrl}} Updated\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/category/update/{{createdCategoryId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"category",
+												"update",
+												"{{createdCategoryId}}"
+											]
+										}
+									},
+									"response": []
 								}
-							},
-							"response": []
-						},
+							]
+						}
+					]
+				},
+				{
+					"name": "Delete",
+					"item": [
 						{
-							"name": "Listar todas as cidades",
-							"event": [
+							"name": "category",
+							"item": [
 								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Retorno bem-sucedido do GET para todas as cidades\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/city/all",
-									"host": [
-										"{{baseUrl}}"
+									"name": "Excluir categoria",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Exclusão de categoria com sucesso\", function () {\r",
+													"    pm.response.to.have.status(204);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
 									],
-									"path": [
-										"city",
-										"all"
-									]
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{userToken}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/category/delete/{{createdCategoryId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"category",
+												"delete",
+												"{{createdCategoryId}}"
+											]
+										}
+									},
+									"response": []
 								}
-							},
-							"response": []
+							]
 						}
 					]
 				}
@@ -448,6 +965,108 @@
 			"key": "baseUrl",
 			"value": "http://localhost:8080",
 			"type": "default"
+		},
+		{
+			"key": "userToken",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "userEmail",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "userName",
+			"value": ""
+		},
+		{
+			"key": "userSurname",
+			"value": ""
+		},
+		{
+			"key": "userPassword",
+			"value": ""
+		},
+		{
+			"key": "categoryQualification",
+			"value": ""
+		},
+		{
+			"key": "categoryDescription",
+			"value": ""
+		},
+		{
+			"key": "categoryUrl",
+			"value": ""
+		},
+		{
+			"key": "createdCategoryId",
+			"value": ""
+		},
+		{
+			"key": "userFunction",
+			"value": ""
+		},
+		{
+			"key": "cityName",
+			"value": ""
+		},
+		{
+			"key": "cityState",
+			"value": ""
+		},
+		{
+			"key": "CityCountry",
+			"value": ""
+		},
+		{
+			"key": "createdCityId",
+			"value": ""
+		},
+		{
+			"key": "productName",
+			"value": ""
+		},
+		{
+			"key": "productDescription",
+			"value": ""
+		},
+		{
+			"key": "productCategoryId",
+			"value": ""
+		},
+		{
+			"key": "productCityId",
+			"value": ""
+		},
+		{
+			"key": "productImageTitle",
+			"value": ""
+		},
+		{
+			"key": "productImageUrl",
+			"value": ""
+		},
+		{
+			"key": "createdProductId",
+			"value": ""
+		},
+		{
+			"key": "reservationDateStart",
+			"value": ""
+		},
+		{
+			"key": "reservationDateEnd",
+			"value": ""
+		},
+		{
+			"key": "reservationHourStart",
+			"value": ""
+		},
+		{
+			"key": "createdReservationId",
+			"value": ""
 		}
 	]
 }
