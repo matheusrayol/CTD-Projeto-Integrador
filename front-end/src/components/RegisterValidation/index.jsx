@@ -1,10 +1,8 @@
 import { React, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styles from './RegisterValidation.module.scss'
-import { useAuth } from '../../hooks/useAuth'
 
 const RegisterValidation = () => {
-  const { saveToken } = useAuth()
   const navigate = useNavigate()
 
   const [name, setName] = useState('')
@@ -97,7 +95,7 @@ const RegisterValidation = () => {
       surname: surname,
       email: email,
       password: password,
-      repassword: repassword
+      functionId: 2
     }
 
     let requestHeaders = {
@@ -117,112 +115,149 @@ const RegisterValidation = () => {
       validatePassword &&
       validateRepassword
     ) {
-      fetch(`https://notcars.com.br/auth`, requestConfiguration).then(
-        response => {
-          if (response.ok) {
+      fetch(`/user`, requestConfiguration).then(response => {
+        if (response.ok) {
+          response.json().then(data => {
+            alert('Cadastro realizado com sucesso!')
+            navigate('/login')
+          })
+        } else {
+          if (response.status === 400) {
             response.json().then(data => {
-              saveToken(data.token)
-              alert('Cadastro realizado com sucesso!')
-              navigate('/login')
+              alert(data.mensagem)
             })
           } else {
-            setFormError({
-              nameError: false,
-              surnameError: false,
-              emailError: false,
-              passwordError: false,
-              repasswordError: false,
-              genericError: true
-            })
             alert('Campo(os) incorreto(s)!')
           }
+          setFormError({
+            nameError: false,
+            surnameError: false,
+            emailError: false,
+            passwordError: false,
+            repasswordError: false,
+            genericError: true
+          })
         }
-      )
+      })
     }
   }
 
   return (
-    <section className={styles.sectionRegisterValidation}>
-      <form className={styles.formRegisterValidation}>
-        <h1 className={styles.titleForm}>Cadastre-se</h1>
-        <div className={styles.completeName}>
-          <div className={styles.completeName__labelInput}>
+    <section
+      className={styles.sectionRegisterValidation}
+      id="sectionRegisterValidation"
+    >
+      <form
+        className={styles.formRegisterValidation}
+        id="formRegisterValidation"
+      >
+        <h1 className={styles.titleForm} id="titleForm">
+          Cadastre-se
+        </h1>
+        <div className={styles.completeName} id="completeName">
+          <div
+            className={styles.completeName__labelInput}
+            id="completeName__labelInputNome"
+          >
             <label htmlFor="">Nome</label>
             <input
               type="text"
               name="name"
               required
               onChange={event => validateName(event.target.value)}
-              className={`${styles.inputValidation} ${
-                formError.nameError ? `${styles.formError}` : ''
-              }`}
+              id="inputValidationNome"
+              className={`${styles.inputValidation} ${formError.nameError ? `${styles.formError}` : ''
+                }`}
             />
           </div>
-          <div className={styles.completeName__labelInput}>
+          <div
+            className={styles.completeName__labelInput}
+            id="completeName__labelInputSobrenome"
+          >
             <label htmlFor="">Sobrenome</label>
             <input
               type="text"
               name="surname"
               required
               onChange={event => validateSurname(event.target.value)}
-              className={`${styles.inputValidation} ${
-                formError.surnameError ? `${styles.formError}` : ''
-              }`}
+              id="inputValidationSobrenome"
+              className={`${styles.inputValidation} ${formError.surnameError ? `${styles.formError}` : ''
+                }`}
             />
           </div>
         </div>
-        <div className={styles.fieldLabelInput}>
+        <div
+          className={styles.fieldLabelInput}
+          id="completeName__labelInputEmail"
+        >
           <label htmlFor="">Email</label>
           <input
             type="email"
             name="email"
             required
             onChange={event => validateEmail(event.target.value)}
-            className={`${styles.inputValidation} ${
-              formError.emailError ? `${styles.formError}` : ''
-            }`}
+            id="inputValidationEmail"
+            className={`${styles.inputValidation} ${formError.emailError ? `${styles.formError}` : ''
+              }`}
           />
         </div>
-        <div className={styles.fieldLabelInput}>
+        <div
+          className={styles.fieldLabelInput}
+          id="completeName__labelInputSenha"
+        >
           <label htmlFor="">Senha</label>
           <input
             type="password"
             name="password"
             required
             onChange={event => validatePassword(event.target.value)}
-            className={`${styles.inputValidation} ${
-              formError.passwordError ? `${styles.formError}` : ''
-            }`}
+            id="inputValidationSenha"
+            className={`${styles.inputValidation} ${formError.passwordError ? `${styles.formError}` : ''
+              }`}
           />
         </div>
-        <div className={styles.fieldLabelInput}>
+        <div
+          className={styles.fieldLabelInput}
+          id="completeName__labelInputReSenha"
+        >
           <label htmlFor="">Confirme a senha</label>
           <input
             type="password"
             name="repassword"
             required
             onChange={event => validateRepassword(event.target.value)}
-            className={`${styles.inputValidation} ${
-              formError.repasswordError ? `${styles.formError}` : ''
-            }`}
+            id="inputValidationReSenha"
+            className={`${styles.inputValidation} ${formError.repasswordError ? `${styles.formError}` : ''
+              }`}
           />
         </div>
         {formError.nameError && (
-          <span className={`${styles.formError}`}>Nome muito curto</span>
+          <span id="formErrorNome" className={`${styles.formError}`}>
+            Nome muito curto
+          </span>
         )}
         {formError.surnameError && (
-          <span className={`${styles.formError}`}>Sobrenome muito curto</span>
+          <span id="formErrorSobrenome" className={`${styles.formError}`}>
+            Sobrenome muito curto
+          </span>
         )}
         {formError.emailError && (
-          <span className={`${styles.formError}`}>Email muito curto</span>
+          <span id="formErrorEmail" className={`${styles.formError}`}>
+            Email muito curto
+          </span>
         )}
         {formError.passwordError && (
-          <span className={`${styles.formError}`}>Senha muito curta</span>
+          <span id="formErrorSenha" className={`${styles.formError}`}>
+            Senha muito curta
+          </span>
         )}
         {formError.repasswordError && (
-          <span className={`${styles.formError}`}>Senhas não coincidem</span>
+          <span id="formErrorReSenha" className={`${styles.formError}`}>
+            Senhas não coincidem
+          </span>
         )}
         <button
+          id="buttonSubmit"
           className={styles.buttonSubmit}
           type="submit"
           onClick={event => handleSubmit(event)}
@@ -230,7 +265,7 @@ const RegisterValidation = () => {
         >
           Cadastrar
         </button>
-        <div className={styles.buttonRegister}>
+        <div className={styles.buttonRegister} id="buttonRegister">
           Você possui cadastro?
           <Link to="/login"> Clique Aqui</Link>
         </div>

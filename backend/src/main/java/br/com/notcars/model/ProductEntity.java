@@ -39,4 +39,7 @@ public class ProductEntity {
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
   @JoinColumn(name = "product_images_id")
   private List<ImageEntity> imageList;
+
+  @OneToMany(mappedBy = "product")
+  private List<ReservationEntity> reservationList;
 }

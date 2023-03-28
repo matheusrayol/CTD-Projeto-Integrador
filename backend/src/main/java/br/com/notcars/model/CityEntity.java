@@ -22,6 +22,9 @@ public class CityEntity {
   @Column(name = "country_city")
   private String country;
 
+  @Column(name = "state")
+  private String state;
+
   @OneToMany(mappedBy = "city")
   private List<ProductEntity> productEntityList;
 

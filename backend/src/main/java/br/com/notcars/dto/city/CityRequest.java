@@ -14,4 +14,7 @@ public class CityRequest {
 
   @NotBlank(message = "country is required")
   private String country;
+
+  @NotBlank(message = "state is required")
+  private String state;
 }

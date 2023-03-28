@@ -1,6 +1,6 @@
 package br.com.notcars.service.impl;
 
-import br.com.notcars.aspect.LogInfo;
+import br.com.notcars.config.aspect.LogInfo;
 import br.com.notcars.dto.product.ProductRequest;
 import br.com.notcars.exceptions.NotFoundException;
 import br.com.notcars.mapper.ImageMapper;
@@ -11,6 +11,7 @@ import br.com.notcars.service.CategoryService;
 import br.com.notcars.service.CharacteristicsService;
 import br.com.notcars.service.CityService;
 import br.com.notcars.service.ProductService;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -61,5 +62,11 @@ public class ProductServiceImpl implements ProductService {
   public List<ProductEntity> findProductByCategoryOrCity(Long category, Long city) {
 
     return productRepository.findAllByCategoryAndCity(category, city);
+  }
+
+  @LogInfo
+  @Override
+  public List<ProductEntity> findAvailabilityByCityAndDate(Long cityId, LocalDate startDate, LocalDate endDate) {
+    return productRepository.findAvailability(cityId, startDate, endDate);
   }
 }
