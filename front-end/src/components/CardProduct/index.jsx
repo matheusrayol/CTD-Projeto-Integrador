@@ -77,19 +77,17 @@ export default function CardProduct(image) {
                 id="cardBody__sectionTittle__img"
               />
               <p id="cardBody__sectionTittle__oLoc_p1">
-                {image.imageData.city.name}
+                {image.imageData.city.name}, {image.imageData.city.state},{' '}
+                {image.imageData.city.country}
               </p>
             </div>
-            <p id="cardBody__sectionTittle__oLoc_p2">
-              {image.imageData.city.country}
-            </p>
+            <p id="cardBody__sectionTittle__oLoc_p2"></p>
           </div>
           <div
             className={styles.cardBody__sectionTittle__pRated}
             id="cardBody__sectionTittle__pRated"
           >
             <p>
-              {/* Avaliação: <span>{image.imageData.rated}</span> */}
               <span>Avaliação: 4.5</span>
             </p>
           </div>
@@ -225,14 +223,20 @@ export default function CardProduct(image) {
             className={styles.cardBody__sectionReservation__calendar}
             id="cardBody__sectionReservation__calendar"
           >
-            <DateRangePickerComp2 id="DateRangePickerComp2" />
+            <DateRangePickerComp2
+              id="DateRangePickerComp2"
+              productId={image.imageData.id}
+            />
           </div>
           <div
             className={styles.cardBody__sectionReservation__reserve}
             id="cardBody__sectionReservation__reserve"
           >
-            <p>Informe as datas pretenditas para realizar a locação do</p>
-            <p>{image.imageData.title}</p>
+            <p>
+              Informe as datas pretenditas para realizar a locação do{' '}
+              {image.imageData.name}
+            </p>
+            <p></p>
             {auth === '' ? (
               <Link to={`/login`} onClick={alertYouLogin}>
                 <button

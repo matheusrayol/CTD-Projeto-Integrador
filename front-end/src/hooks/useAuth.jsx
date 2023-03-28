@@ -31,21 +31,21 @@ export function AuthProvider(props) {
     }
   }
 
-    // Função responsavel por salvar o nome
-    function saveData(data) {
-      if (data.name !== name) {
-        setName(data.name)
-        localStorage.setItem('name', data.name)
-      }
-      if (data.surname !== surname) {
-        setSurname(data.surname)
-        localStorage.setItem('surname', data.surname)
-      }
-      if (data.email !== email) {
-        setEmail(data.email)
-        localStorage.setItem('email', data.email)
-      }
+  // Função responsavel por salvar o nome
+  function saveData(data) {
+    if (data.name !== name) {
+      setName(data.name)
+      localStorage.setItem('name', data.name)
     }
+    if (data.surname !== surname) {
+      setSurname(data.surname)
+      localStorage.setItem('surname', data.surname)
+    }
+    if (data.email !== email) {
+      setEmail(data.email)
+      localStorage.setItem('email', data.email)
+    }
+  }
 
   // Função responsavel por remover o token
   function logout() {
@@ -61,7 +61,9 @@ export function AuthProvider(props) {
   }
 
   return (
-    <AuthContext.Provider value={{ auth, name, surname, email, saveToken, logout, saveData }}>
+    <AuthContext.Provider
+      value={{ auth, name, surname, email, saveToken, logout, saveData }}
+    >
       {props.children}
     </AuthContext.Provider>
   )
