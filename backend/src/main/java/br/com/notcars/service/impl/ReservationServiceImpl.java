@@ -8,6 +8,7 @@ import br.com.notcars.model.ProductEntity;
 import br.com.notcars.model.ReservationEntity;
 import br.com.notcars.model.UserEntity;
 import br.com.notcars.repository.ReservationRepository;
+import br.com.notcars.service.EmailService;
 import br.com.notcars.service.ProductService;
 import br.com.notcars.service.ReservationService;
 import java.util.List;
@@ -24,16 +25,21 @@ public class ReservationServiceImpl implements ReservationService {
   private final ProductService productServiceImpl;
   private final ReservationMapper reservationMapper;
 
+  private final EmailService emailServiceImpl;
+
   @LogInfo
   @Override
-  public ReservationEntity createReservation(ReservationRequest reservationRequest) {
+  public ReservationEntity createReservation(ReservationRequest reservationRequest) throws Exception {
     if(!isAvailable(reservationRequest)){
       throw new BadRequestException("já existe uma reserva para este produto na data selecionada!");
     }
     UserEntity user = userService.findByEmail(reservationRequest.getUserEmail());
     ProductEntity product = productServiceImpl.findProductById(reservationRequest.getProductId());
     ReservationEntity reservation = reservationMapper.toEntity(reservationRequest, user, product);
-    return reservationRepository.save(reservation);
+    reservation = reservationRepository.save(reservation);
+
+    emailServiceImpl.sendEmail(reservationRequest.getUserEmail(), "Reserva criada com sucesso!", emailServiceImpl.reservationEmail(user.getName(), reservation));
+    return reservation;
   }
 
   @LogInfo

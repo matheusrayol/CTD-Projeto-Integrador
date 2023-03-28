@@ -8,7 +8,9 @@ import br.com.notcars.mapper.UserMapper;
 import br.com.notcars.model.FunctionEntity;
 import br.com.notcars.model.UserEntity;
 import br.com.notcars.repository.UserRepository;
+import br.com.notcars.service.EmailService;
 import br.com.notcars.service.FunctionService;
+import javax.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -27,6 +29,8 @@ public class UserServiceImpl implements UserDetailsService {
 
   private final BCryptPasswordEncoder passwordEncoder;
 
+  private final EmailService emailServiceImpl;
+
   @LogInfo
   @Override
   public UserDetails loadUserByUsername(String email) {
@@ -34,14 +38,16 @@ public class UserServiceImpl implements UserDetailsService {
   }
 
   @LogInfo
-  public UserEntity create(UserRequest userRequest) {
+  public UserEntity create(UserRequest userRequest) throws MessagingException {
     validatedIfEmailIsRegistered(userRequest.getEmail());
     FunctionEntity function = functionServiceImpl.findById(userRequest.getFunctionId());
     UserEntity userEntity = userMapper.toUserEntity(userRequest, function);
     String password = passwordEncoder.encode(userEntity.getPassword());
     userEntity.setPassword(password);
+    userEntity = userRepository.save(userEntity);
 
-    return userRepository.save(userEntity);
+    emailServiceImpl.sendEmail(userRequest.getEmail(), "Cadastro realizado com sucesso!", emailServiceImpl.registrationEmail(userEntity.getName()));
+    return userEntity;
   }
 
   @LogInfo
