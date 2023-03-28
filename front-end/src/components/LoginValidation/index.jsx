@@ -4,9 +4,14 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
 import styles from './LoginValidation.module.scss'
 
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
 const LoginValidation = () => {
   const { saveToken, saveData } = useAuth()
   const navigate = useNavigate()
+  const MySwal = withReactContent(Swal)
+
   const [mail, setMail] = useState('')
   const [pass, setPass] = useState('')
   const [formError, setFormError] = useState({
@@ -71,7 +76,11 @@ const LoginValidation = () => {
           response.json().then(data => {
             saveToken(data.jwt)
             saveData(data)
-            alert('Login realizado com sucesso!')
+            // alert('Login realizado com sucesso!')
+            MySwal.fire({
+              icon: 'success',
+              text: 'Login realizado com sucesso!'
+            })
             navigate('/home')
             refreshPage()
           })
