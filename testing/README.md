@@ -17,7 +17,12 @@
 - [Manual Test - Sprint 1 Week 1](https://gitlab.ctd.academy/ctd/brasil/projeto-integrador-1/0223/turma-5/grupo-6/-/blob/main/testing/Reports/Manual%20Tests/Sprint%201%20-%20Test%20Report%201.pdf)
 - [Manual Test - Sprint 1 Week 2](https://gitlab.ctd.academy/ctd/brasil/projeto-integrador-1/0223/turma-5/grupo-6/-/blob/main/testing/Reports/Manual%20Tests/Sprint%201%20-%20Test%20Report%202.pdf)
 - [Manual Test - Sprint 2 Week 1](https://gitlab.ctd.academy/ctd/brasil/projeto-integrador-1/0223/turma-5/grupo-6/-/blob/main/testing/Reports/Manual%20Tests/Sprint%202%20-%20Test%20Report%201.pdf)
+- [Manual Test - Sprint 3 Week 1](https://gitlab.ctd.academy/ctd/brasil/projeto-integrador-1/0223/turma-5/grupo-6/-/blob/main/testing/Reports/Manual%20Tests/Sprint%203%20-%20Test%20Report%201.pdf)
+
 ### Test Reports - Exploratory Testing
 - [Teste Exploratório - Sprint 2](https://gitlab.ctd.academy/ctd/brasil/projeto-integrador-1/0223/turma-5/grupo-6/-/blob/main/testing/Reports/Exploratory%20Tests/Sprint%202%20-%20Relatório%201.pdf)
+- [Teste Exploratório - Sprint 3](https://gitlab.ctd.academy/ctd/brasil/projeto-integrador-1/0223/turma-5/grupo-6/-/blob/main/testing/Reports/Exploratory%20Tests/Sprint%203%20-%20Relatório%201.pdf)
+
 ### Test Reports - Back End
 - [Code Coverage Report - Sprint 2](https://gitlab.ctd.academy/ctd/brasil/projeto-integrador-1/0223/turma-5/grupo-6/-/tree/main/testing/Reports/Coverage%20Reports/Sprint%202)
+- [Code Coverage Report - Sprint 3](https://gitlab.ctd.academy/ctd/brasil/projeto-integrador-1/0223/turma-5/grupo-6/-/tree/main/testing/Reports/Coverage%20Reports/Sprint%203)
