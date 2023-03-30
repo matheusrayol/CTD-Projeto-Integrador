@@ -7,6 +7,7 @@ import Product from '../pages/Product'
 import ReservePage from '../pages/ReservePage'
 import Error404 from '../pages/Error404'
 import styles from './index.module.scss'
+import ReserveCreate from '../pages/ReserveCreate'
 
 const RoutesApp = () => {
   return (
@@ -20,6 +21,10 @@ const RoutesApp = () => {
           <Route path="/accountuser" element={<AccountUser />} />
           <Route path="/product/:id" element={<Product />} />
           <Route path="/product/:id/reserve" element={<ReservePage />} />
+          <Route
+            path="/product/:id/reserve/create"
+            element={<ReserveCreate />}
+          />
           <Route path="*" element={<Error404 />} />
         </Routes>
       </div>

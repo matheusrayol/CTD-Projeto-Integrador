@@ -1,13 +1,13 @@
-image: node:18.15.0
-
 stages: 
   - build
   - deploy
+  - start
 
 build-frontend:
   tags:
     - nginx
   stage: build
+  image: node:18.15.0
   script:
     - cd front-end; pwd
     - npm i --no-optional
@@ -24,6 +24,7 @@ build-backend:
   script:
     - cd backend; pwd
     - mvn clean install
+    - chmod -R 777 .
   artifacts:
     paths:
       - backend/target
@@ -40,9 +41,17 @@ deploy-backend:
   tags:
     - nginx
   stage: deploy
-  image: quay.io/ansible/ansible-core
+  image: kroniak/ssh-client
   script:
-    - ansible all --ssh-common-args='-o StrictHostKeyChecking=no' -u ubuntu --private-key /tmp/pi_t5_grupo6_key.pem -i 'ec2-18-221-166-116.us-east-2.compute.amazonaws.com,' -b -m copy -a "src=backend/target dest=/site/grupo-6/backend"
+    - scp -o StrictHostKeyChecking=no -i /tmp/pi_t5_grupo6_key.pem -r backend/target ubuntu@ec2-3-22-250-39.us-east-2.compute.amazonaws.com:/site/grupo-6/backend
+
+start-backend:
+  tags:
+    - nginx
+  stage: start
+  image: kroniak/ssh-client
+  script:
+    - ssh -o StrictHostKeyChecking=no -i /tmp/pi_t5_grupo6_key.pem ubuntu@ec2-3-22-250-39.us-east-2.compute.amazonaws.com "killall java && cd /site/grupo-6/backend/target && nohup java -jar notcars-0.0.1-SNAPSHOT.jar &" &
 
 # ------ Verificar Depois -------
   # .tag-release:
