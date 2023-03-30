@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "4780afe5-538c-4613-9522-65bc6a8392ae",
-		"name": "potato cars",
+		"name": "projeto integrador",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "20393191"
 	},
@@ -10,13 +10,96 @@
 			"name": "category",
 			"item": [
 				{
+					"name": "busca categoria por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/category/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listar categorias",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/category/all",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"category",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleta categoria",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/category/delete/12",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"category",
+								"delete",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "atualizar uma categoria",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"qualification\": \"test update\",\r\n    \"descriptions\": \"test update\",\r\n    \"urlImage\": \"test update\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/category/update/33",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"category",
+								"update",
+								"33"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "criar categoria",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"qualification\": \"teste\",\r\n    \"descriptions\": \"teste\",\r\n    \"urlImage\": \"teste\"\r\n}",
+							"raw": "{\r\n    \"qualification\": \"test \",\r\n    \"descriptions\": \"test \",\r\n    \"urlImage\": \"test \"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -35,29 +118,70 @@
 						}
 					},
 					"response": []
-				},
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
 				{
-					"name": "buscar todas as categorias paginadas",
+					"name": "buscar todas os produtos",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/category/all?page=4&size=5",
+							"raw": "{{baseUrl}}/product/all",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"category",
+								"product",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar produto por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/product/15",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"product",
+								"15"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "busca produtos por categoria ou cidade",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/product/all?categoryId=1&cityId=2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"product",
 								"all"
 							],
 							"query": [
 								{
-									"key": "page",
-									"value": "4"
+									"key": "categoryId",
+									"value": "1"
 								},
 								{
-									"key": "size",
-									"value": "5"
+									"key": "cityId",
+									"value": "2"
 								}
 							]
 						}
@@ -65,50 +189,13 @@
 					"response": []
 				},
 				{
-					"name": "busca categoria por id",
+					"name": "cadastrar um produto",
 					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/category/24",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"category",
-								"24"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "deleta categoria",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/category/delete/24",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"category",
-								"delete",
-								"24"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "atualizar uma categoria",
-					"request": {
-						"method": "PUT",
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"qualification\": \"teste update\",\r\n    \"descriptions\": \"teste update\",\r\n    \"urlImage\": \"teste update\"\r\n}",
+							"raw": "{\r\n    \"name\": \"fusca\",\r\n    \"description\":  \"fuscquinha maroto\",\r\n    \"categoryId\": 38 ,\r\n    \"cityId\": 1 ,\r\n    \"characteristics\": [1,2,3,4\r\n    ],\r\n    \"images\": [\r\n        {\r\n            \"title\": \"teste\" ,\r\n            \"urlImage\": \"url.com\"\r\n        },\r\n                {\r\n            \"title\": \"teste\" ,\r\n            \"urlImage\": \"url.com\"\r\n        },\r\n                {\r\n            \"title\": \"teste\" ,\r\n            \"urlImage\": \"url.com\"\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -116,14 +203,141 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/category/update/5",
+							"raw": "{{baseUrl}}/product/create",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"category",
-								"update",
-								"5"
+								"product",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "City",
+			"item": [
+				{
+					"name": "buscar todas as cidades",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/city/all",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"city",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "criar cidade",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"São José dos Campos\",\r\n    \"country\": \"São Paulo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/city/create",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"city",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "registrar usuário",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"tatiane\",\r\n    \"surname\": \"gardin\",\r\n    \"email\": \"tatianeg2@mail.com\",\r\n    \"password\": 1234,\r\n    \"functionId\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "autentica usuário",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"tatiane\",\r\n    \"lastName\": \"gardin\",\r\n    \"email\": \"tatianeg@mail.com\",\r\n    \"password\": 1234,\r\n    \"functionId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/authenticate",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"authenticate"
 							]
 						}
 					},
