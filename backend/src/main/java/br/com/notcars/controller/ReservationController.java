@@ -27,7 +27,7 @@ public class ReservationController {
   private final ReservationMapper reservationMapper;
 
   @PostMapping("/create")
-  public ResponseEntity<ReservationResponse> createReservation(@RequestBody @Valid ReservationRequest reservation) {
+  public ResponseEntity<ReservationResponse> createReservation(@RequestBody @Valid ReservationRequest reservation) throws Exception {
     log.info(START_REQUEST + "[POST] " + BASE_URL + "/create");
     ReservationEntity reservationEntity = reservationServiceImpl.createReservation(reservation);
     return ResponseEntity.status(HttpStatus.CREATED).body(reservationMapper.toReservationResponse(reservationEntity));

@@ -8,6 +8,7 @@ import br.com.notcars.dto.user.UserResponse;
 import br.com.notcars.mapper.UserMapper;
 import br.com.notcars.model.UserEntity;
 import br.com.notcars.service.impl.UserServiceImpl;
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -42,7 +43,7 @@ public class UserController {
   private final UserMapper userMapper;
 
   @PostMapping
-  public ResponseEntity<UserResponse> create(@RequestBody @Valid UserRequest userRequest) {
+  public ResponseEntity<UserResponse> create(@RequestBody @Valid UserRequest userRequest) throws MessagingException {
     log.info(START_REQUEST + "[POST] " + BASE_URL);
     UserEntity user = userServiceImpl.create(userRequest);
     return ResponseEntity.status(HttpStatus.CREATED).body(userMapper.toUserResponse(user));
