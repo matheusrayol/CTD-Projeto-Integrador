@@ -25,6 +25,7 @@ build-backend:
   script:
     - cd backend; pwd
     - mvn clean install
+    - chmod -R 777 backend
   artifacts:
     paths:
       - backend/target
