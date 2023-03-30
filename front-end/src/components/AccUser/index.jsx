@@ -4,14 +4,13 @@ import imgAvatar from '../../assets/avatar.jpg'
 import { useAuth } from '../../hooks/useAuth'
 
 export default function AccUser() {
-  const { auth } = useAuth()
+  const { name, surname, email } = useAuth()
   return (
     <main className={styles.main}>
       <p>LOCAL DESTINADO A PAGINA PADRAO DO USUARIO</p>
       <img src={imgAvatar} alt="imagem Avatar" />
-      <p>Email: {auth.email}</p>
-      <p>Password: {auth.password}</p>
-      <p>Name: {auth.name}</p>
+      <p>Nome: {`${name} ${surname}`}</p>
+      <p>Password: {email}</p>
     </main>
   )
 }

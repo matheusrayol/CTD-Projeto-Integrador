@@ -2,6 +2,7 @@ package br.com.notcars.service;
 
 import br.com.notcars.dto.product.ProductRequest;
 import br.com.notcars.model.ProductEntity;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface ProductService {
@@ -12,4 +13,6 @@ public interface ProductService {
   ProductEntity findProductById(Long id);
 
   List<ProductEntity> findProductByCategoryOrCity(Long category, Long city);
+
+  List<ProductEntity> findAvailabilityByCityAndDate(Long cityId, LocalDate startDate, LocalDate endDate);
 }
