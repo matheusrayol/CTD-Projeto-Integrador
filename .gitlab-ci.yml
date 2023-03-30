@@ -43,15 +43,13 @@ deploy-backend:
   stage: deploy
   image: kroniak/ssh-client
   script:
-    # - ansible all --ssh-common-args='-o StrictHostKeyChecking=no' -u ubuntu --private-key /tmp/pi_t5_grupo6_key.pem -i 'ubuntu@ec2-3-22-250-39.us-east-2.compute.amazonaws.com,' -b -m copy -a "src=backend/target dest=/site/grupo-6/backend"
-    - pwd; ls
     - scp -o StrictHostKeyChecking=no -i /tmp/pi_t5_grupo6_key.pem -r backend/target ubuntu@ec2-3-22-250-39.us-east-2.compute.amazonaws.com:/site/grupo-6/backend
-    # - ssh -o StrictHostKeyChecking=no -i /tmp/pi_t5_grupo6_key.pem ubuntu@ec2-3-22-250-39.us-east-2.compute.amazonaws.com "sudo cp -r ~/site/target /site/grupo-6/backend"
 
 start-backend:
   tags:
     - nginx
   stage: start
+  image: kroniak/ssh-client
   script:
     - ssh -o StrictHostKeyChecking=no -i /tmp/pi_t5_grupo6_key.pem ubuntu@ec2-3-22-250-39.us-east-2.compute.amazonaws.com "killall java && cd /site/grupo-6/backend/target && nohup java -jar notcars-0.0.1-SNAPSHOT.jar &" &
 
