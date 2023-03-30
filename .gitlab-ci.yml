@@ -1,5 +1,3 @@
-image: node:18.15.0
-
 stages: 
   - build
   - deploy
@@ -9,6 +7,7 @@ build-frontend:
   tags:
     - nginx
   stage: build
+  image: node:18.15.0
   script:
     - cd front-end; pwd
     - npm i --no-optional
@@ -42,11 +41,12 @@ deploy-backend:
   tags:
     - nginx
   stage: deploy
-  image: quay.io/ansible/ansible-core
+  image: kroniak/ssh-client
   script:
     # - ansible all --ssh-common-args='-o StrictHostKeyChecking=no' -u ubuntu --private-key /tmp/pi_t5_grupo6_key.pem -i 'ubuntu@ec2-3-22-250-39.us-east-2.compute.amazonaws.com,' -b -m copy -a "src=backend/target dest=/site/grupo-6/backend"
-    - scp -o StrictHostKeyChecking=no -i /tmp/pi_t5_grupo6_key.pem -r backend ubuntu@ec2-3-22-250-39.us-east-2.compute.amazonaws.com:~/site
-    - ssh -o StrictHostKeyChecking=no -i /tmp/pi_t5_grupo6_key.pem ubuntu@ec2-3-22-250-39.us-east-2.compute.amazonaws.com "sudo cp -r ~/site/target /site/grupo-6/backend"
+    - pwd; ls
+    - scp -o StrictHostKeyChecking=no -i /tmp/pi_t5_grupo6_key.pem -r backend/target ubuntu@ec2-3-22-250-39.us-east-2.compute.amazonaws.com:/site/grupo-6/backend
+    # - ssh -o StrictHostKeyChecking=no -i /tmp/pi_t5_grupo6_key.pem ubuntu@ec2-3-22-250-39.us-east-2.compute.amazonaws.com "sudo cp -r ~/site/target /site/grupo-6/backend"
 
 start-backend:
   tags:
