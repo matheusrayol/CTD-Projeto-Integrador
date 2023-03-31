@@ -21,6 +21,8 @@ public class ProductResponse {
 
   private CityResponse city;
 
+  private Integer sustainability ;
+
   private List<CharacteristicsResponse> characteristics;
 
   private List<ImageResponse> images;

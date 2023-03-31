@@ -23,8 +23,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.anyString;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayName("ReservationServiceImpl")
@@ -33,6 +32,8 @@ class ReservationServiceImplTest {
     @Mock
     private ReservationRepository reservationRepository;
 
+    @Mock
+    private  EmailServiceImpl emailServiceImpl;
     @Mock
     private UserServiceImpl userService;
 
@@ -101,7 +102,7 @@ class ReservationServiceImplTest {
 
     @Test
     @DisplayName("Devem ser retornadas todas as reservas para um dado ID de usuário")
-    void createReservationWhenProductIsAvailable() {
+    void createReservationWhenProductIsAvailable() throws Exception {
 
         UserEntity user = new UserEntity();
         user.setEmail("test@test.com");
@@ -134,6 +135,8 @@ class ReservationServiceImplTest {
         when(productServiceImpl.findProductById(anyLong())).thenReturn(product);
         when(reservationMapper.toEntity(any(), any(), any())).thenReturn(reservation);
         when(reservationRepository.save(any())).thenReturn(reservation);
+        when(emailServiceImpl.reservationEmail(any(), any())).thenReturn("teste");
+        doNothing().when(emailServiceImpl).sendEmail(any(), any(), any());
 
         ReservationEntity result = reservationServiceImpl.createReservation(reservationRequest);
 

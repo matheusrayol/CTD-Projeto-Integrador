@@ -7,7 +7,9 @@ import br.com.notcars.mapper.UserMapper;
 import br.com.notcars.model.FunctionEntity;
 import br.com.notcars.model.UserEntity;
 import br.com.notcars.repository.UserRepository;
+import br.com.notcars.service.EmailService;
 import br.com.notcars.service.FunctionService;
+import javax.mail.MessagingException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,6 +23,8 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -29,6 +33,9 @@ class UserServiceImplTest {
 
     @Mock
     private UserRepository userRepository;
+
+    @Mock
+    private  EmailServiceImpl emailServiceImpl;
 
     @Mock
     private UserMapper userMapper;
@@ -108,7 +115,7 @@ class UserServiceImplTest {
 
     @Test
     @DisplayName("Devem ser lançadas exceções quando os dados do usuário forem inválidos")
-    void createUserWhenEmailIsNotRegistered() {
+    void createUserWhenEmailIsNotRegistered() throws MessagingException {
         UserRequest userRequest = new UserRequest();
         userRequest.setEmail("test@test.com");
         userRequest.setFunctionId(1L);
@@ -132,6 +139,8 @@ class UserServiceImplTest {
         when(userMapper.toUserEntity(userRequest, functionEntity)).thenReturn(userEntity);
         when(passwordEncoder.encode(userEntity.getPassword())).thenReturn("123456");
         when(userRepository.save(userEntity)).thenReturn(userEntity);
+        when(emailServiceImpl.registrationEmail(any())).thenReturn("teste");
+        doNothing().when(emailServiceImpl).sendEmail(any(), any(), any());
 
         UserEntity result = userServiceImpl.create(userRequest);
 
