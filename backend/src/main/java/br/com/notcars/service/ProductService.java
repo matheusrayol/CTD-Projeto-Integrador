@@ -15,4 +15,7 @@ public interface ProductService {
   List<ProductEntity> findProductByCategoryOrCity(Long category, Long city);
 
   List<ProductEntity> findAvailabilityByCityAndDate(Long cityId, LocalDate startDate, LocalDate endDate);
+
+  ProductEntity updateProduct(Long id, ProductRequest productRequest);
+
 }
