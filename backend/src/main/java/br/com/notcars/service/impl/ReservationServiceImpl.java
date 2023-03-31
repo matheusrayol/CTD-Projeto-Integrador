@@ -48,6 +48,12 @@ public class ReservationServiceImpl implements ReservationService {
     return reservationRepository.findAllByProduct_Id(productId);
   }
 
+  @Override
+  @LogInfo
+  public List<ReservationEntity> findAllByUserId(Long id) {
+    return reservationRepository.findAllByUser_Id(id);
+  }
+
   @LogInfo
   private boolean isAvailable(ReservationRequest reservationRequest) {
     List<ReservationEntity> reservation =

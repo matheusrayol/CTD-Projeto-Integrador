@@ -22,6 +22,9 @@ public class ProductEntity {
   @Column(name = "product_description")
   private String description;
 
+  @Column(name = "sustainability ")
+  private Integer sustainability ;
+
   @ManyToOne
   @JoinColumn(name = "categories_id", referencedColumnName = "id")
   private CategoryEntity category;

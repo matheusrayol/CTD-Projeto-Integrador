@@ -39,4 +39,11 @@ public class ReservationController {
     List<ReservationEntity> reservation = reservationServiceImpl.findAllByProductId(productId);
     return ResponseEntity.ok(reservation.stream().map(reservationMapper::toReservationResponse).collect(Collectors.toList()));
   }
+
+  @GetMapping("/user/{userId}")
+  public ResponseEntity<List<ReservationResponse>> findReservationByUserId(@PathVariable Long userId) {
+    log.info(START_REQUEST + "[GET] " + BASE_URL + "/user/" + userId);
+    List<ReservationEntity> reservation = reservationServiceImpl.findAllByUserId(userId);
+    return ResponseEntity.ok(reservation.stream().map(reservationMapper::toReservationResponse).collect(Collectors.toList()));
+  }
 }

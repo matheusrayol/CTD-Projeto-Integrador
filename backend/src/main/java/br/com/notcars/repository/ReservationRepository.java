@@ -16,4 +16,6 @@ public interface ReservationRepository extends JpaRepository<ReservationEntity, 
     "AND re.dateBegin < :dateEnd " +
     "AND re.dateEnd > :dateBegin")
   List<ReservationEntity> findAllByAvailability(Long productId, LocalDate dateBegin, LocalDate dateEnd);
+
+  List<ReservationEntity> findAllByUser_Id(Long id);
 }

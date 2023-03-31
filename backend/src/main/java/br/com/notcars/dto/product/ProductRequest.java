@@ -9,15 +9,21 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class ProductRequest {
   @NotBlank(message = "name is required")
   private String name;
 
   @NotBlank(message = "description is required")
   private String description;
+
+
+  @NotNull(message = "sustainability is required")
+  private Integer sustainability ;
 
   @NotNull(message = "categoryId is required")
   private Long categoryId;
