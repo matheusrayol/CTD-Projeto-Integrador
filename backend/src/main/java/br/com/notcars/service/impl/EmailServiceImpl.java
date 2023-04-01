@@ -4,6 +4,10 @@ import br.com.notcars.config.aspect.LogInfo;
 import br.com.notcars.dto.reservation.ReservationRequest;
 import br.com.notcars.model.ReservationEntity;
 import br.com.notcars.service.EmailService;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import javax.mail.MessagingException;
@@ -31,35 +35,36 @@ public class EmailServiceImpl implements EmailService {
   }
 
   public String registrationEmail(String name) {
-    return "<div>Olá " + name.toUpperCase() + "! Seja muito bem-vindo(a) em nosso Site."
-      + "<br>"
-      + "Seu cadastro foi feito com sucesso, agora você faz parte da família notcars.</div>"
-      + "<br>"
-      + "<br>"
-      + "<div>---------------------------------------------------</div>"
-      + "<div> <strong>Notcars você encontra vários carros de luxo e que fazem bem ao meio ambiente!!</strong></div>"
-      + "<div>---------------------------------------------------</div>"
-      + "<br>"
-      + "<br>"
-      + "         <img src=https://bucket-pi-t5-grupo6.s3.us-east-2.amazonaws.com/assets/ourLogo.png height=60 >"
-      + "<div> Acesse nosso site e divirta-se </div>";
+    String caminhoArquivo = "src/main/resources/registration.html";
+    try {
+      byte[] bytesArquivo = Files.readAllBytes(Paths.get(caminhoArquivo));
+      String conteudoArquivo = new String(bytesArquivo, StandardCharsets.UTF_8);
+      return conteudoArquivo.replace("{user}", name.toUpperCase());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return "";
   }
+
 
   public String reservationEmail(String name, ReservationEntity reservation) {
     DateTimeFormatter formatters = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    return "<div>Olá " + name.toUpperCase() + ". Seja muito bem-vindo(a)!"
-      + "<br>"
-      + "Sua reserva foi feita com sucesso!.</div>"
-      + "<br>"
-      + "<br>"
-      + "<div>---------------------------------------------------</div>"
-      + "<div> Horário previsto para retirada: " + reservation.getHourStartReservation() + "</div>"
-      + "<div> Data de retirada: " + reservation.getDateBegin().format(formatters) + "</div>"
-      + "<div> Data de entrega: " + reservation.getDateEnd().format(formatters) + "</div>"
-      + "<div>---------------------------------------------------</div>"
-      + "<br>"
-      + "<br>"
-      + "         <img src=https://bucket-pi-t5-grupo6.s3.us-east-2.amazonaws.com/assets/ourLogo.png height=60 >"
-      + "<div> Acesse nosso site e divirta-se </div>";
+    String caminhoArquivo = "src/main/resources/reservation.html";
+    try {
+      byte[] bytesArquivo = Files.readAllBytes(Paths.get(caminhoArquivo));
+      String conteudoArquivo = new String(bytesArquivo, StandardCharsets.UTF_8);
+      conteudoArquivo =  conteudoArquivo.replace("{user}", name.toUpperCase());
+      conteudoArquivo =  conteudoArquivo.replace("{hour}", reservation.getHourStartReservation().toString() );
+      conteudoArquivo =  conteudoArquivo.replace("{dateBegin}", reservation.getDateBegin().format(formatters));
+      conteudoArquivo =  conteudoArquivo.replace("{dateEnd}", reservation.getDateEnd().format(formatters));
+      conteudoArquivo =  conteudoArquivo.replace("{city}", reservation.getProduct().getCity().getName());
+      conteudoArquivo =  conteudoArquivo.replace("{product}", reservation.getProduct().getName());
+      return conteudoArquivo;
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return "";
   }
+
+
 }
