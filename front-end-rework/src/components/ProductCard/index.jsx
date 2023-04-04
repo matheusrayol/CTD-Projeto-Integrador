@@ -39,7 +39,6 @@ export function ProductCard(props) {
                             <Link className="btn btn-light fs-6 poppins mb-4 mb-xl-0"
                                 to={`product/${props.data.id}`}
                                 id={props.data.id}
-                                role="button"
                             >
                                 Mais informações
                             </Link>
