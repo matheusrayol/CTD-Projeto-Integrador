@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
-// import { useParams } from 'react-router-dom'
-import { RotatingLines } from 'react-loader-spinner'
+import { Link, useParams } from 'react-router-dom'
 
 // import axios from 'axios'
 import { DoubleCalendar } from '../CalendarTG/Double'
 import { SingleCalendar } from '../CalendarTG/Single'
+import TGLeaf from '../../assets/travelgreen_leaf.svg'
 // import { format } from 'date-fns'
 
 export default function RenderedPage(product) {
@@ -57,9 +57,11 @@ export default function RenderedPage(product) {
                                 </span>
                             </div>
                             <div className="col d-flex justify-content-end align-items-center">
-                                <svg className="bi bi-arrow-left-circle-fill fs-3 me-4" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16">
-                                    <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"></path>
-                                </svg>
+                                <Link to="/" className="text-white">
+                                    <svg className="bi bi-arrow-left-circle-fill fs-3 me-4" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16">
+                                        <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"></path>
+                                    </svg>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -78,9 +80,8 @@ export default function RenderedPage(product) {
                             </div>
                             <div className="col d-flex justify-content-end align-items-center">
                                 <button className="btn btn-success btn-sm disabled fs-5 poppins disabled me-1" type="button" style={{ fontWeight: `bold`, opacity: `1`, background: `#009e60`, borderStyle: `none` }} disabled>
-                                    <img src="travelgreen_leaf.svg" width="20px" style={{ filter: `invert(100%)` }} />
-                                    {/* {product.productData.sustainability} */}
-                                    70
+                                    <img src={TGLeaf} width="20px" style={{ filter: `invert(100%)` }} />
+                                    {product.productData.sustainability}
                                 </button>
                             </div>
                         </div>
