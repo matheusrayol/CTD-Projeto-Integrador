@@ -52,7 +52,8 @@ start-backend:
   image: kroniak/ssh-client
   script:
     - ssh -o StrictHostKeyChecking=no -i /tmp/pi_t5_grupo6_key.pem ubuntu@ec2-3-22-250-39.us-east-2.compute.amazonaws.com "killall java"
-    - ssh -o StrictHostKeyChecking=no -i /tmp/pi_t5_grupo6_key.pem ubuntu@ec2-3-22-250-39.us-east-2.compute.amazonaws.com "cd /site/grupo-6/backend/target && nohup java -jar notcars-0.0.1-SNAPSHOT.jar &" &
+    - ssh -o StrictHostKeyChecking=no -i /tmp/pi_t5_grupo6_key.pem ubuntu@ec2-3-22-250-39.us-east-2.compute.amazonaws.com "cd /site/grupo-6/backend/target && nohup java -jar notcars-0.0.1-SNAPSHOT.jar &"
+    - exit
 
 # ------ Verificar Depois -------
   # .tag-release:
