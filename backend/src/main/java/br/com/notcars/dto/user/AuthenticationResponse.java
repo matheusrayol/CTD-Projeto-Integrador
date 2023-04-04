@@ -14,4 +14,5 @@ public class AuthenticationResponse {
     private String name;
     private String surname;
     private String email;
+    private String function;
 }
