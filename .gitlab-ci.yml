@@ -51,8 +51,6 @@ start-backend:
   stage: start
   image: kroniak/ssh-client
   script:
-    - ssh -o StrictHostKeyChecking=no -i /tmp/pi_t5_grupo6_key.pem ubuntu@ec2-3-22-250-39.us-east-2.compute.amazonaws.com 'pkill -9 java'
-    - sleep 5
     - ssh -f -o StrictHostKeyChecking=no -i /tmp/pi_t5_grupo6_key.pem ubuntu@ec2-3-22-250-39.us-east-2.compute.amazonaws.com 'nohup java -jar /site/grupo-6/backend/target/notcars-0.0.1-SNAPSHOT.jar > /site/log_teste.txt 2>&1 &'
 # ------ Verificar Depois -------
   # .tag-release:
