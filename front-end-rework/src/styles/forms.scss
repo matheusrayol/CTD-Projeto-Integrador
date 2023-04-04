@@ -1,0 +1,24 @@
+// START - Campos de formulário
+.form-control {
+	&:focus {
+		color: #333 !important;
+		background-color: #fff;
+		border-color: var(--bs-teal);
+		outline: 0;
+		box-shadow: 0 0 0 .25rem #07430240;
+	}
+}
+
+.form-error {
+	&:focus {
+		color: #333 !important;
+		background-color: #fff;
+		border-color: var(--bs-red);
+		outline: 0;
+		box-shadow: 0 0 0 .25rem #ff000040;
+	}
+	color: #333 !important;
+	border-color: var(--bs-red);
+	box-shadow: 0 0 0 .25rem #ff000040;
+}
+// END - Campos de formulário
