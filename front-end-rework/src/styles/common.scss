@@ -1,0 +1,152 @@
+// Fontes
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+// CSS de terceiros
+@import "bootstrap/scss/bootstrap";
+@import "react-calendar/dist/Calendar.css";
+
+// Folhas de estilo Travel Green
+@import "calendar.scss";
+@import "cards.scss";
+@import "forms.scss";
+
+
+html {
+	height: 100%;
+	display: flex;
+	flex-flow: column;
+}
+
+body {
+	background-color: #e8f5e8 !important;
+	font-family: 'Ubuntu', sans-serif;
+	scroll-behavior: smooth;
+	height: 100%;
+	display: flex;
+	flex-flow: column;
+}
+
+#root {
+	overflow: auto;
+	height: 100%;
+	display: flex;
+	flex-flow: column;
+}
+
+a.travelgreen {
+	text-decoration: none;
+	color: #198754;
+	&:hover {
+		text-decoration: none;
+		color: #333;
+	}
+	&:visited {
+		text-decoration: none;
+		color: #198754;
+	}
+}
+
+.travelgreen-navbar {
+	background-color: #fffffe;
+	border-bottom: 1px solid #198754;
+}
+
+.travelgreen-watermark {
+	filter: invert(100%);
+	opacity: 0.51;
+}
+
+.travelgreen-logo {
+	filter: invert(49%) sepia(21%) saturate(853%) hue-rotate(92deg) brightness(97%) contrast(86%);
+}
+
+.travelgreen-category-card {
+	background-size: cover;
+	background-repeat: no-repeat;
+	min-height: 120px;
+	text-shadow: 1px 1px 8px rgb(119, 119, 119);
+	&:hover {
+		transform: scale(1.01);
+		transition: ease-in-out 0.5s;
+		filter: brightness(97%) contrast(86%);
+	}
+}
+
+a.travelgreen-category-card {
+	text-decoration: none;
+}
+
+.travelgreen-footer {
+	background-color: #198754 !important;
+}
+
+.travelgreen-bgcolor {
+	background-color: #198754 !important;
+}
+
+.travelgreen-bgcolor-light {
+	background-color: #499167 !important;
+}
+
+.poppins {
+	font-family: 'Poppins';
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.ubuntu {
+	font-family: 'Ubuntu';
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.fs-7 {
+	font-size: 1.08rem !important;
+}
+
+.btn-light {
+	--bs-btn-hover-bg: #d6e6d6;
+	--bs-btn-hover-border-color: #d6e6d6;
+	--bs-btn-focus-shadow-rgb: none;
+	--bs-btn-active-bg: #d6e6d6;
+	--bs-btn-active-border-color: #f8f9fa;
+}
+
+.btn-primary {
+	--bs-btn-bg: #499167;
+	--bs-btn-border-color: #499167;
+	--bs-btn-hover-bg: #287146;
+	--bs-btn-hover-border-color: #287146;
+	--bs-btn-active-bg: #287146;
+	--bs-btn-active-border-color: #287146;
+	--bs-btn-disabled-bg: #287146;
+	--bs-btn-disabled-border-color: #287146;
+}
+
+.btn-overlay {
+	font-weight: bold !important;
+	font-size: 19px !important;
+	opacity: 1 !important;
+}
+
+.dropdown-menu {
+	--bs-dropdown-link-hover-bg: #d6e6d6;
+	--bs-dropdown-link-active-bg: #499167;
+}
+
+.tt-2l {
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+
+.tt-3l {
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	line-clamp: 3;
+	-webkit-box-orient: vertical;
+}
