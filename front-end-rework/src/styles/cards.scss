@@ -1,0 +1,40 @@
+// START - Card de produtos
+@media (max-width: 1199px) {
+	.card_content {
+		margin-top: -25px;
+	}
+}
+
+.outer_container {
+	max-width: 1400px;
+	max-width: 1400px;
+}
+
+.card_content {
+	background-color: #447e5b;
+	color: white;
+}
+
+.inner_container {
+	width: 90vw;
+}
+
+.img-container {
+	z-index: 1;
+}
+
+.content_img {
+	max-width: 250px;
+	min-height: 250px;
+	object-fit: cover;
+}
+
+@media (min-width: 1200px) {
+	.content_container {
+		margin: 30px;
+	}
+	.card_content {
+		margin-left: -25px;
+	}
+}
+// END - Card de Produtos
