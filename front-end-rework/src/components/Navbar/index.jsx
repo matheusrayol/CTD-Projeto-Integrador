@@ -36,7 +36,7 @@ export default function Navbar() {
                         <>
                             <ul className="navbar-nav ms-auto">
                                 <li className="nav-item">
-                                    <Link to="/accountuser" className="nav-link fs-5 mt-3 mt-sm-3 mb-3 me-md-2 poppins" href="#">
+                                    <Link to="/accountuser" className="nav-link fs-6 mt-3 mt-sm-3 mb-3 me-md-2 poppins" href="#">
                                         <LetterAvatar size="32" bgColor="#19944c" textColor="#FFF" className="me-2">
                                             {name[0]}{surname[0]}
                                         </LetterAvatar>
