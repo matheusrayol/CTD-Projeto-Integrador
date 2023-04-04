@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Collections;
 import java.util.List;
+import org.springframework.scheduling.annotation.AsyncResult;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -136,7 +137,7 @@ class ReservationServiceImplTest {
         when(reservationMapper.toEntity(any(), any(), any())).thenReturn(reservation);
         when(reservationRepository.save(any())).thenReturn(reservation);
         when(emailServiceImpl.reservationEmail(any(), any())).thenReturn("teste");
-        doNothing().when(emailServiceImpl).sendEmail(any(), any(), any());
+        when(emailServiceImpl.sendEmail(any(), any(), any())).thenReturn(new AsyncResult<>("Email enviado"));
 
         ReservationEntity result = reservationServiceImpl.createReservation(reservationRequest);
 
