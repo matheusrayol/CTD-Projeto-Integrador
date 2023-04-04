@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { CalendarTG } from '../CalendarTG'
+import { SingleCalendar } from '../CalendarTG/Single'
 import { LocationSelector } from '../LocationSelector'
 import { CategoryCard } from '../CategoryCard'
 import { ProductCard } from '../ProductCard'
@@ -120,13 +120,6 @@ export default function MainSection() {
         setShowCity(false)
     }
 
-    // const que realiza o fechamento do calendario
-    function toggleCalendar() {
-        setShowCalendar(!showCalendar)
-        setShowCity(false)
-    }
-
-
     // Função responsável pelo recebimento do valor selecionado no input de cidade
     const getValueInputSelect = event => {
         setValueInputSelect(event.target.value)
@@ -207,7 +200,7 @@ export default function MainSection() {
                                         defaultValue={selectDate ? formatDate(startDate) : ''}
                                     />
                                     <div className="dropdown-menu w-100 px-2 py-2 justify-content-center" data-bs-auto-close="outside">
-                                        <CalendarTG
+                                        <SingleCalendar
                                             className="dropdown-item w-100"
                                             data-bs-auto-close="outside"
                                             id={startDate}

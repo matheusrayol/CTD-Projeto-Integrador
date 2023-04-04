@@ -1,7 +1,7 @@
 import { Calendar } from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
 
-export function CalendarTG(props) {
+export function SingleCalendar(props) {
   const { selectedRange, onSelectedData } = props
 
   const handleDateChange = range => {
