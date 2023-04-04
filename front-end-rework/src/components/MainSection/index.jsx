@@ -158,6 +158,14 @@ export default function MainSection() {
         return `De ${startDay}/${startMonth}/${startYear} a ${endDay}/${endMonth}/${endYear}`
     }
 
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const handleCloseMenu = () => {
+        document.querySelector('[aria-controls="categoryList"]').setAttribute('aria-expanded', 'false');
+        document.querySelector('#categoryList').classList.remove('show');
+        setIsMenuOpen(false);
+    };
+
     return (
         <>
             <header>
@@ -199,14 +207,16 @@ export default function MainSection() {
                                         placeholder='Data da Reserva'
                                         defaultValue={selectDate ? formatDate(startDate) : ''}
                                     />
-                                    <div className="dropdown-menu w-100 px-2 py-2 justify-content-center" data-bs-auto-close="outside">
-                                        <SingleCalendar
-                                            className="dropdown-item w-100"
-                                            data-bs-auto-close="outside"
-                                            id={startDate}
-                                            onSelectedData={selectedDate}
-                                            selectedRange={startDate}
-                                        />
+                                    <div className="dropdown-menu w-100 px-2 py-2" data-bs-auto-close="outside">
+                                        <div className="d-flex align-items-center justify-content-center">
+                                            <SingleCalendar
+                                                className="dropdown-item w-100"
+                                                data-bs-auto-close="outside"
+                                                id={startDate}
+                                                onSelectedData={selectedDate}
+                                                selectedRange={startDate}
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -265,12 +275,13 @@ export default function MainSection() {
                                 type="button"
                                 data-bs-toggle="collapse"
                                 data-bs-target="#categoryList"
-                                aria-expanded="false"
-                                aria-controls="categoryList">
+                                aria-expanded={isMenuOpen}
+                                aria-controls="categoryList"
+                                onClick={() => setIsMenuOpen(!isMenuOpen)}>
                                 Clique e escolha a categoria
                             </button>
                         </h3>
-                        <div id="categoryList" className="collapse">
+                        <div id="categoryList" className="collapse" onClick={handleCloseMenu}>
                             <div className="row d-flex">
                                 {category.map((image, index) => (
                                     <CategoryCard
