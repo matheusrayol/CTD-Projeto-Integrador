@@ -1,6 +1,5 @@
 stages: 
   - build
-  - stop
   - deploy
   - start
 
@@ -38,27 +37,19 @@ deploy-frontend:
   script:
     - ansible all --ssh-common-args='-o StrictHostKeyChecking=no' -u ubuntu --private-key /tmp/pi_t5_grupo6_key.pem -i 'ec2-18-221-166-116.us-east-2.compute.amazonaws.com,' -b -m copy -a "src=front-end/build dest=/site/grupo-6/front-end"
 
-stop-backend:
-  tags:
-    - nginx
-  stage: stop
-  image: quay.io/ansible/ansible-core
-  script:
-    - ansible all --ssh-common-args='-o StrictHostKeyChecking=no' -u ubuntu --private-key /tmp/pi_t5_grupo6_key.pem -i 'ec2-18-221-166-116.us-east-2.compute.amazonaws.com,' -b -m service -a "name=travelgreen state=stopped"
-
 deploy-backend:
   tags:
     - nginx
   stage: deploy
   image: kroniak/ssh-client
   script:
-    - ssh -f -o StrictHostKeyChecking=no -i /tmp/pi_t5_grupo6_key.pem ubuntu@ec2-3-22-250-39.us-east-2.compute.amazonaws.com 'systemctl --user stop travelgreen'
-    - scp -o StrictHostKeyChecking=no -i /tmp/pi_t5_grupo6_key.pem -r backend/target/notcars-0.0.1-SNAPSHOT.jar ubuntu@ec2-3-22-250-39.us-east-2.compute.amazonaws.com:/site/grupo-6/backend/target
+    - ssh -o StrictHostKeyChecking=no -i /tmp/pi_t5_grupo6_key.pem ubuntu@ec2-3-22-250-39.us-east-2.compute.amazonaws.com 'systemctl --user stop travelgreen'
+    - scp -o StrictHostKeyChecking=no -i /tmp/pi_t5_grupo6_key.pem -r backend/target/notcars-0.0.1-SNAPSHOT.jar ubuntu@ec2-3-22-250-39.us-east-2.compute.amazonaws.com:/site/grupo-6/backend
 
 start-backend:
   tags:
     - nginx
   stage: start
-  image: quay.io/ansible/ansible-core
+  image: kroniak/ssh-client
   script:
-    - ansible all --ssh-common-args='-o StrictHostKeyChecking=no' -u ubuntu --private-key /tmp/pi_t5_grupo6_key.pem -i 'ec2-18-221-166-116.us-east-2.compute.amazonaws.com,' -b -m service -a "name=travelgreen state=started"
+    - ssh -o StrictHostKeyChecking=no -i /tmp/pi_t5_grupo6_key.pem ubuntu@ec2-3-22-250-39.us-east-2.compute.amazonaws.com 'systemctl --user start travelgreen'
