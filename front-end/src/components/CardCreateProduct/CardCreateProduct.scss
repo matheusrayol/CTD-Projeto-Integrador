@@ -1,0 +1,350 @@
+@import "../../styles/GlobalVariablesScss.scss";
+
+.main {
+  margin: 0 10%;
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+
+  h1 {
+    text-align: center;
+  }
+
+  form {
+
+    .formError,
+    input.formError,
+    textarea.formError {
+      background: rgb(250, 202, 202);
+    }
+
+    input.formError:focus,
+    textarea.formError:focus {
+      background: rgb(250, 202, 202);
+    }
+
+    span.formError {
+      background: none;
+      font-size: 1rem;
+      margin-top: 0.25rem;
+      text-align: center;
+      background-color: none;
+      color: rgb(249, 95, 95);
+    }
+
+    .name-category-fields {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 2rem;
+      font-size: 18px;
+      width: 100%;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      gap: 2rem;
+
+      .name-field {
+        display: flex;
+        flex-direction: column;
+        width: 385px;
+
+        label {
+          color: rgb(15, 100, 15);
+          margin-bottom: 0.25rem;
+        }
+
+        input {
+          padding: 0.5rem 2rem;
+          border-radius: 0.5rem;
+        }
+      }
+
+      .category-field {
+        display: flex;
+        flex-direction: column;
+        width: 150px;
+
+        label {
+          color: rgb(15, 100, 15);
+          margin-bottom: 0.25rem;
+        }
+
+        input {
+          padding: 0.5rem 2rem;
+          border-radius: 0.5rem;
+        }
+      }
+    }
+
+    .locale {
+
+      label {
+        color: rgb(15, 100, 15);
+        margin-bottom: 32rem;
+      }
+
+      .select-location {
+        position: relative;
+
+        input {
+          margin-top: 0.25rem;
+          width: 300px;
+          text-align: center;
+          padding: 0.5rem 1rem;
+          border: 2px solid black;
+          border-radius: 0.5rem;
+          color: gray;
+          font-size: 14px;
+          font-weight: 400;
+          position: relative;
+        }
+
+        .container-location-open {
+          width: 300px;
+          position: absolute;
+          opacity: 1;
+          padding: 1rem;
+          border-radius: 0 0 0.3rem 0.3rem;
+          z-index: 2;
+          box-shadow: 1px 4px 1px 1px black;
+          background-color: rgb(224, 228, 224);
+
+          h3 {
+            font-size: 16px;
+            color: rgb(50, 55, 50);
+            margin: 0;
+            margin-bottom: 0.75rem;
+          }
+
+          .location-list {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            flex-direction: column;
+            border-radius: 0 0 0.313rem 0.0313rem;
+
+            ul {
+              text-decoration: none;
+              list-style: none;
+              margin: 0;
+              border: 0;
+              padding: 0;
+            }
+          }
+        }
+
+        .container-location-close {
+          width: 0%;
+          height: 0;
+          background: red;
+          position: absolute;
+          opacity: 0;
+        }
+
+        ::placeholder {
+          color: gray;
+          font-size: 14px;
+          font-weight: 700;
+        }
+      }
+    }
+
+    .category {
+
+      label {
+        color: rgb(15, 100, 15);
+        margin-bottom: 32rem;
+      }
+
+      .select-category {
+        position: relative;
+
+        input {
+          margin-top: 0.25rem;
+          width: 150px;
+          text-align: center;
+          padding: 0.5rem 1rem;
+          border: 2px solid black;
+          border-radius: 0.5rem;
+          color: gray;
+          font-size: 14px;
+          font-weight: 400;
+          position: relative;
+        }
+
+        .container-category-open {
+          width: 150px;
+          position: absolute;
+          opacity: 1;
+          padding: 1rem;
+          border-radius: 0 0 0.3rem 0.3rem;
+          z-index: 2;
+          box-shadow: 1px 4px 1px 1px black;
+          background-color: rgb(224, 228, 224);
+
+          h3 {
+            font-size: 16px;
+            color: rgb(50, 55, 50);
+            margin: 0;
+            margin-bottom: 0.75rem;
+          }
+
+          .category-list {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            flex-direction: column;
+            border-radius: 0 0 0.313rem 0.0313rem;
+
+            ul {
+              text-decoration: none;
+              list-style: none;
+              margin: 0;
+              border: 0;
+              padding: 0;
+            }
+          }
+        }
+
+        .container-category-close {
+          width: 0%;
+          height: 0;
+          background: red;
+          position: absolute;
+          opacity: 0;
+        }
+
+        ::placeholder {
+          color: gray;
+          font-size: 14px;
+          font-weight: 700;
+        }
+      }
+    }
+
+    .description-field {
+      display: flex;
+      flex-direction: column;
+      margin: 2rem 0;
+      font-size: 18px;
+
+      label {
+        color: rgb(15, 100, 15);
+        margin-bottom: 0.25rem;
+      }
+
+      textarea {
+        border-radius: 0.5rem;
+        border: 2px solid black;
+        width: 79%;
+      }
+    }
+
+    .category-fields {
+      //atributeCategory
+      font-size: 18px;
+    }
+
+    .politic-fields {
+      display: flex;
+      flex-direction: column;
+      margin-top: 1rem;
+
+      h2 {
+        font-size: 24px;
+      }
+
+      .politic-field {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+
+        .politic-field-rules {
+          h4 {
+            font-size: 1rem;
+            margin: 0.5rem 0;
+            padding: 0;
+            text-align: center;
+            color: rgb(15, 100, 15);
+          }
+
+          textarea {
+            display: flex;
+            margin-bottom: 0.25rem;
+            flex-direction: column;
+            border-radius: 0.5rem;
+          }
+        }
+
+        .politic-field-security {
+          h4 {
+            font-size: 1rem;
+            margin: 0.5rem 0;
+            padding: 0;
+            text-align: center;
+            color: rgb(15, 100, 15);
+          }
+
+          textarea {
+            border-radius: 0.5rem;
+            display: flex;
+            margin-bottom: 0.25rem;
+            flex-direction: column;
+          }
+        }
+
+        .politic-field-cancel {
+          h4 {
+            font-size: 1rem;
+            margin: 0.5rem 0;
+            padding: 0;
+            text-align: center;
+            color: rgb(15, 100, 15);
+          }
+
+          textarea {
+            border-radius: 0.5rem;
+            display: flex;
+            margin-bottom: 0.25rem;
+            flex-direction: column;
+          }
+        }
+      }
+    }
+
+    .button-form {
+      width: 100%;
+      display: flex;
+      margin: 1rem 0;
+      align-items: center;
+      justify-content: center;
+
+      button {
+        margin: 0;
+        text-decoration: none;
+        padding: 0.75rem 1.75rem;
+        border: $border-color-two;
+        color: $text-color-two;
+        border-radius: $border-radius-button;
+        background: $background-five;
+        transition: all 0.3s ease;
+
+        font-family: $font-bold;
+        font-size: 1rem;
+        font-weight: 700;
+
+        &:hover {
+          color: $text-color-one;
+          background-color: $background-three;
+          border: $border-color-two;
+        }
+
+        &:disabled {
+          background-color: rgb(180, 193, 179);
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}

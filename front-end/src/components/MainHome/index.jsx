@@ -228,7 +228,7 @@ export function MainHome() {
         </div>
       </section>
       <section className="container-category" id="container-category">
-        <h2>Procure as melhores opções por categoria</h2>
+        <h2> Categorias</h2>
         <div className="list-categories" id="list-categories">
           {category.map((image, index) => (
             <CardCategory
@@ -242,7 +242,7 @@ export function MainHome() {
         </div>
       </section>
       <section className="container-product" id="container-product">
-        <h2>Recomendações para você</h2>
+        <h2>Recomendações</h2>
         <div className="list-products" id="list-products">
           {listProduct
             ? products.map((products, index) => (

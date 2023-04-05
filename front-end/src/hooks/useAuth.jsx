@@ -31,7 +31,7 @@ export function AuthProvider(props) {
     }
   }
 
-  // Função responsavel por salvar o nome
+  // Função responsavel por salvar os campos
   function saveData(data) {
     if (data.name !== name) {
       setName(data.name)
