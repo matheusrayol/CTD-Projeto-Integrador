@@ -13,10 +13,12 @@ import br.com.notcars.service.ProductService;
 import br.com.notcars.service.ReservationService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Log4j2
 public class ReservationServiceImpl implements ReservationService {
   private final ReservationRepository reservationRepository;
 
@@ -30,15 +32,16 @@ public class ReservationServiceImpl implements ReservationService {
   @LogInfo
   @Override
   public ReservationEntity createReservation(ReservationRequest reservationRequest) throws Exception {
-    if(!isAvailable(reservationRequest)){
+    if (!isAvailable(reservationRequest)) {
       throw new BadRequestException("já existe uma reserva para este produto na data selecionada!");
     }
     UserEntity user = userService.findByEmail(reservationRequest.getUserEmail());
     ProductEntity product = productServiceImpl.findProductById(reservationRequest.getProductId());
     ReservationEntity reservation = reservationMapper.toEntity(reservationRequest, user, product);
     reservation = reservationRepository.save(reservation);
-
+    log.info("antes de enviar email");
     emailServiceImpl.sendEmail(reservationRequest.getUserEmail(), "Reserva criada com sucesso!", emailServiceImpl.reservationEmail(user.getName(), reservation));
+    log.info("depois de enviar o email");
     return reservation;
   }
 

@@ -1,10 +1,11 @@
 package br.com.notcars.service;
 
 import br.com.notcars.model.ReservationEntity;
+import java.util.concurrent.Future;
 import javax.mail.MessagingException;
 
 public interface EmailService {
-  void sendEmail(String destinatario, String assunto, String conteudo) throws MessagingException;
+  Future<String> sendEmail(String addressee, String subject, String content) throws MessagingException, InterruptedException;
 
   String registrationEmail(String name);
 
