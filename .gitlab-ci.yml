@@ -43,7 +43,7 @@ deploy-backend:
   stage: deploy
   image: kroniak/ssh-client
   script:
-    - ssh -o StrictHostKeyChecking=no -i /tmp/pi_t5_grupo6_key.pem ubuntu@ec2-3-22-250-39.us-east-2.compute.amazonaws.com 'service travelgreen stop'
+    - ssh -o StrictHostKeyChecking=no -i /tmp/pi_t5_grupo6_key.pem ubuntu@ec2-3-22-250-39.us-east-2.compute.amazonaws.com 'sudo service travelgreen stop'
     - scp -o StrictHostKeyChecking=no -i /tmp/pi_t5_grupo6_key.pem -r backend/target ubuntu@ec2-3-22-250-39.us-east-2.compute.amazonaws.com:/site/grupo-6/backend
 
 start-backend:
@@ -52,7 +52,7 @@ start-backend:
   stage: start
   image: kroniak/ssh-client
   script:
-    - ssh -f -o StrictHostKeyChecking=no -i /tmp/pi_t5_grupo6_key.pem ubuntu@ec2-3-22-250-39.us-east-2.compute.amazonaws.com 'service travelgreen start &'
+    - ssh -f -o StrictHostKeyChecking=no -i /tmp/pi_t5_grupo6_key.pem ubuntu@ec2-3-22-250-39.us-east-2.compute.amazonaws.com 'sudo service travelgreen start &'
 # ------ Verificar Depois -------
   # .tag-release:
   #   stage: tag
