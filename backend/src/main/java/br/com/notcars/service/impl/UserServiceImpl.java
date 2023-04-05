@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserDetailsService {
   }
 
   @LogInfo
-  public UserEntity create(UserRequest userRequest) throws MessagingException {
+  public UserEntity create(UserRequest userRequest) throws MessagingException, InterruptedException {
     validatedIfEmailIsRegistered(userRequest.getEmail());
     FunctionEntity function = functionServiceImpl.findById(userRequest.getFunctionId());
     UserEntity userEntity = userMapper.toUserEntity(userRequest, function);
