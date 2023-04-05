@@ -43,9 +43,8 @@ deploy-backend:
   stage: deploy
   image: kroniak/ssh-client
   script:
-    - ssh -f -o StrictHostKeyChecking=no -i /tmp/pi_t5_grupo6_key.pem ubuntu@ec2-3-22-250-39.us-east-2.compute.amazonaws.com 'systemctl --user status travelgreen'
-    # - systemctl --user stop travelgreen
-    - scp -o StrictHostKeyChecking=no -i /tmp/pi_t5_grupo6_key.pem -r backend/target ubuntu@ec2-3-22-250-39.us-east-2.compute.amazonaws.com:/site/grupo-6/backend
+    - ssh -f -o StrictHostKeyChecking=no -i /tmp/pi_t5_grupo6_key.pem ubuntu@ec2-3-22-250-39.us-east-2.compute.amazonaws.com 'systemctl --user stop travelgreen'
+    - scp -o StrictHostKeyChecking=no -i /tmp/pi_t5_grupo6_key.pem -r backend/target/notcars-0.0.1-SNAPSHOT.jar ubuntu@ec2-3-22-250-39.us-east-2.compute.amazonaws.com:/site/grupo-6/backend
 
 start-backend:
   tags:
@@ -53,81 +52,4 @@ start-backend:
   stage: start
   image: kroniak/ssh-client
   script:
-    - ssh -f -o StrictHostKeyChecking=no -i /tmp/pi_t5_grupo6_key.pem ubuntu@ec2-3-22-250-39.us-east-2.compute.amazonaws.com 'systemctl --user status travelgreen'
-    # - systemctl --user start travelgreen
-# ------ Verificar Depois -------
-  # .tag-release:
-  #   stage: tag
-  #   allow_failure: false
-  #   image: circleci/openjdk:8u232-stretch
-  #   script: &ref_0
-  #     - git config --global user.email "$GITLAB_USER_EMAIL"
-  #     - git config --global user.name "$GITLAB_USER_NAME"
-  #     - >-
-  #       mvn $MAVEN_CLI_OPTS build-helper:parse-version versions:set
-  #       -DnewVersion=$NEW_VERSION_EXPRESSION versions:commit
-  #     - >-
-  #       NEW_VERSION=$(mvn $MAVEN_CLI_OPTS -q
-  #       org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate
-  #       -Dexpression=project.version -DforceStdout)
-  #     - echo "Releasing $NEW_VERSION"
-  #     - git add pom.xml
-  #     - git commit -m "[VERSION] - $NEW_VERSION"
-  #     - mvn $MAVEN_CLI_OPTS scm:tag -DpushChanges=false
-  #     - >-
-  #       mvn $MAVEN_CLI_OPTS build-helper:parse-version versions:set
-  #       -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion}-SNAPSHOT
-  #       versions:commit
-  #     - git add pom.xml
-  #     - >-
-  #       git commit -m "[VERSION] - $(mvn $MAVEN_CLI_OPTS -q
-  #       org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate
-  #       -Dexpression=project.version -DforceStdout)"
-  #     - >-
-  #       git push
-  #       "https://${GITLAB_API_USER}:${GITLAB_API_TOKEN}@${CI_REPOSITORY_URL#*@}"
-  #       HEAD:$CI_COMMIT_REF_NAME
-  #     - >-
-  #       git push
-  #       "https://${GITLAB_API_USER}:${GITLAB_API_TOKEN}@${CI_REPOSITORY_URL#*@}"
-  #       $NEW_VERSION
-  #   when: manual
-  #   only: &ref_1
-  #     - main
-  #   tags: &ref_2
-  #     - docker-2
-
-  # Release patch:
-  #   stage: tag
-  #   allow_failure: false
-  #   image: circleci/openjdk:8u232-stretch
-  #   script: *ref_0
-  #   when: manual
-  #   only: *ref_1
-  #   tags: *ref_2
-  #   before_script:
-  #     - >-
-  #       NEW_VERSION_EXPRESSION=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.incrementalVersion}-RELEASE
-
-  # Release minor:
-  #   stage: tag
-  #   allow_failure: false
-  #   image: circleci/openjdk:8u232-stretch
-  #   script: *ref_0
-  #   when: manual
-  #   only: *ref_1
-  #   tags: *ref_2
-  #   before_script:
-  #     - >-
-  #       NEW_VERSION_EXPRESSION=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.0-RELEASE
-
-  # Release major:
-  #   stage: tag
-  #   allow_failure: false
-  #   image: circleci/openjdk:8u232-stretch
-  #   script: *ref_0
-  #   when: manual
-  #   only: *ref_1
-  #   tags: *ref_2
-  #   before_script:
-  #     - NEW_VERSION_EXPRESSION=\${parsedVersion.nextMajorVersion}.0.0-RELEASE
+    - ssh -f -o StrictHostKeyChecking=no -i /tmp/pi_t5_grupo6_key.pem ubuntu@ec2-3-22-250-39.us-east-2.compute.amazonaws.com 'systemctl --user start travelgreen'
