@@ -22,6 +22,7 @@ public interface UserMapper {
   @Mapping(source = "user.name", target = "name")
   @Mapping(source = "user.surname", target = "surname")
   @Mapping(source = "user.email", target = "email")
+  @Mapping(source = "user.id", target = "id")
   @Mapping(source = "user.function.name", target = "function")
   AuthenticationResponse toAuthenticationResponse(String jwt, UserEntity user);
 }
