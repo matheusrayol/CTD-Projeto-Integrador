@@ -28,9 +28,9 @@ body {
 }
 
 #root {
-	height: 100%;
 	display: flex;
 	flex-flow: column;
+	flex-grow: 1 !important
 }
 
 a.travelgreen {
@@ -180,3 +180,10 @@ a.travelgreen-category-card {
 	margin-bottom: 5px;
 	font-size: 0.65em;
 }
+<<<<<<< HEAD
+=======
+
+.mt-3half {
+	margin-top: 2rem !important;
+}
+>>>>>>> 856d4659 (refactor: fixed issue with product page fetch)

@@ -77,7 +77,7 @@ const LoginValidation = () => {
                         saveData(data)
                         setValidLogin(true)
                         setTimeout(function () {
-                            navigate('/home');
+                            navigate('/');
                             refreshPage();
                         }, 1500)
                     } else {

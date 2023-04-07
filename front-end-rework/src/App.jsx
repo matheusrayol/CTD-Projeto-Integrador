@@ -1,12 +1,13 @@
 import React from 'react'
-import RoutesApp from './routes/RoutesApp'
 import { AuthProvider } from './hooks/useAuth'
+import { RouterProvider } from 'react-router-dom'
+import TravelGreenRoutes from './routes/default'
 
 const App = () => {
   
   return (
     <AuthProvider>
-      <RoutesApp />
+      <RouterProvider router={TravelGreenRoutes} />
     </AuthProvider>
   )
 
