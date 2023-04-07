@@ -36,16 +36,16 @@ export default function Navbar() {
                         <>
                             <ul className="navbar-nav ms-auto">
                                 <li className="nav-item">
-                                    <Link to="/accountuser" className="nav-link fs-6 mt-3 mt-sm-3 mb-3 me-md-2 poppins" href="#">
-                                        <LetterAvatar size="32" bgColor="#19944c" textColor="#FFF" className="me-2">
-                                            {name[0]}{surname[0]}
-                                        </LetterAvatar>
-                                        <span className="ms-2">Olá, {name}!</span>
-                                    </Link>
                                 </li>
                             </ul>
                             <div className="d-flex justify-content-evenly">
-                                <Link to="/home" onClick={() => logout()}>
+                                <Link to="/accountuser" className="d-flex align-items-center nav-link fs-6 mt-3 mt-sm-3 mb-3 me-md-2 poppins" href="#">
+                                    <LetterAvatar size="32" bgColor="#19944c" textColor="#FFF" className="me-2">
+                                        {name[0]}{surname[0]}
+                                    </LetterAvatar>
+                                    <span className="ms-2">Olá, {name}!</span>
+                                </Link>
+                                <Link to="/" onClick={() => logout()}>
                                     <button className="btn btn-primary fw-semibold mt-sm-3 mb-3 poppins" type="button">Sair</button>
                                 </Link>
                             </div>

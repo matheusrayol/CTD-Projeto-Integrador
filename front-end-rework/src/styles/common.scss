@@ -28,9 +28,9 @@ body {
 }
 
 #root {
-	height: 100%;
 	display: flex;
 	flex-flow: column;
+	flex-grow: 1 !important
 }
 
 a.travelgreen {
@@ -179,4 +179,8 @@ a.travelgreen-category-card {
 	border-radius: 7px;
 	margin-bottom: 5px;
 	font-size: 0.65em;
+}
+
+.mt-3half {
+	margin-top: 2rem !important;
 }
