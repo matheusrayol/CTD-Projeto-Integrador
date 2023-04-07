@@ -357,8 +357,12 @@
       }
 
       &__calendar {
-        margin: 0 15%;
+        min-height: 450px;
+        margin: 0 3rem;
+        width: 66%;
+        display: flex;
         grid-area: calendar;
+        justify-content: center;
       }
 
       &__reserve {

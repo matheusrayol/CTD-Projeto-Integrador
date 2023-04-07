@@ -8,13 +8,21 @@ import GalleryPageProduct from '../CardGallery/GalleryPageProduct'
 import DateRangePickerComp2 from './DateRangePickerComp2'
 import { useAuth } from '../../hooks/useAuth'
 
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
 export default function CardProduct(image) {
   const [buttonOpen, setButtonOpen] = useState(true)
   const { auth } = useAuth()
+  const MySwal = withReactContent(Swal)
 
   function alertYouLogin() {
-    alert('Você não está logado para realizar uma reserva')
-    //enviar uma logica para o LoginValidation para criar um "pop-up" no local do alert
+    // alert('Você não está logado para realizar uma reserva')
+    MySwal.fire({
+      icon: 'warning',
+      text: 'Você não está logado para realizar uma reserva!',
+      text2: 'Vamos redireciona-lo'
+    })
   }
 
   const galleryImages = [
@@ -49,7 +57,7 @@ export default function CardProduct(image) {
             <p>{image.imageData.name}</p>
             <p>{image.imageData.category.qualification}</p>
           </div>
-          <Link to="/home" id="cardBody__sectionBack__link">
+          <Link to="/" id="cardBody__sectionBack__link">
             <button
               className={styles.cardBody__sectionBack__button}
               id="cardBody__sectionBack__button"
