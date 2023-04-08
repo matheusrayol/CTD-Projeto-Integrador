@@ -32,7 +32,7 @@ export function ProductCard(props) {
                                 </svg>
                                 &nbsp; {Math.round(props.data.sustainability / 10 / 2)}/5
                             </p>
-                            <p className="poppins fs-4">{props.data.name}</p>
+                            <p className="poppins fs-4 tt-1l">{props.data.name}</p>
                             <p className="tt-3l">{props.data.description}</p>
                             <p className="fs-6">
                                 <svg className="bi bi-pin-map-fill" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16">

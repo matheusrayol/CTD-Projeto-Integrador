@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { SingleCalendar } from '../CalendarTG/Single'
+import { HomeCalendar } from '../CalendarTG/HomeCalendar'
 import { LocationSelector } from '../LocationSelector'
 import { CategoryCard } from '../CategoryCard'
 import { ProductCard } from '../ProductCard'
@@ -11,16 +11,13 @@ export default function MainSection() {
 
     // Configuração do calendário e busca de reservas
     const [selectDate, setSelectDate] = useState(false)
-    const [showCalendar, setShowCalendar] = useState(false)
     const [showCity, setShowCity] = useState(false)
 
     // Configuração dos cards e filtros
-    const [objectFilter, setObjectFilter] = useState([])
-    const [listProducts, setListProducts] = useState(true)
+    const objectFilter = useState([])
+    const listProducts = useState(true)
     const [inputSelect, setInputSelect] = useState(true)
     const [valueInputSelect, setValueInputSelect] = useState('')
-    const [inputCategory, setInputCategory] = useState(true)
-    const [valueInputCategory, setValueInputCategory] = useState('')
 
 
     // Retorna as categorias em cards
@@ -102,8 +99,6 @@ export default function MainSection() {
         }
     }
 
-    // Função responsável pelo retorno de produtos de acordo com o ID da categoria
-    const [categoryId, setCategoryId] = useState('');
     // Chamada assíncrona para buscar os produtos cadastrados conforme a ID da categoria
     async function filterCategory(id) {
         try {
@@ -139,7 +134,6 @@ export default function MainSection() {
     const selectedDate = range => {
         setStartDate(range)
         setSelectDate(true)
-        setShowCalendar(false)
     }
 
     // Const para formatação e formas do alcance do calendário
@@ -209,7 +203,7 @@ export default function MainSection() {
                                     />
                                     <div className="dropdown-menu w-100 px-2 py-2" data-bs-auto-close="outside">
                                         <div className="d-flex align-items-center justify-content-center">
-                                            <SingleCalendar
+                                            <HomeCalendar
                                                 className="dropdown-item w-100"
                                                 data-bs-auto-close="outside"
                                                 id={startDate}
