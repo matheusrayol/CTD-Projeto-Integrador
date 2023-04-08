@@ -5,12 +5,20 @@ const AuthContext = createContext()
 
 export function AuthProvider(props) {
   const authLocalStorage = localStorage.getItem('auth')
+  const functionRoleLocalStorage = localStorage.getItem('functionRole')
   const nameLocalStorage = localStorage.getItem('name')
+  const idLocalStorage = localStorage.getItem('id')
   const surnameLocalStorage = localStorage.getItem('surname')
   const emailLocalStorage = localStorage.getItem('email')
 
   const [auth, setAuth] = useState(
     authLocalStorage === null ? '' : authLocalStorage
+  )
+
+  const [id, setId] = useState(idLocalStorage === null ? '' : idLocalStorage)
+
+  const [functionRole, setFunctionRole] = useState(
+    functionRoleLocalStorage === null ? '' : functionRoleLocalStorage
   )
 
   const [name, setName] = useState(
@@ -31,11 +39,15 @@ export function AuthProvider(props) {
     }
   }
 
-  // Função responsavel por salvar o nome
+  // Função responsavel por salvar os campos
   function saveData(data) {
     if (data.name !== name) {
       setName(data.name)
       localStorage.setItem('name', data.name)
+    }
+    if (data.id !== id) {
+      setId(data.id)
+      localStorage.setItem('id', data.id)
     }
     if (data.surname !== surname) {
       setSurname(data.surname)
@@ -45,15 +57,23 @@ export function AuthProvider(props) {
       setEmail(data.email)
       localStorage.setItem('email', data.email)
     }
+    if (data.function !== functionRole) {
+      setFunctionRole(data.function)
+      localStorage.setItem('functionRole', data.function)
+    }
   }
 
   // Função responsavel por remover o token
   function logout() {
     setAuth('')
+    setId('')
+    setFunctionRole('')
     setName('')
     setSurname('')
     setEmail('')
     localStorage.removeItem('auth')
+    localStorage.removeItem('id')
+    localStorage.removeItem('functionRole')
     localStorage.removeItem('name')
     localStorage.removeItem('surname')
     localStorage.removeItem('email')
@@ -62,7 +82,17 @@ export function AuthProvider(props) {
 
   return (
     <AuthContext.Provider
-      value={{ auth, name, surname, email, saveToken, logout, saveData }}
+      value={{
+        id,
+        auth,
+        functionRole,
+        name,
+        surname,
+        email,
+        saveToken,
+        logout,
+        saveData
+      }}
     >
       {props.children}
     </AuthContext.Provider>

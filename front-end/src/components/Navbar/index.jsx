@@ -7,7 +7,7 @@ import imgAvatar from '../../assets/imgAvatar.png'
 import styles from './Navbar.module.scss'
 
 function Navbar() {
-  const { auth, logout, name } = useAuth()
+  const { auth, logout, name, functionRole } = useAuth()
 
   const [menuOpen, setMenuOpen] = useState(false)
   const [size, setSize] = useState({
@@ -40,7 +40,7 @@ function Navbar() {
     <header className={styles.header} id="header">
       <div className={styles.header__content} id="header__content">
         <div className={styles.logos} id="logos">
-          <Link to="/home" className={styles.logoEgg}>
+          <Link to="/" className={styles.logoEgg}>
             <span></span>
             <p>Travel Green</p>
           </Link>
@@ -75,16 +75,18 @@ function Navbar() {
                   >
                     <img src={imgAvatar} alt="imagem Avatar" />
                     <p>
-                      <Link id="NameUserWhenLogged" to="/accountuser">
-                        Olá, {name.toUpperCase()}!
-                      </Link>
+                      {functionRole === 'ROLE_ADMIN' ? (
+                        <Link id="NameUserWhenLogged" to="/accountadmin">
+                          Olá ADM, {name.toUpperCase()}!
+                        </Link>
+                      ) : (
+                        <Link id="NameUserWhenLogged" to="/accountuser">
+                          Olá, {name.toUpperCase()}!
+                        </Link>
+                      )}
                     </p>
                   </div>
-                  <Link
-                    id="ifLogoutSair"
-                    to="/home"
-                    onClick={() => logout()}
-                  >
+                  <Link id="ifLogoutSair" to="/" onClick={() => logout()}>
                     Sair
                   </Link>
                 </div>

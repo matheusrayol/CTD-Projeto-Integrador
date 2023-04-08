@@ -76,13 +76,8 @@ const LoginValidation = () => {
           response.json().then(data => {
             saveToken(data.jwt)
             saveData(data)
-            // alert('Login realizado com sucesso!')
-            MySwal.fire({
-              icon: 'success',
-              text: 'Login realizado com sucesso!'
-            })
-            navigate('/home')
-            refreshPage()
+            navigate('/')
+            // refreshPage()
           })
         } else {
           setFormError({
@@ -90,7 +85,11 @@ const LoginValidation = () => {
             passError: false,
             genericError: true
           })
-          alert('Usuário e/ou senha incorreto(s)!')
+          // alert('Usuário e/ou senha incorreto(s)!')
+          MySwal.fire({
+            icon: 'error',
+            text: 'Usuário e/ou senha incorreto(s)!'
+          })
         }
       })
     }

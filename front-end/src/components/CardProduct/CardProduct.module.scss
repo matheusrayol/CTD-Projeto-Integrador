@@ -357,8 +357,12 @@
       }
 
       &__calendar {
-        margin: 0 15%;
+        min-height: 450px;
+        margin: 0 3rem;
+        width: 66%;
+        display: flex;
         grid-area: calendar;
+        justify-content: center;
       }
 
       &__reserve {
@@ -388,6 +392,25 @@
           margin-bottom: 2rem;
           padding: 0.25rem;
           border: 0;
+        }
+
+        .buttonReservationADM {
+          font-family: $font-normal;
+          padding: 0.75rem 1.75rem;
+          border: 1px solid rgb(104, 22, 22);
+          color: black;
+          border-radius: $border-radius-button;
+          background: rgb(212, 212, 212);
+          transition: all 0.3s ease-in-out;
+          font-size: 1rem;
+          font-weight: 700;
+          cursor: pointer;
+
+          &:hover {
+            color: white;
+            background-color: rgb(58, 58, 58);
+            border: 1px solid rgb(252, 94, 94);
+          }
         }
 
         .buttonReservation {

@@ -19,9 +19,9 @@ export const CardCategory = category => {
                     alt={category.imageData.qualification}
                   />
                 </div>
-                <p className={styles.pFirstChild}>
+                {/* <p className={styles.pFirstChild}>
                   {category.imageData.descriptions}
-                </p>
+                </p> */}
                 <p>{category.imageData.qualification}</p>
               </div>
             </div>
