@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Calendar } from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
 
@@ -10,6 +11,21 @@ export function DoubleCalendar(props) {
 
   const minDate = new Date()
 
+  const [date, setDate] = useState(new Date());
+  const disabledDates = [
+    new Date(2023, 3, 8),  // 1º de abril de 2023
+    new Date(2023, 3, 9),  // 1º de maio de 2023
+    new Date(2023, 3, 10)   // 1º de junho de 2023
+  ];
+
+  function tileDisabled({ date, view }) {
+    return disabledDates.some(disabledDate =>
+      disabledDate.getDate() === date.getDate() &&
+      disabledDate.getMonth() === date.getMonth() &&
+      disabledDate.getFullYear() === date.getFullYear()
+    );
+  }
+
   return (
     <Calendar
       id="DoubleCalendar"
@@ -18,6 +34,7 @@ export function DoubleCalendar(props) {
       selectRange={true}
       minDate={minDate}
       showDoubleView={true}
+      tileDisabled={tileDisabled}
     />
   )
 }
