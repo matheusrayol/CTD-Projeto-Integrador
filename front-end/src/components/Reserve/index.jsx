@@ -7,10 +7,14 @@ import { useAuth } from '../../hooks/useAuth'
 
 import { useNavigate } from 'react-router'
 
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
 export default function Reserve(image) {
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(addDays(new Date(), 7))
   const navigate = useNavigate()
+  const MySwal = withReactContent(Swal)
 
   const handleRangeChange = newRange => {
     setStartDate(newRange.startDate)
@@ -47,18 +51,23 @@ export default function Reserve(image) {
       }
       fetch('/reservation/create', config).then(response => {
         if (response.status === 201) {
-          alert('Reserva feita com sucesso!')
           navigate(`../product/${image.imageData.id}/reserve/create`)
         }
         console.log(response)
         if (response.status === 403) {
-          alert('Faça o login novamente')
+          MySwal.fire({
+            icon: 'warning',
+            text: 'Faça o login novamente'
+          })
           logout()
           navigate('/login')
         }
       })
     } else {
-      alert('Campos solicitados não preenchidos!')
+      MySwal.fire({
+        icon: 'error',
+        text: 'Campos solicitados não preenchidos!'
+      })
     }
   }
 

@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import icon from '../assets/iconCreateReserve.svg'
 
-export default function ReserveCreate() {
+export default function ProductCreate() {
   return (
     <div className={styles.appReserveCreate}>
       <div className={styles.bodyReserveCreate}>
@@ -17,7 +17,7 @@ export default function ReserveCreate() {
             </div>
             <div className={styles.sectionReserveCreate__div__text}>
               <h2>Muito obrigado!</h2>
-              <p>Sua reserva foi realizada com sucesso.</p>
+              <p>Seu produto foi criado com sucesso.</p>
             </div>
             <div className={styles.sectionReserveCreate__div__button}>
               <Link to={`/`}>
