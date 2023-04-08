@@ -43,14 +43,17 @@
       flex-wrap: wrap;
       gap: 2rem;
 
+
       .name-field {
         display: flex;
         flex-direction: column;
-        width: 385px;
+        width: 300px;
+
 
         label {
           color: rgb(15, 100, 15);
           margin-bottom: 0.25rem;
+
         }
 
         input {
@@ -222,6 +225,31 @@
       }
     }
 
+    .sustentability {
+
+      .select-sustentability {
+        display: flex;
+        flex-direction: column;
+        font-size: 18px;
+
+        label {
+          color: rgb(15, 100, 15);
+        }
+
+        input {
+          margin-top: 0.25rem;
+          width: 150px;
+          text-align: center;
+          padding: 0.5rem 1rem;
+          border: 2px solid black;
+          border-radius: 0.5rem;
+          color: gray;
+          font-size: 14px;
+          font-weight: 400;
+        }
+      }
+    }
+
     .description-field {
       display: flex;
       flex-direction: column;
@@ -329,8 +357,6 @@
         border-radius: $border-radius-button;
         background: $background-five;
         transition: all 0.3s ease;
-
-        font-family: $font-bold;
         font-size: 1rem;
         font-weight: 700;
 

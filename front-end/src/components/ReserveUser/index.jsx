@@ -1,33 +1,27 @@
-import React from 'react'
+import { React, useState, useEffect } from 'react'
+import { useAuth } from '../../hooks/useAuth'
+import { CardReservesUser } from '../CardReserveUser'
 
 export default function ReserveUser() {
+  const { id } = useAuth()
+  const [productsReservations, setProductsReservations] = useState([])
+  useEffect(() => {
+    fetch(`/reservation/user/${id}`).then(res => {
+      res.json().then(data => {
+        setProductsReservations(data)
+        console.log(data)
+      })
+    })
+  }, [id])
+
   return (
     <div style={{ textAlign: 'center' }}>
       <h1>Minhas reservas</h1>
-      <div>
-        <p>array reservas estilo os cards</p>
-      </div>
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem' }}>
-        <div
-          style={{
-            border: '1px solid red'
-          }}
-        >
-          <p>reserva X</p>
-          <p>Data Chegada: 03/04/2023</p>
-          <p>Data Saida: 04/04/2023</p>
-          <p>Horario Previsto: 13:00h</p>
-        </div>
-        <div
-          style={{
-            border: '1px solid red'
-          }}
-        >
-          <p>reserva Y</p>
-          <p>Data Chegada: 05/04/2023</p>
-          <p>Data Saida: 06/04/2023</p>
-          <p>Horario Previsto: 18:00h</p>
-        </div>
+
+      <div style={{ display: 'flex', gap: '2rem', margin: '0 15%' }}>
+        {productsReservations.map((image, index) => (
+          <CardReservesUser key={index} imageData={image} />
+        ))}
       </div>
     </div>
   )

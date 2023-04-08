@@ -13,7 +13,7 @@ import withReactContent from 'sweetalert2-react-content'
 
 export default function CardProduct(image) {
   const [buttonOpen, setButtonOpen] = useState(true)
-  const { auth } = useAuth()
+  const { auth, functionRole } = useAuth()
   const MySwal = withReactContent(Swal)
 
   function alertYouLogin() {
@@ -255,18 +255,32 @@ export default function CardProduct(image) {
                 </button>
               </Link>
             ) : (
-              <Link
-                key={image.imageData.id}
-                to={`../product/${image.imageData.id}/reserve`}
-                id="LinkToReserve"
-              >
-                <button
-                  className={styles.buttonReservation}
-                  id="buttonReservation"
-                >
-                  Iniciar Reserva
-                </button>
-              </Link>
+              <>
+                {functionRole === 'ROLE_ADMIN' ? (
+                  <Link>
+                    <button
+                      disabled
+                      className={styles.buttonReservationADM}
+                      id="buttonReservation"
+                    >
+                      ADM não faz reserva
+                    </button>
+                  </Link>
+                ) : (
+                  <Link
+                    key={image.imageData.id}
+                    to={`../product/${image.imageData.id}/reserve`}
+                    id="LinkToReserve"
+                  >
+                    <button
+                      className={styles.buttonReservation}
+                      id="buttonReservation"
+                    >
+                      Iniciar Reserva
+                    </button>
+                  </Link>
+                )}
+              </>
             )}
           </div>
         </div>
@@ -289,6 +303,7 @@ export default function CardProduct(image) {
                 id="sectionPoliticClose"
               >
                 <h2 id="sectionPoliticClose__div__h2">Política </h2>
+
                 <button
                   className={styles.buttonPolitic}
                   onClick={() => setButtonOpen(true)}

@@ -29,6 +29,14 @@ function AttributeImage({ onAddAttribute }) {
                 onChange={event => handleNameChange(index, event)}
                 placeholder="Attribute Name"
               />
+
+              <label htmlFor="">Url do Icone</label>
+              <input
+                type="text"
+                value={attribute.iconClass}
+                onChange={event => handleNameChange(index, event)}
+                placeholder="Attribute Name"
+              />
             </div>
           ))}
         </div>

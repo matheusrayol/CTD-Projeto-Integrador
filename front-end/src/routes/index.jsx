@@ -15,7 +15,7 @@ import { useAuth } from '../hooks/useAuth'
 import ReservesUser from '../pages/ReservesUser'
 
 const RoutesApp = () => {
-  const { name, surname } = useAuth()
+  const { id } = useAuth()
   return (
     <BrowserRouter>
       <div className={styles.body}>
@@ -25,7 +25,7 @@ const RoutesApp = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/accountuser" element={<AccountUser />} />
           <Route
-            path={`/accountuser/reservations/${name}${surname}`}
+            path={`/accountuser/reservations/${id}`}
             element={<ReservesUser />}
           />
           <Route path="/accountadmin" element={<AccountAdmin />} />

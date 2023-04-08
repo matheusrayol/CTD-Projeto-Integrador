@@ -1,135 +1,41 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react'
+import { React, useEffect, useState } from 'react'
 import './CardCreateProduct.scss'
-import AttributeImage from './AttributeImage'
-import { SelectLocation } from '../Select'
+import { SelectLocale } from '../SelectLocale'
 import { SelectCategory } from '../SelectCategory'
 import { useNavigate } from 'react-router'
+import { useAuth } from '../../hooks/useAuth'
 
 export default function CardCreateProduct() {
+  const { auth } = useAuth()
   const navigate = useNavigate()
+
   const [nameCar, setNameCar] = useState('')
-  const [categoryCar, setCategoryCar] = useState({})
-  const [localeCar, setLocaleCar] = useState({})
   const [descriptionCar, setDescriptionCar] = useState('')
-  const [characteristicCar, setCharacteristicCar] = useState({})
-  const [imagesCar, setImagesCar] = useState({})
-  const [politicRuleCar, setPoliticRuleCar] = useState('')
-  const [politicHealthCar, setPoliticHealthCar] = useState('')
-  const [politicCancelCar, setPoliticCancelCar] = useState('')
 
-  // const que valida os campos para habilitar o botao para envio do fetch
-  const isFormValid =
-    nameCar &&
-    categoryCar &&
-    localeCar &&
-    descriptionCar &&
-    characteristicCar &&
-    imagesCar &&
-    politicRuleCar &&
-    politicHealthCar &&
-    politicCancelCar
+  const [sustainabilityValue, setSustainabilityValue] = useState('')
 
-  // Const de form erro para validação visual
-  const [formError, setFormError] = useState({
-    nameCarError: false,
-    categoryCarError: false,
-    localeCarError: false,
-    descriptionCarError: false,
-    characteristicCarError: false,
-    imagesCar: false,
-    politicRuleError: false,
-    politicHealthCarError: false,
-    politicCancelCarError: false,
-    genericError: false
-  })
+  // const [characteristicField, setCharacteristicField] = useState('')
 
-  const validateNameCar = nameCar => {
-    setFormError(prevState => ({ ...prevState, genericError: false }))
+  const [nameImage1, setNameImage1] = useState('')
+  const [urlImage1, setUrlImage1] = useState('')
+  const [nameImage2, setNameImage2] = useState('')
+  const [urlImage2, setUrlImage2] = useState('')
+  const [nameImage3, setNameImage3] = useState('')
+  const [urlImage3, setUrlImage3] = useState('')
+  const [nameImage4, setNameImage4] = useState('')
+  const [urlImage4, setUrlImage4] = useState('')
+  const [nameImage5, setNameImage5] = useState('')
+  const [urlImage5, setUrlImage5] = useState('')
 
-    if (nameCar.length > 20) {
-      setFormError(prevState => ({ ...prevState, nameCarError: false }))
-      setNameCar(nameCar)
-      return true
-    } else {
-      setFormError(prevState => ({ ...prevState, nameCarError: true }))
-      return false
-    }
-  }
-
-  const validateCategoryCar = categoryCar => {}
-
-  const validateLocaleCar = localeCar => {}
-
-  const validateDescriptionCar = descriptionCar => {
-    setFormError(prevState => ({ ...prevState, genericError: false }))
-
-    if (descriptionCar.length > 20) {
-      setFormError(prevState => ({ ...prevState, descriptionCarError: false }))
-      setDescriptionCar(descriptionCar)
-      return true
-    } else {
-      setFormError(prevState => ({ ...prevState, descriptionCarError: true }))
-      return false
-    }
-  }
-
-  const validateCharacteristicCar = characteristicCar => {}
-
-  const validateImageCar = imageCar => {}
-
-  const validateRuleCar = politicRuleCar => {
-    setFormError(prevState => ({ ...prevState, genericError: false }))
-
-    if (politicRuleCar.length > 3) {
-      setFormError(prevState => ({ ...prevState, politicRuleCarError: false }))
-      setPoliticRuleCar(politicRuleCar)
-      return true
-    } else {
-      setFormError(prevState => ({ ...prevState, politicRuleCarError: true }))
-      return false
-    }
-  }
-
-  const validateHealthCar = politicHealthCar => {
-    setFormError(prevState => ({ ...prevState, genericError: false }))
-
-    if (politicHealthCar.length > 3) {
-      setFormError(prevState => ({
-        ...prevState,
-        politicHealthCarError: false
-      }))
-      setPoliticHealthCar(politicHealthCar)
-      return true
-    } else {
-      setFormError(prevState => ({ ...prevState, politicHealthCarError: true }))
-      return false
-    }
-  }
-
-  const validateCancelCar = politicCancelCar => {
-    setFormError(prevState => ({ ...prevState, genericError: false }))
-
-    if (politicCancelCar.length > 3) {
-      setFormError(prevState => ({
-        ...prevState,
-        politicCancelCarError: false
-      }))
-      setPoliticCancelCar(politicCancelCar)
-      return true
-    } else {
-      setFormError(prevState => ({ ...prevState, politicCancelCarError: true }))
-      return false
-    }
-  }
-
+  ////////////////////////////////////////CAMPO LOCAL//////////////////////////////////////////////
   // const's para fazer abertura e fechamento campo local com os dados
   const [showDestination, setShowDestination] = useState(false)
   const [inputSelect, setInputSelect] = useState(true)
   const [valueInputSelect, setValueInputSelect] = useState('')
   const [cityId, setCityId] = useState('')
 
-  //Fetch de todas as cidades
+  //Fetch de todas as cidades para pegar o ID do retorno para o fetch da crição
   const [location, setLocation] = useState([])
   useEffect(() => {
     if (showDestination) {
@@ -161,8 +67,16 @@ export default function CardCreateProduct() {
   function toogleLocation() {
     setShowDestination(!showDestination)
   }
+  /////////////////////////////////////////////////////////////////////////////////////////////////
 
-  //Fetch de todas as category
+  //////////////////////////////////////CAMPO CATEGORIA////////////////////////////////////////////
+  // const's para fazer abertura e fechamento campo categoria com os dados
+  const [showDestination2, setShowDestination2] = useState(false)
+  const [inputCategory, setInputCategory] = useState(true)
+  const [valueInputCategory, setValueInputCategory] = useState('')
+  const [categoryId, setCategoryId] = useState('')
+
+  //Fetch de todas as categorias para pegar o ID do retorno para o fetch da crição
   const [category, setCategory] = useState([])
   useEffect(() => {
     if (showDestination) {
@@ -174,16 +88,18 @@ export default function CardCreateProduct() {
     }
   }, [showDestination])
 
-  // const's para fazer abertura e fechamento campo categoria com os dados
-  const [showDestination2, setShowDestination2] = useState(false)
-  const [inputCategory, setInputCategory] = useState(true)
-  const [valueInputCategory, setValueInputCategory] = useState('')
-  const [categoryId, setCategoryId] = useState('')
-
   // const que fecha o toggle caso o input escolhido tenha sido clicado
   const inputSelected2 = categoryName => {
     setValueInputCategory(categoryName)
     setShowDestination2(false)
+  }
+
+  // const pega valor input quando selecionado
+  const getSustentabilityValue = event => {
+    setSustainabilityValue(event.target.value)
+    // if (sustainabilityValue < 0 || sustainabilityValue > 100) {
+    //   alert('ta tudo errado ....')
+    // }
   }
 
   // const pega valor input quando selecionado
@@ -200,61 +116,7 @@ export default function CardCreateProduct() {
   function toogleLocation2() {
     setShowDestination2(!showDestination2)
   }
-
-  const handleSubmit = e => {
-    e.preventDefault()
-
-    let signInData = {
-      nameCar: nameCar,
-      categoryCar: categoryCar,
-      localeCar: {},
-      descriptionCar: descriptionCar,
-      characteristicCar: {},
-      images: {},
-      politic: [rule, health, cancel]
-    }
-
-    let requestHeaders = {
-      'Content-Type': 'application/json'
-    }
-
-    let requestConfiguration = {
-      method: 'POST',
-      body: JSON.stringify(signInData),
-      headers: requestHeaders
-    }
-
-    if (validateNameCar) {
-      fetch(`/product/create`, requestConfiguration).then(response => {
-        if (response.ok) {
-          response.json().then(data => {
-            alert('Produto Criado com Sucesso!')
-            navigate(`../sucess`)
-          })
-        } else {
-          if (response.status === 400) {
-            response.json().then(data => {
-              alert(data.mensagem)
-            })
-          } else {
-            alert('Campo(os) incorreto(s)!')
-          }
-          setFormError({
-            nameCarError: false,
-            categoryCarError: false,
-            localeCarError: false,
-            descriptionCarError: false,
-            characteristicCarError: false,
-            imagesCar: false,
-            politicRuleError: false,
-            politicHealthCarError: false,
-            politicCancelCarError: false,
-            genericError: true
-          })
-        }
-      })
-    }
-  }
+  /////////////////////////////////////////////////////////////////////////////////////////////////
 
   const rule = [
     {
@@ -284,72 +146,365 @@ export default function CardCreateProduct() {
 
   const characteristics = [
     {
+      id: 3,
       name: 'Zero Emissão',
       icon: 'https://bucket-pi-t5-grupo6.s3.us-east-2.amazonaws.com/assets/icon_emissionFree.svg'
     },
     {
+      id: 4,
       name: 'Silencioso',
       icon: 'https://bucket-pi-t5-grupo6.s3.us-east-2.amazonaws.com/assets/icon_silence.svg'
     },
     {
+      id: 5,
       name: 'Autonomia',
       icon: 'https://bucket-pi-t5-grupo6.s3.us-east-2.amazonaws.com/assets/icon_autonomy.svg'
     },
     {
+      id: 6,
       name: 'Recarregável',
       icon: 'https://bucket-pi-t5-grupo6.s3.us-east-2.amazonaws.com/assets/icon_recharge.svg'
     },
     {
+      id: 7,
       name: 'Performance',
       icon: 'https://bucket-pi-t5-grupo6.s3.us-east-2.amazonaws.com/assets/icon_performance.svg'
     },
     {
+      id: 8,
       name: 'Manutenção simplificada',
       icon: 'https://bucket-pi-t5-grupo6.s3.us-east-2.amazonaws.com/assets/icon_maintenance.svg'
     },
     {
+      id: 9,
       name: 'Rápida aceleração',
       icon: 'https://bucket-pi-t5-grupo6.s3.us-east-2.amazonaws.com/assets/icon_speedest_acceleration.svg'
     },
     {
+      id: 10,
       name: 'Recarga por frenagem',
       icon: 'https://bucket-pi-t5-grupo6.s3.us-east-2.amazonaws.com/assets/icon_brake_recharge.svg'
     }
   ]
 
-  const [isChecked0, setIsChecked0] = useState(false)
-  const [isChecked1, setIsChecked1] = useState(false)
-  const [isChecked2, setIsChecked2] = useState(false)
-  const [isChecked3, setIsChecked3] = useState(false)
-  const [isChecked4, setIsChecked4] = useState(false)
-  const [isChecked5, setIsChecked5] = useState(false)
-  const [isChecked6, setIsChecked6] = useState(false)
-  const [isChecked7, setIsChecked7] = useState(false)
+  // const que valida os campos para habilitar o botao para envio do fetch
+  const isFormValid =
+    nameCar &&
+    inputSelect &&
+    inputCategory &&
+    descriptionCar &&
+    sustainabilityValue &&
+    nameImage1 &&
+    nameImage2 &&
+    nameImage3 &&
+    nameImage4 &&
+    nameImage5
+  // && characteristics
 
-  const handleCheckboxChange0 = () => {
-    setIsChecked0(!isChecked0)
+  // Const de form erro para validação visual
+  const [formError, setFormError] = useState({
+    nameCarError: false,
+    inputSelectError: false,
+    inputCategoryError: false,
+    descriptionCarError: false,
+    sustainabilityValueError: false,
+    nameImage1Error: false,
+    nameImage2Error: false,
+    nameImage3Error: false,
+    nameImage4Error: false,
+    nameImage5Error: false,
+    // characteristics: false,
+    genericError: false
+  })
+
+  const validateNameCar = nameCar => {
+    setFormError(prevState => ({ ...prevState, genericError: false }))
+
+    if (nameCar.length > 3) {
+      setFormError(prevState => ({ ...prevState, nameCarError: false }))
+      setNameCar(nameCar)
+      return true
+    } else {
+      setFormError(prevState => ({ ...prevState, nameCarError: true }))
+      return false
+    }
   }
 
-  const handleCheckboxChange1 = () => {
-    setIsChecked1(!isChecked1)
+  // const validateInputSelect = inputSelect => {
+  //   setFormError(prevState => ({ ...prevState, genericError: false }))
+
+  //   if (inputSelect !== null || inputSelect !== '') {
+  //     setFormError(prevState => ({ ...prevState, inputSelectError: false }))
+  //     setInputSelect(inputSelect)
+  //     return true
+  //   } else {
+  //     setFormError(prevState => ({ ...prevState, inputSelectError: true }))
+  //     return false
+  //   }
+  // }
+
+  // const validateInputCategory = inputCategory => {
+  //   setFormError(prevState => ({ ...prevState, genericError: false }))
+
+  //   if (inputCategory !== null || inputCategory !== '') {
+  //     setFormError(prevState => ({ ...prevState, inputCategoryError: false }))
+  //     setInputCategory(inputCategory)
+  //     return true
+  //   } else {
+  //     setFormError(prevState => ({ ...prevState, inputCategoryError: true }))
+  //     return false
+  //   }
+  // }
+
+  const validateDescriptionCar = descriptionCar => {
+    setFormError(prevState => ({ ...prevState, genericError: false }))
+
+    if (descriptionCar.length > 20) {
+      setFormError(prevState => ({ ...prevState, descriptionCarError: false }))
+      setDescriptionCar(descriptionCar)
+      return true
+    } else {
+      setFormError(prevState => ({ ...prevState, descriptionCarError: true }))
+      return false
+    }
   }
-  const handleCheckboxChange2 = () => {
-    setIsChecked2(!isChecked2)
+
+  const validateSustainabilityValue = sustainabilityValue => {
+    setFormError(prevState => ({ ...prevState, genericError: false }))
+
+    if (sustainabilityValue.length > 3) {
+      setFormError(prevState => ({
+        ...prevState,
+        sustainabilityValueError: false
+      }))
+      setSustainabilityValue(sustainabilityValue)
+      return true
+    } else {
+      setFormError(prevState => ({
+        ...prevState,
+        sustainabilityValueError: true
+      }))
+      return false
+    }
   }
-  const handleCheckboxChange3 = () => {
-    setIsChecked3(!isChecked3)
+
+  const validateNameImage1Car = nameImageCar => {
+    setFormError(prevState => ({ ...prevState, genericError: false }))
+
+    if (nameImageCar !== null) {
+      setFormError(prevState => ({ ...prevState, nameImageCarError: false }))
+      setNameImage1(nameImageCar)
+      return true
+    } else {
+      setFormError(prevState => ({ ...prevState, nameImageCarError: true }))
+      return false
+    }
   }
-  const handleCheckboxChange4 = () => {
-    setIsChecked4(!isChecked4)
+
+  const validateUrlImage1Car = urlImageCar => {
+    setFormError(prevState => ({ ...prevState, genericError: false }))
+
+    if (urlImageCar !== null) {
+      setFormError(prevState => ({ ...prevState, urlImageCarError: false }))
+      setUrlImage1(urlImageCar)
+      return true
+    } else {
+      setFormError(prevState => ({ ...prevState, urlImageCarError: true }))
+      return false
+    }
   }
-  const handleCheckboxChange5 = () => {
-    setIsChecked5(!isChecked5)
+
+  const validateNameImage2Car = nameImageCar => {
+    setFormError(prevState => ({ ...prevState, genericError: false }))
+
+    if (nameImageCar !== null) {
+      setFormError(prevState => ({ ...prevState, nameImageCarError: false }))
+      setNameImage2(nameImageCar)
+      return true
+    } else {
+      setFormError(prevState => ({ ...prevState, nameImageCarError: true }))
+      return false
+    }
   }
-  const handleCheckboxChange6 = () => {
-    setIsChecked6(!isChecked6)
+
+  const validateUrlImage2Car = urlImageCar => {
+    setFormError(prevState => ({ ...prevState, genericError: false }))
+
+    if (urlImageCar !== null) {
+      setFormError(prevState => ({ ...prevState, urlImageCarError: false }))
+      setUrlImage2(urlImageCar)
+      return true
+    } else {
+      setFormError(prevState => ({ ...prevState, urlImageCarError: true }))
+      return false
+    }
   }
-  const handleCheckboxChange7 = () => {
-    setIsChecked7(!isChecked7)
+
+  const validateNameImage3Car = nameImageCar => {
+    setFormError(prevState => ({ ...prevState, genericError: false }))
+
+    if (nameImageCar !== null) {
+      setFormError(prevState => ({ ...prevState, nameImageCarError: false }))
+      setNameImage3(nameImageCar)
+      return true
+    } else {
+      setFormError(prevState => ({ ...prevState, nameImageCarError: true }))
+      return false
+    }
+  }
+
+  const validateUrlImage3Car = urlImageCar => {
+    setFormError(prevState => ({ ...prevState, genericError: false }))
+
+    if (urlImageCar !== null) {
+      setFormError(prevState => ({ ...prevState, urlImageCarError: false }))
+      setUrlImage3(urlImageCar)
+      return true
+    } else {
+      setFormError(prevState => ({ ...prevState, urlImageCarError: true }))
+      return false
+    }
+  }
+
+  const validateNameImage4Car = nameImageCar => {
+    setFormError(prevState => ({ ...prevState, genericError: false }))
+
+    if (nameImageCar !== null) {
+      setFormError(prevState => ({ ...prevState, nameImageCarError: false }))
+      setNameImage4(nameImageCar)
+      return true
+    } else {
+      setFormError(prevState => ({ ...prevState, nameImageCarError: true }))
+      return false
+    }
+  }
+
+  const validateUrlImage4Car = urlImageCar => {
+    setFormError(prevState => ({ ...prevState, genericError: false }))
+
+    if (urlImageCar !== null) {
+      setFormError(prevState => ({ ...prevState, urlImageCarError: false }))
+      setUrlImage4(urlImageCar)
+      return true
+    } else {
+      setFormError(prevState => ({ ...prevState, urlImageCarError: true }))
+      return false
+    }
+  }
+
+  const validateNameImage5Car = nameImageCar => {
+    setFormError(prevState => ({ ...prevState, genericError: false }))
+
+    if (nameImageCar !== null) {
+      setFormError(prevState => ({ ...prevState, nameImageCarError: false }))
+      setNameImage5(nameImageCar)
+      return true
+    } else {
+      setFormError(prevState => ({ ...prevState, nameImageCarError: true }))
+      return false
+    }
+  }
+
+  const validateUrlImage5Car = urlImageCar => {
+    setFormError(prevState => ({ ...prevState, genericError: false }))
+
+    if (urlImageCar !== null) {
+      setFormError(prevState => ({ ...prevState, urlImageCarError: false }))
+      setUrlImage5(urlImageCar)
+      return true
+    } else {
+      setFormError(prevState => ({ ...prevState, urlImageCarError: true }))
+      return false
+    }
+  }
+
+  // const validateCharacteristicField = characteristics => {
+  //   setFormError(prevState => ({ ...prevState, genericError: false }))
+
+  //   if (characteristics !== null || characteristics !== '') {
+  //     setFormError(prevState => ({ ...prevState, characteristicsError: false }))
+  //     setCharacteristicField(characteristics)
+  //     return true
+  //   } else {
+  //     setFormError(prevState => ({ ...prevState, characteristicsError: true }))
+  //     return false
+  //   }
+  // } como validar checked?
+
+  const createProductFetch = e => {
+    e.preventDefault()
+
+    let signInData = {
+      name: nameCar,
+      categoryId: categoryId,
+      cityId: cityId,
+      sustainability: sustainabilityValue,
+      description: descriptionCar,
+      characteristics: [
+        characteristics[0].id,
+        characteristics[1].id,
+        characteristics[2].id,
+        characteristics[3].id,
+        characteristics[4].id,
+        characteristics[5].id,
+        characteristics[6].id,
+        characteristics[7].id
+      ],
+      images: [
+        {
+          title: nameImage1,
+          urlImage: urlImage1
+        },
+        {
+          title: nameImage2,
+          urlImage: urlImage2
+        },
+        {
+          title: nameImage3,
+          urlImage: urlImage3
+        },
+        {
+          title: nameImage4,
+          urlImage: urlImage4
+        },
+        {
+          title: nameImage5,
+          urlImage: urlImage5
+        }
+      ]
+      //politic: [rule, health, cancel]
+    }
+
+    let requestConfiguration = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        authorization: `Bearer ${auth}`
+      },
+      body: JSON.stringify(signInData)
+    }
+
+    if (validateNameCar) {
+      fetch(`/product/create`, requestConfiguration).then(response => {
+        if (response.ok) {
+          response.json().then(data => {
+            alert('Produto Criado com Sucesso!')
+            navigate(`../accountadmin/createProduct/sucess`)
+          })
+        } else {
+          if (response.status === 400) {
+            response.json().then(data => {
+              alert(data.mensagem)
+            })
+          } else {
+            alert('Campo(os) incorreto(s)!')
+          }
+          setFormError({
+            nameCarError: false
+          })
+        }
+      })
+    }
   }
 
   return (
@@ -359,10 +514,9 @@ export default function CardCreateProduct() {
         <h2>Dados</h2>
         <div className="name-category-fields">
           <div className="name-field">
-            <label htmlFor="">Nome</label>
+            <label htmlFor="">Nome do Carro</label>
             <input
               type="text"
-              required
               onChange={event => validateNameCar(event.target.value)}
               className={`inputValidation ${
                 formError.nameCarError ? 'formError' : ''
@@ -372,26 +526,57 @@ export default function CardCreateProduct() {
               <span className="formError">Nome muito curto</span>
             )}
           </div>
-          <div className="category">
-            <label htmlFor="">Categorias</label>
-            <div className="select-category" id="select-category">
+          <div className="locale">
+            <label htmlFor="">Local</label>
+            <div className="select-location" id="select-location">
               <input
-                id="input-select-category"
-                className="input-select-category"
-                onClick={toogleLocation2}
-                onChange={getValueInputCategory}
-                placeholder="qual a categoria?"
-                value={valueInputCategory}
+                id="input-select-location"
+                className="input-select-location"
+                onClick={toogleLocation}
+                value={valueInputSelect}
+                onChange={getValueInputSelect}
               />
               <div
                 id="showDestination"
+                className={
+                  showDestination
+                    ? 'container-location-open'
+                    : 'container-location-close'
+                }
+              >
+                {inputSelect ? <h3>Filial agregada</h3> : ''}
+                {location.map((location, index) => (
+                  <div className="location-list">
+                    <SelectLocale
+                      id={index.length}
+                      data={location}
+                      onSelectDestination={currentDestination => {
+                        inputSelected(currentDestination)
+                        setCityId(location.id)
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className="category">
+            <label htmlFor="">Categoria</label>
+            <div className="select-category">
+              <input
+                className="input-select-category"
+                onClick={toogleLocation2}
+                onChange={getValueInputCategory}
+                value={valueInputCategory}
+              />
+              <div
                 className={
                   showDestination2
                     ? 'container-category-open'
                     : 'container-category-close'
                 }
               >
-                {inputCategory ? <h3>Categorias por nome</h3> : ''}
+                {inputCategory ? <h3>Categoria por id</h3> : ''}
                 {category.map((category, index) => (
                   <div className="category-list">
                     <SelectCategory
@@ -407,39 +592,15 @@ export default function CardCreateProduct() {
               </div>
             </div>
           </div>
-          <div className="locale">
-            <label htmlFor="">Local</label>
-            <div className="select-location" id="select-location">
+          <div className="sustentability">
+            <div className="select-sustentability">
+              <label>Sustentabilidade</label>
               <input
-                id="input-select-location"
-                className="input-select-location"
-                onClick={toogleLocation}
-                onChange={getValueInputSelect}
-                placeholder="qual o local?"
-                value={valueInputSelect}
+                type="text"
+                value={sustainabilityValue}
+                onChange={getSustentabilityValue}
+                placeholder="0 ~ 100"
               />
-              <div
-                id="showDestination"
-                className={
-                  showDestination
-                    ? 'container-location-open'
-                    : 'container-location-close'
-                }
-              >
-                {inputSelect ? <h3>Locais para retirada</h3> : ''}
-                {location.map((location, index) => (
-                  <div className="location-list">
-                    <SelectLocation
-                      id={index.length}
-                      data={location}
-                      onSelectDestination={currentDestination => {
-                        inputSelected(currentDestination)
-                        setCityId(location.id)
-                      }}
-                    />
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
         </div>
@@ -450,7 +611,6 @@ export default function CardCreateProduct() {
             id=""
             cols="5"
             rows="5"
-            required
             onChange={event => validateDescriptionCar(event.target.value)}
             className={`inputValidation ${
               formError.descriptionCarError ? 'formError' : ''
@@ -461,15 +621,7 @@ export default function CardCreateProduct() {
           )}
         </div>
         <div className="category-fields">
-          {/* <AttributeCharacteristic /> */}
           <h2>Caracteristicas</h2>
-          {/* {products.map((products, index) => (
-            <ListCharacteristics
-              key={index}
-              id={index.length}
-              data={products}
-            />
-          ))} */}
           <div
             style={{
               display: 'grid',
@@ -483,8 +635,7 @@ export default function CardCreateProduct() {
             >
               <input
                 type="checkbox"
-                checked={isChecked0}
-                onChange={handleCheckboxChange0}
+                checked
                 style={{ width: '20px', height: '20px' }}
               />
               <img
@@ -499,8 +650,7 @@ export default function CardCreateProduct() {
             >
               <input
                 type="checkbox"
-                checked={isChecked1}
-                onChange={handleCheckboxChange1}
+                checked
                 style={{ width: '20px', height: '20px' }}
               />
               <img
@@ -515,8 +665,7 @@ export default function CardCreateProduct() {
             >
               <input
                 type="checkbox"
-                checked={isChecked2}
-                onChange={handleCheckboxChange2}
+                checked
                 style={{ width: '20px', height: '20px' }}
               />
               <img
@@ -531,8 +680,7 @@ export default function CardCreateProduct() {
             >
               <input
                 type="checkbox"
-                checked={isChecked3}
-                onChange={handleCheckboxChange3}
+                checked
                 style={{ width: '20px', height: '20px' }}
               />
               <img
@@ -557,8 +705,7 @@ export default function CardCreateProduct() {
             >
               <input
                 type="checkbox"
-                checked={isChecked4}
-                onChange={handleCheckboxChange4}
+                checked
                 style={{ width: '20px', height: '20px' }}
               />
               <img
@@ -573,8 +720,7 @@ export default function CardCreateProduct() {
             >
               <input
                 type="checkbox"
-                checked={isChecked5}
-                onChange={handleCheckboxChange5}
+                checked
                 style={{ width: '20px', height: '20px' }}
               />
               <img
@@ -589,8 +735,7 @@ export default function CardCreateProduct() {
             >
               <input
                 type="checkbox"
-                checked={isChecked6}
-                onChange={handleCheckboxChange6}
+                checked
                 style={{ width: '20px', height: '20px' }}
               />
               <img
@@ -605,8 +750,7 @@ export default function CardCreateProduct() {
             >
               <input
                 type="checkbox"
-                checked={isChecked7}
-                onChange={handleCheckboxChange7}
+                checked
                 style={{ width: '20px', height: '20px' }}
               />
               <img
@@ -619,7 +763,145 @@ export default function CardCreateProduct() {
           </div>
         </div>
         <div>
-          <AttributeImage />
+          <h2>Imagens</h2>
+          <div style={{ display: 'flex', gap: '2rem', marginBottom: '1rem' }}>
+            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'end' }}>
+              <label htmlFor="">Nome Imagem</label>
+              <input
+                type="text"
+                onChange={event => validateNameImage1Car(event.target.value)}
+                style={{
+                  padding: '0.5rem 2rem',
+                  borderRadius: '0.5rem',
+                  width: '400px'
+                }}
+                className={`inputValidation ${
+                  formError.nameImage1Error ? 'formError' : ''
+                }`}
+              />
+              {formError.nameImage1Error && (
+                <span className="formError">
+                  Nome da imagem muito curto ou nulo
+                </span>
+              )}
+            </div>
+            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'end' }}>
+              <label htmlFor="">Url Imagem</label>
+              <input
+                type="text"
+                onChange={event => validateUrlImage1Car(event.target.value)}
+                style={{
+                  padding: '0.5rem 2rem',
+                  borderRadius: '0.5rem',
+                  width: '400px'
+                }}
+              />
+            </div>
+          </div>
+          <div style={{ display: 'flex', gap: '2rem', marginBottom: '1rem' }}>
+            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'end' }}>
+              <label htmlFor="">Nome Imagem</label>
+              <input
+                type="text"
+                onChange={event => validateNameImage2Car(event.target.value)}
+                style={{
+                  padding: '0.5rem 2rem',
+                  borderRadius: '0.5rem',
+                  width: '400px'
+                }}
+              />
+            </div>
+            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'end' }}>
+              <label htmlFor="">Url Imagem</label>
+              <input
+                type="text"
+                onChange={event => validateUrlImage2Car(event.target.value)}
+                style={{
+                  padding: '0.5rem 2rem',
+                  borderRadius: '0.5rem',
+                  width: '400px'
+                }}
+              />
+            </div>
+          </div>
+          <div style={{ display: 'flex', gap: '2rem', marginBottom: '1rem' }}>
+            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'end' }}>
+              <label htmlFor="">Nome Imagem</label>
+              <input
+                type="text"
+                onChange={event => validateNameImage3Car(event.target.value)}
+                style={{
+                  padding: '0.5rem 2rem',
+                  borderRadius: '0.5rem',
+                  width: '400px'
+                }}
+              />
+            </div>
+            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'end' }}>
+              <label htmlFor="">Url Imagem</label>
+              <input
+                type="text"
+                onChange={event => validateUrlImage3Car(event.target.value)}
+                style={{
+                  padding: '0.5rem 2rem',
+                  borderRadius: '0.5rem',
+                  width: '400px'
+                }}
+              />
+            </div>
+          </div>
+          <div style={{ display: 'flex', gap: '2rem', marginBottom: '1rem' }}>
+            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'end' }}>
+              <label htmlFor="">Nome Imagem</label>
+              <input
+                type="text"
+                onChange={event => validateNameImage4Car(event.target.value)}
+                style={{
+                  padding: '0.5rem 2rem',
+                  borderRadius: '0.5rem',
+                  width: '400px'
+                }}
+              />
+            </div>
+            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'end' }}>
+              <label htmlFor="">Url Imagem</label>
+              <input
+                type="text"
+                onChange={event => validateUrlImage4Car(event.target.value)}
+                style={{
+                  padding: '0.5rem 2rem',
+                  borderRadius: '0.5rem',
+                  width: '400px'
+                }}
+              />
+            </div>
+          </div>
+          <div style={{ display: 'flex', gap: '2rem', marginBottom: '1rem' }}>
+            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'end' }}>
+              <label htmlFor="">Nome Imagem</label>
+              <input
+                type="text"
+                onChange={event => validateNameImage5Car(event.target.value)}
+                style={{
+                  padding: '0.5rem 2rem',
+                  borderRadius: '0.5rem',
+                  width: '400px'
+                }}
+              />
+            </div>
+            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'end' }}>
+              <label htmlFor="">Url Imagem</label>
+              <input
+                type="text"
+                onChange={event => validateUrlImage5Car(event.target.value)}
+                style={{
+                  padding: '0.5rem 2rem',
+                  borderRadius: '0.5rem',
+                  width: '400px'
+                }}
+              />
+            </div>
+          </div>
         </div>
         <div className="politic-fields">
           <h2>Politicas</h2>
@@ -632,8 +914,7 @@ export default function CardCreateProduct() {
                 value={rule[0].paragraph1}
                 cols="50"
                 rows="2"
-                required
-                onChange={event => validateRuleCar(event.target.value)}
+                // onChange={event => validateRuleCar(event.target.value)}
                 className={`inputValidation ${
                   formError.politicRuleCarError ? 'formError' : ''
                 }`}
@@ -644,8 +925,7 @@ export default function CardCreateProduct() {
                 value={rule[0].paragraph2}
                 cols="50"
                 rows="2"
-                required
-                onChange={event => validateRuleCar(event.target.value)}
+                // onChange={event => validateRuleCar(event.target.value)}
                 className={`inputValidation ${
                   formError.politicRuleCarError ? 'formError' : ''
                 }`}
@@ -656,8 +936,7 @@ export default function CardCreateProduct() {
                 value={rule[0].paragraph3}
                 cols="50"
                 rows="2"
-                required
-                onChange={event => validateRuleCar(event.target.value)}
+                // onChange={event => validateRuleCar(event.target.value)}
                 className={`inputValidation ${
                   formError.politicRuleCarError ? 'formError' : ''
                 }`}
@@ -671,8 +950,7 @@ export default function CardCreateProduct() {
                 value={health[0].paragraph1}
                 cols="50"
                 rows="2"
-                required
-                onChange={event => validateHealthCar(event.target.value)}
+                // onChange={event => validateHealthCar(event.target.value)}
                 className={`inputValidation ${
                   formError.politicHealthCarError ? 'formError' : ''
                 }`}
@@ -683,8 +961,7 @@ export default function CardCreateProduct() {
                 value={health[0].paragraph2}
                 cols="50"
                 rows="2"
-                required
-                onChange={event => validateHealthCar(event.target.value)}
+                // onChange={event => validateHealthCar(event.target.value)}
                 className={`inputValidation ${
                   formError.politicHealthCarError ? 'formError' : ''
                 }`}
@@ -695,8 +972,7 @@ export default function CardCreateProduct() {
                 value={health[0].paragraph3}
                 cols="50"
                 rows="2"
-                required
-                onChange={event => validateHealthCar(event.target.value)}
+                // onChange={event => validateHealthCar(event.target.value)}
                 className={`inputValidation ${
                   formError.politicHealthCarError ? 'formError' : ''
                 }`}
@@ -710,8 +986,7 @@ export default function CardCreateProduct() {
                 value={cancel[0].paragraph1}
                 cols="50"
                 rows="2"
-                required
-                onChange={event => validateCancelCar(event.target.value)}
+                // onChange={event => validateCancelCar(event.target.value)}
                 className={`inputValidation ${
                   formError.politicCancelCarError ? 'formError' : ''
                 }`}
@@ -722,8 +997,7 @@ export default function CardCreateProduct() {
                 value={cancel[0].paragraph2}
                 cols="50"
                 rows="2"
-                required
-                onChange={event => validateCancelCar(event.target.value)}
+                // onChange={event => validateCancelCar(event.target.value)}
                 className={`inputValidation ${
                   formError.politicCancelCarError ? 'formError' : ''
                 }`}
@@ -734,8 +1008,7 @@ export default function CardCreateProduct() {
                 value={cancel[0].paragraph3}
                 cols="50"
                 rows="2"
-                required
-                onChange={event => validateCancelCar(event.target.value)}
+                // onChange={event => validateCancelCar(event.target.value)}
                 className={`inputValidation ${
                   formError.politicCancelCarError ? 'formError' : ''
                 }`}
@@ -781,7 +1054,7 @@ export default function CardCreateProduct() {
         )}
         <div className="button-form">
           <button
-            onClick={event => handleSubmit(event)}
+            onClick={event => createProductFetch(event)}
             disabled={!isFormValid}
           >
             Enviar

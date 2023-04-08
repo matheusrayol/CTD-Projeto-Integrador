@@ -76,11 +76,7 @@ const LoginValidation = () => {
           response.json().then(data => {
             saveToken(data.jwt)
             saveData(data)
-            // MySwal.fire({
-            //   icon: 'success',
-            //   text: 'Login realizado com sucesso!'
-            // })
-            navigate('/home')
+            navigate('/')
             // refreshPage()
           })
         } else {
