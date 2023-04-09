@@ -7,7 +7,7 @@ import * as bootstrap from 'bootstrap'
 
 export default function Navbar() {
 
-    const { auth, logout, name, surname } = useAuth()
+    const { auth, logout, name, surname, functionRole } = useAuth()
 
     return (
         <nav className="navbar navbar-light navbar-expand-md travelgreen-navbar sticky-top">
@@ -38,16 +38,19 @@ export default function Navbar() {
                                 <li className="nav-item">
                                 </li>
                             </ul>
-                            <div className="d-flex justify-content-evenly">
-                                <Link to="/accountuser" className="d-flex align-items-center nav-link fs-6 mt-3 mt-sm-3 mb-3 me-md-2 poppins" href="#">
+                            <div className="d-grid d-md-flex justify-content-md-evenly">
+                                <span className="d-flex align-items-center nav-link fs-6 mt-3 mt-sm-3 mb-3 me-md-2 poppins">
                                     <LetterAvatar size="32" bgColor="#19944c" textColor="#FFF" className="me-2">
                                         {name[0]}{surname[0]}
                                     </LetterAvatar>
                                     <span className="ms-2">Olá, {name}!</span>
-                                </Link>
-                                <Link to="/" onClick={() => logout()}>
-                                    <button className="btn btn-primary fw-semibold mt-sm-3 mb-3 poppins" type="button">Sair</button>
-                                </Link>
+                                </span>
+                                {functionRole === 'ROLE_ADMIN' ? (
+                                    <Link to="/accountadmin" className="btn btn-light mt-3 mt-sm-3 mb-3 poppins" role="button">Administrar</Link>
+                                ) : (
+                                    <Link to="/accountuser" className="btn btn-primary fw-semibold mt-sm-3 mb-3 poppins" role="button">Minha Conta</Link>
+                                )}
+                                <Link to="/" onClick={() => logout()} className="btn btn-primary fw-semibold mt-sm-3 mb-3 poppins ms-md-2" role="button">Sair</Link>
                             </div>
                         </>
                     )}

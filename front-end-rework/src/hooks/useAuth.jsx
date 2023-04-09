@@ -5,6 +5,8 @@ const AuthContext = createContext()
 
 export function AuthProvider(props) {
     const authLocalStorage = localStorage.getItem('auth')
+    const idLocalStorage = localStorage.getItem('id')
+    const functionRoleLocalStorage = localStorage.getItem('functionRole')
     const nameLocalStorage = localStorage.getItem('name')
     const nameInitialLocalStorage = localStorage.getItem('nameInitial')
     const surnameLocalStorage = localStorage.getItem('surname')
@@ -13,6 +15,14 @@ export function AuthProvider(props) {
 
     const [auth, setAuth] = useState(
         authLocalStorage === null ? '' : authLocalStorage
+    )
+
+    const [id, setId] = useState(
+        idLocalStorage === null ? '' : idLocalStorage
+    )
+
+    const [functionRole, setFunctionRole] = useState(
+        functionRoleLocalStorage === null ? '' : functionRoleLocalStorage
     )
 
     const [name, setName] = useState(
@@ -45,6 +55,14 @@ export function AuthProvider(props) {
 
     // Função responsavel por salvar o nome
     function saveData(data) {
+        if (data.id !== id) {
+            setId(data.id)
+            localStorage.setItem('id', data.id)
+        }
+        if (data.function !== functionRole) {
+            setFunctionRole(data.function)
+            localStorage.setItem('functionRole', data.function)
+        }
         if (data.name !== name) {
             setName(data.name)
             localStorage.setItem('name', data.name)
@@ -67,6 +85,8 @@ export function AuthProvider(props) {
 
     // Função responsavel por remover o token
     function logout() {
+        setId('')
+        setFunctionRole('')
         setAuth('')
         setName('')
         setNameInitial('')
@@ -79,10 +99,14 @@ export function AuthProvider(props) {
         localStorage.removeItem('surname')
         localStorage.removeItem('surnameInitial')
         localStorage.removeItem('email')
+        localStorage.removeItem('functionRole')
+        localStorage.removeItem('id')
+        localStorage.removeITem('dateStart')
+        localStorage.removeITem('dateEnd')
     }
 
     return (
-        <AuthContext.Provider value={{ auth, name, nameInitial, surname, surnameInitial, email, saveToken, logout, saveData }}>
+        <AuthContext.Provider value={{ id, functionRole, auth, name, nameInitial, surname, surnameInitial, email, saveToken, logout, saveData }}>
             {props.children}
         </AuthContext.Provider>
     )
