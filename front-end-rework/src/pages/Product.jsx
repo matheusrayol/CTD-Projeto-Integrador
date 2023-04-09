@@ -2,12 +2,16 @@ import React from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import ProductDetails from "../components/ProductDetails";
-import { ScrollRestoration } from 'react-router-dom'
+import { useLocation, ScrollRestoration } from 'react-router-dom'
 
 export default function Product() {
-   return (
+
+    const location = useLocation()
+    localStorage.setItem('currentLocation', location.pathname)
+
+    return (
         <>
-        <ScrollRestoration />
+            <ScrollRestoration />
             <Navbar />
             <ProductDetails />
             <Footer />

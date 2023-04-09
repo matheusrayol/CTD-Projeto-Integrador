@@ -77,7 +77,7 @@ const LoginValidation = () => {
                         saveData(data)
                         setValidLogin(true)
                         setTimeout(function () {
-                            navigate('/');
+                            navigate(`${localStorage.getItem('currentLocation')}`);
                             refreshPage();
                         }, 1500)
                     } else {
