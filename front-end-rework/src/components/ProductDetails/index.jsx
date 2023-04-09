@@ -109,21 +109,11 @@ export default function ProductDetails() {
                     <section>
                         <div id="carousel-1" className="carousel slide d-flex d-lg-none" data-bs-ride="carousel">
                             <div className="carousel-inner">
-                                <div className="carousel-item active">
-                                    <img className="w-100 d-block" src={product.images[0].urlImage} alt={product.name} />
-                                </div>
-                                <div className="carousel-item">
-                                    <img className="w-100 d-block" src={product.images[1].urlImage} alt={product.name} />
-                                </div>
-                                <div className="carousel-item">
-                                    <img className="w-100 d-block" src={product.images[2].urlImage} alt={product.name} />
-                                </div>
-                                <div className="carousel-item">
-                                    <img className="w-100 d-block" src={product.images[3].urlImage} alt={product.name} />
-                                </div>
-                                <div className="carousel-item">
-                                    <img className="w-100 d-block" src={product.images[4].urlImage} alt={product.name} />
-                                </div>
+                                {product.images.map((image, index) => (
+                                    <div className={index === 0 ? "carousel-item active" : "carousel-item"} key={index}>
+                                        <img className="w-100 d-block" src={image.urlImage} alt={product.name} />
+                                    </div>
+                                ))}
                             </div>
                             <div>
                                 <a className="carousel-control-prev" href="#carousel-1" role="button" data-bs-slide="prev">
@@ -148,7 +138,7 @@ export default function ProductDetails() {
                                 <div className="col-lg-12 col-xl-7 col-xxl-7 d-none d-lg-flex">
                                     <div>
                                         <div className="img-container">
-                                            <img id="expandedImg" className="rounded w-100" src={expandedImgSrc ? expandedImgSrc : product.images[0].urlImage} alt={imgText} />
+                                            <img id="expandedImg" className="rounded w-100" src={expandedImgSrc ? expandedImgSrc : product.images[0].urlImage} alt={imgText} onClick={() => setToggler(!toggler)} />
                                             <div id="className"></div>
                                         </div>
                                         <div className="row gx-2">
