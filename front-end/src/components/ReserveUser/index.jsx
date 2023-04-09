@@ -9,7 +9,6 @@ export default function ReserveUser() {
     fetch(`/reservation/user/${id}`).then(res => {
       res.json().then(data => {
         setProductsReservations(data)
-        console.log(data)
       })
     })
   }, [id])
