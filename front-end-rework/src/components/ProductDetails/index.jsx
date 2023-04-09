@@ -5,12 +5,15 @@ import { DoubleCalendar } from '../CalendarTG/Double'
 import { SingleCalendar } from '../CalendarTG/Single'
 import TGLeaf from '../../assets/travelgreen_leaf.svg'
 import { useAuth } from '../../hooks/useAuth'
+import FsLightbox from 'fslightbox-react'
 
 import axios from 'axios'
 
 import { useLocation } from 'react-router-dom'
 
 export default function ProductDetails() {
+
+    const [toggler, setToggler] = useState(false)
 
     const location = useLocation().pathname.split('/')[2]
     const [product, setProduct] = useState()
@@ -47,16 +50,16 @@ export default function ProductDetails() {
         event.target.parentElement.style.display = 'block';
     }
 
+    const [selectDate, setSelectDate] = useState(false)
+    const [rangeDate, setRangeDate] = useState([null, null]);
+
     // Const que seleciona a data do calendario selecionado
     const selectedDate = range => {
-        setStartDate(range)
+        localStorage.setItem('startDate', range[0])
+        localStorage.setItem('endDate', range[1])
+        setRangeDate(range)
         setSelectDate(true)
-        setShowCalendar(false)
     }
- 
-    const [selectDate, setSelectDate] = useState(false)
-    const [showCalendar, setShowCalendar] = useState(false)
-    const [startDate, setStartDate] = useState([null, null]);
 
     return (
         <>
@@ -141,6 +144,31 @@ export default function ProductDetails() {
                                             <img id="expandedImg" className="rounded w-100" src={expandedImgSrc ? expandedImgSrc : product.images[0].urlImage} alt={imgText} onClick={() => setToggler(!toggler)} />
                                             <div id="className"></div>
                                         </div>
+                                        <FsLightbox
+                                            key={product.id + '-lightbox'}
+                                            toggler={toggler}
+                                            sources={[
+                                                expandedImgSrc ? expandedImgSrc : product.images[0].urlImage,
+                                                product.images[1].urlImage,
+                                                product.images[2].urlImage,
+                                                product.images[3].urlImage,
+                                                product.images[4].urlImage
+                                            ]}
+                                            thumbs={[
+                                                null,
+                                                null,
+                                                null,
+                                                null,
+                                                null
+                                            ]}
+                                            types={[
+                                                'image',
+                                                'image',
+                                                'image',
+                                                'image',
+                                                'image'
+                                            ]}          
+                                        />
                                         <div className="row gx-2">
                                             <div className="col column">
                                                 <img className="img-thumbnail img-square shadow" src={product.images[0].urlImage} alt={product.name} onClick={handleImgClick} />
@@ -379,19 +407,17 @@ export default function ProductDetails() {
                                     <h4 className="poppins travelgreen-logo mb-4">Datas disponíveis</h4>
                                     <div className="text-center d-flex d-xl-none justify-content-center align-items-center align-content-center flex-grow-1">
                                         <SingleCalendar
-                                            id={startDate}
+                                            id={rangeDate}
                                             onSelectedData={selectedDate}
-                                            selectedRange={startDate}
-                                            state={{ state: startDate }}
+                                            selectedRange={rangeDate}
                                         />
                                     </div>
                                     <div className="text-center d-none d-xl-flex justify-content-center align-items-center align-content-center flex-grow-1">
                                         <DoubleCalendar
-                                            id={startDate}
+                                            id={rangeDate}
                                             onSelectedData={selectedDate}
-                                            selectedRange={startDate}
+                                            selectedRange={rangeDate}
                                             width="100%"
-                                            state={{ state: startDate.toString() }}
                                         />
                                     </div>
                                     <div className="text-center mt-3">
