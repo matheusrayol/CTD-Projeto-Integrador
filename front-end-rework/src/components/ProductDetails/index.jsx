@@ -20,7 +20,7 @@ export default function ProductDetails() {
 
     useEffect(() => {
         function fetchProduct() {
-            axios.get(`http://localhost:8080/product/${location}`)
+            axios.get(`/product/${location}`)
                 .then(response => {
                     setProduct(response.data)
                 })
@@ -32,6 +32,25 @@ export default function ProductDetails() {
 
     }, []
     )
+
+    const [reservationList, setReservationList] = useState([])
+    useEffect(() => {
+        function fetchReservations() {
+            axios.get(`/reservation/product/${location}`)
+                .then(response => {
+                    setReservationList(response.data)
+                })
+                .catch(error => {
+                    console.error(error)
+                })
+        }
+        fetchReservations()
+    }, []
+    )
+
+    console.log(reservationList)
+
+
 
     const { auth } = useAuth()
 
@@ -50,15 +69,28 @@ export default function ProductDetails() {
         event.target.parentElement.style.display = 'block';
     }
 
-    const [selectDate, setSelectDate] = useState(false)
-    const [rangeDate, setRangeDate] = useState([null, null]);
+    const [selectRange, setSelectRange] = useState(false)
+    const [dateRange, setDateRange] = useState([null, null]);
 
-    // Const que seleciona a data do calendario selecionado
-    const selectedDate = range => {
+    const selectedRange = range => {
         localStorage.setItem('startDate', range[0])
         localStorage.setItem('endDate', range[1])
-        setRangeDate(range)
-        setSelectDate(true)
+        setDateRange(range)
+        setSelectRange(true)
+    }
+
+    const disabledDates = [
+        new Date(2023, 3, 8),  // 1º de abril de 2023
+        new Date(2023, 3, 9),  // 1º de maio de 2023
+        new Date(2023, 3, 10)   // 1º de junho de 2023
+    ];
+
+    function tileDisabled({ date, view }) {
+        return disabledDates.some(disabledDate =>
+            disabledDate.getDate() === date.getDate() &&
+            disabledDate.getMonth() === date.getMonth() &&
+            disabledDate.getFullYear() === date.getFullYear()
+        );
     }
 
     return (
@@ -167,7 +199,7 @@ export default function ProductDetails() {
                                                 'image',
                                                 'image',
                                                 'image'
-                                            ]}          
+                                            ]}
                                         />
                                         <div className="row gx-2">
                                             <div className="col column">
@@ -407,16 +439,18 @@ export default function ProductDetails() {
                                     <h4 className="poppins travelgreen-logo mb-4">Datas disponíveis</h4>
                                     <div className="text-center d-flex d-xl-none justify-content-center align-items-center align-content-center flex-grow-1">
                                         <SingleCalendar
-                                            id={rangeDate}
-                                            onSelectedData={selectedDate}
-                                            selectedRange={rangeDate}
+                                            id={dateRange}
+                                            onSelectedRange={selectedRange}
+                                            selectRange={selectRange}
+                                            tileDisabled={tileDisabled}
                                         />
                                     </div>
                                     <div className="text-center d-none d-xl-flex justify-content-center align-items-center align-content-center flex-grow-1">
                                         <DoubleCalendar
-                                            id={rangeDate}
-                                            onSelectedData={selectedDate}
-                                            selectedRange={rangeDate}
+                                            id={dateRange}
+                                            onSelectedData={selectedRange}
+                                            selectRange={selectRange}
+                                            tileDisabled={tileDisabled}
                                             width="100%"
                                         />
                                     </div>

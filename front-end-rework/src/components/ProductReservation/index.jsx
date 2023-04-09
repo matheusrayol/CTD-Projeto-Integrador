@@ -14,21 +14,28 @@ import axios from 'axios'
 import { useLocation } from 'react-router-dom'
 
 export default function ProductReservation() {
-    const [startDate, setStartDate] = useState(localStorage.getItem('dateStart'))
-    const [endDate, setEndDate] = useState(localStorage.getItem('dateEnd'))
-    const dateRange = [startDate, endDate]
-    const navigate = useNavigate()
+    const [selectRange, setSelectRange] = useState(false)
+    const [dateRange, setDateRange] = useState([null, null]);
 
-    // Const que seleciona a data do calendario selecionado
-    const selectedDate = range => {
-        setStartDate(range)
+    const selectedRange = range => {
+        localStorage.setItem('startDate', range[0])
+        localStorage.setItem('endDate', range[1])
+        setDateRange(range)
+        setSelectRange(true)
     }
 
-    const handleRangeChange = newRange => {
-        setStartDate(newRange.startDate)
-        setEndDate(newRange.endDate)
-        localStorage.setItem('dateStart', new Date(startDate))
-        localStorage.setItem('dateEnd', new Date(endDate))
+    const disabledDates = [
+        new Date(2023, 3, 8),  // 1º de abril de 2023
+        new Date(2023, 3, 9),  // 1º de maio de 2023
+        new Date(2023, 3, 10)   // 1º de junho de 2023
+    ];
+
+    function tileDisabled({ date, view }) {
+        return disabledDates.some(disabledDate =>
+            disabledDate.getDate() === date.getDate() &&
+            disabledDate.getMonth() === date.getMonth() &&
+            disabledDate.getFullYear() === date.getFullYear()
+        );
     }
 
     const [horaChegada, setHoraChegada] = useState(false)
@@ -110,20 +117,20 @@ export default function ProductReservation() {
                                 <div className="col-12 col-lg-7 px-4 py-4 rounded bg-white">
                                     <h5 className="poppins travelgreen-logo mb-4">Data para a reserva</h5>
                                     <div className="text-center d-flex d-xl-none justify-content-center align-items-center align-content-center flex-grow-1">
-                                        <SingleCalendar
-                                            id={startDate}
-                                            onSelectedData={selectedDate}
-                                            selectedRange={dateRange}
-                                            onRangeChange={handleRangeChange}
+                                    <SingleCalendar
+                                            id={dateRange}
+                                            onSelectedRange={selectedRange}
+                                            selectRange={selectRange}
+                                            tileDisabled={tileDisabled}
                                         />
                                     </div>
                                     <div className="text-center d-none d-xl-flex justify-content-center align-items-center align-content-center flex-grow-1">
-                                        <DoubleCalendar
-                                            id={startDate}
-                                            onSelectedData={selectedDate}
-                                            selectedRange={dateRange}
+                                    <DoubleCalendar
+                                            id={dateRange}
+                                            onSelectedData={selectedRange}
+                                            selectRange={selectRange}
+                                            tileDisabled={tileDisabled}
                                             width="100%"
-                                            onRangeChange={handleRangeChange}
                                         />
                                     </div>
                                     <div className="text-center mt-5">
@@ -257,7 +264,7 @@ export default function ProductReservation() {
                                                 <span className="mb-1 text-white">
                                                     <strong>Data de retirada:</strong>
                                                     &nbsp;
-                                                    {moment(startDate).format('DD/MM/YYYY')}
+                                                    {/* {moment(startDate).format('DD/MM/YYYY')} */}
                                                 </span>
                                                 <span className="mb-1 text-white">
                                                     <strong>Hora de retirada:</strong>
@@ -267,7 +274,7 @@ export default function ProductReservation() {
                                                 <span className="mb-1 text-white">
                                                     <strong>Data de retorno: </strong>
                                                     &nbsp;
-                                                    {moment(endDate).format('DD/MM/YYYY')}
+                                                    {/* {moment(endDate).format('DD/MM/YYYY')} */}
                                                 </span>
                                             </div>
                                         </section>

@@ -11,7 +11,7 @@ export default function Navbar() {
 
     return (
         <nav className="navbar navbar-light navbar-expand-md travelgreen-navbar sticky-top">
-            <div className="container">
+            <div className="container px-0">
                 <Link to="/" className="navbar-brand d-flex align-items-center">
                     <img className="travelgreen-logo" src={Logo} height="45px" alt="Travel Green" />
                 </Link>

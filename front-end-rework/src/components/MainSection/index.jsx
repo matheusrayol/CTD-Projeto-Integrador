@@ -207,7 +207,7 @@ export default function MainSection() {
                                                 className="dropdown-item w-100"
                                                 data-bs-auto-close="outside"
                                                 id={startDate}
-                                                onSelectedData={selectedDate}
+                                                onSelectedRange={selectedDate}
                                                 selectedRange={startDate}
                                             />
                                         </div>

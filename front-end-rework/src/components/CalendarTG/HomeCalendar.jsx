@@ -2,10 +2,10 @@ import { Calendar } from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
 
 export function HomeCalendar(props) {
-  const { selectedRange, onSelectedData } = props
+  const { selectedRange, onSelectedRange } = props
 
   const handleDateChange = range => {
-    onSelectedData(range)
+    onSelectedRange(range)
   }
 
   const minDate = new Date()

@@ -3,15 +3,14 @@ import { useState } from 'react'
 import 'react-calendar/dist/Calendar.css'
 
 export function SingleCalendar(props) {
-  const { selectedRange, onSelectedData } = props
+  const { selectedRange, onSelectedRange } = props
 
-  const handleDateChange = range => {
-    onSelectedData(range)
+  const handleRangeChange = range => {
+    onSelectedRange(range)
   }
 
   const minDate = new Date()
 
-  const [date, setDate] = useState(new Date());
   const disabledDates = [
     new Date(2023, 3, 8),  // 1º de abril de 2023
     new Date(2023, 3, 9),  // 1º de maio de 2023
@@ -29,7 +28,7 @@ export function SingleCalendar(props) {
   return (
     <Calendar
       id="SingleCalendar"
-      onChange={handleDateChange}
+      onChange={handleRangeChange}
       value={selectedRange}
       selectRange={true}
       minDate={minDate}
