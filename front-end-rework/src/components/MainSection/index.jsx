@@ -172,7 +172,6 @@ export default function MainSection() {
                                         aria-expanded="false"
                                         data-bs-toggle="dropdown"
                                         type="text"
-                                        onClick={toggleLocation}
                                         onChange={getValueInputSelect}
                                         placeholder='Cidade para retirada'
                                         defaultValue={valueInputSelect} />
