@@ -49,11 +49,8 @@ export default function MainSection() {
                 console.error(error);
             }
         }
-
-        if (showCity) {
             fetchLocation();
-        }
-    }, [showCity]);
+    }, []);
 
 
     // Retorna todos os produtos cadastrados
@@ -123,11 +120,6 @@ export default function MainSection() {
         } else {
             setInputSelect(true)
         }
-    }
-
-    // Const que realiza a abertura do calendario
-    function toggleLocation() {
-        setShowCity(!showCity)
     }
 
     // Const que seleciona a data do calendario selecionado

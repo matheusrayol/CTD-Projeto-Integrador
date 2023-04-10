@@ -5,7 +5,6 @@ import './styles/common.scss'
 import axios from 'axios'
 import LogRocket from 'logrocket';
 
-
 LogRocket.init('sthqmi/travel-green');
 
 axios.defaults.baseURL = `http://localhost:8080`

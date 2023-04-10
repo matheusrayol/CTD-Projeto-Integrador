@@ -25,9 +25,9 @@ export default function ProductReservation() {
     }
 
     const disabledDates = [
-        new Date(2023, 3, 8),  // 1º de abril de 2023
-        new Date(2023, 3, 9),  // 1º de maio de 2023
-        new Date(2023, 3, 10)   // 1º de junho de 2023
+        new Date(2023, 3, 12),
+        new Date(2023, 3, 11), 
+        new Date(2023, 3, 10)
     ];
 
     function tileDisabled({ date, view }) {
@@ -264,7 +264,7 @@ export default function ProductReservation() {
                                                 <span className="mb-1 text-white">
                                                     <strong>Data de retirada:</strong>
                                                     &nbsp;
-                                                    {/* {moment(startDate).format('DD/MM/YYYY')} */}
+                                                    {moment(startDate).format('DD/MM/YYYY')}
                                                 </span>
                                                 <span className="mb-1 text-white">
                                                     <strong>Hora de retirada:</strong>
@@ -274,7 +274,7 @@ export default function ProductReservation() {
                                                 <span className="mb-1 text-white">
                                                     <strong>Data de retorno: </strong>
                                                     &nbsp;
-                                                    {/* {moment(endDate).format('DD/MM/YYYY')} */}
+                                                    {moment(endDate).format('DD/MM/YYYY')}
                                                 </span>
                                             </div>
                                         </section>

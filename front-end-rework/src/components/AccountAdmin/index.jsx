@@ -4,7 +4,7 @@ import axios from 'axios'
 import data from "../../json/characteristics.json"
 import policyData from "../../json/policies.json"
 import { useForm } from "react-hook-form";
-
+import { Link } from "react-router-dom";
 
 export default function AccountAdmin() {
 
@@ -80,17 +80,109 @@ export default function AccountAdmin() {
         setSustainabilityScore(event.target.value)
     }
 
-    const { id, name, surname, email, functionRole } = useAuth();
+    const [imageCounter, setImageCounter] = useState(1)
 
-    const createProduct = event => {
+    const handleNewImage = (event) => {
         event.preventDefault();
-
-        let signinData = {
-            
-        }
-
+        setImageCounter(imageCounter + 1)
     }
 
+    const { auth, id, name, surname, functionRole, email } = useAuth();
+
+    const onSubmit = (data, e) => {
+
+        console.log(data)
+        let imagesCounter = 0;
+        const imageArray = [];
+
+        while (data['img' + imagesCounter + 'Name']) {
+            const imageObject = {
+                title: data['img' + imagesCounter + 'Name'],
+                urlImage: data['img' + imagesCounter + 'Url']
+            };
+            imageArray.push(imageObject);
+            imagesCounter++;
+        }
+
+        let newProduct = {
+            name: data.productName,
+            categoryId: data.categoryName,
+            cityId: data.cityName,
+            sustainability: data.sustainabilityNumber,
+            description: data.productDescription,
+            characteristics: [
+                {
+                    id: characteristics[0].id,
+                    name: characteristics[0].name,
+                    urlImage: characteristics[0].icon,
+                },
+                {
+                    id: characteristics[1].id,
+                    name: characteristics[1].name,
+                    urlImage: characteristics[1].icon,
+                },
+                {
+                    id: characteristics[2].id,
+                    name: characteristics[2].name,
+                    urlImage: characteristics[2].icon,
+                },
+                {
+                    id: characteristics[3].id,
+                    name: characteristics[3].name,
+                    urlImage: characteristics[3].icon,
+                },
+                {
+                    id: characteristics[4].id,
+                    name: characteristics[4].name,
+                    urlImage: characteristics[4].icon,
+                },
+                {
+                    id: characteristics[5].id,
+                    name: characteristics[5].name,
+                    urlImage: characteristics[5].icon,
+                },
+                {
+                    id: characteristics[6].id,
+                    name: characteristics[6].name,
+                    urlImage: characteristics[6].icon,
+                },
+                {
+                    id: characteristics[7].id,
+                    name: characteristics[7].name,
+                    urlImage: characteristics[7].icon,
+                }
+            ],
+            images: imageArray
+        }
+
+        console.log(newProduct)
+
+        let requestConfiguration = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8',
+                authorization: `Bearer ${auth}`
+            },
+            body: JSON.stringify(newProduct)
+        }
+
+        fetch(`http://localhost:8080/product/create`, requestConfiguration).then(response => {
+            if (response.ok) {
+                response.json().then(data => {
+                    alert('Produto Criado com Sucesso!')
+                    // navigate(`../accountadmin/createProduct/sucess`)
+                })
+            } else {
+                if (response.status === 400) {
+                    response.json().then(data => {
+                        alert(data.mensagem)
+                    })
+                } else {
+                    alert('Campo(os) incorreto(s)!')
+                }
+            }
+        })
+    }
 
     return (
         <>
@@ -116,22 +208,19 @@ export default function AccountAdmin() {
                                     <strong>Função:</strong> {functionRole === "ROLE_USER" ? "Usuário" : "Administrador"}
                                 </p>
                             </div>
-                            <div className="col-lg-8 py-4 px-4" style={{ backgroundColor: `white` }}>
+                            <div className="col-lg-8 py-4 px-4 bg-white">
                                 <h4 className="poppins travelgreen-logo mb-4 fw-semibold mx-2">Cadastrar produto</h4>
                                 <div>
-                                    <h6 className="fw-normal text-success mx-2 poppins mb-0">Informações básicas</h6>
-                                    <form onSubmit={handleSubmit((data) => {
-                                        console.log(data)
-                                    })}>
+                                    <form onSubmit={handleSubmit(onSubmit)}>
                                         <div className="d-flex flex-column align-items-start flex-md-row">
-                                            <div className="input-group mx-2 my-2">
+                                            <div className="input-group mx-2 mb-2">
+                                                <h6 className="ms-1 my-0 mb-1 poppins">
+                                                    Produto
+                                                </h6>
                                                 <div className="input-group">
-                                                    <label className={`form-label text-light ${!errors.productName ? "bg-success border-success" : "bg-danger border-danger"} input-group-text mb-0`}>
-                                                        Produto
-                                                    </label>
                                                     <input
                                                         id="productName"
-                                                        className={`shadow-sm form-control ${!errors.productName ? "border-success" : "border-danger"}`}
+                                                        className={`form-control ${!errors.productName ? "border-success" : "border-danger form-error"} border-tg`}
                                                         type="text"
                                                         placeholder="Insira o nome do produto"
                                                         {...register('productName', {
@@ -143,15 +232,15 @@ export default function AccountAdmin() {
                                                         })}
                                                     />
                                                 </div>
-                                                <p className="text-danger mx-2 mb-0 pb-0">{errors.productName?.message}</p>
+                                                <p className="text-danger ms-1 mb-0">{errors.productName?.message}</p>
                                             </div>
-                                            <div className="input-group mx-2 my-2">
+                                            <div className="input-group mx-2 mb-2">
+                                                <h6 className="ms-1 my-0 mb-1 poppins">
+                                                    Cidade
+                                                </h6>
                                                 <div className="input-group">
-                                                    <label className={`form-label text-light ${!errors.cityName ? "bg-success border-success" : "bg-danger border-danger"} input-group-text mb-0`}>
-                                                        Cidade
-                                                    </label>
                                                     <select
-                                                        className={`form-select ${!errors.cityName ? "border-success" : "border-danger"} rounded-0 rounded-end`}
+                                                        className={`form-select ${!errors.cityName ? "border-success" : "border-danger form-error"} border-tg rounded`}
                                                         onSelect={getValueInputSelect}
                                                         {...register('cityName', {
                                                             required: "É necessário selecionar uma cidade.",
@@ -167,17 +256,17 @@ export default function AccountAdmin() {
                                                         ))}
                                                     </select>
                                                 </div>
-                                                <p className="text-danger mx-2 mb-0 pb-0">{errors.cityName?.message}</p>
+                                                <p className="text-danger ms-1 mb-0">{errors.cityName?.message}</p>
                                             </div>
                                         </div>
                                         <div className="d-flex flex-column align-items-start flex-md-row">
-                                            <div className="input-group mx-2 my-2">
+                                            <div className="input-group mx-2 mb-2">
+                                                <h6 className="ms-1 my-0 mb-1 poppins">
+                                                    Categoria
+                                                </h6>
                                                 <div className="input-group">
-                                                    <label className={`form-label text-light ${!errors.categoryName ? "bg-success border-success" : "bg-danger border-danger"} input-group-text mb-0`}>
-                                                        Categoria
-                                                    </label>
                                                     <select
-                                                        className={`form-control ${!errors.categoryName ? "border-success" : "border-danger"} rounded-0 rounded-end`}
+                                                        className={`form-select ${!errors.categoryName ? "border-success" : "border-danger form-error"} border-tg rounded`}
                                                         onSelect={getCategoryValueInputSelect}
                                                         {...register('categoryName', {
                                                             required: "É necessário selecionar uma categoria.",
@@ -193,15 +282,15 @@ export default function AccountAdmin() {
                                                         ))}
                                                     </select>
                                                 </div>
-                                                <p className="text-danger mx-2 mb-0 pb-0">{errors.categoryName?.message}</p>
+                                                <p className="text-danger ms-1 mb-0">{errors.categoryName?.message}</p>
                                             </div>
-                                            <div className="input-group mx-2 my-2">
+                                            <div className="input-group mx-2 mb-2">
+                                                <h6 className="ms-1 my-0 mb-1 poppins">
+                                                    Sustentabilidade
+                                                </h6>
                                                 <div className="input-group">
-                                                    <label className={`form-label text-light ${!errors.sustainabilityNumber ? "bg-success border-success" : "bg-danger border-danger"} input-group-text mb-0`}>
-                                                        Sustentabilidade
-                                                    </label>
                                                     <input
-                                                        className={`form-control ${!errors.sustainabilityNumber ? "border-success" : "border-danger"}`}
+                                                        className={`form-control ${!errors.sustainabilityNumber ? "border-success" : "border-danger form-error"} border-tg`}
                                                         type="number"
                                                         placeholder="0 ~ 100"
                                                         min="0"
@@ -220,17 +309,17 @@ export default function AccountAdmin() {
                                                         })}
                                                     />
                                                 </div>
-                                                <p className="text-danger mx-2 mb-0 pb-0">{errors.sustainabilityNumber?.message}</p>
+                                                <p className="text-danger ms-1 mb-0">{errors.sustainabilityNumber?.message}</p>
                                             </div>
                                         </div>
-                                        <div className="d-flex flex-column align-items-start flex-auto">
-                                            <div className="input-group">
-                                                <h6 className="fw-normal text-success poppins mx-2">
+                                        <div className="d-flex flex-column align-items-start flex-md-row">
+                                            <div className="input-group mx-2 mb-2">
+                                                <h6 className="ms-1 my-0 mb-1 poppins">
                                                     Descrição
                                                 </h6>
                                                 <div className="input-group">
                                                     <textarea
-                                                        className={`form-control ${!errors.productDescription ? "border-success" : "border-danger"} mx-2`}
+                                                        className={`form-control ${!errors.productDescription ? "border-success" : "border-danger form-error"} border-tg`}
                                                         style={{ height: `100px` }}
                                                         {...register('productDescription', {
                                                             required: "É necessário preencher este campo.",
@@ -241,317 +330,168 @@ export default function AccountAdmin() {
                                                         })}
                                                     />
                                                 </div>
+                                                <p className="text-danger ms-1 mb-0 pb-0">{errors.productDescription?.message}</p>
                                             </div>
-                                            <p className="text-danger mx-3 mb-0 pb-0">{errors.productDescription?.message}</p>
+
                                         </div>
                                         <div>
-                                            <h6 className="fw-normal text-success mx-2 mt-3 poppins mb-0 mt-2">
-                                                Características
-                                            </h6>
-                                            <div className="d-flex mx-2 row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 gy-0 gx-0">
-                                                {characteristics.map((characteristic) => (
-                                                    <div className="col" key={characteristic.id}>
-                                                        <div className="form-check">
-                                                            <label className="form-check-label" htmlFor={`characteristic-${characteristic.id}`}>
+                                            <div className="input-group mx-2 mt-3">
+                                                <h6 className="ms-1 my-0 mb-1 poppins">
+                                                    Características
+                                                </h6>
+                                            </div>
+                                            <div className="input-group">
+                                                <div className="d-flex ms-2 row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 gy-1 gx-1">
+                                                    {characteristics.map((characteristic) => (
+                                                        <div className="col" key={characteristic.id}>
+                                                            <div className="form-check">
+                                                                <label className="form-check-label" htmlFor={`characteristic-${characteristic.id}`}>
+                                                                    <input
+                                                                        id={`characteristic-${characteristic.id}`}
+                                                                        className={`form-check-input ${!errors.uncontrolled ? "border-success" : "border-danger form-error"}`}
+                                                                        type="checkbox"
+                                                                        value={characteristic.id}
+                                                                        {...register("uncontrolled", {
+                                                                            required: "É necessário selecionar no mínimo 1 característica para o cadastro do produto."
+                                                                        })}
+                                                                    />
+                                                                    <img src={characteristic.icon} alt={characteristic.name} /> {characteristic.name}
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                                <p className="text-danger ms-1 mb-0">{errors.uncontrolled?.message}</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div className="input-group mx-2 mt-2">
+                                                <h6 className="ms-1 my-0 poppins">
+                                                    Imagens
+                                                </h6>
+                                            </div>
+                                            <div className="d-flex flex-column align-items-start">
+                                                {Array.from(Array(imageCounter)).map((image, index) => {
+                                                    return (
+                                                        <div key={`image` + index} className="input-group mx-2 my-2">
+                                                            <div className="input-group">
+                                                                <label className={`form-label text-light ${!errors[`img` + index + `Url`] ? "bg-success border-success" : "bg-danger border-danger"} input-group-text mb-0`}>
+                                                                    URL
+                                                                </label>
                                                                 <input
-                                                                    name="characteristics"
-                                                                    id={`characteristic-${characteristic.id}`}
-                                                                    className="form-check-input"
-                                                                    type="checkbox"
-                                                                    value={characteristic.id}
-                                                                    defaultChecked
-                                                                    {...register("uncontrolled", {
-                                                                        required: "São necessárias 8 características para o cadastro do produto."
+                                                                    id={`img` + index + `Url`}
+                                                                    className={`form-control shadow-sm rounded-0 rounded-end ${!errors[`img` + index + `Url`] ? "border-success" : "border-danger form-error"} border-tg`}
+                                                                    type="text"
+                                                                    {...register(`img${index}Url`, {
+                                                                        required: "É necessário preencher este campo.",
+                                                                        minLength: {
+                                                                            value: 10,
+                                                                            message: "Mínimo de 10 caracteres."
+                                                                        }
                                                                     })}
                                                                 />
-                                                                {characteristic.name}
-                                                            </label>
+                                                                <Link onClick={handleNewImage}>
+                                                                    <svg className="fs-1 text-light bg-success px-2 py-2 ms-2 me-3 rounded" xmlns="http://www.w3.org/2000/svg" viewBox="-32 0 512 512" width="1em" height="1em" fill="currentColor">
+                                                                        {/* <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --> */}
+                                                                        <path d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"></path>
+                                                                    </svg>
+                                                                </Link>
+                                                                <div className="input-group d-none">
+                                                                    <input
+                                                                        id={`img` + index + `Name`}
+                                                                        type="text"
+                                                                        defaultValue={`Imagem` + index}
+                                                                        {...register(`img${index}Name`, {
+                                                                            required: "É necessário preencher este campo.",
+                                                                            minLength: {
+                                                                                value: 5,
+                                                                                message: "Mínimo de 5 caracteres."
+                                                                            }
+                                                                        })}
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                            <p className="text-danger ms-1 mb-0 pb-0">{errors[`img` + index + `Url`]?.message}</p>
                                                         </div>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <h6 className="fw-normal text-success mx-2 mt-3 poppins mb-0 mt-2">
-                                                Imagens
-                                            </h6>
-                                            <div className="d-flex flex-column align-items-start flex-md-row">
-                                                <div className="input-group mx-2 my-2">
-                                                    <div className="input-group">
-                                                        <label className={`form-label text-light ${!errors.imageOneName ? "bg-success border-success" : "bg-danger border-danger"} input-group-text mb-0`}>
-                                                            Imagem 1
-                                                        </label>
-                                                        <input
-                                                            id="imageOneName"
-                                                            className={`form-control shadow-sm ${!errors.imageOneName ? "border-success" : "border-danger"}`}
-                                                            type="text"
-                                                            {...register('imageOneName', {
-                                                                required: "É necessário preencher este campo.",
-                                                                minLength: {
-                                                                    value: 5,
-                                                                    message: "Mínimo de 5 caracteres."
-                                                                }
-                                                            })}
-                                                        />
-                                                    </div>
-                                                    <p className="text-danger mx-2 mb-0 pb-0">{errors.imageOneName?.message}</p>
-                                                </div>
-                                                <div className="input-group mx-2 my-2">
-                                                    <div className="input-group">
-                                                        <label className={`form-label text-light ${!errors.imageOneUrl ? "bg-success border-success" : "bg-danger border-danger"} input-group-text mb-0`}>
-                                                            URL
-                                                        </label>
-                                                        <input
-                                                            id="imageOneUrl"
-                                                            className={`form-control shadow-sm ${!errors.imageOneUrl ? "border-success" : "border-danger"}`}
-                                                            type="text"
-                                                            {...register('imageOneUrl', {
-                                                                required: "É necessário preencher este campo.",
-                                                                minLength: {
-                                                                    value: 10,
-                                                                    message: "Mínimo de 10 caracteres."
-                                                                }
-                                                            })}
-                                                        />
-                                                    </div>
-                                                    <p className="text-danger mx-2 mb-0 pb-0">{errors.imageOneUrl?.message}</p>
-                                                </div>
-                                            </div>
-                                            <div className="d-flex flex-column align-items-start flex-md-row">
-                                                <div className="input-group mx-2 my-2">
-                                                    <div className="input-group">
-                                                        <label className={`form-label text-light ${!errors.imageTwoName ? "bg-success border-success" : "bg-danger border-danger"} input-group-text mb-0`}>
-                                                            Imagem 2
-                                                        </label>
-                                                        <input
-                                                            id="imageTwoName"
-                                                            className={`form-control shadow-sm ${!errors.imageTwoName ? "border-success" : "border-danger"}`}
-                                                            type="text"
-                                                            {...register('imageTwoName', {
-                                                                required: "É necessário preencher este campo.",
-                                                                minLength: {
-                                                                    value: 5,
-                                                                    message: "Mínimo de 5 caracteres."
-                                                                }
-                                                            })}
-                                                        />
-                                                    </div>
-                                                    <p className="text-danger mx-2 mb-0 pb-0">{errors.imageTwoName?.message}</p>
-                                                </div>
-                                                <div className="input-group mx-2 my-2">
-                                                    <div className="input-group">
-                                                        <label className={`form-label text-light ${!errors.imageTwoUrl ? "bg-success border-success" : "bg-danger border-danger"} input-group-text mb-0`}>
-                                                            URL
-                                                        </label>
-                                                        <input
-                                                            id="imageTwoUrl"
-                                                            className={`form-control shadow-sm ${!errors.imageTwoUrl ? "border-success" : "border-danger"}`}
-                                                            type="text"
-                                                            {...register('imageTwoUrl', {
-                                                                required: "É necessário preencher este campo.",
-                                                                minLength: {
-                                                                    value: 10,
-                                                                    message: "Mínimo de 10 caracteres."
-                                                                }
-                                                            })}
-                                                        />
-                                                    </div>
-                                                    <p className="text-danger mx-2 mb-0 pb-0">{errors.imageTwoUrl?.message}</p>
-                                                </div>
-                                            </div>
-                                            <div className="d-flex flex-column align-items-start flex-md-row">
-                                                <div className="input-group mx-2 my-2">
-                                                    <div className="input-group">
-                                                        <label className={`form-label text-light ${!errors.imageThreeName ? "bg-success border-success" : "bg-danger border-danger"} input-group-text mb-0`}>
-                                                            Imagem 3
-                                                        </label>
-                                                        <input
-                                                            id="imageThreeName"
-                                                            className={`form-control shadow-sm ${!errors.imageThreeName ? "border-success" : "border-danger"}`}
-                                                            type="text"
-                                                            {...register('imageThreeName', {
-                                                                required: "É necessário preencher este campo.",
-                                                                minLength: {
-                                                                    value: 5,
-                                                                    message: "Mínimo de 5 caracteres."
-                                                                }
-                                                            })}
-                                                        />
-                                                    </div>
-                                                    <p className="text-danger mx-2 mb-0 pb-0">{errors.imageThreeName?.message}</p>
-                                                </div>
-                                                <div className="input-group mx-2 my-2">
-                                                    <div className="input-group">
-                                                        <label className={`form-label text-light ${!errors.imageThreeUrl ? "bg-success border-success" : "bg-danger border-danger"} input-group-text mb-0`}>
-                                                            URL
-                                                        </label>
-                                                        <input
-                                                            id="imageThreeUrl"
-                                                            className={`form-control shadow-sm ${!errors.imageThreeUrl ? "border-success" : "border-danger"}`}
-                                                            type="text"
-                                                            {...register('imageThreeUrl', {
-                                                                required: "É necessário preencher este campo.",
-                                                                minLength: {
-                                                                    value: 10,
-                                                                    message: "Mínimo de 10 caracteres."
-                                                                }
-                                                            })}
-                                                        />
-                                                    </div>
-                                                    <p className="text-danger mx-2 mb-0 pb-0">{errors.imageThreeUrl?.message}</p>
-                                                </div>
-                                            </div>
-                                            <div className="d-flex flex-column align-items-start flex-md-row">
-                                                <div className="input-group mx-2 my-2">
-                                                    <div className="input-group">
-                                                        <label className={`form-label text-light ${!errors.imageFourName ? "bg-success border-success" : "bg-danger border-danger"} input-group-text mb-0`}>
-                                                            Imagem 4
-                                                        </label>
-                                                        <input
-                                                            id="imageFourName"
-                                                            className={`form-control shadow-sm ${!errors.imageFourName ? "border-success" : "border-danger"}`}
-                                                            type="text"
-                                                            {...register('imageFourName', {
-                                                                required: "É necessário preencher este campo.",
-                                                                minLength: {
-                                                                    value: 5,
-                                                                    message: "Mínimo de 5 caracteres."
-                                                                }
-                                                            })}
-                                                        />
-                                                    </div>
-                                                    <p className="text-danger mx-2 mb-0 pb-0">{errors.imageFourName?.message}</p>
-                                                </div>
-                                                <div className="input-group mx-2 my-2">
-                                                    <div className="input-group">
-                                                        <label className={`form-label text-light ${!errors.imageFourUrl ? "bg-success border-success" : "bg-danger border-danger"} input-group-text mb-0`}>
-                                                            URL
-                                                        </label>
-                                                        <input
-                                                            id="imageFourUrl"
-                                                            className={`form-control shadow-sm ${!errors.imageFourUrl ? "border-success" : "border-danger"}`}
-                                                            type="text"
-                                                            {...register('imageFourUrl', {
-                                                                required: "É necessário preencher este campo.",
-                                                                minLength: {
-                                                                    value: 10,
-                                                                    message: "Mínimo de 10 caracteres."
-                                                                }
-                                                            })}
-                                                        />
-                                                    </div>
-                                                    <p className="text-danger mx-2 mb-0 pb-0">{errors.imageFourUrl?.message}</p>
-                                                </div>
-                                            </div>
-                                            <div className="d-flex flex-column align-items-start flex-md-row">
-                                                <div className="input-group mx-2 my-2">
-                                                    <div className="input-group">
-                                                        <label className={`form-label text-light ${!errors.imageFiveName ? "bg-success border-success" : "bg-danger border-danger"} input-group-text mb-0`}>
-                                                            Imagem 5
-                                                        </label>
-                                                        <input
-                                                            id="imageFiveName"
-                                                            className={`form-control shadow-sm ${!errors.imageFiveName ? "border-success" : "border-danger"}`}
-                                                            type="text"
-                                                            {...register('imageFiveName', {
-                                                                required: "É necessário preencher este campo.",
-                                                                minLength: {
-                                                                    value: 5,
-                                                                    message: "Mínimo de 5 caracteres."
-                                                                }
-                                                            })}
-                                                        />
-                                                    </div>
-                                                    <p className="text-danger mx-2 mb-0 pb-0">{errors.imageFiveName?.message}</p>
-                                                </div>
-                                                <div className="input-group mx-2 my-2">
-                                                    <div className="input-group">
-                                                        <label className={`form-label text-light ${!errors.imageFiveUrl ? "bg-success border-success" : "bg-danger border-danger"} input-group-text mb-0`}>
-                                                            URL
-                                                        </label>
-                                                        <input
-                                                            id="imageFiveUrl"
-                                                            className={`form-control shadow-sm ${!errors.imageFiveUrl ? "border-success" : "border-danger"}`}
-                                                            type="text"
-                                                            {...register('imageFiveUrl', {
-                                                                required: "É necessário preencher este campo.",
-                                                                minLength: {
-                                                                    value: 10,
-                                                                    message: "Mínimo de 10 caracteres."
-                                                                }
-                                                            })}
-                                                        />
-                                                    </div>
-                                                    <p className="text-danger mx-2 mb-0 pb-0">{errors.imageFiveUrl?.message}</p>
-                                                </div>
+                                                    )
+                                                })}
                                             </div>
                                         </div>
                                         <div className="d-flex flex-column">
                                             <h4 className="poppins travelgreen-logo fw-semibold mt-4 mx-2">Políticas do produto</h4>
-                                            <div className="d-flex flex-column">
-                                                <h6 className="fw-normal mx-2 mt-3 poppins mb-0 mt-2">Regras da Locação</h6>
-                                                <div className="input-group">
-                                                    <textarea
-                                                        className={`form-control shadow-sm mx-2 ${!errors.locationRules ? "border-success" : "border-danger"}`}
-                                                        style={{ height: `75px` }}
-                                                        defaultValue={[policyData[0].text.line]}
-                                                        {...register('locationRules', {
-                                                            required: "É necessário preencher este campo.",
-                                                            minLength: {
-                                                                value: 10,
-                                                                message: "Mínimo de 10 caracteres."
-                                                            }
-                                                        })}
-                                                    />
+                                            <div className="d-flex flex-column align-items-start flex-md-row">
+                                                <div className="input-group mx-2 mb-2">
+                                                    <h6 className="ms-1 my-0 mb-1 poppins">
+                                                        Regras da Locação
+                                                    </h6>
+                                                    <div className="input-group">
+                                                        <textarea
+                                                            className={`form-control shadow-sm ${!errors.locationRules ? "border-success" : "border-danger"} border-tg`}
+                                                            style={{ height: `110px` }}
+                                                            defaultValue={[policyData[0].text.line]}
+                                                            {...register('locationRules', {
+                                                                required: "É necessário preencher este campo.",
+                                                                minLength: {
+                                                                    value: 10,
+                                                                    message: "Mínimo de 10 caracteres."
+                                                                }
+                                                            })}
+                                                        />
+                                                    </div>
+                                                    <p className="text-danger ms-1 mb-0 pb-0">{errors.locationRules?.message}</p>
                                                 </div>
-                                                <p className="text-danger mx-2 mb-0 pb-0">{errors.locationRules?.message}</p>
                                             </div>
-                                            <div className="d-flex flex-column">
-                                                <h6 className="fw-normal mx-2 mt-3 poppins mb-0 mt-2">
-                                                    Saúde e Segurança
-                                                </h6>
-                                                <div className="input-group">
-                                                    <textarea
-                                                        className={`form-control shadow-sm mx-2 ${!errors.healthAndSafety ? "border-success" : "border-danger"}`}
-                                                        style={{ height: `75px` }}
-                                                        defaultValue={[policyData[1].text.line]}
-                                                        {...register('healthAndSafety', {
-                                                            required: "É necessário preencher este campo.",
-                                                            minLength: {
-                                                                value: 10,
-                                                                message: "Mínimo de 10 caracteres."
-                                                            }
-                                                        })}
-                                                    />
+                                            <div className="d-flex flex-column align-items-start flex-md-row">
+                                                <div className="input-group mx-2 mb-2">
+                                                    <h6 className="ms-1 my-0 mb-1 poppins">
+                                                        Saúde e Segurança
+                                                    </h6>
+                                                    <div className="input-group">
+                                                        <textarea
+                                                            className={`form-control shadow-sm ${!errors.healthAndSafety ? "border-success" : "border-danger"} border-tg`}
+                                                            style={{ height: `110px` }}
+                                                            defaultValue={[policyData[1].text.line]}
+                                                            {...register('healthAndSafety', {
+                                                                required: "É necessário preencher este campo.",
+                                                                minLength: {
+                                                                    value: 10,
+                                                                    message: "Mínimo de 10 caracteres."
+                                                                }
+                                                            })}
+                                                        />
+                                                    </div>
+                                                    <p className="text-danger ms-1 mb-0 pb-0">{errors.healthAndSafety?.message}</p>
                                                 </div>
-                                                <p className="text-danger mx-2 mb-0 pb-0">{errors.healthAndSafety?.message}</p>
                                             </div>
-                                            <h6 className="fw-normal mx-2 mt-3 poppins mb-0 mt-2">
-                                                Política de Cancelamento
-                                            </h6>
-                                            <div className="input-group">
-                                                <textarea
-                                                    className={`form-control shadow-sm mx-2 ${!errors.cancellationPolicy ? "border-success" : "border-danger"}`}
-                                                    style={{ height: `75px` }}
-                                                    defaultValue={[policyData[2].text.line]}
-                                                    {...register('cancellationPolicy', {
-                                                        required: "É necessário preencher este campo.",
-                                                        minLength: {
-                                                            value: 10,
-                                                            message: "Mínimo de 10 caracteres."
-                                                        }
-                                                    })}
-                                                />
+                                            <div className="d-flex flex-column align-items-start flex-md-row">
+                                                <div className="input-group mx-2 mb-2">
+                                                    <h6 className="ms-1 my-0 mb-1 poppins">
+                                                        Política de Cancelamento
+                                                    </h6>
+                                                    <div className="input-group">
+                                                        <textarea
+                                                            className={`form-control shadow-sm ${!errors.cancellationPolicy ? "border-success" : "border-danger"} border-tg`}
+                                                            style={{ height: `110px` }}
+                                                            defaultValue={[policyData[2].text.line]}
+                                                            {...register('cancellationPolicy', {
+                                                                required: "É necessário preencher este campo.",
+                                                                minLength: {
+                                                                    value: 10,
+                                                                    message: "Mínimo de 10 caracteres."
+                                                                }
+                                                            })}
+                                                        />
+                                                    </div>
+                                                    <p className="text-danger ms-1 mb-0 pb-0">{errors.cancellationPolicy?.message}</p>
+                                                </div>
                                             </div>
-                                            <p className="text-danger mx-2 mb-0 pb-0">{errors.cancellationPolicy?.message}</p>
+                                            <div className="d-flex justify-content-center poppins">
+                                                <div className="btn-group mt-3" role="group">
+                                                    <button className="btn btn-success" type="submit">Cadastrar produto</button>
+                                                    <button className="btn btn-danger" type="reset" onClick={() => clearErrors()}>Limpar campos</button>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div className="d-flex justify-content-center poppins">
-                                            <div className="btn-group mt-3" role="group">
-                                                <button className="btn btn-success" type="submit">Cadastrar produto</button>
-                                                <button className="btn btn-danger" type="reset" onClick={() => clearErrors()}>Limpar campos</button>
-                                            </div>
-                                        </div>
-
                                     </form>
                                 </div>
                             </div>
