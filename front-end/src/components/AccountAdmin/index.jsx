@@ -166,7 +166,7 @@ export default function AccountAdmin() {
             body: JSON.stringify(newProduct)
         }
 
-        fetch(`http://localhost:8080/product/create`, requestConfiguration).then(response => {
+        fetch(`http://ec2-3-22-250-39.us-east-2.compute.amazonaws.com:8080/product/create`, requestConfiguration).then(response => {
             if (response.ok) {
                 response.json().then(data => {
                     alert('Produto Criado com Sucesso!')

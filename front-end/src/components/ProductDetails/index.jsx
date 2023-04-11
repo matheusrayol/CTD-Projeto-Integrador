@@ -46,10 +46,6 @@ export default function ProductDetails() {
     }, []
     )
 
-    console.log(reservationList)
-
-
-
     const { auth } = useAuth()
 
     const [expandedImgSrc, setExpandedImgSrc] = useState('');
