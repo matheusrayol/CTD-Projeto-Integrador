@@ -5,4 +5,6 @@ import java.util.List;
 
 public interface CharacteristicsService {
   List<CharacteristicsEntity> findAllById(List<Long> characteristicsIdList);
+
+  List<CharacteristicsEntity> findAll();
 }

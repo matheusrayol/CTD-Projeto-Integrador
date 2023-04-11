@@ -18,4 +18,10 @@ public class CharacteristicsServiceImpl implements CharacteristicsService {
   public List<CharacteristicsEntity> findAllById(List<Long> characteristicsIdList) {
     return characteristicsRepository.findAllById(characteristicsIdList);
   }
+
+  @LogInfo
+  @Override
+  public List<CharacteristicsEntity> findAll() {
+    return characteristicsRepository.findAll();
+  }
 }

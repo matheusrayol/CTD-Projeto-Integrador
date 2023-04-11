@@ -12,5 +12,7 @@ public interface CharacteristicsMapper {
 
   CharacteristicsEntity toEntity (CharacteristicsRequest characteristicsRequest);
 
+  CharacteristicsResponse toResponse (CharacteristicsEntity characteristics);
+
    List<CharacteristicsResponse> map(List<CharacteristicsEntity> characteristics);
 }
