@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { RotatingLines } from 'react-loader-spinner'
 import { DoubleCalendar } from '../CalendarTG/Double'
 import { SingleCalendar } from '../CalendarTG/Single'
@@ -8,8 +8,6 @@ import { useAuth } from '../../hooks/useAuth'
 import FsLightbox from 'fslightbox-react'
 
 import axios from 'axios'
-
-import { useLocation } from 'react-router-dom'
 
 export default function ProductDetails() {
 
