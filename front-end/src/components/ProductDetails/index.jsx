@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { RotatingLines } from 'react-loader-spinner'
-import { DoubleCalendar } from '../CalendarTG/Double'
-import { SingleCalendar } from '../CalendarTG/Single'
+// import { DoubleCalendar } from '../CalendarTG/Double'
+// import { SingleCalendar } from '../CalendarTG/Single'
 import TGLeaf from '../../assets/travelgreen_leaf.svg'
 import { useAuth } from '../../hooks/useAuth'
 import FsLightbox from 'fslightbox-react'
@@ -432,21 +432,21 @@ export default function ProductDetails() {
                                 <div className="col offset-xxl-0 d-flex flex-column py-4 px-4 rounded bg-white">
                                     <h4 className="poppins travelgreen-logo mb-4">Datas disponíveis</h4>
                                     <div className="text-center d-flex d-xl-none justify-content-center align-items-center align-content-center flex-grow-1">
-                                        <SingleCalendar
+                                        {/* <SingleCalendar
                                             id={dateRange}
                                             onSelectedRange={selectedRange}
                                             selectRange={selectRange}
                                             tileDisabled={tileDisabled}
-                                        />
+                                        /> */}
                                     </div>
                                     <div className="text-center d-none d-xl-flex justify-content-center align-items-center align-content-center flex-grow-1">
-                                        <DoubleCalendar
+                                        {/* <DoubleCalendar
                                             id={dateRange}
                                             onSelectedData={selectedRange}
                                             selectRange={selectRange}
                                             tileDisabled={tileDisabled}
                                             width="100%"
-                                        />
+                                        /> */}
                                     </div>
                                     <div className="text-center mt-3">
                                         {auth ? (
