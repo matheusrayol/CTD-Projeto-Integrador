@@ -19,6 +19,8 @@ export default function Reserve(image) {
   const handleRangeChange = newRange => {
     setStartDate(newRange.startDate)
     setEndDate(newRange.endDate)
+    localStorage.setItem('startDate', newRange.startDate)
+    localStorage.setItem('endDate', newRange.endDate)
   }
 
   const [horaChegada, setHoraChegada] = useState(false)

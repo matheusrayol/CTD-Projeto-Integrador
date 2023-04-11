@@ -1,112 +1,61 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useAuth } from '../../hooks/useAuth'
-import { BiMenuAltRight } from 'react-icons/bi'
-import { AiOutlineClose } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
-import imgAvatar from '../../assets/imgAvatar.png'
-import styles from './Navbar.module.scss'
+import LetterAvatar from '../LetterAvatar'
+import Logo from '../../assets/travelgreen_logo.svg'
+import * as bootstrap from 'bootstrap'
 
-function Navbar() {
-  const { auth, logout, name, functionRole } = useAuth()
+export default function Navbar() {
 
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [size, setSize] = useState({
-    width: 0,
-    height: 0
-  })
-  useEffect(() => {
-    const handleResize = () => {
-      setSize({
-        width: window.innerWidth,
-        height: window.innerHeight
-      })
-    }
-    window.addEventListener('resize', handleResize)
+    const { auth, logout, name, surname, functionRole } = useAuth()
 
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
-
-  useEffect(() => {
-    if (size.width > 750 && menuOpen) {
-      setMenuOpen(false)
-    }
-  }, [size.width, menuOpen])
-
-  const menuToggleHandler = () => {
-    setMenuOpen(p => !p)
-  }
-
-  return (
-    <header className={styles.header} id="header">
-      <div className={styles.header__content} id="header__content">
-        <div className={styles.logos} id="logos">
-          <Link to="/" className={styles.logoEgg}>
-            <span></span>
-            <p>Travel Green</p>
-          </Link>
-        </div>
-        <nav
-          id="header__content__nav"
-          className={`${styles.header__content__nav} 
-          ${menuOpen && size.width < 750 ? `${styles.isMenu}` : ''} 
-          }`}
-        >
-          <h1 id="header__content__nav__title">Menu</h1>
-          <ul>
-            <li>
-              <Link to="/home">Início</Link>
-            </li>
-
-            <li>
-              {auth === '' ? (
-                <div className={styles.ifLogin} id="ifLogin">
-                  <Link id="ifLoginEntrar" to="/login">
-                    Entrar
-                  </Link>
-                  <Link id="ifLoginCadastrar" to="/register">
-                    Cadastrar
-                  </Link>
+    return (
+        <nav className="navbar navbar-light navbar-expand-md travelgreen-navbar sticky-top">
+            <div className="container px-0">
+                <Link to="/" className="navbar-brand d-flex align-items-center">
+                    <img className="travelgreen-logo" src={Logo} height="45px" alt="Travel Green" />
+                </Link>
+                <button className="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navegacao">
+                    <span className="visually-hidden">Toggle navigation</span>
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+                <div id="navegacao" className="collapse navbar-collapse">
+                    {auth === '' ? (
+                        // Opções caso não exista um usuário logado
+                        <>
+                            <ul className="navbar-nav ms-auto">
+                                <li className="nav-item"></li>
+                            </ul>
+                            <div className="d-grid d-sm-flex justify-content-sm-evenly">
+                                <Link to="/login" className="btn btn-light mt-3 mt-sm-3 mb-3 me-md-2 poppins" role="button">Fazer Login</Link>
+                                <Link to="/register" className="btn btn-primary fw-semibold mt-sm-3 mb-3 poppins" role="button">Cadastre-se</Link>
+                            </div>
+                        </>
+                    ) : (
+                        // Opções caso exista um usuário logado
+                        <>
+                            <ul className="navbar-nav ms-auto">
+                                <li className="nav-item">
+                                </li>
+                            </ul>
+                            <div className="d-grid d-md-flex justify-content-md-evenly">
+                                <span className="d-flex align-items-center nav-link fs-6 mt-3 mt-sm-3 mb-3 me-md-2 poppins">
+                                    <LetterAvatar size="32" bgColor="#19944c" textColor="#FFF" className="me-2">
+                                        {name[0]}{surname[0]}
+                                    </LetterAvatar>
+                                    <span className="ms-2">Olá, {name}!</span>
+                                </span>
+                                {functionRole === 'ROLE_ADMIN' ? (
+                                    <Link to="/accountadmin" className="btn btn-light mt-3 mt-sm-3 mb-3 poppins" role="button">Administrar</Link>
+                                ) : (
+                                    <Link to="/accountuser" className="btn btn-primary fw-semibold mt-sm-3 mb-3 poppins" role="button">Minha Conta</Link>
+                                )}
+                                <Link to="/" onClick={() => logout()} className="btn btn-primary fw-semibold mt-sm-3 mb-3 poppins ms-md-2" role="button">Sair</Link>
+                            </div>
+                        </>
+                    )}
                 </div>
-              ) : (
-                <div className={styles.ifLogout} id="ifLogout">
-                  <div
-                    className={styles.ifLogout__sectionUser}
-                    id="ifLogout__sectionUser"
-                  >
-                    <img src={imgAvatar} alt="imagem Avatar" />
-                    <p>
-                      {functionRole === 'ROLE_ADMIN' ? (
-                        <Link id="NameUserWhenLogged" to="/accountadmin">
-                          Olá ADM, {name.toUpperCase()}!
-                        </Link>
-                      ) : (
-                        <Link id="NameUserWhenLogged" to="/accountuser">
-                          Olá, {name.toUpperCase()}!
-                        </Link>
-                      )}
-                    </p>
-                  </div>
-                  <Link id="ifLogoutSair" to="/" onClick={() => logout()}>
-                    Sair
-                  </Link>
-                </div>
-              )}
-            </li>
-          </ul>
+            </div>
         </nav>
-        <div
-          className={styles.header__content__toggle}
-          id="header__content__toggle"
-        >
-          {!menuOpen ? (
-            <BiMenuAltRight onClick={menuToggleHandler} />
-          ) : (
-            <AiOutlineClose onClick={menuToggleHandler} />
-          )}
-        </div>
-      </div>
-    </header>
-  )
+    )
 }
-
-export default Navbar
