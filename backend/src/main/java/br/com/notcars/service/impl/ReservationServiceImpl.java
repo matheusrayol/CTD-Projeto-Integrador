@@ -39,9 +39,7 @@ public class ReservationServiceImpl implements ReservationService {
     ProductEntity product = productServiceImpl.findProductById(reservationRequest.getProductId());
     ReservationEntity reservation = reservationMapper.toEntity(reservationRequest, user, product);
     reservation = reservationRepository.save(reservation);
-    log.info("antes de enviar email");
     emailServiceImpl.sendEmail(reservationRequest.getUserEmail(), "Reserva criada com sucesso!", emailServiceImpl.reservationEmail(user.getName(), reservation));
-    log.info("depois de enviar o email");
     return reservation;
   }
 
