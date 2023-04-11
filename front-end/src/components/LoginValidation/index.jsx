@@ -121,7 +121,7 @@ const LoginValidation = () => {
                                                     <div className="text-center">
                                                         <h4 className="text-dark mb-4 poppins">Login Concluído!</h4>
                                                     </div>
-                                                    <p className="ubuntu">Aguarde, você está sendo redirecionado...<br />Caso não queira aguardar, <Link className="travelgreen" to="/home">clique aqui</Link></p>
+                                                    <p className="ubuntu">Aguarde, você está sendo redirecionado...<br />Caso não queira aguardar, <Link className="travelgreen" to="/">clique aqui</Link></p>
                                                 </div>
                                             </div>
                                         </div>

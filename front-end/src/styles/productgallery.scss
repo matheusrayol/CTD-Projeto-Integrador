@@ -61,3 +61,18 @@ h1 {
     filter: brightness(97%) contrast(86%);
   }
 }
+
+#lightbox {
+  z-index: 1090;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /*optional bg color*/
+  background-color: rgba(196, 155, 237, 0.52);
+  /*the following isn't necessary but will help center everything once we add buttons*/
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

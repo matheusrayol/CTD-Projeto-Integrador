@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 export const CategoryCard = category => {
     return (
-        <div className="col-md-6 col-xl-3 gx-1 gy-1">
+        <div className="col-md-6 col-xl-3 gx-1 gy-1 px-3">
             <Link className="travelgreen-category-card" key={category.imageData.id} onClick={() => category.onSelectCategory(`${category.imageData.id}`)} data-bs-toggle="tooltip" data-bs-placement="bottom" title={category.imageData.descriptions}>
                 <div className="card shadow py-2 travelgreen-category-card" style={{ backgroundImage: `url(${category.imageData.urlImage})` }}>
                     <div className="card-body pb-0 pt-0">

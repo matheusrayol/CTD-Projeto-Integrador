@@ -24,7 +24,6 @@ export default function ProductDetails() {
                 })
         }
         fetchProduct()
-
     }, []
     )
 
@@ -84,6 +83,52 @@ export default function ProductDetails() {
         );
     }
 
+    // const [lightboxDisplay, setLightBoxDisplay] = useState(false)
+    // const [imageToShow, setImageToShow] = useState('')
+    // const [imgList, setImgList] = useState([])
+
+    // const showImage = (image) => {
+    //     //set imageToShow to be the one that's been clicked on    
+    //     setImageToShow(image);
+    //     //set lightbox visibility to true
+    //     setLightBoxDisplay(true);
+    // }
+
+    // const hideLightBox = () => {
+    //     setLightBoxDisplay(false)
+    // }
+
+    // let currentIndex = imgList.indexOf(imageToShow)
+
+    // let nextImage = imgList[currentIndex + 1]
+
+    // const showPrev = (e) => {
+    //     e.stopPropagation()
+    //     let currentIndex = imgList.indexOf(imageToShow)
+    //     if (currentIndex <= 0) {
+    //         setLightBoxDisplay(false)
+    //     }
+    //     else {
+    //         let nextImage = imgList[currentIndex - 1]
+    //         setImageToShow(nextImage)
+    //     }
+    // }
+
+    // const showNext = (e) => {
+    //     e.stopPropagation()
+    //     let currentIndex = imgList.indexOf(imageToShow)
+    //     if (currentIndex >= images.length - 1) {
+    //         setLightBoxDisplay(false)
+    //     }
+    //     else {
+    //         let nextImage = imgList[currentIndex + 1]
+    //         setImageToShow(nextImage)
+    //     }
+    // }
+
+    // setImageToShow(nextImage)
+
+
     return (
         <>
             {product ? (
@@ -115,7 +160,7 @@ export default function ProductDetails() {
                         <div className="container text-white">
                             <div className="row d-flex justify-content-center align-items-center">
                                 <div className="col">
-                        
+
                                     <span className="text-truncate d-flex align-items-center ubuntu fs-5 ms-3">
                                         <svg className="bi bi-pin-map-fill me-2 fs-7" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16">
                                             <path fillRule="evenodd" d="M3.1 11.2a.5.5 0 0 1 .4-.2H6a.5.5 0 0 1 0 1H3.75L1.5 15h13l-2.25-3H10a.5.5 0 0 1 0-1h2.5a.5.5 0 0 1 .4.2l3 4a.5.5 0 0 1-.4.8H.5a.5.5 0 0 1-.4-.8l3-4z"></path>
@@ -136,6 +181,7 @@ export default function ProductDetails() {
                     <section>
                         <div id="carousel-1" className="carousel slide d-flex d-lg-none" data-bs-ride="carousel">
                             <div className="carousel-inner">
+                                {/* {setImgList(product.images.map((image) => image.urlImage))} */}
                                 {product.images.map((image, index) => (
                                     <div className={index === 0 ? "carousel-item active" : "carousel-item"} key={index}>
                                         <img className="w-100 d-block" src={image.urlImage} alt={product.name} />
@@ -154,36 +200,32 @@ export default function ProductDetails() {
                             </div>
                             <ol className="carousel-indicators">
                                 <li className="active" data-bs-target="#carousel-1" data-bs-slide-to="0"></li>
-                                <li data-bs-target="#carousel-1" data-bs-slide-to="1"></li>
-                                <li data-bs-target="#carousel-1" data-bs-slide-to="2"></li>
-                                <li data-bs-target="#carousel-1" data-bs-slide-to="3"></li>
-                                <li data-bs-target="#carousel-1" data-bs-slide-to="4"></li>
+                                {product.images.slice(1).map((image, index) => (
+                                    <li data-bs-target="#carousel-1" data-bs-slide-to={index + 1} key={index}></li>
+                                ))}
                             </ol>
                         </div>
                         <div className="container mt-4">
                             <div className="row">
                                 <div className="col-lg-12 col-xl-7 col-xxl-7 d-none d-lg-flex">
                                     <div>
+                                        {/* {lightboxDisplay ?
+                                            <div id="lightbox" onClick={hideLightBox} >
+                                                <button onClick={showPrev}>&lt;</button>
+                                                <img id="lightbox-img" src={imageToShow}></img>
+                                                <button onClick={showNext}>&gt;</button>
+                                            </div>
+                                            : ''} */}
                                         <div className="img-container">
-                                            <img id="expandedImg" className="rounded w-100" src={expandedImgSrc ? expandedImgSrc : product.images[0].urlImage} alt={imgText} />
+                                            <img id="expandedImg" className="rounded w-100" src={expandedImgSrc ? expandedImgSrc : product.images[0].urlImage} alt={imgText ? imgText : product.images[0].name} onClick={() => showImage(expandedImgSrc)} />
                                             <div id="className"></div>
                                         </div>
                                         <div className="row gx-2">
-                                            <div className="col column">
-                                                <img className="img-thumbnail img-square shadow" src={product.images[0].urlImage} alt={product.name} onClick={handleImgClick} />
-                                            </div>
-                                            <div className="col column">
-                                                <img className="img-thumbnail img-square shadow" src={product.images[1].urlImage} alt={product.name} onClick={handleImgClick} />
-                                            </div>
-                                            <div className="col column">
-                                                <img className="img-thumbnail img-square shadow" src={product.images[2].urlImage} alt={product.name} onClick={handleImgClick} />
-                                            </div>
-                                            <div className="col column">
-                                                <img className="img-thumbnail img-square shadow" src={product.images[3].urlImage} alt={product.name} onClick={handleImgClick} />
-                                            </div>
-                                            <div className="col column">
-                                                <img className="img-thumbnail img-square shadow" src={product.images[4].urlImage} alt={product.name} onClick={handleImgClick} />
-                                            </div>
+                                            {product.images.map((image, index) => (
+                                                <div className="col column" key={`productImage` + index}>
+                                                    <img className="img-thumbnail img-square shadow" src={image.urlImage} alt={product.name} onClick={handleImgClick} />
+                                                </div>
+                                            ))}
                                         </div>
                                     </div>
                                 </div>
@@ -210,45 +252,13 @@ export default function ProductDetails() {
                                         Características
                                     </h4>
                                     <p className="text-center tag-cloud">
-                                        <span className="poppins">
-                                            <img src={product.characteristics[0].icon} alt={product.characteristics[0].name} />
-                                            &nbsp;
-                                            {product.characteristics[0].name}
-                                        </span>
-                                        <span className="poppins">
-                                            <img src={product.characteristics[1].icon} alt={product.characteristics[1].name} />
-                                            &nbsp;
-                                            {product.characteristics[1].name}
-                                        </span>
-                                        <span className="poppins">
-                                            <img src={product.characteristics[2].icon} alt={product.characteristics[2].name} />
-                                            &nbsp;{product.characteristics[2].name}
-                                        </span>
-                                        <span className="poppins">
-                                            <img src={product.characteristics[3].icon} alt={product.characteristics[3].name} />
-                                            &nbsp;
-                                            {product.characteristics[3].name}
-                                        </span>
-                                        <span className="poppins">
-                                            <img src={product.characteristics[4].icon} alt={product.characteristics[4].name} />
-                                            &nbsp;
-                                            {product.characteristics[4].name}
-                                        </span>
-                                        <span className="poppins">
-                                            <img src={product.characteristics[5].icon} alt={product.characteristics[5].name} />
-                                            &nbsp;
-                                            {product.characteristics[5].name}
-                                        </span>
-                                        <span className="poppins">
-                                            <img src={product.characteristics[6].icon} alt={product.characteristics[6].name} />
-                                            &nbsp;
-                                            {product.characteristics[6].name}
-                                        </span>
-                                        <span className="poppins">
-                                            <img src={product.characteristics[7].icon} alt={product.characteristics[7].name} />
-                                            &nbsp;
-                                            {product.characteristics[7].name}
-                                        </span>
+                                        {product.characteristics.map((characteristic, index) => (
+                                            <span className="poppins" key={`characteristic` + index}>
+                                                <img src={characteristic.icon} alt={characteristic.name} />
+                                                &nbsp;
+                                                {characteristic.name}
+                                            </span>
+                                        ))}
                                     </p>
                                     <div className="mb-2">
                                         <span className="fs-5 mb-2 fw-bold">
@@ -365,7 +375,8 @@ export default function ProductDetails() {
                                                     <img className="rounded-circle" src="https://loremflickr.com/320/320/dog" width="100" alt="Testimonial 1" />
                                                     <p className="d-flex text-center rating justify-content-center align-items-center">5&nbsp;<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -32 576 576" width="1em" height="1em" fill="currentColor">
                                                         <path d="M381.2 150.3L524.9 171.5C536.8 173.2 546.8 181.6 550.6 193.1C554.4 204.7 551.3 217.3 542.7 225.9L438.5 328.1L463.1 474.7C465.1 486.7 460.2 498.9 450.2 506C440.3 513.1 427.2 514 416.5 508.3L288.1 439.8L159.8 508.3C149 514 135.9 513.1 126 506C116.1 498.9 111.1 486.7 113.2 474.7L137.8 328.1L33.58 225.9C24.97 217.3 21.91 204.7 25.69 193.1C29.46 181.6 39.43 173.2 51.42 171.5L195 150.3L259.4 17.97C264.7 6.954 275.9-.0391 288.1-.0391C300.4-.0391 311.6 6.954 316.9 17.97L381.2 150.3z"></path>
-                                                    </svg></p>
+                                                    </svg>
+                                                    </p>
                                                     <p className="text-center"><em>Fiquei muito surpreso com a qualidade do carro que aluguei. Consegui levar minha família sem problemas para passeios no litoral carioca, e a bateria durou muito!</em></p>
                                                     <p className="signature">João Batista</p>
                                                     <p className="text-center date">21 de março de 2023</p>

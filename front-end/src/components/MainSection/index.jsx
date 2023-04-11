@@ -263,7 +263,7 @@ export default function MainSection() {
                                 aria-expanded={isMenuOpen}
                                 aria-controls="categoryList"
                                 onClick={() => setIsMenuOpen(!isMenuOpen)}>
-                                Clique e escolha a categoria
+                                Filtrar por categoria
                             </button>
                         </h3>
                         <div id="categoryList" className="collapse" onClick={handleCloseMenu}>
