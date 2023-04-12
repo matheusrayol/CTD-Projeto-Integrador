@@ -267,7 +267,7 @@ export default function MainSection() {
                             </button>
                         </h3>
                         <div id="categoryList" className="collapse" onClick={handleCloseMenu}>
-                            <div className="row d-flex">
+                            <div className="row d-flex px-2">
                                 {category.map((image, index) => (
                                     <CategoryCard
                                         onSelectCategory={currentCategory => {
@@ -282,7 +282,7 @@ export default function MainSection() {
                     </div>
                     <div className="container d-none d-sm-none d-md-none d-lg-grid mt-3">
                         <h3 className="fw-bold text-success mb-3">Procure as melhores opções por categoria</h3>
-                        <div className="row d-flex mb-3">
+                        <div className="row d-flex mb-3 px-2">
                             {category.map((image, index) => (
                                 <CategoryCard
                                     onSelectCategory={currentCategory => {

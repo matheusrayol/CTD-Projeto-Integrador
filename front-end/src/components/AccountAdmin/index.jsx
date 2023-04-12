@@ -1,7 +1,6 @@
 import { useAuth } from "../../hooks/useAuth"
 import { useState, useEffect } from "react"
 import axios from "axios"
-import data from "../../json/characteristics.json"
 import policyData from "../../json/policies.json"
 import { useForm } from "react-hook-form"
 import { Link, useNavigate } from "react-router-dom"
@@ -78,8 +77,17 @@ export default function AccountAdmin() {
     const [characteristics, setCharacteristics] = useState([])
 
     useEffect(() => {
-        setCharacteristics(data)
+        async function fetchCharacteristics() {
+            try {
+                const response = await axios.get('/characteristics/all')
+                setCharacteristics(response.data)
+            } catch (error) {
+                console.error(error)
+            }
+        }
+        fetchCharacteristics();
     }, [])
+    console.log(characteristics)
     // Busca das características - Fim
 
     // Configuração do Índice de sustentabilidade - Início

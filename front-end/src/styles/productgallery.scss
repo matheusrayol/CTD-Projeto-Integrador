@@ -1,7 +1,7 @@
 .column {
   float: left;
   width: 25%;
-  padding: 10px 5px;
+  padding-top: 10px;
 }
 
 .column img {
@@ -32,7 +32,6 @@
 }
 
 .img-square {
-  max-width: 85px;
   height: auto;
   object-fit: cover;
 }
@@ -48,11 +47,12 @@ h1 {
 }
 
 .img-thumbnail {
-  padding: 0;
+  padding: 0.10rem;
   border: none;
   border-radius: .375rem;
   max-width: 100%;
   height: auto;
+  background-color: #90a090;
 
 
   &:hover {

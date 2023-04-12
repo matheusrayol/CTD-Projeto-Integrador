@@ -34,10 +34,10 @@
 		margin-top: 8px;
 		&:enabled {
 			&:hover {
-				background-color: #f8f8fa;
+				background-color: #cbd6ce;
 			}
 			&:focus {
-				background-color: #f8f8fa;
+				background-color: #cbd6ce;
 			}
 		}
 	}
@@ -53,12 +53,12 @@ abbr[title] {
 .react-calendar__tile {
 	&:enabled {
 		&:hover {
-			background: #f8f8fa;
+			background: #cbd6ce;
 			color: #287146;
 			border-radius: 6px;
 		}
 		&:focus {
-			background: #f8f8fa;
+			background: #cbd6ce;
 			color: #287146;
 			border-radius: 6px;
 		}
@@ -89,10 +89,10 @@ abbr[title] {
 .react-calendar__tile--hasActive {
 	&:enabled {
 		&:hover {
-			background: #f8f8fa;
+			background: #cbd6ce;
 		}
 		&:focus {
-			background: #f8f8fa;
+			background: #cbd6ce;
 		}
 	}
 }
@@ -116,7 +116,7 @@ abbr[title] {
 
 .react-calendar--selectRange {
 	.react-calendar__tile--hover {
-		background-color: #f8f8fa;
+		background-color: #cbd6ce;
 	}
 }
 

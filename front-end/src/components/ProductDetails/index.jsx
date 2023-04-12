@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { RotatingLines } from 'react-loader-spinner'
-import { DoubleCalendar } from '../CalendarTG/Double'
-import { SingleCalendar } from '../CalendarTG/Single'
+import { ProductCalendar } from '../CalendarTG/ProductCalendar'
 import TGLeaf from '../../assets/travelgreen_leaf.svg'
 import { useAuth } from '../../hooks/useAuth'
 
@@ -24,25 +23,34 @@ export default function ProductDetails() {
                 })
         }
         fetchProduct()
-    }, []
-    )
+    }, [])
 
-    const [reservationList, setReservationList] = useState([])
+    // Função para desativar as datas
+    const [disabledDate, setDisabledDate] = useState([])
+
     useEffect(() => {
-        function fetchReservations() {
-            axios.get(`/reservation/product/${location}`)
-                .then(response => {
-                    setReservationList(response.data)
+        axios.get(`/reservation/product/${location}`)
+            .then(response => {
+                const formattedReservationList = response.data.map(reservation => {
+                    return {
+                        id: reservation.id,
+                        dateBegin: new Date(reservation.dateBegin),
+                        dateEnd: new Date(reservation.dateEnd),
+                        color: '#DB2828'
+                    }
                 })
-                .catch(error => {
-                    console.error(error)
-                })
-        }
-        fetchReservations()
-    }, []
-    )
+                setDisabledDate(formattedReservationList)
+            })
+            .catch(error => {
+                console.error(error)
+            })
+    }, [])
 
-    const { auth } = useAuth()
+    function updateDateRange() {
+        
+    }
+
+    const { auth, functionRole } = useAuth()
 
     const [expandedImgSrc, setExpandedImgSrc] = useState('');
 
@@ -58,76 +66,6 @@ export default function ProductDetails() {
         // Show the container element (hidden with CSS)
         event.target.parentElement.style.display = 'block';
     }
-
-    const [selectRange, setSelectRange] = useState(false)
-    const [dateRange, setDateRange] = useState([null, null]);
-
-    const selectedRange = range => {
-        localStorage.setItem('startDate', range[0])
-        localStorage.setItem('endDate', range[1])
-        setDateRange(range)
-        setSelectRange(true)
-    }
-
-    const disabledDates = [
-        new Date(2023, 3, 8),  // 1º de abril de 2023
-        new Date(2023, 3, 9),  // 1º de maio de 2023
-        new Date(2023, 3, 10)   // 1º de junho de 2023
-    ];
-
-    function tileDisabled({ date, view }) {
-        return disabledDates.some(disabledDate =>
-            disabledDate.getDate() === date.getDate() &&
-            disabledDate.getMonth() === date.getMonth() &&
-            disabledDate.getFullYear() === date.getFullYear()
-        );
-    }
-
-    // const [lightboxDisplay, setLightBoxDisplay] = useState(false)
-    // const [imageToShow, setImageToShow] = useState('')
-    // const [imgList, setImgList] = useState([])
-
-    // const showImage = (image) => {
-    //     //set imageToShow to be the one that's been clicked on    
-    //     setImageToShow(image);
-    //     //set lightbox visibility to true
-    //     setLightBoxDisplay(true);
-    // }
-
-    // const hideLightBox = () => {
-    //     setLightBoxDisplay(false)
-    // }
-
-    // let currentIndex = imgList.indexOf(imageToShow)
-
-    // let nextImage = imgList[currentIndex + 1]
-
-    // const showPrev = (e) => {
-    //     e.stopPropagation()
-    //     let currentIndex = imgList.indexOf(imageToShow)
-    //     if (currentIndex <= 0) {
-    //         setLightBoxDisplay(false)
-    //     }
-    //     else {
-    //         let nextImage = imgList[currentIndex - 1]
-    //         setImageToShow(nextImage)
-    //     }
-    // }
-
-    // const showNext = (e) => {
-    //     e.stopPropagation()
-    //     let currentIndex = imgList.indexOf(imageToShow)
-    //     if (currentIndex >= images.length - 1) {
-    //         setLightBoxDisplay(false)
-    //     }
-    //     else {
-    //         let nextImage = imgList[currentIndex + 1]
-    //         setImageToShow(nextImage)
-    //     }
-    // }
-
-    // setImageToShow(nextImage)
-
 
     return (
         <>
@@ -160,7 +98,6 @@ export default function ProductDetails() {
                         <div className="container text-white">
                             <div className="row d-flex justify-content-center align-items-center">
                                 <div className="col">
-
                                     <span className="text-truncate d-flex align-items-center ubuntu fs-5 ms-3">
                                         <svg className="bi bi-pin-map-fill me-2 fs-7" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16">
                                             <path fillRule="evenodd" d="M3.1 11.2a.5.5 0 0 1 .4-.2H6a.5.5 0 0 1 0 1H3.75L1.5 15h13l-2.25-3H10a.5.5 0 0 1 0-1h2.5a.5.5 0 0 1 .4.2l3 4a.5.5 0 0 1-.4.8H.5a.5.5 0 0 1-.4-.8l3-4z"></path>
@@ -181,7 +118,6 @@ export default function ProductDetails() {
                     <section>
                         <div id="carousel-1" className="carousel slide d-flex d-lg-none" data-bs-ride="carousel">
                             <div className="carousel-inner">
-                                {/* {setImgList(product.images.map((image) => image.urlImage))} */}
                                 {product.images.map((image, index) => (
                                     <div className={index === 0 ? "carousel-item active" : "carousel-item"} key={index}>
                                         <img className="w-100 d-block" src={image.urlImage} alt={product.name} />
@@ -209,13 +145,6 @@ export default function ProductDetails() {
                             <div className="row">
                                 <div className="col-lg-12 col-xl-7 col-xxl-7 d-none d-lg-flex">
                                     <div>
-                                        {/* {lightboxDisplay ?
-                                            <div id="lightbox" onClick={hideLightBox} >
-                                                <button onClick={showPrev}>&lt;</button>
-                                                <img id="lightbox-img" src={imageToShow}></img>
-                                                <button onClick={showNext}>&gt;</button>
-                                            </div>
-                                            : ''} */}
                                         <div className="img-container">
                                             <img id="expandedImg" className="rounded w-100" src={expandedImgSrc ? expandedImgSrc : product.images[0].urlImage} alt={imgText ? imgText : product.images[0].name} onClick={() => showImage(expandedImgSrc)} />
                                             <div id="className"></div>
@@ -412,26 +341,25 @@ export default function ProductDetails() {
                                 </div>
                                 <div className="col offset-xxl-0 d-flex flex-column py-4 px-4 rounded bg-white">
                                     <h4 className="poppins travelgreen-logo mb-4">Datas disponíveis</h4>
-                                    <div className="text-center d-flex d-xl-none justify-content-center align-items-center align-content-center flex-grow-1">
-                                        <SingleCalendar
-                                            id={dateRange}
-                                            onSelectedRange={selectedRange}
-                                            selectRange={selectRange}
-                                            tileDisabled={tileDisabled}
-                                        />
-                                    </div>
-                                    <div className="text-center d-none d-xl-flex justify-content-center align-items-center align-content-center flex-grow-1">
-                                        <DoubleCalendar
-                                            id={dateRange}
-                                            onSelectedData={selectedRange}
-                                            selectRange={selectRange}
-                                            tileDisabled={tileDisabled}
-                                            width="100%"
+                                    <div className="text-center d-flex justify-content-center align-items-center align-content-center flex-grow-1">
+                                        <ProductCalendar
+                                            onDisabledDate={disabledDate}
+                                            onSelectedData={updateDateRange}
                                         />
                                     </div>
                                     <div className="text-center mt-3">
                                         {auth ? (
-                                            <Link key={product.id} id="bookVehicle" to={`../product/${product.id}/bookVehicle`} className="btn btn-success poppins" role="button" state={{ state: product.id }}>Efetuar reserva</Link>
+                                            <div>
+                                                {functionRole === "ROLE_ADMIN" ? (
+                                                    <>
+                                                        <button key={product.id} id="bookVehicle" to={'/'} className="btn btn-danger poppins" type="button" disabled>Não é possível reservar como Administrador</button>
+                                                        <br />
+                                                        <small className="text-mute mt-4">Faça o login com uma conta de usuário padrão para reservar um veículo.</small>
+                                                    </>
+                                                ) : (
+                                                    <Link key={product.id} id="bookVehicle" to={`../product/${product.id}/bookVehicle`} className="btn btn-success poppins" role="button" state={{ state: product.id }}>Efetuar reserva</Link>
+                                                )}
+                                            </div>
                                         ) : (
                                             <Link id="bookVehicle" to="/login" className="btn btn-outline-danger poppins" role="button" disabled>Faça o login para efetuar a reserva</Link>
                                         )}
