@@ -145,6 +145,7 @@ export const ReservationCards = userReservation => {
                 <div className="container shadow rounded card_content">
                     <div className="content_container mt-5 mb-3 \mt-xl-3">
                         <h4 className="poppins">{products.name}</h4>
+                        <p className="tt-3l">{products.description}</p>
                         <h6 className="ubuntu"><strong>Data de retirada:</strong> {formattedStartDate} às {userReservation.parsedData.hourStartReservation}</h6>
                         <h6 className="ubuntu"><strong>Data de retorno:</strong> {formattedEndDate}</h6>
                         <p id="fs-2" className="mb-5">
