@@ -16,7 +16,7 @@ const ProductReservation = () => {
     const navigate = useNavigate()
 
     const { logout, auth, name, surname, email, functionRole } = useAuth()
-    const { register, handleSubmit, formState: { errors }, clearErrors } = useForm();
+    const { register, handleSubmit, formState: { errors }, clearErrors, setValue, watch } = useForm();
 
     const location = useLocation().pathname.split('/')[2]
     const [product, setProduct] = useState()
@@ -56,10 +56,10 @@ const ProductReservation = () => {
             })
     }, [])
 
-    const [startDate, setStartDate] = useState([localStorage.getItem('startDate'), localStorage.getItem('endDate')])
+    const [startDate, setStartDate] = useState([new Date(localStorage.getItem('startDate')), new Date(localStorage.getItem('endDate'))])
     const [selectDate, setSelectDate] = useState(false)
-    const [initial, setInitial] = useState('')
-    const [final, setFinal] = useState('')
+    const [initial, setInitial] = useState(null)
+    const [final, setFinal] = useState(null)
 
     const formatDate = (range) => {
         if (!range) {
@@ -76,8 +76,8 @@ const ProductReservation = () => {
         setFinal(`${finalDay} de ${finalMonth} de ${finalYear}`)
     }
 
-    const [validationInitial, setValidationInitial] = useState('')
-    const [validationFinal, setValidationFinal] = useState('')
+    const [validationInitial, setValidationInitial] = useState(null)
+    const [validationFinal, setValidationFinal] = useState(null)
 
     const formatValidationDate = (range) => {
         if (!range) {
@@ -100,6 +100,9 @@ const ProductReservation = () => {
         setSelectDate(true)
         formatDate(range)
         formatValidationDate(range)
+        setValue('dataRetirada', validationInitial)
+        setValue('dataRetorno', validationFinal)
+        setIsDateMissing(false)
     }
 
     const [inputSelect, setInputSelect] = useState(true)
@@ -113,8 +116,11 @@ const ProductReservation = () => {
         }
     }
 
+    const [isDateMissing, setIsDateMissing] = useState(false)
 
     const onSubmit = (data, e) => {
+
+        console.log(data)
 
         const payload = {
             hourStartReservation: valueInputSelect,
@@ -127,7 +133,7 @@ const ProductReservation = () => {
         const requestConfiguration = {
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8',
-                'authorization': `Bearer ${auth}`
+                'Authorization': `Bearer ${auth}`
             },
         };
 
@@ -138,14 +144,17 @@ const ProductReservation = () => {
         )
             .then(response => {
                 if (response.status === 200 || response.status === 201) {
-                    // setIsProductCreated(true)
-                    navigate(`/product/`+location+`/bookingConfirmation`)
-                } 
+                    navigate(`/product/` + location + `/bookingConfirmation`)
+                }
                 if (response.status === 400) {
                     console.log('Erro ao criar o produto')
                 } else {
                     console.log('Ocorreu um erro desconhecido')
                 }
+            })
+            .catch(error => {
+                setIsDateMissing(true)
+                console.log(error)
             });
     }
 
@@ -207,20 +216,24 @@ const ProductReservation = () => {
                                 <div className="row gx-3 gy-3 rounded">
                                     <div className="col-12 col-lg-7 px-4 py-4 rounded bg-white">
                                         <h5 className="poppins travelgreen-logo mb-4">Data para a reserva</h5>
-                                        <div className="text-center d-flex justify-content-center align-items-center align-content-center flex-grow-1">
+                                        <div className="text-center d-flex flex-column justify-content-center align-items-center align-content-center flex-grow-1">
                                             <ProductCalendar
+                                                onChange={updateDateRange}
                                                 onDisabledDate={disabledDate}
-                                                value={startDate}
-                                                defaultValue={startDate}
                                                 onSelectedData={updateDateRange}
                                             />
                                         </div>
-                                        <div className="text-center mt-5">
+                                        <div className="pt-3">
+                                            {isDateMissing && (
+                                                <p className="text-danger ms-1 mb-0">Selecione a data da sua reserva</p>
+                                            )}
+                                        </div>
+                                        <div className="text-center mt-4">
                                             <h5 className="text-start poppins travelgreen-logo mb-2">Hora para a reserva</h5>
                                         </div>
-                                        <div className="d-flex mb-5">
+                                        <div className="d-flex flex-column mb-5">
                                             <select
-                                                {...register("horaChegada", { required: true })}
+                                                {...register("horaChegada", { required: "Selecione a hora para retirar o veículo" })}
                                                 onChange={getValueInputSelect}
                                                 className="btn btn-lg btn-success d-flex flex-grow-1"
 
@@ -251,6 +264,7 @@ const ProductReservation = () => {
                                                 <option className="bg-white text-dark" value="23:00:00">11:00 PM</option>
                                                 <option className="bg-white text-dark" value="00:00:00">12:00 PM</option>
                                             </select>
+                                            <p className="text-danger ms-1 mb-0">{errors.horaChegada?.message}</p>
                                         </div>
                                         <div className="text-center mt-3">
                                             <h5 className="text-start poppins travelgreen-logo mb-2">Informações importantes</h5>
@@ -273,7 +287,6 @@ const ProductReservation = () => {
                                                                                 <div className="d-flex mb-2">
                                                                                     <div className="bs-icon-sm bs-icon-circle text-bg-success d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block bs-icon me-2">
                                                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -64 640 640" width="1em" height="1em" fill="currentColor">
-                                                                                            {/* <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --> */}
                                                                                             <path d="M96 96C96 60.65 124.7 32 160 32H576C611.3 32 640 60.65 640 96V320C640 355.3 611.3 384 576 384H160C124.7 384 96 355.3 96 320V96zM160 320H224C224 284.7 195.3 256 160 256V320zM160 96V160C195.3 160 224 131.3 224 96H160zM576 256C540.7 256 512 284.7 512 320H576V256zM512 96C512 131.3 540.7 160 576 160V96H512zM368 128C323.8 128 288 163.8 288 208C288 252.2 323.8 288 368 288C412.2 288 448 252.2 448 208C448 163.8 412.2 128 368 128zM48 360C48 399.8 80.24 432 120 432H520C533.3 432 544 442.7 544 456C544 469.3 533.3 480 520 480H120C53.73 480 0 426.3 0 360V120C0 106.7 10.75 96 24 96C37.25 96 48 106.7 48 120V360z"></path>
                                                                                         </svg>
                                                                                     </div>
@@ -295,7 +308,6 @@ const ProductReservation = () => {
                                                                                 <div className="d-flex mb-2">
                                                                                     <div className="bs-icon-sm bs-icon-circle text-bg-success d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block bs-icon me-2">
                                                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -64 640 640" width="1em" height="1em" fill="currentColor">
-                                                                                            {/* <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --> */}
                                                                                             <path d="M96 96C96 60.65 124.7 32 160 32H576C611.3 32 640 60.65 640 96V320C640 355.3 611.3 384 576 384H160C124.7 384 96 355.3 96 320V96zM160 320H224C224 284.7 195.3 256 160 256V320zM160 96V160C195.3 160 224 131.3 224 96H160zM576 256C540.7 256 512 284.7 512 320H576V256zM512 96C512 131.3 540.7 160 576 160V96H512zM368 128C323.8 128 288 163.8 288 208C288 252.2 323.8 288 368 288C412.2 288 448 252.2 448 208C448 163.8 412.2 128 368 128zM48 360C48 399.8 80.24 432 120 432H520C533.3 432 544 442.7 544 456C544 469.3 533.3 480 520 480H120C53.73 480 0 426.3 0 360V120C0 106.7 10.75 96 24 96C37.25 96 48 106.7 48 120V360z"></path>
                                                                                         </svg>
                                                                                     </div>
@@ -348,16 +360,12 @@ const ProductReservation = () => {
                                             <input id="city" className="form-control" type="text" name="city" placeholder={product.city.name}
                                                 {...register('cityReservation', { required: "É necessário fornecer a cidade para retirada do veículo." })}
                                             />
+                                            <p className="mt-2">{errors.cityReservation?.message}</p>
                                             <div className="d-flex flex-column mt-3 mb-3">
                                                 <span className="mb-1 text-white">
                                                     <strong>Data de retirada:</strong>
                                                     &nbsp;
                                                     {selectDate ? initial : ''}
-                                                    <div className="d-hidden">
-                                                        <input id="dataRetirada" type="text" name="dataRetirada" placeholder={validationInitial} value={validationInitial}
-                                                            {...register('dataRetirada', { required: "É necessário fornecer a data de retirada do veículo." })}
-                                                        />
-                                                    </div>
                                                 </span>
                                                 <span className="mb-1 text-white">
                                                     <strong>Hora de retirada:</strong>
@@ -368,11 +376,6 @@ const ProductReservation = () => {
                                                     <strong>Data de retorno: </strong>
                                                     &nbsp;
                                                     {selectDate ? final : ''}
-                                                    <div className="d-hidden">
-                                                        <input id="dataRetorno" type="text" name="dataRetorno" placeholder={validationFinal} value={validationFinal}
-                                                            {...register('dataRetorno', { required: "É necessário fornecer a data de retorno do veículo." })}
-                                                        />
-                                                    </div>
                                                 </span>
                                             </div>
                                         </section>
@@ -427,7 +430,7 @@ export function BookedVehicle() {
                                                 <div className="text-center">
                                                     <h4 className="text-dark mb-4 poppins">Reserva Concluída!</h4>
                                                 </div>
-                                                <p className="ubuntu">{name},<br/>Obrigado por alugar um veículo na Travel Green!<br />Você receberá a confirmação da reserva por e-mail em alguns instantes.</p>
+                                                <p className="ubuntu">{name},<br />Obrigado por alugar um veículo na Travel Green!<br />Você receberá a confirmação da reserva por e-mail em alguns instantes.</p>
                                                 <div className="text-center">
                                                     <Link to="/" className="btn btn-primary poppins">Voltar para a Página inicial</Link>
                                                 </div>

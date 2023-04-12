@@ -1,6 +1,6 @@
 import React from 'react'
 import { useAuth } from '../../hooks/useAuth'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import LetterAvatar from '../LetterAvatar'
 import Logo from '../../assets/travelgreen_logo.svg'
 import * as bootstrap from 'bootstrap'
@@ -8,11 +8,18 @@ import * as bootstrap from 'bootstrap'
 export default function Navbar() {
 
     const { auth, logout, name, surname, functionRole } = useAuth()
+    const navigate = useNavigate();
+
+    const handleClick = (event) => {
+        event.preventDefault();
+        navigate("/", { replace: true });
+        window.location.reload();
+    }
 
     return (
         <nav className="navbar navbar-light navbar-expand-md travelgreen-navbar sticky-top">
             <div className="container px-3">
-                <Link to="/" className="navbar-brand d-flex align-items-center">
+                <Link to="/" className="navbar-brand d-flex align-items-center" onClick={handleClick}>
                     <img className="travelgreen-logo" src={Logo} height="45px" alt="Travel Green" />
                 </Link>
                 <button className="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navegacao">

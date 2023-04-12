@@ -32,10 +32,10 @@ export function ProductCalendar(props) {
   }
 
   function handleDateChange(date) {
-    onSelectedData(date)
     localStorage.setItem('latestDateRange', JSON.stringify(date))
     localStorage.setItem('startDate', date[0])
     localStorage.setItem('endDate', date[1])
+    onSelectedData(date)
   }
 
   return (
