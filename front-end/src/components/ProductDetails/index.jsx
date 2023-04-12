@@ -4,6 +4,8 @@ import { RotatingLines } from 'react-loader-spinner'
 import { ProductCalendar } from '../CalendarTG/ProductCalendar'
 import TGLeaf from '../../assets/travelgreen_leaf.svg'
 import { useAuth } from '../../hooks/useAuth'
+import { Fancybox } from '@fancyapps/ui'
+import '@fancyapps/ui/dist/fancybox/fancybox.css'
 
 import axios from 'axios'
 
@@ -47,7 +49,7 @@ export default function ProductDetails() {
     }, [])
 
     function updateDateRange() {
-        
+
     }
 
     const { auth, functionRole } = useAuth()
@@ -144,21 +146,28 @@ export default function ProductDetails() {
                         <div className="container mt-4">
                             <div className="row">
                                 <div className="col-lg-12 col-xl-7 col-xxl-7 d-none d-lg-flex">
-                                    <div>
+                                    <div className='d-flex flex-column'>
                                         <div className="img-container">
-                                            <img id="expandedImg" className="rounded w-100" src={expandedImgSrc ? expandedImgSrc : product.images[0].urlImage} alt={imgText ? imgText : product.images[0].name} onClick={() => showImage(expandedImgSrc)} />
+                                            <a href={expandedImgSrc ? expandedImgSrc : product.images[0].urlImage} data-fancybox="gallery" data-caption={imgText ? imgText : product.images[0].name}>
+                                                <img id="expandedImg" className="rounded w-100" src={expandedImgSrc ? expandedImgSrc : product.images[0].urlImage} alt={imgText ? imgText : product.images[0].name} onClick={Fancybox.bind('[data-fancybox="gallery"]')} />
+                                            </a>
                                             <div id="className"></div>
                                         </div>
-                                        <div className="row gx-2">
+                                        <div className="row gx-2 d-inline-flex align-self-center">
                                             {product.images.map((image, index) => (
                                                 <div className="col column" key={`productImage` + index}>
+                                                    <div className="d-none">
+                                                        <a href={image.urlImage} data-fancybox="gallery" data-caption={image.name}>
+                                                            <img src={image.urlImage} alt={product.name} />
+                                                        </a>
+                                                    </div>
                                                     <img className="img-thumbnail img-square shadow" src={image.urlImage} alt={product.name} onClick={handleImgClick} />
                                                 </div>
                                             ))}
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-lg-12 col-xl-5 d-flex flex-column bg-white rounded shadow-lg px-4 py-4 position-relative">
+                                <div className="col-lg-12 col-xl-5 d-flex flex-column bg-white rounded shadow-lg px-4 py-4 mt-5 mt-xl-0 position-relative">
                                     <div className="position-absolute share-like">
                                         <svg className="bi bi-share travelgreen-logo me-3 fs-3" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16">
                                             <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"></path>
