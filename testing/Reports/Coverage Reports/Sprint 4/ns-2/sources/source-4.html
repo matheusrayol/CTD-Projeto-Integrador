@@ -1,0 +1,80 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > EmailService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">br.com.notcars.service</a>
+</div>
+
+<h1>Coverage Summary for Class: EmailService (br.com.notcars.service)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">EmailService</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package br.com.notcars.service;
+&nbsp;
+&nbsp;import br.com.notcars.model.ReservationEntity;
+&nbsp;import java.util.concurrent.Future;
+&nbsp;import javax.mail.MessagingException;
+&nbsp;
+&nbsp;public interface EmailService {
+&nbsp;  Future&lt;String&gt; sendEmail(String addressee, String subject, String content) throws MessagingException, InterruptedException;
+&nbsp;
+&nbsp;  String registrationEmail(String name);
+&nbsp;
+&nbsp;  String reservationEmail(String name, ReservationEntity reservation);
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-12 18:13</div>
+</div>
+</body>
+</html>
