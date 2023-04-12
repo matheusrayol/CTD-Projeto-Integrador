@@ -1,5 +1,6 @@
 package br.com.notcars.service.impl;
 
+import br.com.notcars.constant.EmailRegistrationConstant;
 import br.com.notcars.constant.EmailReservationConstant;
 import br.com.notcars.model.ReservationEntity;
 import br.com.notcars.service.EmailService;
@@ -38,7 +39,7 @@ public class EmailServiceImpl implements EmailService {
   }
 
   public String registrationEmail(String name) {
-    String fileContent = EmailReservationConstant.reservation;
+    String fileContent = EmailRegistrationConstant.registration;
     return fileContent.replace("{user}", name.toUpperCase());
   }
 
