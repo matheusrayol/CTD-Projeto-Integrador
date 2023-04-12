@@ -1,0 +1,192 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > UserServiceImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">br.com.notcars.service.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: UserServiceImpl (br.com.notcars.service.impl)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UserServiceImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/13)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">UserServiceImpl$MockitoMock$2iN8XNzY</td>
+  </tr>
+  <tr>
+    <td class="name">UserServiceImpl$MockitoMock$2iN8XNzY$auxiliary$jEcWrQu8</td>
+  </tr>
+  <tr>
+    <td class="name">UserServiceImpl$MockitoMock$2iN8XNzY$auxiliary$jIT993gL</td>
+  </tr>
+  <tr>
+    <td class="name">UserServiceImpl$MockitoMock$2iN8XNzY$auxiliary$L863BX3L</td>
+  </tr>
+  <tr>
+    <td class="name">UserServiceImpl$MockitoMock$2iN8XNzY$auxiliary$qLl14HxM</td>
+  </tr>
+  <tr>
+    <td class="name">UserServiceImpl$MockitoMock$2iN8XNzY$auxiliary$wQXjaF2Q</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/13)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package br.com.notcars.service.impl;
+&nbsp;
+&nbsp;import br.com.notcars.config.aspect.LogInfo;
+&nbsp;import br.com.notcars.dto.user.UserRequest;
+&nbsp;import br.com.notcars.exceptions.BadRequestException;
+&nbsp;import br.com.notcars.exceptions.NotFoundException;
+&nbsp;import br.com.notcars.mapper.UserMapper;
+&nbsp;import br.com.notcars.model.FunctionEntity;
+&nbsp;import br.com.notcars.model.UserEntity;
+&nbsp;import br.com.notcars.repository.UserRepository;
+&nbsp;import br.com.notcars.service.EmailService;
+&nbsp;import br.com.notcars.service.FunctionService;
+&nbsp;import javax.mail.MessagingException;
+&nbsp;import lombok.RequiredArgsConstructor;
+&nbsp;import org.springframework.security.core.userdetails.UserDetails;
+&nbsp;import org.springframework.security.core.userdetails.UserDetailsService;
+&nbsp;import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;@Service
+<b class="fc">&nbsp;@RequiredArgsConstructor</b>
+&nbsp;public class UserServiceImpl implements UserDetailsService {
+&nbsp;
+&nbsp;  private final UserRepository userRepository;
+&nbsp;
+&nbsp;  private final UserMapper userMapper;
+&nbsp;
+&nbsp;  private final FunctionService functionServiceImpl;
+&nbsp;
+&nbsp;  private final BCryptPasswordEncoder passwordEncoder;
+&nbsp;
+&nbsp;  private final EmailService emailServiceImpl;
+&nbsp;
+&nbsp;  @LogInfo
+&nbsp;  @Override
+&nbsp;  public UserDetails loadUserByUsername(String email) {
+<b class="fc">&nbsp;    return userRepository.findByEmail(email).orElseThrow(() -&gt; new NotFoundException(&quot;Usuário não encontrado&quot;));</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @LogInfo
+&nbsp;  public UserEntity create(UserRequest userRequest) throws MessagingException, InterruptedException {
+<b class="fc">&nbsp;    validatedIfEmailIsRegistered(userRequest.getEmail());</b>
+<b class="fc">&nbsp;    FunctionEntity function = functionServiceImpl.findById(userRequest.getFunctionId());</b>
+<b class="fc">&nbsp;    UserEntity userEntity = userMapper.toUserEntity(userRequest, function);</b>
+<b class="fc">&nbsp;    String password = passwordEncoder.encode(userEntity.getPassword());</b>
+<b class="fc">&nbsp;    userEntity.setPassword(password);</b>
+<b class="fc">&nbsp;    userEntity = userRepository.save(userEntity);</b>
+&nbsp;
+<b class="fc">&nbsp;    emailServiceImpl.sendEmail(userRequest.getEmail(), &quot;Cadastro realizado com sucesso!&quot;, emailServiceImpl.registrationEmail(userEntity.getName()));</b>
+<b class="fc">&nbsp;    return userEntity;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @LogInfo
+&nbsp;  public UserEntity findByEmail(String email) {
+<b class="fc">&nbsp;    return userRepository.findByEmail(email).orElseThrow(() -&gt; new NotFoundException(&quot;Usuário não encontrado&quot;));</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @LogInfo
+&nbsp;  private void validatedIfEmailIsRegistered(String email) {
+<b class="fc">&nbsp;    if (userRepository.findByEmail(email).isPresent()) {</b>
+<b class="fc">&nbsp;      throw new BadRequestException(&quot;Email já cadastrado&quot;);</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-12 18:13</div>
+</div>
+</body>
+</html>
