@@ -1,18 +1,17 @@
 import { React, useEffect, useState } from 'react'
 import moment from 'moment'
-// import Batata from './batata/Batata'
 
 export const CardReservesUser = userReserve => {
   //Fetch do produto por id
-  const [products, setProducts] = useState({})
+  const [products, setProducts] = useState([])
+  const idProd = userReserve.imageData.productId
   useEffect(() => {
-    fetch(`/product/${userReserve.imageData.productId}`).then(res => {
+    fetch(`/product/${idProd}`).then(res => {
       res.json().then(data => {
         setProducts(data)
-        console.log(data)
       })
     })
-  }, [userReserve.imageData.productId])
+  }, [idProd])
 
   const dateInicialFormat = moment(userReserve.imageData.dateBegin).format(
     'DD/MM/YYYY'
@@ -22,23 +21,28 @@ export const CardReservesUser = userReserve => {
   )
 
   return (
-    <section key={userReserve.imageData.id} style={{ height: '68vh' }}>
+    <section style={{ height: '68vh', width: '100%' }}>
       <div
         style={{
           display: 'flex',
           width: '300px',
           border: '2px solid blue',
-          flexDirection: 'column'
+          flexDirection: 'column',
+          flexWrap: 'wrap'
         }}
       >
-        <p>{products.name}</p>
+        <p>Carro alugado: {products.name}</p>
+        <p>Categoria: {products.category?.qualification || ''}</p>
 
-        <p>Inicio da locação:{dateInicialFormat}</p>
-        <p>Termino da locação:{dateEndFormat}</p>
-        {/* <img src={urlImage} alt="imagem produto" /> */}
-        {/* {products.map((products, index) => (
-          <Batata key={index} data={products} />
-        ))} */}
+        <p>Inicio da locação: {dateInicialFormat}</p>
+        <p>Termino da locação: {dateEndFormat}</p>
+        <p>Hora agendada: {userReserve.imageData.hourStartReservation}</p>
+
+        <img
+          style={{ width: '100%' }}
+          src={products.images?.[0]?.urlImage || ''}
+          alt=""
+        />
       </div>
     </section>
   )
