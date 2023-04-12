@@ -26,40 +26,6 @@ class CharacteristicsServiceImplTest {
     @InjectMocks
     private CharacteristicsServiceImpl characteristicsService;
 
-    @Nested
-    public class FindAllCharacteristics {
-        @Test
-        @DisplayName("Deve retornar a lista de características quando a lista de Características não estiver vazia")
-        void shouldReturnList_whenListOfCharacteristicsNotEmpty() {
-            // Arrange
-            when(characteristicsRepository.findAllById(anyList()))
-                    .thenReturn(List.of(mock(CharacteristicsEntity.class)));
-
-            // Act
-            List<CharacteristicsEntity> result;
-            result = characteristicsService.findAllById(List.of(1L));
-
-            // Assert
-            assertEquals(1, result.size());
-            verify(characteristicsRepository, timeout(1)).findAllById(anyList());
-        }
-
-        @Test
-        @DisplayName("Deve retornar uma lista vazia quando a lista de Cidades estiver vazia")
-        void shouldReturnListEmpty_whenListOfCityIsEmpty() {
-            // Arrange
-            when(characteristicsRepository.findAllById(anyList())).thenReturn(List.of());
-
-            // Act
-            List<CharacteristicsEntity> result;
-            result = characteristicsService.findAllById(List.of(1L));
-
-            // Assert
-            assertEquals(0, result.size());
-            verify(characteristicsRepository, timeout(1)).findAllById(anyList());
-        }
-    }
-
     @Test
     @DisplayName("Deve retornar uma lista vazia quando a lista de IDs for nula")
     void findAllByIdWithInvalidIds() {
@@ -135,5 +101,108 @@ class CharacteristicsServiceImplTest {
         // Assert
         assertEquals(1, result.size());
         assertEquals(validId, result.get(0).getId());
+    }
+
+    @Test
+    @DisplayName("Deve retornar uma lista de Características com IDs válidos quando for dada uma lista" +
+            " de IDs válidos e inválidos")
+    void findAllByIdWhenGivenEmptyIdList() {
+        when(characteristicsRepository.findAllById(anyList())).thenReturn(List.of());
+        List<CharacteristicsEntity> result;
+        result = characteristicsService.findAllById(List.of());
+        assertEquals(0, result.size());
+        verify(characteristicsRepository, timeout(1)).findAllById(anyList());
+    }
+
+    @Test
+    @DisplayName(
+            "Deve retornar uma lista de Características com IDs válidos quando for dada uma lista de IDs válidos")
+    void findAllByIdWhenGivenOrderedIdList() {
+        List<Long> inputIdList = List.of(1L, 2L, 3L);
+        List<CharacteristicsEntity> expectedCharacteristicsList =
+                List.of(
+                        new CharacteristicsEntity(1L, "name1", "icon1", null),
+                        new CharacteristicsEntity(2L, "name2", "icon2", null),
+                        new CharacteristicsEntity(3L, "name3", "icon3", null));
+
+        when(characteristicsRepository.findAllById(inputIdList))
+                .thenReturn(expectedCharacteristicsList);
+
+        List<CharacteristicsEntity> result = characteristicsService.findAllById(inputIdList);
+
+        assertEquals(expectedCharacteristicsList, result);
+        verify(characteristicsRepository, times(1)).findAllById(inputIdList);
+    }
+
+    @Test
+    @DisplayName("Deve ertornar uma lista de Características com IDs válidos quando for dada uma lista de IDs válidos")
+    void findAllByIdWhenGivenValidIds() { // Prepare test data
+        List<Long> ids = List.of(1L, 2L, 3L);
+        List<CharacteristicsEntity> expectedCharacteristics =
+                List.of(
+                        new CharacteristicsEntity(1L, "name1", "icon1", null),
+                        new CharacteristicsEntity(2L, "name2", "icon2", null),
+                        new CharacteristicsEntity(3L, "name3", "icon3", null));
+
+        // Mock repository behavior
+        when(characteristicsRepository.findAllById(ids)).thenReturn(expectedCharacteristics);
+
+        // Call the method under test
+        List<CharacteristicsEntity> result = characteristicsService.findAllById(ids);
+
+        // Assert the result
+        assertEquals(expectedCharacteristics, result);
+        verify(characteristicsRepository, times(1)).findAllById(ids);
+    }
+
+    @Nested
+    public class FindAllCharacteristics {
+        @Test
+        @DisplayName(
+                "Deve retornar a lista de características quando a lista de Características não estiver vazia")
+        void shouldReturnList_whenListOfCharacteristicsNotEmpty() {
+            // Arrange
+            when(characteristicsRepository.findAllById(anyList()))
+                    .thenReturn(List.of(mock(CharacteristicsEntity.class)));
+
+            // Act
+            List<CharacteristicsEntity> result;
+            result = characteristicsService.findAllById(List.of(1L));
+
+            // Assert
+            assertEquals(1, result.size());
+            verify(characteristicsRepository, timeout(1)).findAllById(anyList());
+        }
+
+        @Test
+        @DisplayName("Deve retornar uma lista vazia quando a lista de Cidades estiver vazia")
+        void shouldReturnListEmpty_whenListOfCityIsEmpty() {
+            // Arrange
+            when(characteristicsRepository.findAllById(anyList())).thenReturn(List.of());
+
+            // Act
+            List<CharacteristicsEntity> result;
+            result = characteristicsService.findAllById(List.of(1L));
+
+            // Assert
+            assertEquals(0, result.size());
+            verify(characteristicsRepository, timeout(1)).findAllById(anyList());
+        }
+    }
+
+    @Test
+    @DisplayName("Deve retornar uma lista de Características com IDs válidos quando o findAll é chamado")
+    void findAllReturnsAllCharacteristics() {
+        List<CharacteristicsEntity> expectedCharacteristics =
+                List.of(
+                        new CharacteristicsEntity(1L, "Name1", "Icon1", null),
+                        new CharacteristicsEntity(2L, "Name2", "Icon2", null),
+                        new CharacteristicsEntity(3L, "Name3", "Icon3", null));
+        when(characteristicsRepository.findAll()).thenReturn(expectedCharacteristics);
+
+        List<CharacteristicsEntity> actualCharacteristics = characteristicsService.findAll();
+
+        assertEquals(expectedCharacteristics, actualCharacteristics);
+        verify(characteristicsRepository, times(1)).findAll();
     }
 }

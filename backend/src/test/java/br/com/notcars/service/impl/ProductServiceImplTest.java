@@ -21,6 +21,8 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -34,6 +36,9 @@ class ProductServiceImplTest {
 
     @Mock
     private CharacteristicsServiceImpl characteristicsServiceImpl;
+
+    @Mock
+    private ImageServiceImpl imageServiceImpl;
 
     @Mock
     private CityServiceImpl cityServiceImpl;
@@ -79,6 +84,30 @@ class ProductServiceImplTest {
         result = productService.findProductByCategoryOrCity(1L, 1L);
         assertEquals(0, result.size());
         verify(productRepository, times(1)).findAllByCategoryAndCity(anyLong(), anyLong());
+    }
+
+    @Test
+    @DisplayName("Deve retornar uma lista vazia quando não houver produtos disponíveis para a cidade e data informada")
+    void findAvailabilityByCityAndDateReturnsEmptyListWhenNoProductsAvailable() {
+        when(productRepository.findAvailability(anyLong(), any(), any())).thenReturn(List.of());
+        List<ProductEntity> result;
+        result = productService.findAvailabilityByCityAndDate(1L, LocalDate.now(), LocalDate.now());
+        assertEquals(0, result.size());
+        verify(productRepository, times(1)).findAvailability(anyLong(), any(), any());
+    }
+
+    @Test
+    @DisplayName("Deve retornar uma lista de produtos disponíveis para a cidade e data informada")
+    void findAvailabilityByCityAndDateReturnsAvailableProducts() {
+        Long cityId = 1L;
+        LocalDate startDate = LocalDate.now();
+        LocalDate endDate = LocalDate.now().plusDays(1);
+        when(productRepository.findAvailability(cityId, startDate, endDate))
+                .thenReturn(List.of(mock(ProductEntity.class)));
+        List<ProductEntity> result =
+                productService.findAvailabilityByCityAndDate(cityId, startDate, endDate);
+        assertEquals(1, result.size());
+        verify(productRepository, times(1)).findAvailability(cityId, startDate, endDate);
     }
 
     @Nested
@@ -141,9 +170,7 @@ class ProductServiceImplTest {
             // Act
             NotFoundException result;
             result =
-                    assertThrows(
-                            NotFoundException.class,
-                            () -> productService.findProductById(1L));
+                    assertThrows(NotFoundException.class, () -> productService.findProductById(1L));
 
             // Assert
             assertThat(result.getTitle()).isEqualTo("product_not_found");
@@ -176,7 +203,6 @@ class ProductServiceImplTest {
             verify(categoryServiceImpl, times(1)).findCategoryById(any());
             verify(cityServiceImpl, never()).findCityById(any());
             verify(productRepository, never()).save(any());
-
         }
 
         @Test
@@ -238,26 +264,69 @@ class ProductServiceImplTest {
     }
 
     @Test
-    @DisplayName("Deve retornar uma lista vazia quando não houver produtos disponíveis para a cidade e data informada")
-    void findAvailabilityByCityAndDateReturnsEmptyListWhenNoProductsAvailable() {
-        when(productRepository.findAvailability(anyLong(), any(), any())).thenReturn(List.of());
-        List<ProductEntity> result;
-        result = productService.findAvailabilityByCityAndDate(1L, LocalDate.now(), LocalDate.now());
-        assertEquals(0, result.size());
-        verify(productRepository, times(1)).findAvailability(anyLong(), any(), any());
+    @DisplayName("Deve lançar uma NotFoundException quando a ID do produto não for encontrada")
+    void updateProductWhenProductIdNotFoundThenThrowNotFoundException() {
+        ProductRequest productRequest = new ProductRequest();
+        when(productRepository.findById(anyLong())).thenReturn(Optional.empty());
+
+        NotFoundException exception =
+                assertThrows(
+                        NotFoundException.class,
+                        () -> productService.updateProduct(1L, productRequest));
+        assertEquals("product_not_found", exception.getTitle());
+        verify(productRepository, times(1)).findById(anyLong());
+        verify(imageServiceImpl, never()).deleteImagesByProductId(anyLong());
+        verify(categoryServiceImpl, never()).findCategoryById(any());
+        verify(cityServiceImpl, never()).findCityById(any());
+        verify(imageMapper, never()).toEntity(any());
+        verify(characteristicsServiceImpl, never()).findAllById(any());
+        verify(productMapper, never())
+                .updateProductEntity(any(), any(), any(), any(), anyList(), anyList());
+        verify(productRepository, never()).save(any());
     }
 
     @Test
-    @DisplayName("Deve retornar uma lista de produtos disponíveis para a cidade e data informada")
-    void findAvailabilityByCityAndDateReturnsAvailableProducts() {
-        Long cityId = 1L;
-        LocalDate startDate = LocalDate.now();
-        LocalDate endDate = LocalDate.now().plusDays(1);
-        when(productRepository.findAvailability(cityId, startDate, endDate))
-                .thenReturn(List.of(mock(ProductEntity.class)));
-        List<ProductEntity> result =
-                productService.findAvailabilityByCityAndDate(cityId, startDate, endDate);
-        assertEquals(1, result.size());
-        verify(productRepository, times(1)).findAvailability(cityId, startDate, endDate);
+    @DisplayName("Deve atualizar um produto quando os dados forem válidos")
+    void updateProductWithGivenIdAndNewProductRequestData() {
+        Long productId = 1L;
+        ProductRequest productRequest = new ProductRequest();
+        productRequest.setCategoryId(1L);
+        productRequest.setCityId(1L);
+        productRequest.setImages(List.of(mock(ImageRequest.class)));
+        productRequest.setCharacteristics(List.of(1L));
+
+        ProductEntity existingProduct = mock(ProductEntity.class);
+        CategoryEntity category = mock(CategoryEntity.class);
+        CityEntity city = mock(CityEntity.class);
+        List<ImageEntity> images = List.of(mock(ImageEntity.class));
+        List<CharacteristicsEntity> characteristics = List.of(mock(CharacteristicsEntity.class));
+        ProductEntity updatedProduct = mock(ProductEntity.class);
+
+        when(productRepository.findById(productId)).thenReturn(Optional.of(existingProduct));
+        when(categoryServiceImpl.findCategoryById(productRequest.getCategoryId()))
+                .thenReturn(category);
+        when(cityServiceImpl.findCityById(productRequest.getCityId())).thenReturn(city);
+        when(imageMapper.toEntity(any(ImageRequest.class))).thenReturn(images.get(0));
+        when(characteristicsServiceImpl.findAllById(productRequest.getCharacteristics()))
+                .thenReturn(characteristics);
+        when(productMapper.updateProductEntity(
+                existingProduct, productRequest, category, city, characteristics, images))
+                .thenReturn(updatedProduct);
+        when(productRepository.save(updatedProduct)).thenReturn(updatedProduct);
+
+        ProductEntity result = productService.updateProduct(productId, productRequest);
+
+        assertNotNull(result);
+        assertSame(updatedProduct, result);
+        verify(productRepository, times(1)).findById(productId);
+        verify(categoryServiceImpl, times(1)).findCategoryById(productRequest.getCategoryId());
+        verify(cityServiceImpl, times(1)).findCityById(productRequest.getCityId());
+        verify(imageMapper, times(1)).toEntity(any(ImageRequest.class));
+        verify(characteristicsServiceImpl, times(1))
+                .findAllById(productRequest.getCharacteristics());
+        verify(productMapper, times(1))
+                .updateProductEntity(
+                        existingProduct, productRequest, category, city, characteristics, images);
+        verify(productRepository, times(1)).save(updatedProduct);
     }
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import { BookedVehicle } from '../components/ProductReservation'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import { useLocation } from 'react-router-dom'
+import { ScrollRestoration, useLocation } from 'react-router-dom'
 
 export default function Home() {
 
@@ -11,6 +11,7 @@ export default function Home() {
 
     return (
         <>
+            <ScrollRestoration />
             <Navbar />
             <BookedVehicle />
             <Footer />

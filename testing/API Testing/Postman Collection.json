@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "Endpoints - Testes Positivos",
+			"name": "Endpoints - Travel Green",
 			"item": [
 				{
 					"name": "Create",
@@ -17,6 +17,72 @@
 							"item": [
 								{
 									"name": "Criar novo usuário",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"// Variáveis Globais - Geração de aleatoriedade\r",
+													"var uuid = require(\"uuid\");\r",
+													"var id = uuid.v4();\r",
+													"\r",
+													"// Variáveis para configuração do usuário \r",
+													"var userName = `Postman`\r",
+													"var userSurname = `Collection Test ${id.slice(id.length - 6)}`\r",
+													"var userEmail = `postman-${id.slice(id.length - 6)}@pig6.com`\r",
+													"var userPassword = `123456`\r",
+													"var userFunction = `2`\r",
+													"pm.collectionVariables.set('userEmail', userEmail);\r",
+													"pm.collectionVariables.set('userName', userName);\r",
+													"pm.collectionVariables.set('userSurname', userSurname);\r",
+													"pm.collectionVariables.set('userPassword', userPassword);\r",
+													"pm.collectionVariables.set('userFunction', userFunction);"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Usuário é criado com sucesso\", function () {\r",
+													"    pm.response.to.have.status(\"Created\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Retorno corresponde ao usuário cadastrado\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(pm.collectionVariables.get(\"userEmail\"));\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\": \"{{userName}}\",\r\n    \"surname\": \"{{userSurname}}\",\r\n    \"email\": \"{{userEmail}}\",\r\n    \"password\": \"{{userPassword}}\",\r\n    \"functionId\": \"{{userFunction}}\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/user",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"user"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Criar novo admin",
 									"event": [
 										{
 											"listen": "prerequest",
@@ -93,7 +159,52 @@
 													"});\r",
 													"\r",
 													"// Define uma variável na collection com o token de resposta\r",
-													"pm.collectionVariables.set('userToken', pm.response.json().jwt)"
+													"pm.collectionVariables.set('userToken', pm.response.json().jwt)\r",
+													"pm.collectionVariables.set('createdUserId', pm.response.json().id)"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"email\": \"{{userEmail}}\",\r\n    \"password\": \"{{userPassword}}\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/user/authenticate",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"user",
+												"authenticate"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Autenticar Admin",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Usuário é autenticado com sucesso\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"// Define uma variável na collection com o token de resposta\r",
+													"pm.collectionVariables.set('userToken', pm.response.json().jwt)\r",
+													"pm.collectionVariables.set('createdUserId', pm.response.json().id)"
 												],
 												"type": "text/javascript"
 											}
@@ -324,12 +435,14 @@
 													"var productCityId = pm.collectionVariables.get(\"createdCityId\")\r",
 													"var productImageTitle = `Postman Car ${id.slice(id.length - 6)}`\r",
 													"var productImageUrl = `https://localhost`\r",
+													"var sustainabilityScore = Math.floor(Math.random() * 100)\r",
 													"pm.collectionVariables.set('productName', productName);\r",
 													"pm.collectionVariables.set('productDescription', productDescription);\r",
 													"pm.collectionVariables.set('productCategoryId', productCategoryId);\r",
 													"pm.collectionVariables.set('productCityId', productCityId);\r",
 													"pm.collectionVariables.set('productImageTitle', productImageTitle);\r",
-													"pm.collectionVariables.set('productImageUrl', productImageUrl);"
+													"pm.collectionVariables.set('productImageUrl', productImageUrl);\r",
+													"pm.collectionVariables.set('sustainabilityScore', sustainabilityScore);"
 												],
 												"type": "text/javascript"
 											}
@@ -350,7 +463,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n  \"name\": \"{{productName}}\",\r\n  \"description\": \"{{productDescription}}\",\r\n  \"categoryId\": \"{{productCategoryId}}\",\r\n  \"cityId\": \"{{productCityId}}\",\r\n  \"characteristics\": [\r\n    0\r\n  ],\r\n  \"images\": [\r\n    {\r\n      \"title\": \"{{productImageTitle}}\",\r\n      \"urlImage\": \"{{productImageUrl}}\"\r\n    }\r\n  ]\r\n}\r\n",
+											"raw": "{\r\n  \"name\": \"{{productName}}\",\r\n  \"description\": \"{{productDescription}}\",\r\n  \"categoryId\": \"{{productCategoryId}}\",\r\n  \"cityId\": \"{{productCityId}}\",\r\n  \"sustainability\": \"{{sustainabilityScore}}\",\r\n  \"characteristics\": [\r\n    0\r\n  ],\r\n  \"images\": [\r\n    {\r\n      \"title\": \"{{productImageTitle}}\",\r\n      \"urlImage\": \"{{productImageUrl}}\"\r\n    }\r\n  ]\r\n}\r\n",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -418,6 +531,7 @@
 													"// Format the time as HH:mm:ss\r",
 													"const time = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}:${second.toString().padStart(2, '0')}`;\r",
 													"\r",
+													"pm.collectionVariables.set('reservationHour', hour)\r",
 													"pm.collectionVariables.set('reservationHourStart', time)\r",
 													"pm.collectionVariables.set('reservationDateStart', firstDate)\r",
 													"pm.collectionVariables.set('reservationDateEnd', secondDate)"
@@ -450,7 +564,7 @@
 											"bearer": [
 												{
 													"key": "token",
-													"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0YXRpYW5lZzJAbWFpbC5jb20iLCJleHAiOjE2ODYyNjQ0NzQsImlhdCI6MTY3OTc4NDQ3NH0.LV8fJ1EM80tOQgdgDF3DTPN_iAcIuk4SGvSjhpjD3Lc",
+													"value": "{{userToken}}",
 													"type": "string"
 												}
 											]
@@ -803,6 +917,77 @@
 										}
 									},
 									"response": []
+								},
+								{
+									"name": "listar reservas de um usuário",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Tempo de resposta de POST menor do que 250ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(250);\r",
+													"});\r",
+													"pm.test(\"Solicitação GET bem-sucedida\", function () {\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([200,201, 202]);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/reservation/user/{{createdUserId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reservation",
+												"user",
+												"{{createdUserId}}"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "characteristics",
+							"item": [
+								{
+									"name": "Buscar todas as características",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Retorno bem-sucedido do GET para todas as características\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/characteristics/all",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"characteristics",
+												"all"
+											]
+										}
+									},
+									"response": []
 								}
 							]
 						}
@@ -867,6 +1052,95 @@
 												"category",
 												"update",
 												"{{createdCategoryId}}"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "product",
+							"item": [
+								{
+									"name": "atualizar produto",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Tempo de resposta de POST menor do que 250ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(250);\r",
+													"});\r",
+													"pm.test(\"Solicitação POST bem-sucedida\", function () {\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);\r",
+													"});\r",
+													"pm.test(\"Retorno corresponde à categoria cadastrada\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(pm.collectionVariables.get(\"productName\"));\r",
+													"    pm.collectionVariables.set('createdProductId', pm.response.json().id);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"// Variáveis Globais - Geração de aleatoriedade\r",
+													"var uuid = require(\"uuid\");\r",
+													"var id = uuid.v4();\r",
+													"\r",
+													"var productName = `Postman Car ${id.slice(id.length - 6)}`\r",
+													"var productDescription = `Postman Cars usam estresse como combustível`\r",
+													"var productCategoryId = pm.collectionVariables.get(\"createdCategoryId\")\r",
+													"var productCityId = pm.collectionVariables.get(\"createdCityId\")\r",
+													"var productImageTitle = `Postman Car ${id.slice(id.length - 6)}`\r",
+													"var productImageUrl = `https://localhost`\r",
+													"var sustainabilityScore = Math.floor(Math.random() * 100)\r",
+													"pm.collectionVariables.set('productName', productName);\r",
+													"pm.collectionVariables.set('productDescription', productDescription);\r",
+													"pm.collectionVariables.set('productCategoryId', productCategoryId);\r",
+													"pm.collectionVariables.set('productCityId', productCityId);\r",
+													"pm.collectionVariables.set('productImageTitle', productImageTitle);\r",
+													"pm.collectionVariables.set('productImageUrl', productImageUrl);\r",
+													"pm.collectionVariables.set('sustainabilityScore', sustainabilityScore);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{userToken}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"name\": \"{{productName}}\",\r\n  \"description\": \"{{productDescription}}\",\r\n  \"categoryId\": \"{{productCategoryId}}\",\r\n  \"cityId\": \"{{productCityId}}\",\r\n  \"sustainability\": \"{{sustainabilityScore}}\",\r\n  \"characteristics\": [\r\n    0\r\n  ],\r\n  \"images\": [\r\n    {\r\n      \"title\": \"{{productImageTitle}}\",\r\n      \"urlImage\": \"{{productImageUrl}}\"\r\n    }\r\n  ]\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/product/update/{{createdProductId}}",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"product",
+												"update",
+												"{{createdProductId}}"
 											]
 										}
 									},
@@ -1066,6 +1340,18 @@
 		},
 		{
 			"key": "createdReservationId",
+			"value": ""
+		},
+		{
+			"key": "sustainabilityScore",
+			"value": ""
+		},
+		{
+			"key": "reservationHour",
+			"value": ""
+		},
+		{
+			"key": "createdUserId",
 			"value": ""
 		}
 	]
