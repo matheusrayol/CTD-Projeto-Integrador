@@ -20,6 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/product")
 @RequiredArgsConstructor
@@ -81,6 +82,14 @@ public class ProductController {
 
     return ResponseEntity.status(HttpStatus.CREATED).body(productMapper
       .toResponse(product, categoryResponse, cityResponse, characteristicsResponse, imageListResponse));
+  }
+
+  @PutMapping("/update/{id}")
+  public ResponseEntity<ProductResponse> updateProductById(@PathVariable Long id,
+                                                           @RequestBody @Valid ProductRequest productRequest) {
+    log.info(START_REQUEST + "[PUT] " + BASE_URL + "/update/" + id + " [BODY]" + productRequest.toString());
+    ProductEntity product = productServiceImpl.updateProduct(id, productRequest);
+    return ResponseEntity.ok(productMapper.toResponse(product));
   }
 
 }

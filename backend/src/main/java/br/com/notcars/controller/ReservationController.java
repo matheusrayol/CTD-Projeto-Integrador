@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/reservation")
 @RequiredArgsConstructor
@@ -27,7 +28,7 @@ public class ReservationController {
   private final ReservationMapper reservationMapper;
 
   @PostMapping("/create")
-  public ResponseEntity<ReservationResponse> createReservation(@RequestBody @Valid ReservationRequest reservation) {
+  public ResponseEntity<ReservationResponse> createReservation(@RequestBody @Valid ReservationRequest reservation) throws Exception {
     log.info(START_REQUEST + "[POST] " + BASE_URL + "/create");
     ReservationEntity reservationEntity = reservationServiceImpl.createReservation(reservation);
     return ResponseEntity.status(HttpStatus.CREATED).body(reservationMapper.toReservationResponse(reservationEntity));
@@ -37,6 +38,13 @@ public class ReservationController {
   public ResponseEntity<List<ReservationResponse>> findReservationByProductId(@PathVariable Long productId) {
     log.info(START_REQUEST + "[GET] " + BASE_URL + "/product/" + productId);
     List<ReservationEntity> reservation = reservationServiceImpl.findAllByProductId(productId);
+    return ResponseEntity.ok(reservation.stream().map(reservationMapper::toReservationResponse).collect(Collectors.toList()));
+  }
+
+  @GetMapping("/user/{userId}")
+  public ResponseEntity<List<ReservationResponse>> findReservationByUserId(@PathVariable Long userId) {
+    log.info(START_REQUEST + "[GET] " + BASE_URL + "/user/" + userId);
+    List<ReservationEntity> reservation = reservationServiceImpl.findAllByUserId(userId);
     return ResponseEntity.ok(reservation.stream().map(reservationMapper::toReservationResponse).collect(Collectors.toList()));
   }
 }

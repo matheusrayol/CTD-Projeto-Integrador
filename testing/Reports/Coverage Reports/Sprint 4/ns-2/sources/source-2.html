@@ -1,0 +1,85 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > CategoryService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">br.com.notcars.service</a>
+</div>
+
+<h1>Coverage Summary for Class: CategoryService (br.com.notcars.service)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">CategoryService</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package br.com.notcars.service;
+&nbsp;
+&nbsp;import br.com.notcars.dto.category.CategoryRequest;
+&nbsp;import br.com.notcars.model.CategoryEntity;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;
+&nbsp;public interface CategoryService {
+&nbsp;  List&lt;CategoryEntity&gt; findAllCategory();
+&nbsp;
+&nbsp;  CategoryEntity findCategoryById(Long id);
+&nbsp;
+&nbsp;  void deleteCategoryById(Long id);
+&nbsp;
+&nbsp;  CategoryEntity createCategory(CategoryRequest categoryRequest);
+&nbsp;
+&nbsp;  CategoryEntity updatedCategory(Long id, CategoryRequest categoryRequest);
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-12 18:13</div>
+</div>
+</body>
+</html>

@@ -2,12 +2,13 @@ package br.com.notcars.controller;
 
 import br.com.notcars.dto.user.AuthenticateRequest;
 import br.com.notcars.dto.user.AuthenticationResponse;
-import br.com.notcars.util.JwtUtil;
 import br.com.notcars.dto.user.UserRequest;
 import br.com.notcars.dto.user.UserResponse;
 import br.com.notcars.mapper.UserMapper;
 import br.com.notcars.model.UserEntity;
 import br.com.notcars.service.impl.UserServiceImpl;
+import br.com.notcars.util.JwtUtil;
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -17,11 +18,9 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(maxAge = 3600)
 @RestController
 @RequiredArgsConstructor
 @Log4j2
@@ -42,7 +41,7 @@ public class UserController {
   private final UserMapper userMapper;
 
   @PostMapping
-  public ResponseEntity<UserResponse> create(@RequestBody @Valid UserRequest userRequest) {
+  public ResponseEntity<UserResponse> create(@RequestBody @Valid UserRequest userRequest) throws MessagingException, InterruptedException {
     log.info(START_REQUEST + "[POST] " + BASE_URL);
     UserEntity user = userServiceImpl.create(userRequest);
     return ResponseEntity.status(HttpStatus.CREATED).body(userMapper.toUserResponse(user));

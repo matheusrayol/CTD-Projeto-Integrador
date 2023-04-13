@@ -1,0 +1,169 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ReservationServiceImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">br.com.notcars.service.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: ReservationServiceImpl (br.com.notcars.service.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ReservationServiceImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (15/15)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package br.com.notcars.service.impl;
+&nbsp;
+&nbsp;import br.com.notcars.config.aspect.LogInfo;
+&nbsp;import br.com.notcars.dto.reservation.ReservationRequest;
+&nbsp;import br.com.notcars.exceptions.BadRequestException;
+&nbsp;import br.com.notcars.mapper.ReservationMapper;
+&nbsp;import br.com.notcars.model.ProductEntity;
+&nbsp;import br.com.notcars.model.ReservationEntity;
+&nbsp;import br.com.notcars.model.UserEntity;
+&nbsp;import br.com.notcars.repository.ReservationRepository;
+&nbsp;import br.com.notcars.service.EmailService;
+&nbsp;import br.com.notcars.service.ProductService;
+&nbsp;import br.com.notcars.service.ReservationService;
+&nbsp;import java.util.List;
+&nbsp;import lombok.RequiredArgsConstructor;
+&nbsp;import lombok.extern.log4j.Log4j2;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;@Service
+<b class="fc">&nbsp;@RequiredArgsConstructor</b>
+<b class="fc">&nbsp;@Log4j2</b>
+&nbsp;public class ReservationServiceImpl implements ReservationService {
+&nbsp;  private final ReservationRepository reservationRepository;
+&nbsp;
+&nbsp;  private final UserServiceImpl userService;
+&nbsp;
+&nbsp;  private final ProductService productServiceImpl;
+&nbsp;  private final ReservationMapper reservationMapper;
+&nbsp;
+&nbsp;  private final EmailService emailServiceImpl;
+&nbsp;
+&nbsp;  @LogInfo
+&nbsp;  @Override
+&nbsp;  public ReservationEntity createReservation(ReservationRequest reservationRequest) throws Exception {
+<b class="fc">&nbsp;    if (!isAvailable(reservationRequest)) {</b>
+<b class="fc">&nbsp;      throw new BadRequestException(&quot;já existe uma reserva para este produto na data selecionada!&quot;);</b>
+&nbsp;    }
+<b class="fc">&nbsp;    UserEntity user = userService.findByEmail(reservationRequest.getUserEmail());</b>
+<b class="fc">&nbsp;    ProductEntity product = productServiceImpl.findProductById(reservationRequest.getProductId());</b>
+<b class="fc">&nbsp;    ReservationEntity reservation = reservationMapper.toEntity(reservationRequest, user, product);</b>
+<b class="fc">&nbsp;    reservation = reservationRepository.save(reservation);</b>
+<b class="fc">&nbsp;    emailServiceImpl.sendEmail(reservationRequest.getUserEmail(), &quot;Reserva criada com sucesso!&quot;, emailServiceImpl.reservationEmail(user.getName(), reservation));</b>
+<b class="fc">&nbsp;    return reservation;</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @LogInfo
+&nbsp;  @Override
+&nbsp;  public List&lt;ReservationEntity&gt; findAllByProductId(Long productId) {
+<b class="fc">&nbsp;    return reservationRepository.findAllByProduct_Id(productId);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @Override
+&nbsp;  @LogInfo
+&nbsp;  public List&lt;ReservationEntity&gt; findAllByUserId(Long id) {
+<b class="fc">&nbsp;    return reservationRepository.findAllByUser_Id(id);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @LogInfo
+&nbsp;  private boolean isAvailable(ReservationRequest reservationRequest) {
+<b class="fc">&nbsp;    List&lt;ReservationEntity&gt; reservation =</b>
+<b class="fc">&nbsp;      reservationRepository.findAllByAvailability(reservationRequest.getProductId(), reservationRequest.getDateBegin(), reservationRequest.getDateEnd());</b>
+<b class="fc">&nbsp;    return reservation.isEmpty();</b>
+&nbsp;  }
+&nbsp;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-12 18:13</div>
+</div>
+</body>
+</html>

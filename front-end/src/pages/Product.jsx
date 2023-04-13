@@ -1,45 +1,20 @@
-import React, { useEffect, useState } from 'react'
-import styles from './Product.module.scss'
+import React from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import CardProduct from '../components/CardProduct'
-import { useParams } from 'react-router'
-
-import { RotatingLines } from 'react-loader-spinner'
+import ProductDetails from "../components/ProductDetails";
+import { useLocation, ScrollRestoration } from 'react-router-dom'
 
 export default function Product() {
-  const params = useParams()
-  const [product, setProduct] = useState(null)
 
-  useEffect(() => {
-    async function fetchProduct() {
-      const response = await fetch(`/product/all`)
-      const products = await response.json()
-      const product = products.find(p => p.id === parseInt(params.id))
-      setProduct(product)
-    }
-    fetchProduct()
-  }, [params])
+    const location = useLocation()
+    localStorage.setItem('currentLocation', location.pathname)
 
-  return (
-    <div className={styles.appProduct}>
-      <div className={styles.bodyProduct}>
-        <Navbar />
-        {product ? (
-          <CardProduct key={product.id} imageData={product} />
-        ) : (
-          <div className={styles.spinner}>
-            <RotatingLines
-              strokeColor="#499167"
-              strokeWidth="5"
-              animationDuration="0.75"
-              width="48"
-              visible={true}
-            />
-          </div>
-        )}
-        <Footer />
-      </div>
-    </div>
-  )
+    return (
+        <>
+            <ScrollRestoration />
+            <Navbar />
+            <ProductDetails />
+            <Footer />
+        </>
+    )
 }
