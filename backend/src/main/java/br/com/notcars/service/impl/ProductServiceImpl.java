@@ -7,10 +7,7 @@ import br.com.notcars.mapper.ImageMapper;
 import br.com.notcars.mapper.ProductMapper;
 import br.com.notcars.model.*;
 import br.com.notcars.repository.ProductRepository;
-import br.com.notcars.service.CategoryService;
-import br.com.notcars.service.CharacteristicsService;
-import br.com.notcars.service.CityService;
-import br.com.notcars.service.ProductService;
+import br.com.notcars.service.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,6 +20,8 @@ public class ProductServiceImpl implements ProductService {
   private final ProductRepository productRepository;
 
   private final CategoryService categoryServiceImpl;
+
+  private final ImageService imageServiceImpl;
 
   private final CharacteristicsService characteristicsServiceImpl;
 
@@ -68,5 +67,16 @@ public class ProductServiceImpl implements ProductService {
   @Override
   public List<ProductEntity> findAvailabilityByCityAndDate(Long cityId, LocalDate startDate, LocalDate endDate) {
     return productRepository.findAvailability(cityId, startDate, endDate);
+  }
+
+  @Override
+  public ProductEntity updateProduct(Long id, ProductRequest productRequest) {
+    ProductEntity product = findProductById(id);
+    imageServiceImpl.deleteImagesByProductId(id);
+    CategoryEntity category = categoryServiceImpl.findCategoryById(productRequest.getCategoryId());
+    CityEntity city = cityServiceImpl.findCityById(productRequest.getCityId());
+    List<ImageEntity> images = productRequest.getImages().stream().map(imageMapper::toEntity).collect(Collectors.toList());
+    List<CharacteristicsEntity> characteristics = characteristicsServiceImpl.findAllById(productRequest.getCharacteristics());
+    return productRepository.save(productMapper.updateProductEntity(product, productRequest, category, city, characteristics, images));
   }
 }

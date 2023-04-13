@@ -1,0 +1,811 @@
+{
+	"id": "99fcdee7-911e-4126-87d9-e55e6cd98c1c",
+	"name": "Projeto Integrador",
+	"timestamp": "2023-04-12T21:11:40.240Z",
+	"collection_id": "20400404-3c6b6be2-0d44-4ffb-ba77-0512a1aa1440",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 43,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2023-04-12T21:11:37.700Z",
+	"totalFail": 1,
+	"results": [
+		{
+			"id": "063fa773-af21-4bdd-85ae-4103b9460556",
+			"name": "Criar novo usuário",
+			"url": "http://localhost:8080/user",
+			"time": 86,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Usuário é criado com sucesso": true,
+				"Retorno corresponde ao usuário cadastrado": true
+			},
+			"testPassFailCounts": {
+				"Usuário é criado com sucesso": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Retorno corresponde ao usuário cadastrado": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				86
+			],
+			"allTests": [
+				{
+					"Usuário é criado com sucesso": true,
+					"Retorno corresponde ao usuário cadastrado": true
+				}
+			]
+		},
+		{
+			"id": "362885b4-e1c3-4114-9114-88c4bca487b3",
+			"name": "Autenticar Usuário",
+			"url": "http://localhost:8080/user/authenticate",
+			"time": 82,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Usuário é autenticado com sucesso": true
+			},
+			"testPassFailCounts": {
+				"Usuário é autenticado com sucesso": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				82
+			],
+			"allTests": [
+				{
+					"Usuário é autenticado com sucesso": true
+				}
+			]
+		},
+		{
+			"id": "10b58a43-72f9-4f89-ba16-e345e3d206fe",
+			"name": "Criar reserva",
+			"url": "http://localhost:8080/reservation/create",
+			"time": 29,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Tempo de resposta de POST menor do que 250ms": true,
+				"Solicitação POST bem-sucedida": true,
+				"Retorno corresponde à reserva cadastrada": true
+			},
+			"testPassFailCounts": {
+				"Tempo de resposta de POST menor do que 250ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Solicitação POST bem-sucedida": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Retorno corresponde à reserva cadastrada": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				29
+			],
+			"allTests": [
+				{
+					"Tempo de resposta de POST menor do que 250ms": true,
+					"Solicitação POST bem-sucedida": true,
+					"Retorno corresponde à reserva cadastrada": true
+				}
+			]
+		},
+		{
+			"id": "c5606cad-749c-4bf1-bcfd-3ded1fb5adf2",
+			"name": "Buscar todas as categorias",
+			"url": "http://localhost:8080/category/all",
+			"time": 6,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Retorno bem-sucedido do GET para todas as categorias": true
+			},
+			"testPassFailCounts": {
+				"Retorno bem-sucedido do GET para todas as categorias": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Retorno bem-sucedido do GET para todas as categorias": true
+				}
+			]
+		},
+		{
+			"id": "39530000-5c28-46a4-97c7-7ebbd8244e62",
+			"name": "Buscar categoria por ID",
+			"url": "http://localhost:8080/category/27",
+			"time": 6,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Tempo de resposta de POST menor do que 250ms": true,
+				"Solicitação GET bem-sucedida": true,
+				"Retorno corresponde à categoria cadastrada": true
+			},
+			"testPassFailCounts": {
+				"Tempo de resposta de POST menor do que 250ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Solicitação GET bem-sucedida": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Retorno corresponde à categoria cadastrada": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Tempo de resposta de POST menor do que 250ms": true,
+					"Solicitação GET bem-sucedida": true,
+					"Retorno corresponde à categoria cadastrada": true
+				}
+			]
+		},
+		{
+			"id": "95b8156e-4565-4e62-9d31-bfbaca912479",
+			"name": "Listar todas as cidades",
+			"url": "http://localhost:8080/city/all",
+			"time": 5,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Retorno bem-sucedido do GET para todas as cidades": true
+			},
+			"testPassFailCounts": {
+				"Retorno bem-sucedido do GET para todas as cidades": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				5
+			],
+			"allTests": [
+				{
+					"Retorno bem-sucedido do GET para todas as cidades": true
+				}
+			]
+		},
+		{
+			"id": "e50d995c-4695-48d9-964d-433260deff16",
+			"name": "Buscar todos os produtos",
+			"url": "http://localhost:8080/product/all",
+			"time": 49,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Retorno bem-sucedido do GET para todos os produtos": true
+			},
+			"testPassFailCounts": {
+				"Retorno bem-sucedido do GET para todos os produtos": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				49
+			],
+			"allTests": [
+				{
+					"Retorno bem-sucedido do GET para todos os produtos": true
+				}
+			]
+		},
+		{
+			"id": "cd064353-856f-4586-b284-3fd66bf5f5ed",
+			"name": "Buscar produto por ID",
+			"url": "http://localhost:8080/product/48",
+			"time": 6,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Tempo de resposta de POST menor do que 250ms": true,
+				"Solicitação GET bem-sucedida": true,
+				"Retorno corresponde ao produto cadastrado": true
+			},
+			"testPassFailCounts": {
+				"Tempo de resposta de POST menor do que 250ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Solicitação GET bem-sucedida": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Retorno corresponde ao produto cadastrado": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Tempo de resposta de POST menor do que 250ms": true,
+					"Solicitação GET bem-sucedida": true,
+					"Retorno corresponde ao produto cadastrado": true
+				}
+			]
+		},
+		{
+			"id": "0ab6640d-c06a-459e-bf07-d60d3fc3c7cb",
+			"name": "Buscar produtos por categoria",
+			"url": "http://localhost:8080/product/all?categoryId=27&cityId=18",
+			"time": 6,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Tempo de resposta de POST menor do que 250ms": true,
+				"Solicitação GET bem-sucedida": true,
+				"Retorno corresponde ao produto cadastrado": true
+			},
+			"testPassFailCounts": {
+				"Tempo de resposta de POST menor do que 250ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Solicitação GET bem-sucedida": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Retorno corresponde ao produto cadastrado": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Tempo de resposta de POST menor do que 250ms": true,
+					"Solicitação GET bem-sucedida": true,
+					"Retorno corresponde ao produto cadastrado": true
+				}
+			]
+		},
+		{
+			"id": "e271608f-ceed-4536-9d9e-92ecf92e7e16",
+			"name": "Buscar produto por cidade e data",
+			"url": "http://localhost:8080/product/availability?cityId=18&startDate=2023-04-11&endDate=2023-04-19",
+			"time": 8,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Tempo de resposta de POST menor do que 250ms": true,
+				"Solicitação GET bem-sucedida": true
+			},
+			"testPassFailCounts": {
+				"Tempo de resposta de POST menor do que 250ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Solicitação GET bem-sucedida": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				8
+			],
+			"allTests": [
+				{
+					"Tempo de resposta de POST menor do que 250ms": true,
+					"Solicitação GET bem-sucedida": true
+				}
+			]
+		},
+		{
+			"id": "c15cf8cf-2564-4355-a557-dd7b6cd55d72",
+			"name": "listar reservas de um produto",
+			"url": "http://localhost:8080/reservation/product/48",
+			"time": 11,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Tempo de resposta de POST menor do que 250ms": true,
+				"Solicitação GET bem-sucedida": true,
+				"Retorno corresponde ao produto cadastrado": true
+			},
+			"testPassFailCounts": {
+				"Tempo de resposta de POST menor do que 250ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Solicitação GET bem-sucedida": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Retorno corresponde ao produto cadastrado": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				11
+			],
+			"allTests": [
+				{
+					"Tempo de resposta de POST menor do que 250ms": true,
+					"Solicitação GET bem-sucedida": true,
+					"Retorno corresponde ao produto cadastrado": true
+				}
+			]
+		},
+		{
+			"id": "c34445e7-875e-4577-bda0-7b82207dfa20",
+			"name": "listar reservas de um usuário",
+			"url": "http://localhost:8080/reservation/user/47",
+			"time": 7,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Tempo de resposta de POST menor do que 250ms": true,
+				"Solicitação GET bem-sucedida": true
+			},
+			"testPassFailCounts": {
+				"Tempo de resposta de POST menor do que 250ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Solicitação GET bem-sucedida": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Tempo de resposta de POST menor do que 250ms": true,
+					"Solicitação GET bem-sucedida": true
+				}
+			]
+		},
+		{
+			"id": "a5924274-5f15-4580-8db8-6774fb33007c",
+			"name": "Buscar todas as características",
+			"url": "http://localhost:8080/characteristics/all",
+			"time": 5,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Retorno bem-sucedido do GET para todas as características": true
+			},
+			"testPassFailCounts": {
+				"Retorno bem-sucedido do GET para todas as características": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				5
+			],
+			"allTests": [
+				{
+					"Retorno bem-sucedido do GET para todas as características": true
+				}
+			]
+		},
+		{
+			"id": "0ab57812-358a-45ce-8989-92420ae7d1a7",
+			"name": "Criar novo admin",
+			"url": "http://localhost:8080/user",
+			"time": 82,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Usuário é criado com sucesso": true,
+				"Retorno corresponde ao usuário cadastrado": true
+			},
+			"testPassFailCounts": {
+				"Usuário é criado com sucesso": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Retorno corresponde ao usuário cadastrado": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				82
+			],
+			"allTests": [
+				{
+					"Usuário é criado com sucesso": true,
+					"Retorno corresponde ao usuário cadastrado": true
+				}
+			]
+		},
+		{
+			"id": "e0453164-06ac-4cf2-9b30-26959d28aabc",
+			"name": "Autenticar Admin",
+			"url": "http://localhost:8080/user/authenticate",
+			"time": 84,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Usuário é autenticado com sucesso": true
+			},
+			"testPassFailCounts": {
+				"Usuário é autenticado com sucesso": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				84
+			],
+			"allTests": [
+				{
+					"Usuário é autenticado com sucesso": true
+				}
+			]
+		},
+		{
+			"id": "83abcad4-a7ad-48da-84e0-ddf8b24dafc3",
+			"name": "Criar uma categoria",
+			"url": "http://localhost:8080/category/create",
+			"time": 10,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Tempo de resposta de POST menor do que 250ms": true,
+				"Retorno corresponde à categoria cadastrada": true
+			},
+			"testPassFailCounts": {
+				"Tempo de resposta de POST menor do que 250ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Retorno corresponde à categoria cadastrada": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				10
+			],
+			"allTests": [
+				{
+					"Tempo de resposta de POST menor do que 250ms": true,
+					"Retorno corresponde à categoria cadastrada": true
+				}
+			]
+		},
+		{
+			"id": "0a32f242-8568-4019-b8a6-f95fd8b824f5",
+			"name": "Atualizar categoria",
+			"url": "http://localhost:8080/category/update/28",
+			"time": 17,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Tempo de resposta de POST menor do que 250ms": true,
+				"Solicitação PUT bem-sucedida": true,
+				"Retorno corresponde à categoria alterada": true
+			},
+			"testPassFailCounts": {
+				"Tempo de resposta de POST menor do que 250ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Solicitação PUT bem-sucedida": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Retorno corresponde à categoria alterada": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				17
+			],
+			"allTests": [
+				{
+					"Tempo de resposta de POST menor do que 250ms": true,
+					"Solicitação PUT bem-sucedida": true,
+					"Retorno corresponde à categoria alterada": true
+				}
+			]
+		},
+		{
+			"id": "2949bf6a-527c-4d27-bb82-4c63e56430ff",
+			"name": "Criar uma cidade",
+			"url": "http://localhost:8080/city/create",
+			"time": 10,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Tempo de resposta de POST menor do que 250ms": true,
+				"Solicitação POST bem-sucedida": true,
+				"Retorno corresponde à cidade cadastrada": true
+			},
+			"testPassFailCounts": {
+				"Tempo de resposta de POST menor do que 250ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Solicitação POST bem-sucedida": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Retorno corresponde à cidade cadastrada": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				10
+			],
+			"allTests": [
+				{
+					"Tempo de resposta de POST menor do que 250ms": true,
+					"Solicitação POST bem-sucedida": true,
+					"Retorno corresponde à cidade cadastrada": true
+				}
+			]
+		},
+		{
+			"id": "8fae4b9d-0d17-4b8a-a069-a86ac0a66bd1",
+			"name": "Criar um produto",
+			"url": "http://localhost:8080/product/create",
+			"time": 61,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Tempo de resposta de POST menor do que 250ms": true,
+				"Solicitação POST bem-sucedida": true,
+				"Retorno corresponde à categoria cadastrada": true
+			},
+			"testPassFailCounts": {
+				"Tempo de resposta de POST menor do que 250ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Solicitação POST bem-sucedida": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Retorno corresponde à categoria cadastrada": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				61
+			],
+			"allTests": [
+				{
+					"Tempo de resposta de POST menor do que 250ms": true,
+					"Solicitação POST bem-sucedida": true,
+					"Retorno corresponde à categoria cadastrada": true
+				}
+			]
+		},
+		{
+			"id": "4e71a1da-c59e-49a1-a8a9-96752fe69a8c",
+			"name": "atualizar produto",
+			"url": "http://localhost:8080/product/update/49",
+			"time": 20,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Tempo de resposta de POST menor do que 250ms": true,
+				"Solicitação POST bem-sucedida": true,
+				"Retorno corresponde à categoria cadastrada": true
+			},
+			"testPassFailCounts": {
+				"Tempo de resposta de POST menor do que 250ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Solicitação POST bem-sucedida": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Retorno corresponde à categoria cadastrada": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				20
+			],
+			"allTests": [
+				{
+					"Tempo de resposta de POST menor do que 250ms": true,
+					"Solicitação POST bem-sucedida": true,
+					"Retorno corresponde à categoria cadastrada": true
+				}
+			]
+		},
+		{
+			"id": "3e79ef2a-147e-4136-94ce-e65230adae44",
+			"name": "Excluir categoria",
+			"url": "http://localhost:8080/category/delete/28",
+			"time": 14,
+			"responseCode": {
+				"code": 500,
+				"name": "Internal Server Error"
+			},
+			"tests": {
+				"Exclusão de categoria com sucesso": false
+			},
+			"testPassFailCounts": {
+				"Exclusão de categoria com sucesso": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				14
+			],
+			"allTests": [
+				{
+					"Exclusão de categoria com sucesso": false
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 604,
+	"collection": {
+		"requests": [
+			{
+				"id": "063fa773-af21-4bdd-85ae-4103b9460556",
+				"method": "POST"
+			},
+			{
+				"id": "362885b4-e1c3-4114-9114-88c4bca487b3",
+				"method": "POST"
+			},
+			{
+				"id": "10b58a43-72f9-4f89-ba16-e345e3d206fe",
+				"method": "POST"
+			},
+			{
+				"id": "c5606cad-749c-4bf1-bcfd-3ded1fb5adf2",
+				"method": "GET"
+			},
+			{
+				"id": "39530000-5c28-46a4-97c7-7ebbd8244e62",
+				"method": "GET"
+			},
+			{
+				"id": "95b8156e-4565-4e62-9d31-bfbaca912479",
+				"method": "GET"
+			},
+			{
+				"id": "e50d995c-4695-48d9-964d-433260deff16",
+				"method": "GET"
+			},
+			{
+				"id": "cd064353-856f-4586-b284-3fd66bf5f5ed",
+				"method": "GET"
+			},
+			{
+				"id": "0ab6640d-c06a-459e-bf07-d60d3fc3c7cb",
+				"method": "GET"
+			},
+			{
+				"id": "e271608f-ceed-4536-9d9e-92ecf92e7e16",
+				"method": "GET"
+			},
+			{
+				"id": "c15cf8cf-2564-4355-a557-dd7b6cd55d72",
+				"method": "GET"
+			},
+			{
+				"id": "c34445e7-875e-4577-bda0-7b82207dfa20",
+				"method": "GET"
+			},
+			{
+				"id": "a5924274-5f15-4580-8db8-6774fb33007c",
+				"method": "GET"
+			},
+			{
+				"id": "0ab57812-358a-45ce-8989-92420ae7d1a7",
+				"method": "POST"
+			},
+			{
+				"id": "e0453164-06ac-4cf2-9b30-26959d28aabc",
+				"method": "POST"
+			},
+			{
+				"id": "83abcad4-a7ad-48da-84e0-ddf8b24dafc3",
+				"method": "POST"
+			},
+			{
+				"id": "0a32f242-8568-4019-b8a6-f95fd8b824f5",
+				"method": "PUT"
+			},
+			{
+				"id": "2949bf6a-527c-4d27-bb82-4c63e56430ff",
+				"method": "POST"
+			},
+			{
+				"id": "8fae4b9d-0d17-4b8a-a069-a86ac0a66bd1",
+				"method": "POST"
+			},
+			{
+				"id": "4e71a1da-c59e-49a1-a8a9-96752fe69a8c",
+				"method": "PUT"
+			},
+			{
+				"id": "3e79ef2a-147e-4136-94ce-e65230adae44",
+				"method": "DELETE"
+			}
+		]
+	}
+}

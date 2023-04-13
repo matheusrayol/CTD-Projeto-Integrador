@@ -14,6 +14,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.scheduling.annotation.AsyncResult;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -23,8 +24,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.anyString;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayName("ReservationServiceImpl")
@@ -33,6 +33,8 @@ class ReservationServiceImplTest {
     @Mock
     private ReservationRepository reservationRepository;
 
+    @Mock
+    private EmailServiceImpl emailServiceImpl;
     @Mock
     private UserServiceImpl userService;
 
@@ -44,6 +46,37 @@ class ReservationServiceImplTest {
 
     @InjectMocks
     private ReservationServiceImpl reservationServiceImpl;
+
+    @Test
+    @DisplayName("Deve retornar uma lista vazia quando a lista de IDs for nula para o usuário")
+    void findAllByUserIdReturnsEmptyListWhenNoReservations() {
+        Long userId = 1L;
+        when(reservationRepository.findAllByUser_Id(userId)).thenReturn(Collections.emptyList());
+
+        List<ReservationEntity> reservations = reservationServiceImpl.findAllByUserId(userId);
+
+        assertTrue(reservations.isEmpty());
+        verify(reservationRepository, times(1)).findAllByUser_Id(userId);
+    }
+
+    @Test
+    @DisplayName("SDeve ertornar todas as reservas para um dado ID de usuário")
+    void findAllByUserIdReturnsAllReservations() {
+        Long userId = 1L;
+        ReservationEntity reservationEntity = new ReservationEntity();
+        reservationEntity.setId(1L);
+        reservationEntity.setHourStartReservation(LocalTime.now());
+        reservationEntity.setDateBegin(LocalDate.now());
+        reservationEntity.setDateEnd(LocalDate.now().plusDays(1));
+        List<ReservationEntity> expectedReservations = Collections.singletonList(reservationEntity);
+
+        when(reservationRepository.findAllByUser_Id(userId)).thenReturn(expectedReservations);
+
+        List<ReservationEntity> actualReservations = reservationServiceImpl.findAllByUserId(userId);
+
+        assertEquals(expectedReservations, actualReservations);
+        verify(reservationRepository).findAllByUser_Id(userId);
+    }
 
     @Test
     @DisplayName("Devem ser retornadas todas as reservas para um dado ID de produto")
@@ -101,7 +134,7 @@ class ReservationServiceImplTest {
 
     @Test
     @DisplayName("Devem ser retornadas todas as reservas para um dado ID de usuário")
-    void createReservationWhenProductIsAvailable() {
+    void createReservationWhenProductIsAvailable() throws Exception {
 
         UserEntity user = new UserEntity();
         user.setEmail("test@test.com");
@@ -134,6 +167,8 @@ class ReservationServiceImplTest {
         when(productServiceImpl.findProductById(anyLong())).thenReturn(product);
         when(reservationMapper.toEntity(any(), any(), any())).thenReturn(reservation);
         when(reservationRepository.save(any())).thenReturn(reservation);
+        when(emailServiceImpl.reservationEmail(any(), any())).thenReturn("teste");
+        when(emailServiceImpl.sendEmail(any(), any(), any())).thenReturn(new AsyncResult<>("Email enviado"));
 
         ReservationEntity result = reservationServiceImpl.createReservation(reservationRequest);
 

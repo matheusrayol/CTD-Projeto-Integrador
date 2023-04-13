@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "text": {
+            "line" : "A tolerância máxima de atraso para a retirada do veículo é de 15 minutos; \nNão é permitido fumar ou beber dentro do veículo;\nNão é permitido desativar sistemas de segurança, como monitoramento por GPS e o serviço de assistência remota."
+        }
+    },
+    {
+        "id": 2,
+        "text": {
+            "line" : "Veículos higienizados na retirada e na devolução;\nVeículos revisados e com seguro contra acidentes;\nSistema de monitoramento por GPS;\nAssistência remota por telefone ou videochamada"
+        }
+    },
+    {
+        "id": 3,
+        "text": {
+            "line" : "O cancelamento pode ser efetuado sem custo até 24 horas antes da data escolhida para a retirada;\nO cancelamento com menos de 24 horas da data escolhida para retirada incorrerá em uma tarifa de 20% do valor da reserva;\nEm caso de indisponibilidade do veículo escolhido por motivos de força maior, o cliente poderá optar por escolher outro veículo ou cancelar a reserva sem custo.Não é permitido desativar sistemas de segurança, como monitoramento por GPS e o serviço de assistência remota."        }
+    }
+
+]

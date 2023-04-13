@@ -1,0 +1,97 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ProductService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">br.com.notcars.service</a>
+</div>
+
+<h1>Coverage Summary for Class: ProductService (br.com.notcars.service)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">ProductService$MockitoMock$TXTQL0iN</td>
+  </tr>
+  <tr>
+    <td class="name">ProductService$MockitoMock$TXTQL0iN$auxiliary$3Ex0rgIU</td>
+  </tr>
+  <tr>
+    <td class="name">ProductService$MockitoMock$TXTQL0iN$auxiliary$w94vUx8h</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package br.com.notcars.service;
+&nbsp;
+&nbsp;import br.com.notcars.dto.product.ProductRequest;
+&nbsp;import br.com.notcars.model.ProductEntity;
+&nbsp;import java.time.LocalDate;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public interface ProductService {
+&nbsp;  List&lt;ProductEntity&gt; findAll();
+&nbsp;
+&nbsp;  ProductEntity createProduct(ProductRequest productRequest);
+&nbsp;
+&nbsp;  ProductEntity findProductById(Long id);
+&nbsp;
+&nbsp;  List&lt;ProductEntity&gt; findProductByCategoryOrCity(Long category, Long city);
+&nbsp;
+&nbsp;  List&lt;ProductEntity&gt; findAvailabilityByCityAndDate(Long cityId, LocalDate startDate, LocalDate endDate);
+&nbsp;
+&nbsp;  ProductEntity updateProduct(Long id, ProductRequest productRequest);
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-12 18:13</div>
+</div>
+</body>
+</html>

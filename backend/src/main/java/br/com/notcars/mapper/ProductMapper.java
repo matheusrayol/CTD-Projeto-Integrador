@@ -36,4 +36,18 @@ public interface ProductMapper {
                              CityResponse cityResponse,
                              List<CharacteristicsResponse> characteristics,
                              List<ImageResponse> images);
+
+  @Mapping(source = "productEntity.id", target = "id")
+  @Mapping(source = "productRequest.name", target = "name")
+  @Mapping(source = "productRequest.description", target = "description")
+  @Mapping(source = "productRequest.sustainability", target = "sustainability")
+  @Mapping(source = "category", target = "category")
+  @Mapping(source = "city", target = "city")
+  @Mapping(source = "characteristicsList", target = "characteristicsList")
+  @Mapping(source = "imageList", target = "imageList")
+  ProductEntity updateProductEntity (ProductEntity productEntity, ProductRequest productRequest,
+                                     CategoryEntity category,
+                                     CityEntity city,
+                                     List<CharacteristicsEntity> characteristicsList,
+                                     List<ImageEntity> imageList);
 }
